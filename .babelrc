@@ -3,7 +3,7 @@
     [
       "babel-plugin-styled-components",
       {
-        // "ssr": false // server-side rendering
+        "ssr": false // server-side rendering
       }
     ]
   ]
