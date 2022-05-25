@@ -9,6 +9,7 @@
     "eject": "craco eject"
   },
   "dependencies": {
+    "@fontsource/roboto": "^4.5.7",
     "@mui/lab": "latest",
     "@mui/material": "latest",
     "@mui/styled-engine-sc": "latest",

@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
+import TestComponent from "components/Test";
+// import TestComponent from "src/components/Test";
+
 import { Container } from "./styles";
 
 const Main: React.FC = () => {
@@ -10,6 +13,7 @@ const Main: React.FC = () => {
       <Button variant="text">Text</Button>
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
+      <TestComponent />
     </Container>
   );
 };

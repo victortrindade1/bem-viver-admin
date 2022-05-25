@@ -13,4 +13,5 @@
 
 ## Próxima etapa
 
-- Material UI theme
+- Material UI:
+  - Global style
