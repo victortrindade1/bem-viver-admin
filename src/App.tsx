@@ -6,12 +6,8 @@ import { ThemeProvider } from "styled-components";
 
 import AppRoutes from "./routes";
 
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
 import theme from "styles/theme";
+import GlobalStyle from "styles/global";
 
 function App() {
   return (
@@ -19,6 +15,7 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AppRoutes />
+          <GlobalStyle />
         </ThemeProvider>
       </MuiThemeProvider>
     </StyledEngineProvider>

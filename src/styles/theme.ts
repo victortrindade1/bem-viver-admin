@@ -5,9 +5,11 @@ const theme = createTheme({
     primary: {
       main: "#123fff",
       dark: "#f54",
+      contrastText: "#eeeaaa",
     },
     secondary: {
       main: "#654321",
+      dark: "#f5aaaa",
     },
   },
   //custom theme variables

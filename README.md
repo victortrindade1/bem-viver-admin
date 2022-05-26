@@ -1,5 +1,7 @@
 # Bem Viver Admin
 
+Até aqui é um perfeito boilerplate pra iniciar projetos com CRA, TS, MUI e Styled Components
+
 ## Configuração do projeto
 
 - Create-React-App
@@ -11,7 +13,9 @@
   - To use styled components with Material UI
   - Absolute imports
 
-## Próxima etapa
+## Feito por último
 
 - Material UI:
   - Global style
+
+## Próxima etapa
