@@ -1,6 +1,12 @@
 # Bem Viver Admin
 
-Até aqui é um perfeito boilerplate pra iniciar projetos com CRA, TS, MUI e Styled Components
+## O q estou fazendo
+
+Configurei o routes pra receber rota pública e privada
+
+## Próximo passo
+
+Layout global e login layout
 
 ## Configuração do projeto
 
@@ -19,8 +25,6 @@ Até aqui é um perfeito boilerplate pra iniciar projetos com CRA, TS, MUI e Sty
   - Global style
 
 ## Próxima etapa
-
-- Deixar online
 
 - Appbar + menu
   Para o appbar persistir ao clicar no menu:
