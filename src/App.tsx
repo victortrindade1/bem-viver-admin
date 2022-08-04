@@ -4,6 +4,8 @@ import {
 } from "@mui/material/styles";
 import { ThemeProvider } from "styled-components";
 
+import "config/ReactotronConfig";
+
 import AppRoutes from "./routes";
 
 import theme from "styles/theme";
