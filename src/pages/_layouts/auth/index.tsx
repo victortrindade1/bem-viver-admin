@@ -1,9 +1,13 @@
 import React from "react";
 
-// import { Container } from './styles';
+import { Container } from "./styles";
 
-const auth: React.FC = () => {
-  return <div />;
+interface Iauth {
+  children: React.ReactNode;
+}
+
+const auth = ({ children }: Iauth) => {
+  return <Container>{children}</Container>;
 };
 
 export default auth;

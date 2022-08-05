@@ -4,6 +4,7 @@
 
 `https://github.com/WallysonGalvao/rocketseat-gobarber` (TS)
 `https://github.com/victortrindade1/rocketseat-gobarber-web` (JS)
+`https://github.com/StefanoSaffran/gobarber` (TS)
 
 ## O q estou fazendo
 
