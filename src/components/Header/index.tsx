@@ -1,6 +1,10 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+
 import { IconButton } from "@mui/material";
+
+import logo from "assets/logo.svg";
 
 import {
   Container,
@@ -19,8 +23,13 @@ const Header: React.FC = () => {
           <FaBars color={theme.bg.light} />
         </IconButton>
       </MenuBtnContainer>
-      <LogoContainer />
-      <LoginContainer />
+      <LogoContainer>
+        <img src={logo} alt="logo" />
+      </LogoContainer>
+      <LoginContainer>
+        Fulano
+        <FaUser />
+      </LoginContainer>
     </Container>
   );
 };
