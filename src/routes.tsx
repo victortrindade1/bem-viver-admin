@@ -35,7 +35,7 @@ export default function AppRoutes() {
   const user = {
     id: 1,
     name: "Robin",
-    roles: ["teacher"],
+    roles: ["admin"],
   };
 
   return (

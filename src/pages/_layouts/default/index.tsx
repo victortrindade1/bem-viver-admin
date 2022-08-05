@@ -1,6 +1,6 @@
 import React from "react";
 
-// import Header from '~/components/Header';
+import Header from "components/Header";
 
 import { Wrapper } from "./styles";
 
@@ -11,7 +11,7 @@ interface Props {
 export default function DefaultLayout({ children }: Props) {
   return (
     <Wrapper>
-      {/* <Header /> */}
+      <Header />
       {children}
     </Wrapper>
   );

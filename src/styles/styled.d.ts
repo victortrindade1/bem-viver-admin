@@ -15,9 +15,13 @@ interface CustomTheme {
     main: string;
     light: string;
   };
-  text: {
-    main: string;
-    light: string;
+  logo: {
+    rosa: string;
+    azul: string;
+    verdeClaro: string;
+    verdeEscuro: string;
+    laranja: string;
+    amarelo: string;
   };
 }
 declare module "@mui/material/styles" {
