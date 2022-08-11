@@ -9,6 +9,7 @@
     "eject": "craco eject"
   },
   "dependencies": {
+    "@fontsource/fredoka": "^4.5.6",
     "@fontsource/roboto": "^4.5.7",
     "@mui/lab": "latest",
     "@mui/material": "latest",

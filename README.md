@@ -12,7 +12,7 @@ Configurei o reactotron
 
 ## Próximo passo
 
-Layout global e login layout
+menu
 
 ## Configuração do projeto
 

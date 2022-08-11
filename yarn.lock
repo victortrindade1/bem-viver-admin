@@ -1292,6 +1292,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/fredoka@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/fredoka/-/fredoka-4.5.6.tgz#6bf36673637b004ee96c3e2a6df9738926a1ca63"
+  integrity sha512-JW99sZlcArYbEYUwOKU1CHwxmcHdSHAXM2MLVXcKzsAmtTzfL4YGFPX5UOkMpQg+pxgm0HOjtGxnv1t/FxA1KQ==
+
 "@fontsource/roboto@^4.5.7":
   version "4.5.7"
   resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-4.5.7.tgz#292740a52fa2bac61b89f92e1c588037defe65cb"
