@@ -6,13 +6,13 @@
 `https://github.com/victortrindade1/rocketseat-gobarber-web` (JS)
 `https://github.com/StefanoSaffran/gobarber` (TS)
 
-## O q estou fazendo
+## O q fiz por último
 
-Configurei o reactotron
+Style Menu
 
 ## Próximo passo
 
-menu
+Layout pages
 
 ## Configuração do projeto
 
@@ -25,9 +25,3 @@ menu
   - To use styled components with Material UI
   - Absolute imports
 - Reactotron
-
-## Próxima etapa
-
-- Appbar + menu
-  Para o appbar persistir ao clicar no menu:
-  `https://stackoverflow.com/questions/66898908/material-ui-how-to-bring-the-drawer-component-below-the-appbar`

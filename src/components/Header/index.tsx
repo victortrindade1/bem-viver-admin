@@ -9,9 +9,9 @@ import {
   FaFileInvoiceDollar,
   FaCog,
 } from "react-icons/fa";
-// import { IconButton } from "@mui/material";
+
 import Drawer from "@mui/material/Drawer";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 
@@ -23,6 +23,8 @@ import {
   LoginContainer,
   MenuContainer,
   LinkContainer,
+  Border,
+  MenuItemContainer,
   MenuIconContainer,
   MenuLabelContainer,
 } from "./styles";
@@ -30,38 +32,45 @@ import {
 import theme from "styles/theme";
 import { IconType } from "react-icons/lib";
 
-const links: { label: string; Icon: IconType; href: string }[] = [
-  {
-    label: "Alunos",
-    href: "/alunos",
-    Icon: FaUsers,
-  },
-  {
-    label: "Professores",
-    href: "/professores",
-    Icon: FaChalkboardTeacher,
-  },
-  {
-    label: "Turmas",
-    href: "/turmas",
-    Icon: FaChalkboard,
-  },
-  {
-    label: "Financeiro",
-    href: "/financeiro",
-    Icon: FaChartPie,
-  },
-  {
-    label: "Relatórios",
-    href: "/relatorios",
-    Icon: FaFileInvoiceDollar,
-  },
-  {
-    label: "Configurações",
-    href: "/configuracoes",
-    Icon: FaCog,
-  },
-];
+const links: { label: string; Icon: IconType; href: string; color: string }[] =
+  [
+    {
+      label: "Alunos",
+      href: "/alunos",
+      Icon: FaUsers,
+      color: theme.logo.azul,
+    },
+    {
+      label: "Professores",
+      href: "/professores",
+      Icon: FaChalkboardTeacher,
+      color: theme.logo.amarelo,
+    },
+    {
+      label: "Turmas",
+      href: "/turmas",
+      Icon: FaChalkboard,
+      color: theme.logo.rosa,
+    },
+    {
+      label: "Financeiro",
+      href: "/financeiro",
+      Icon: FaChartPie,
+      color: theme.logo.verdeEscuro,
+    },
+    {
+      label: "Relatórios",
+      href: "/relatorios",
+      Icon: FaFileInvoiceDollar,
+      color: theme.logo.laranja,
+    },
+    {
+      label: "Config.",
+      href: "/configuracoes",
+      Icon: FaCog,
+      color: theme.logo.verdeClaro,
+    },
+  ];
 
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -75,7 +84,6 @@ const Header: React.FC = () => {
       ) {
         return;
       }
-      // console.tron.log(isOpened);
       setMenuOpened(isOpened ? isOpened : !menuOpened);
     };
 
@@ -83,7 +91,6 @@ const Header: React.FC = () => {
     if (menuOpened) {
       return toggleDrawer();
     }
-    // return;
   };
 
   return (
@@ -94,9 +101,11 @@ const Header: React.FC = () => {
             <FaBars color={theme.bg.light} />
           </IconButtonStyled>
         </MenuBtnContainer>
-        <LogoContainer>
-          <img src={logo} alt="logo" />
-        </LogoContainer>
+        <NavLink to="/dashboard">
+          <LogoContainer>
+            <img src={logo} alt="logo" />
+          </LogoContainer>
+        </NavLink>
         <LoginContainer>
           Admin
           <FaUser />
@@ -104,15 +113,24 @@ const Header: React.FC = () => {
       </Container>
       <Drawer anchor={"left"} open={menuOpened} onClose={toggleDrawer(false)}>
         <MenuContainer onClick={toggleDrawer(false)}>
-          {links.map(({ label, Icon, href }) => (
-            <Link key={href} to={href}>
-              <LinkContainer>
-                <MenuIconContainer>
-                  <Icon size={25} />
-                </MenuIconContainer>
-                <MenuLabelContainer>{label}</MenuLabelContainer>
-              </LinkContainer>
-            </Link>
+          {links.map(({ label, Icon, href, color }) => (
+            <NavLink
+              key={href}
+              to={href}
+              children={({ isActive }) => (
+                <LinkContainer color={color} isActive={isActive}>
+                  <Border color={color} />
+                  <MenuItemContainer>
+                    <MenuIconContainer>
+                      <Icon size={25} />
+                    </MenuIconContainer>
+                    <MenuLabelContainer isActive={isActive} color={color}>
+                      {label}
+                    </MenuLabelContainer>
+                  </MenuItemContainer>
+                </LinkContainer>
+              )}
+            />
           ))}
         </MenuContainer>
       </Drawer>

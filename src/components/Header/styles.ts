@@ -1,5 +1,14 @@
 import { IconButton } from "@mui/material";
+import { lighten, darken } from "polished";
 import styled from "styled-components";
+
+interface IsActive {
+  isActive: boolean;
+}
+
+interface Icolor extends IsActive {
+  color: string;
+}
 
 export const Container = styled.div`
   background-color: #fff;
@@ -54,20 +63,47 @@ export const MenuContainer = styled.div`
   height: 100%;
   margin-top: 72px;
   font-family: "Fredoka";
+  /* font-weight: bold; */
   width: 72px;
 `;
 
-export const LinkContainer = styled.div`
+export const LinkContainer = styled.div<Icolor>`
   width: 72px;
   height: 72px;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  color: ${(props) =>
+    props.isActive ? props.color : props.theme.palette.primary.main};
+  background: ${(props) =>
+    props.isActive ? lighten(0.3, props.color) : "#fff"};
+
+  :hover {
+    color: ${(props) => props.color};
+  }
+`;
+
+export const Border = styled.div`
+  width: 3px;
+  height: 72px;
+  background-color: ${(props) => props.color};
+`;
+
+export const MenuItemContainer = styled.div`
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 100%;
+  justify-content: center;
 `;
 
 export const MenuIconContainer = styled.div``;
 
-export const MenuLabelContainer = styled.div`
+export const MenuLabelContainer = styled.div<Icolor>`
   font-size: 11px;
+  color: ${(props) =>
+    props.isActive
+      ? darken(0.3, props.color)
+      : props.theme.palette.primary.main};
 `;
