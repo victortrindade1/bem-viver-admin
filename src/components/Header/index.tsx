@@ -75,7 +75,7 @@ const Header: React.FC = () => {
       ) {
         return;
       }
-      console.tron.log(isOpened);
+      // console.tron.log(isOpened);
       setMenuOpened(isOpened ? isOpened : !menuOpened);
     };
 
