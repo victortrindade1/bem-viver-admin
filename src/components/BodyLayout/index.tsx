@@ -12,6 +12,8 @@ const BodyLayout: React.FC<IBodyLayout> = ({
   children,
   links,
 }: IBodyLayout) => {
+  // const breakpoint = useMediaQuery("(max-width:600px)");
+
   return (
     <Container>
       {links && <BodyMenu links={links} />}

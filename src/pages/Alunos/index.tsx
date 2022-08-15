@@ -12,6 +12,11 @@ const links = [
     icon: FaUser,
     url: "/alunos",
   },
+  {
+    label: "Cobranças",
+    icon: FaUser,
+    url: "/alunos",
+  },
 ];
 
 const Alunos: React.FC = () => {

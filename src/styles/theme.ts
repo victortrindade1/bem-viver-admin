@@ -29,6 +29,14 @@ const theme = createTheme({
     laranja: "#e7a746",
     amarelo: "#EEc744",
   },
+  // P/ usar useMediQuery sem renderizar 2 vezes (sem renderizar no servidor)
+  components: {
+    MuiUseMediaQuery: {
+      defaultProps: {
+        noSsr: true,
+      },
+    },
+  },
 });
 
 export default theme;

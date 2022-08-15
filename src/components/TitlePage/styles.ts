@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 50px;
+  padding: 38px;
   font-family: "Fredoka", sans-serif;
   color: #fff;
   font-weight: bold;
