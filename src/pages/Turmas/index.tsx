@@ -4,12 +4,12 @@ import TitlePage from "components/TitlePage";
 
 import { Container } from "./styles";
 
-const Dashboard: React.FC = () => {
+const Turmas: React.FC = () => {
   return (
     <Container>
-      <TitlePage titleLabel="Dashboard" />
+      <TitlePage titleLabel={"Turmas"} />
     </Container>
   );
 };
 
-export default Dashboard;
+export default Turmas;

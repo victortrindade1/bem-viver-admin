@@ -4,12 +4,12 @@ import TitlePage from "components/TitlePage";
 
 import { Container } from "./styles";
 
-const Dashboard: React.FC = () => {
+const Financeiro: React.FC = () => {
   return (
     <Container>
-      <TitlePage titleLabel="Dashboard" />
+      <TitlePage titleLabel="Financeiro" />
     </Container>
   );
 };
 
-export default Dashboard;
+export default Financeiro;

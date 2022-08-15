@@ -1,13 +1,27 @@
 import React from "react";
+import { FaUser } from "react-icons/fa";
 
-// import { Container } from './styles';
+import TitlePage from "components/TitlePage";
+import BodyLayout from "components/BodyLayout";
+
+import { Container } from "./styles";
+
+const links = [
+  {
+    label: "Novo",
+    icon: FaUser,
+    url: "/alunos",
+  },
+];
 
 const Alunos: React.FC = () => {
   return (
-    <div>
-      <h1>Alunos</h1>
-      <p>Protected: authenticated user required</p>
-    </div>
+    <Container>
+      <TitlePage titleLabel={"Alunos"} />
+      <BodyLayout links={links}>
+        <h2>Consultar Alunos</h2>
+      </BodyLayout>
+    </Container>
   );
 };
 

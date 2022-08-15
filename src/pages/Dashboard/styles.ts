@@ -3,11 +3,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  color: ${(props) => props.theme.palette.primary.dark};
-  font-family: "Roboto";
-  font-weight: 300;
+  background: ${(props) => props.theme.bg.main};
+  height: 100%;
+  padding-top: 72px;
 
   h1 {
-    font-weight: 300;
+    color: ${(props) => props.theme.palette.primary.dark} !important;
   }
 `;

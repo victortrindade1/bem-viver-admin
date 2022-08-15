@@ -77,7 +77,7 @@ export const LinkContainer = styled.div<Icolor>`
   color: ${(props) =>
     props.isActive ? props.color : props.theme.palette.primary.main};
   background: ${(props) =>
-    props.isActive ? lighten(0.3, props.color) : "#fff"};
+    props.isActive ? lighten(0.37, props.color) : "#fff"};
 
   :hover {
     color: ${(props) => props.color};

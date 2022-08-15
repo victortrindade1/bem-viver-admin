@@ -4,12 +4,12 @@ import TitlePage from "components/TitlePage";
 
 import { Container } from "./styles";
 
-const Dashboard: React.FC = () => {
+const Professores: React.FC = () => {
   return (
     <Container>
-      <TitlePage titleLabel="Dashboard" />
+      <TitlePage titleLabel="Professores" />
     </Container>
   );
 };
 
-export default Dashboard;
+export default Professores;

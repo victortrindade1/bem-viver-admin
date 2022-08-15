@@ -12,6 +12,11 @@ import DefaultLayout from "pages/_layouts/default";
 import Login from "pages/Login";
 import Dashboard from "pages/Dashboard";
 import Alunos from "pages/Alunos";
+import Turmas from "pages/Turmas";
+import Professores from "pages/Professores";
+import Financeiro from "pages/Financeiro";
+import Relatorios from "pages/Relatorios";
+import ConfigPage from "pages/ConfigPage";
 
 interface IProtectedRoute {
   isAllowed?: boolean;
@@ -64,6 +69,7 @@ export default function AppRoutes() {
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             {/* <Route index element={<Alunos />} /> */}
             <Route path="/alunos" element={<Alunos />} />
+            <Route path="/turmas" element={<Turmas />} />
           </Route>
 
           {/* Área protegida: admin apenas */}
@@ -76,6 +82,10 @@ export default function AppRoutes() {
           >
             <Route index element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/professores" element={<Professores />} />
+            <Route path="/financeiro" element={<Financeiro />} />
+            <Route path="/relatorios" element={<Relatorios />} />
+            <Route path="/configuracoes" element={<ConfigPage />} />
           </Route>
         </Route>
 
