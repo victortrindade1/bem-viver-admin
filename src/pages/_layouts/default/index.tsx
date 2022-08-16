@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "components/Header";
+import Footer from "components/Footer";
 
 import { Wrapper } from "./styles";
 
@@ -13,6 +14,7 @@ export default function DefaultLayout({ children }: Props) {
     <Wrapper>
       <Header />
       {children}
+      <Footer />
     </Wrapper>
   );
 }

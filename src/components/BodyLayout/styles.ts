@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
+  height: auto;
 `;
 
 export const BodyContainer = styled.div`
@@ -13,5 +14,5 @@ export const BodyContainer = styled.div`
   margin: 0 15px;
   -webkit-box-shadow: 0px 10px 13px -7px #000000,
     5px 5px 1px 5px rgba(101, 104, 114, 0);
-  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 1px 5px rgba(101, 104, 114, 0);
+  box-shadow: 0px 8px 13px -10px #000000;
 `;
