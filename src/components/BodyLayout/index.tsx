@@ -11,13 +11,16 @@ interface IBodyLayout extends IBodyMenu {
 const BodyLayout: React.FC<IBodyLayout> = ({
   children,
   links,
+  backgroundColor,
 }: IBodyLayout) => {
   // const breakpoint = useMediaQuery("(max-width:600px)");
 
   return (
     <Container>
-      {links && <BodyMenu links={links} />}
-      <BodyContainer>{children}</BodyContainer>
+      {links && <BodyMenu links={links} backgroundColor={backgroundColor} />}
+      <BodyContainer backgroundColor={backgroundColor}>
+        {children}
+      </BodyContainer>
     </Container>
   );
 };

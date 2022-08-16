@@ -6,13 +6,9 @@
 `https://github.com/victortrindade1/rocketseat-gobarber-web` (JS)
 `https://github.com/StefanoSaffran/gobarber` (TS)
 
-## O q fiz por último
-
-Style Menu
-
 ## Próximo passo
 
-Layout pages
+Body Menu
 
 ## Configuração do projeto
 

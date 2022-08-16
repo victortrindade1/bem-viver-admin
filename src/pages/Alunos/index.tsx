@@ -1,20 +1,26 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUserPlus, FaCommentDollar, FaPaperPlane } from "react-icons/fa";
 
 import TitlePage from "components/TitlePage";
 import BodyLayout from "components/BodyLayout";
 
 import { Container } from "./styles";
+import theme from "styles/theme";
 
 const links = [
   {
     label: "Novo",
-    icon: FaUser,
+    Icon: FaUserPlus,
     url: "/alunos",
   },
   {
     label: "Cobranças",
-    icon: FaUser,
+    Icon: FaCommentDollar,
+    url: "/alunos",
+  },
+  {
+    label: "Notificações",
+    Icon: FaPaperPlane,
     url: "/alunos",
   },
 ];
@@ -23,7 +29,7 @@ const Alunos: React.FC = () => {
   return (
     <Container>
       <TitlePage titleLabel={"Alunos"} />
-      <BodyLayout links={links}>
+      <BodyLayout links={links} backgroundColor={theme.logo.azul}>
         <h2>Consultar Alunos</h2>
       </BodyLayout>
     </Container>

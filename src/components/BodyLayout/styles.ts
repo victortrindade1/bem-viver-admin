@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { lighten } from "polished";
 
 export const Container = styled.div`
   display: flex;
@@ -7,12 +8,15 @@ export const Container = styled.div`
   height: auto;
 `;
 
-export const BodyContainer = styled.div`
+export const BodyContainer = styled.div<IColor>`
   width: 100%;
   height: calc(100vh - 215px);
-  background-color: #fff;
+  background-color: ${(props) =>
+    props.backgroundColor
+      ? lighten(0.35, props.backgroundColor)
+      : "transparent"};
   margin: 0 15px;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000,
-    5px 5px 1px 5px rgba(101, 104, 114, 0);
-  box-shadow: 0px 8px 13px -10px #000000;
+  /* -webkit-box-shadow: 0px 8px 13px -10px #000000;
+  box-shadow: 0px 8px 13px -10px #000000; */
+  border-radius: 4px;
 `;

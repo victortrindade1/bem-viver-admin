@@ -1,11 +1,12 @@
 interface IColor {
-  color: string;
+  backgroundColor: string;
 }
 
-interface IBodyMenu {
+interface IBodyMenu extends IColor {
   links?: {
     label: string;
     url: string;
-    icon: IconType;
+    Icon: IconType;
+    // color?: string;
   }[];
 }

@@ -1,10 +1,18 @@
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { FaEllipsisV } from "react-icons/fa";
-import { Container, MoreButtonContainer } from "./styles";
-import { Button } from "@mui/material";
 
-const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
+import {
+  Container,
+  MoreButtonContainer,
+  ButtonContainer,
+  LabelContainer,
+} from "./styles";
+
+const BodyMenu: React.FC<IBodyMenu> = ({
+  links,
+  backgroundColor,
+}: IBodyMenu) => {
   const breakpoint = useMediaQuery("(max-width:600px)");
 
   return (
@@ -15,8 +23,13 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
         </MoreButtonContainer>
       ) : (
         <Container>
-          <Button>Botão 1</Button>
-          <Button>Botão 2</Button>
+          {links &&
+            links.map(({ Icon, label }) => (
+              <ButtonContainer backgroundColor={backgroundColor}>
+                <Icon size={25} />
+                <LabelContainer>{label}</LabelContainer>
+              </ButtonContainer>
+            ))}
         </Container>
       )}
     </>
