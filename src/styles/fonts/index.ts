@@ -6,3 +6,4 @@ import "@fontsource/roboto/400.css";
 
 // Fredoka
 import "@fontsource/fredoka/400.css";
+import "@fontsource/fredoka/600.css";

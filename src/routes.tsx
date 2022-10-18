@@ -54,7 +54,6 @@ export default function AppRoutes() {
             </AuthLayout>
           }
         >
-          {/* <Route index element={<Login />} /> */}
           <Route path="/login" element={<Login />} />
         </Route>
 
@@ -67,7 +66,6 @@ export default function AppRoutes() {
           }
         >
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
-            {/* <Route index element={<Alunos />} /> */}
             <Route path="/alunos" element={<Alunos />} />
             <Route path="/turmas" element={<Turmas />} />
           </Route>
