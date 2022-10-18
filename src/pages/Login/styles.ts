@@ -65,6 +65,12 @@ export const DarkSide = styled.div`
     width: 31vw;
     border-radius: 8px 0px 0px 8px;
   `};
+
+  ${media.greaterThan("medium")`
+    margin: 5vw 0vw 5vw 5vw;
+    height: calc(100vh - 10vw);
+    width: 35vw;
+  `};
 `;
 
 export const LightSide = styled.div`
@@ -91,6 +97,9 @@ export const LightSide = styled.div`
 
   ${media.greaterThan("medium")`
     padding: 5vw;
+    margin: 5vw 5vw 5vw 0vw;
+    height: calc(100vh - 10vw);
+    width: 55vw;
   `};
 `;
 
