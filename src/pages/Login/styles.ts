@@ -17,7 +17,7 @@ export const Container = styled.div`
 `;
 
 export const DarkSideContainer = styled.div`
-  background-color: #2f3c7e;
+  background-color: #aa96da;
 
   ${media.lessThan("small")`
     height: 50vh;
@@ -35,7 +35,7 @@ export const DarkSideContainer = styled.div`
 `;
 
 export const LightSideContainer = styled.div`
-  background-color: #fbeaeb;
+  background-color: #c5fad5;
   ${media.lessThan("small")`
     height: 50vh;
     width: 100vw;
@@ -51,7 +51,7 @@ export const LightSideContainer = styled.div`
 `;
 
 export const DarkSide = styled.div`
-  background-color: #2f3c7e;
+  background-color: #aa96da;
 
   display: flex;
   flex-direction: column;
@@ -184,6 +184,6 @@ export const LoginButton = styled(MuiButton).attrs({
   box-shadow: -5px 5px 20px 0px #00000040;
 
   :hover {
-    background-color: ${darken(0.1, "#2f3c7e")};
+    background-color: ${darken(0.1, "#AA96DA")};
   }
 `;
