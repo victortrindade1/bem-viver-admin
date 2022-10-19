@@ -1,19 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FormContainer,
   TextFieldElement,
   PasswordElement,
 } from "react-hook-form-mui";
 
-// import { TextField } from "@mui/material";
-// import { useForm, SubmitHandler } from "react-hook-form";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import Visibility from "@mui/icons-material/Visibility";
-// import VisibilityOff from "@mui/icons-material/VisibilityOff";
-// import IconButton from "@mui/material/IconButton";
-
-// import PasswordInput from "components/PasswordInput";
-// import { FormInputText } from "components/FormComponents/FormInputText";
+import AuthContext from "contexts/auth";
+// import signInService from "services/authService";
 
 import {
   Container,
@@ -29,20 +22,20 @@ import {
   FormContainerWrapper,
 } from "./styles";
 
-interface IFormInput {
-  name: string;
-  password: string;
-}
-
 const defaultValues = {
-  name: "",
+  email: "",
   password: "",
 };
 
 const Login: React.FC = () => {
-  const handleSubmit = (data: IFormInput) => {
-    console.log(data);
-  };
+  const { signed, user, signIn } = useContext(AuthContext);
+
+  console.log(signed);
+  console.log(user);
+
+  function handleSubmit(data: IAuth) {
+    signIn(data);
+  }
 
   return (
     <Container>
@@ -58,13 +51,13 @@ const Login: React.FC = () => {
           <FormContainerWrapper>
             <FormContainer
               defaultValues={defaultValues}
-              onSuccess={handleSubmit}
+              onSuccess={(data: IAuth) => handleSubmit(data)}
             >
               <TextFieldElement
                 fullWidth
                 variant="standard"
-                name="name"
-                label="NOME"
+                name="email"
+                label="E-MAIL"
                 margin="normal"
                 required
               />

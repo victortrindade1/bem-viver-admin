@@ -8,6 +8,8 @@ import "config/ReactotronConfig";
 
 import AppRoutes from "./routes";
 
+import { AuthProvider } from "./contexts/auth";
+
 import theme from "styles/theme";
 import GlobalStyle from "styles/global";
 
@@ -16,7 +18,9 @@ function App() {
     <StyledEngineProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <AppRoutes />
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
           <GlobalStyle />
         </ThemeProvider>
       </MuiThemeProvider>

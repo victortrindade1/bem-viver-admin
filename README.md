@@ -8,15 +8,11 @@
 
 ## Próximo passo
 
-Vou fazer minha primeira conexão com a api. Será o login.
-
-Após, construir uma página de login só pra disparar o login.
-
-Criar context de auth
+ContextAPI funcionando. Agora vou dar continuidade às configurações de auth do minicurso. Ainda falta o loading, talvez um error handler, sign out, token, rotas
 
 ## Login
 
-Cheguei no form. Vou instalar uma lib de manipular state de form, e juntar com MUI form
+Estou implementando o auth context. Estou em: Manipulando estados globais com ContextAPI
 
 O usuário receberá o convite por e-mail. Será o link de ediçao de cadastro, junto com um usuário e senha. Clicou no link, direciona pra tela de ediçao de cadastro admin.
 
@@ -40,3 +36,4 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
   - Lib that makes react-hook-form and MUI together very practice
 - styled-media-query (Media-Query CSS in Styled Components)
 - Polished (makes color darker or ligther)
+- ContextAPI (Global states)
