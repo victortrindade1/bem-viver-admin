@@ -26,10 +26,43 @@
     -->
 
     <title>React App</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      .loader-wrapper {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        display: grid;
+        place-items: center;
+      }
+    </style>
+    <link rel="stylesheet" href="%PUBLIC_URL%/loading.css" type="text/css" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loader-wrapper">
+        <div class="loadingio-spinner-wedges-t7k7j6oedti">
+          <div class="ldio-127ya2cq3kn">
+            <div>
+              <div><div></div></div>
+              <div><div></div></div>
+              <div><div></div></div>
+              <div><div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

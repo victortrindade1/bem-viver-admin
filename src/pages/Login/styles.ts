@@ -79,7 +79,7 @@ export const LightSide = styled.div`
 
   ${media.lessThan("small")`
     width: 80vw;
-    height: 40vh;
+    height: 300px;
     top: -60px;
     border-radius: 8px;
     box-shadow: 5px 5px 20px 0px #00000040;

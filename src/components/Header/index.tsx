@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 import Drawer from "@mui/material/Drawer";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 

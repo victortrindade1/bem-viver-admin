@@ -1,3 +1,4 @@
+// import { useState, useEffect } from "react";
 import {
   ThemeProvider as MuiThemeProvider,
   StyledEngineProvider,
@@ -15,11 +16,28 @@ import theme from "styles/theme";
 import GlobalStyle from "styles/global";
 
 function App() {
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const onPageLoad = () => {
+  //     setIsLoading(false);
+  //   };
+
+  //   if (document.readyState === "complete") {
+  //     onPageLoad();
+  //   } else {
+  //     window.addEventListener("load", onPageLoad);
+
+  //     return () => window.removeEventListener("load", onPageLoad);
+  //   }
+  // }, []);
+
   return (
     <StyledEngineProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
+            {/* {!isLoading && <MyRoutes />} */}
             <MyRoutes />
             {/* <AppRoutes /> */}
           </AuthProvider>
