@@ -28,10 +28,7 @@ const defaultValues = {
 };
 
 const Login: React.FC = () => {
-  const { signed, user, signIn } = useContext(AuthContext);
-
-  console.log(signed);
-  console.log(user);
+  const { signIn } = useContext(AuthContext);
 
   function handleSubmit(data: IAuth) {
     signIn(data);
