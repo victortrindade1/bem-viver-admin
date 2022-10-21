@@ -17,6 +17,7 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
   async function signOut() {
     setUser(null);
+    // <Navigate to="/login" replace />;
   }
 
   return (
