@@ -4,9 +4,10 @@ import {
 } from "@mui/material/styles";
 import { ThemeProvider } from "styled-components";
 
-import "config/ReactotronConfig";
+// import "config/ReactotronConfig";
 
-import AppRoutes from "./routes";
+import MyRoutes from "./routes";
+// import AppRoutes from "routes";
 
 import { AuthProvider } from "./contexts/auth";
 
@@ -19,7 +20,8 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
-            <AppRoutes />
+            <MyRoutes />
+            {/* <AppRoutes /> */}
           </AuthProvider>
           <GlobalStyle />
         </ThemeProvider>

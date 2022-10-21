@@ -8,7 +8,9 @@
 
 ## Próximo passo
 
-ContextAPI funcionando. Agora vou dar continuidade às configurações de auth do minicurso. Ainda falta o loading, talvez um error handler, sign out, token, rotas
+Depois, transferir o layout do login pra auth layout, pra aproveitar na page de cadastro.
+
+ContextAPI funcionando. Agora vou dar continuidade às configurações de auth do minicurso. Ainda falta o loading, talvez um error handler, token, e quero tentar fazer um lazypage
 
 ## Login
 

@@ -2,11 +2,11 @@ import React from "react";
 
 import { Container } from "./styles";
 
-interface Iauth {
+interface Ichildren {
   children: React.ReactNode;
 }
 
-const auth = ({ children }: Iauth) => {
+const auth = ({ children }: Ichildren) => {
   return <Container>{children}</Container>;
 };
 

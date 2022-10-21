@@ -25,8 +25,7 @@ const links = [
   },
 ];
 
-const Alunos: React.FC = (props) => {
-  console.tron.log(props);
+const Alunos: React.FC = () => {
   return (
     <Container>
       <TitlePage titleLabel={"Alunos"} />

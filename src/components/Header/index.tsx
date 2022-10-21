@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IconType } from "react-icons/lib";
 import {
   FaBars,
   FaUser,
@@ -15,6 +16,8 @@ import { NavLink } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 
+import AuthContext from "contexts/auth";
+
 import {
   Container,
   MenuBtnContainer,
@@ -30,7 +33,7 @@ import {
 } from "./styles";
 
 import theme from "styles/theme";
-import { IconType } from "react-icons/lib";
+import { useContext } from "react";
 
 const links: { label: string; Icon: IconType; href: string; color: string }[] =
   [
@@ -75,6 +78,8 @@ const links: { label: string; Icon: IconType; href: string; color: string }[] =
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
 
+  const { signOut } = useContext(AuthContext);
+
   const toggleDrawer =
     (isOpened?: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -93,6 +98,10 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <>
       <Container onClick={handleCloseMenu()}>
@@ -106,7 +115,7 @@ const Header: React.FC = () => {
             <img src={logo} alt="logo" />
           </LogoContainer>
         </NavLink>
-        <LoginContainer>
+        <LoginContainer onClick={handleSignOut}>
           Admin
           <FaUser />
         </LoginContainer>

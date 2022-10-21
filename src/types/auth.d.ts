@@ -9,6 +9,22 @@ interface IAuthProvider {
 
 interface AuthContextData {
   signed: boolean;
-  user: object | null;
+  user: IUser | null;
   signIn(data: IAuth): Promise<void>;
+  signOut(): void;
+}
+
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  avatar?: any;
+}
+
+interface IResponse {
+  data: {
+    token: string;
+    user: IUser;
+  };
 }
