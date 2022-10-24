@@ -1,6 +1,4 @@
-import { useContext } from "react";
-
-import AuthContext from "contexts/auth";
+import { useAuth } from "contexts/auth";
 
 import AuthLayout from "pages/_layouts/auth";
 import Login from "pages/Login";
@@ -12,6 +10,7 @@ import Professores from "pages/Professores";
 import Financeiro from "pages/Financeiro";
 import Relatorios from "pages/Relatorios";
 import ConfigPage from "pages/ConfigPage";
+import LoadingPage from "pages/LoadingPage";
 
 import {
   Route,
@@ -23,7 +22,11 @@ import {
 } from "react-router-dom";
 
 export default function MyRoutes() {
-  const { signed } = useContext(AuthContext);
+  const { signed, loadingLogin } = useAuth();
+
+  if (loadingLogin) {
+    return <LoadingPage />;
+  }
 
   const PrivateWrapper = () => {
     const location = useLocation();

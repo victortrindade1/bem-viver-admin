@@ -12,6 +12,7 @@ interface AuthContextData {
   user: IUser | null;
   signIn(data: IAuth): Promise<void>;
   signOut(): void;
+  loadingLogin: boolean;
 }
 
 interface IUser {

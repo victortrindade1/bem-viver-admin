@@ -1,0 +1,13 @@
+@import "loading.css";
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #aa96da;
+  background-image: linear-gradient(45deg, #aa96da 0%, #c5fad5 100%);
+  display: grid;
+  place-items: center;
+}

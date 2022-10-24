@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 
-import AuthContext from "contexts/auth";
+import { useAuth } from "contexts/auth";
 
 import {
   Container,
@@ -33,7 +33,6 @@ import {
 } from "./styles";
 
 import theme from "styles/theme";
-import { useContext } from "react";
 
 const links: { label: string; Icon: IconType; href: string; color: string }[] =
   [
@@ -78,7 +77,7 @@ const links: { label: string; Icon: IconType; href: string; color: string }[] =
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
 
-  const { signOut } = useContext(AuthContext);
+  const { signOut } = useAuth();
 
   const toggleDrawer =
     (isOpened?: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {

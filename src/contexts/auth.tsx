@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import signInService from "../services/authService";
 import api from "services/api";
 
@@ -6,14 +6,16 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [loadingLogin, setLoadingLogin] = useState(true);
 
   async function signIn(data: IAuth) {
     const response = await signInService(data);
 
     setUser(response.data.user);
 
-    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+    api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
 
+    // Login persist
     await localStorage.setItem(
       "@AdminAuth:user",
       JSON.stringify(response.data.user)
@@ -37,6 +39,10 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
       if (storagedUser && storagedToken) {
         setUser(JSON.parse(storagedUser));
+        setLoadingLogin(false);
+
+        // Token da session da API
+        api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
       }
     }
 
@@ -44,10 +50,16 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, user, signIn, signOut, loadingLogin }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthContext;
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  return context;
+}

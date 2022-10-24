@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   FormContainer,
   TextFieldElement,
   PasswordElement,
 } from "react-hook-form-mui";
 // import { Navigate } from "react-router-dom";
-import AuthContext from "contexts/auth";
+import { useAuth } from "contexts/auth";
 // import signInService from "services/authService";
 
 import {
@@ -28,7 +28,7 @@ const defaultValues = {
 };
 
 const Login: React.FC = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
 
   function handleSubmit(data: IAuth) {
     signIn(data);
