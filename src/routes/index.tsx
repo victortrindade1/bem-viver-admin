@@ -1,15 +1,9 @@
+import { lazy, Suspense } from "react";
 import { useAuth } from "contexts/auth";
 
 import AuthLayout from "pages/_layouts/auth";
-import Login from "pages/Login";
 import DefaultLayout from "pages/_layouts/default";
-import Dashboard from "pages/Dashboard";
-import Alunos from "pages/Alunos";
-import Turmas from "pages/Turmas";
-import Professores from "pages/Professores";
-import Financeiro from "pages/Financeiro";
-import Relatorios from "pages/Relatorios";
-import ConfigPage from "pages/ConfigPage";
+
 import LoadingPage from "pages/LoadingPage";
 
 import {
@@ -21,10 +15,19 @@ import {
   Routes,
 } from "react-router-dom";
 
-export default function MyRoutes() {
-  const { signed, loadingLogin } = useAuth();
+const Dashboard = lazy(() => import("pages/Dashboard"));
+const Alunos = lazy(() => import("pages/Alunos"));
+const Turmas = lazy(() => import("pages/Turmas"));
+const Professores = lazy(() => import("pages/Professores"));
+const Financeiro = lazy(() => import("pages/Financeiro"));
+const Relatorios = lazy(() => import("pages/Relatorios"));
+const ConfigPage = lazy(() => import("pages/ConfigPage"));
+const Login = lazy(() => import("pages/Login"));
 
-  if (loadingLogin) {
+export default function MyRoutes() {
+  const { signed, loading } = useAuth();
+
+  if (loading) {
     return <LoadingPage />;
   }
 
@@ -52,18 +55,75 @@ export default function MyRoutes() {
               </DefaultLayout>
             }
           >
-            <Route index element={<Dashboard />} />
-            <Route path="alunos" element={<Alunos />} />
-            <Route path="turmas" element={<Turmas />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="professores" element={<Professores />} />
-            <Route path="financeiro" element={<Financeiro />} />
-            <Route path="relatorios" element={<Relatorios />} />
-            <Route path="configuracoes" element={<ConfigPage />} />
+            <Route
+              index
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Dashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="alunos"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Alunos />
+                </Suspense>
+              }
+            />
+            <Route
+              path="turmas"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Turmas />
+                </Suspense>
+              }
+            />
+            <Route
+              path="dashboard"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Dashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="professores"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Professores />
+                </Suspense>
+              }
+            />
+            <Route
+              path="financeiro"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Financeiro />
+                </Suspense>
+              }
+            />
+            <Route
+              path="relatorios"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Relatorios />
+                </Suspense>
+              }
+            />
+            <Route
+              path="configuracoes"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <ConfigPage />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
 
         <Route element={<PublicWrapper />}>
+          {/* <Suspense fallback={<div>Loading...</div>}> */}
           <Route
             element={
               <AuthLayout>
@@ -71,9 +131,24 @@ export default function MyRoutes() {
               </AuthLayout>
             }
           >
-            <Route index element={<Login />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              index
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Login />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <Login />
+                </Suspense>
+              }
+            />
           </Route>
+          {/* </Suspense> */}
         </Route>
 
         <Route

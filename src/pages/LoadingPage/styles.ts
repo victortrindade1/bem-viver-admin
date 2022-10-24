@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface ILoadingPage {
+  transparent?: boolean;
+}
+
+export const Container = styled.div<ILoadingPage>`
   width: 100%;
   height: 100%;
   position: fixed;

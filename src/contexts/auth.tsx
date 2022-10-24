@@ -6,7 +6,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
-  const [loadingLogin, setLoadingLogin] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   async function signIn(data: IAuth) {
     const response = await signInService(data);
@@ -39,11 +39,11 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
       if (storagedUser && storagedToken) {
         setUser(JSON.parse(storagedUser));
-        setLoadingLogin(false);
 
         // Token da session da API
         api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
       }
+      setLoading(false);
     }
 
     loadStoragedData();
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signOut, loadingLogin }}
+      value={{ signed: !!user, user, signIn, signOut, loading }}
     >
       {children}
     </AuthContext.Provider>

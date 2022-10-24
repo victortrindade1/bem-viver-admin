@@ -1,14 +1,10 @@
-// import { useState, useEffect } from "react";
 import {
   ThemeProvider as MuiThemeProvider,
   StyledEngineProvider,
 } from "@mui/material/styles";
 import { ThemeProvider } from "styled-components";
 
-// import "config/ReactotronConfig";
-
 import MyRoutes from "./routes";
-// import AppRoutes from "routes";
 
 import { AuthProvider } from "./contexts/auth";
 
