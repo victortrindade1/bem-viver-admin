@@ -34,45 +34,38 @@ import {
 
 import theme from "styles/theme";
 
-const links: { label: string; Icon: IconType; href: string; color: string }[] =
-  [
-    {
-      label: "Alunos",
-      href: "/alunos",
-      Icon: FaUsers,
-      color: theme.logo.azul,
-    },
-    {
-      label: "Professores",
-      href: "/professores",
-      Icon: FaChalkboardTeacher,
-      color: theme.logo.amarelo,
-    },
-    {
-      label: "Turmas",
-      href: "/turmas",
-      Icon: FaChalkboard,
-      color: theme.logo.rosa,
-    },
-    {
-      label: "Financeiro",
-      href: "/financeiro",
-      Icon: FaChartPie,
-      color: theme.logo.verdeEscuro,
-    },
-    {
-      label: "Relatórios",
-      href: "/relatorios",
-      Icon: FaFileInvoiceDollar,
-      color: theme.logo.laranja,
-    },
-    {
-      label: "Config.",
-      href: "/configuracoes",
-      Icon: FaCog,
-      color: theme.logo.verdeClaro,
-    },
-  ];
+const links: { label: string; Icon: IconType; href: string }[] = [
+  {
+    label: "Alunos",
+    href: "/alunos",
+    Icon: FaUsers,
+  },
+  {
+    label: "Professores",
+    href: "/professores",
+    Icon: FaChalkboardTeacher,
+  },
+  {
+    label: "Turmas",
+    href: "/turmas",
+    Icon: FaChalkboard,
+  },
+  {
+    label: "Financeiro",
+    href: "/financeiro",
+    Icon: FaChartPie,
+  },
+  {
+    label: "Relatórios",
+    href: "/relatorios",
+    Icon: FaFileInvoiceDollar,
+  },
+  {
+    label: "Config.",
+    href: "/configuracoes",
+    Icon: FaCog,
+  },
+];
 
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -121,19 +114,19 @@ const Header: React.FC = () => {
       </Container>
       <Drawer anchor={"left"} open={menuOpened} onClose={toggleDrawer(false)}>
         <MenuContainer onClick={toggleDrawer(false)}>
-          {links.map(({ label, Icon, href, color }) => (
+          {links.map(({ label, Icon, href }) => (
             <NavLink
               key={href}
               to={href}
               children={({ isActive }) => (
-                <LinkContainer color={color} isActive={isActive}>
-                  <Border color={color} />
+                <LinkContainer isActive={isActive}>
+                  <Border isActive={isActive} />
                   <MenuItemContainer>
                     <MenuIconContainer>
                       <Icon size={25} />
                     </MenuIconContainer>
-                    <MenuLabelContainer isActive={isActive} color={color}>
-                      {label}
+                    <MenuLabelContainer isActive={isActive}>
+                      <span>{label}</span>
                     </MenuLabelContainer>
                   </MenuItemContainer>
                 </LinkContainer>

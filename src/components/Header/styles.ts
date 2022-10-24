@@ -1,13 +1,9 @@
 import { IconButton } from "@mui/material";
-import { lighten, darken } from "polished";
+import { lighten } from "polished";
 import styled from "styled-components";
 
 interface IsActive {
   isActive: boolean;
-}
-
-interface Icolor extends IsActive {
-  color: string;
 }
 
 export const Container = styled.div`
@@ -28,7 +24,7 @@ export const MenuBtnContainer = styled.div`
   height: 72px;
   width: 72px;
 
-  background-color: ${(props) => props.theme.logo.verdeClaro};
+  background-color: ${(props) => props.theme.palette.primary.main};
 
   display: flex;
   align-items: center;
@@ -49,7 +45,7 @@ export const LogoContainer = styled.div`
 
 export const LoginContainer = styled.div`
   padding: 15px;
-  color: ${(props) => props.theme.logo.rosa};
+  color: ${(props) => props.theme.palette.primary.main};
 
   svg {
     margin-left: 5px;
@@ -67,7 +63,7 @@ export const MenuContainer = styled.div`
   width: 72px;
 `;
 
-export const LinkContainer = styled.div<Icolor>`
+export const LinkContainer = styled.div<IsActive>`
   width: 72px;
   height: 72px;
   display: flex;
@@ -75,19 +71,25 @@ export const LinkContainer = styled.div<Icolor>`
   justify-content: flex-start;
 
   color: ${(props) =>
-    props.isActive ? props.color : props.theme.palette.primary.main};
+    props.isActive
+      ? props.theme.palette.primary.main
+      : props.theme.palette.primary.dark};
   background: ${(props) =>
-    props.isActive ? lighten(0.37, props.color) : "#fff"};
+    props.isActive ? lighten(0.25, props.theme.palette.primary.main) : "#fff"};
 
   :hover {
-    color: ${(props) => props.color};
+    span {
+      color: ${(props) => props.theme.palette.primary.main};
+    }
+    color: ${(props) => props.theme.palette.primary.main};
   }
 `;
 
-export const Border = styled.div`
+export const Border = styled.div<IsActive>`
   width: 3px;
   height: 72px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) =>
+    props.isActive ? props.theme.palette.primary.main : "none"};
 `;
 
 export const MenuItemContainer = styled.div`
@@ -100,10 +102,10 @@ export const MenuItemContainer = styled.div`
 
 export const MenuIconContainer = styled.div``;
 
-export const MenuLabelContainer = styled.div<Icolor>`
+export const MenuLabelContainer = styled.div<IsActive>`
   font-size: 11px;
   color: ${(props) =>
     props.isActive
-      ? darken(0.3, props.color)
-      : props.theme.palette.primary.main};
+      ? props.theme.palette.primary.main
+      : props.theme.palette.primary.dark};
 `;

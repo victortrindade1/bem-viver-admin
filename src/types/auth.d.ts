@@ -1,3 +1,10 @@
+interface ISubmitUser {
+  name?: string;
+  email: string;
+  newPassword?: string;
+  confirmPassword?: string;
+}
+
 interface IAuth {
   email: string;
   password: string;

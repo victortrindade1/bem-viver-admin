@@ -23,6 +23,7 @@ const Financeiro = lazy(() => import("pages/Financeiro"));
 const Relatorios = lazy(() => import("pages/Relatorios"));
 const ConfigPage = lazy(() => import("pages/ConfigPage"));
 const Login = lazy(() => import("pages/Login"));
+const User = lazy(() => import("pages/User"));
 
 export default function MyRoutes() {
   const { signed, loading } = useAuth();
@@ -120,10 +121,25 @@ export default function MyRoutes() {
               }
             />
           </Route>
+          <Route
+            element={
+              <AuthLayout>
+                <Outlet />
+              </AuthLayout>
+            }
+          >
+            <Route
+              path="/cadastro-administrativo"
+              element={
+                <Suspense fallback={<LoadingPage />}>
+                  <User />
+                </Suspense>
+              }
+            />
+          </Route>
         </Route>
 
         <Route element={<PublicWrapper />}>
-          {/* <Suspense fallback={<div>Loading...</div>}> */}
           <Route
             element={
               <AuthLayout>
