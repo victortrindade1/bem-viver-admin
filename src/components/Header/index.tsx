@@ -75,7 +75,7 @@ const Header: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   const toggleDrawer =
     (isOpened?: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -137,7 +137,7 @@ const Header: React.FC = () => {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          Admin
+          {user && user.name}
           <FaUser />
         </LoginContainer>
       </Container>

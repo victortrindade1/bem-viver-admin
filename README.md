@@ -8,7 +8,9 @@
 
 ## Próximo passo
 
-Depois, transferir o layout do login pra auth layout, pra aproveitar na page de cadastro.
+Transferir User page pra default layout, pra aproveitar o menu header.
+
+Fazer validation no form
 
 ## Login
 

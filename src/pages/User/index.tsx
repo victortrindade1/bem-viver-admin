@@ -34,6 +34,8 @@ const User: React.FC = () => {
       await api.put(`/users/${user?.id}`, dataSubmit);
 
       updateUser(dataSubmit);
+
+      await localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
     },
     [updateUser, user]
   );
