@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import {
   FormContainer,
   TextFieldElement,
@@ -6,34 +6,68 @@ import {
   PasswordRepeatElement,
 } from "react-hook-form-mui";
 
+import { useAuth } from "contexts/auth";
+import api from "services/api";
+
 import { Title, FormContainerWrapper } from "./styles";
 
-const defaultValues = {
-  name: "",
-  email: "",
-  newPassword: "",
-  confirmPassword: "",
-};
-
 const User: React.FC = () => {
-  function handleSubmit(data: any) {
-    // e.preventDefault();
+  const { user, updateUser } = useAuth();
 
-    console.log(data.target.value);
-  }
+  const defaultValues = useMemo(
+    () => ({
+      name: user?.name,
+      email: user?.email,
+    }),
+    [user]
+  );
+
+  const handleSubmit = useCallback(
+    async (event: any) => {
+      event.preventDefault();
+
+      const dataSubmit: any = {
+        ...user,
+        [event.target.name]: event.target.value,
+      };
+
+      await api.put(`/users/${user?.id}`, dataSubmit);
+
+      updateUser(dataSubmit);
+    },
+    [updateUser, user]
+  );
+
+  // Trigger Enter
+  useEffect(() => {
+    const keyDownHandler = (event: any) => {
+      if (event.key === "Enter") {
+        handleSubmit(event);
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [handleSubmit]);
 
   return (
     <>
-      <Title>Cadastro Administrativo</Title>
+      <Title>Minha Conta</Title>
       <FormContainerWrapper>
-        <FormContainer defaultValues={defaultValues}>
+        <FormContainer
+          defaultValues={defaultValues}
+          onSuccess={(event) => handleSubmit(event)}
+        >
           <TextFieldElement
             fullWidth
             variant="standard"
             name="name"
             label="NOME"
             margin="normal"
-            onBlurCapture={(data) => handleSubmit(data)}
+            onBlurCapture={(event) => handleSubmit(event)}
           />
           <TextFieldElement
             fullWidth
@@ -42,7 +76,7 @@ const User: React.FC = () => {
             label="E-MAIL"
             margin="normal"
             required
-            onBlurCapture={(data) => handleSubmit(data)}
+            onBlurCapture={(event) => handleSubmit(event)}
           />
           <PasswordElement
             fullWidth
@@ -53,12 +87,12 @@ const User: React.FC = () => {
           />
           <PasswordRepeatElement
             passwordFieldName={"password"}
-            name="password-repeat"
+            name="passwordRepeat"
             margin="normal"
             label="CONFIRME A SENHA"
             variant="standard"
             fullWidth
-            onBlurCapture={(data) => handleSubmit(data)}
+            onBlurCapture={(event) => handleSubmit(event)}
           />
         </FormContainer>
       </FormContainerWrapper>

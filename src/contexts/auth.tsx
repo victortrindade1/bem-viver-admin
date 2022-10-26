@@ -13,7 +13,7 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
     setUser(response.data.user);
 
-    api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
     // Login persist
     await localStorage.setItem(
@@ -30,6 +30,10 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
     await localStorage.clear();
 
     setUser(null);
+  }
+
+  function updateUser(data: IUser) {
+    setUser(data);
   }
 
   useEffect(() => {
@@ -51,7 +55,14 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signOut, loading }}
+      value={{
+        signed: !!user,
+        user,
+        signIn,
+        signOut,
+        loading,
+        updateUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

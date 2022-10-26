@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 import Drawer from "@mui/material/Drawer";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 
@@ -33,6 +33,7 @@ import {
 } from "./styles";
 
 import theme from "styles/theme";
+import { Menu, MenuItem } from "@mui/material";
 
 const links: { label: string; Icon: IconType; href: string }[] = [
   {
@@ -69,6 +70,10 @@ const links: { label: string; Icon: IconType; href: string }[] = [
 
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const navigate = useNavigate();
 
   const { signOut } = useAuth();
 
@@ -94,6 +99,24 @@ const Header: React.FC = () => {
     signOut();
   };
 
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseLoginMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleConta = () => {
+    handleCloseLoginMenu();
+    navigate("/conta");
+  };
+
+  const handleSair = () => {
+    handleSignOut();
+    handleCloseLoginMenu();
+  };
+
   return (
     <>
       <Container onClick={handleCloseMenu()}>
@@ -107,7 +130,13 @@ const Header: React.FC = () => {
             <img src={logo} alt="logo" />
           </LogoContainer>
         </NavLink>
-        <LoginContainer onClick={handleSignOut}>
+        <LoginContainer
+          id="login-container"
+          onClick={handleClick}
+          aria-controls={open ? "login-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+        >
           Admin
           <FaUser />
         </LoginContainer>
@@ -135,6 +164,24 @@ const Header: React.FC = () => {
           ))}
         </MenuContainer>
       </Drawer>
+      <Menu
+        id="login-menu"
+        aria-labelledby="login-container"
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleCloseLoginMenu}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem onClick={handleConta}>Minha Conta</MenuItem>
+        <MenuItem onClick={handleSair}>Sair</MenuItem>
+      </Menu>
     </>
   );
 };

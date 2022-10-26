@@ -1,6 +1,6 @@
 interface ISubmitUser {
   name?: string;
-  email: string;
+  email?: string;
   newPassword?: string;
   confirmPassword?: string;
 }
@@ -20,6 +20,7 @@ interface AuthContextData {
   signIn(data: IAuth): Promise<void>;
   signOut(): void;
   loading: boolean;
+  updateUser(data: IUser): void;
 }
 
 interface IUser {

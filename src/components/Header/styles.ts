@@ -50,6 +50,10 @@ export const LoginContainer = styled.div`
   svg {
     margin-left: 5px;
   }
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const MenuContainer = styled.div`

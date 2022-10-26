@@ -129,7 +129,7 @@ export default function MyRoutes() {
             }
           >
             <Route
-              path="/cadastro-administrativo"
+              path="/conta"
               element={
                 <Suspense fallback={<LoadingPage />}>
                   <User />
