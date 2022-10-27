@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { lighten } from "polished";
+// import { lighten } from "polished";
+import media from "styled-media-query";
 
 export const Container = styled.div`
   display: flex;
@@ -8,15 +9,26 @@ export const Container = styled.div`
   height: auto;
 `;
 
-export const BodyContainer = styled.div<IColor>`
+export const BodyMenuContainer = styled.div`
+  min-width: 15vw;
+`;
+
+export const BodyContainer = styled.div`
   width: 100%;
   height: calc(100vh - 215px);
-  background-color: ${(props) =>
-    props.backgroundColor
-      ? lighten(0.35, props.backgroundColor)
-      : "transparent"};
   margin: 0 15px;
-  /* -webkit-box-shadow: 0px 8px 13px -10px #000000;
-  box-shadow: 0px 8px 13px -10px #000000; */
   border-radius: 4px;
+  background-color: #fff;
+
+  ${media.lessThan("small")`
+    padding: 20px;
+  `};
+
+  ${media.between("small", "medium")`
+    padding: 30px;
+  `};
+
+  ${media.greaterThan("medium")`
+    padding: 60px;
+  `};
 `;

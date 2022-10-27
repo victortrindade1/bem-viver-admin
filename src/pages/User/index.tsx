@@ -9,9 +9,22 @@ import {
 import { useAuth } from "contexts/auth";
 import api from "services/api";
 
-import { Title, FormContainerWrapper } from "./styles";
+// import TitlePage from "components/TitlePage";
+// import BodyLayout from "components/BodyLayout";
+
+import {
+  DarkSideContainer,
+  LightSideContainer,
+  BodyMenuContainer,
+  BodyLayoutContainer,
+  Title,
+  FormContainerWrapper,
+} from "./styles";
+import { useState } from "react";
 
 const User: React.FC = () => {
+  const [scrollTop, setScrollTop] = useState(0);
+
   const { user, updateUser } = useAuth();
 
   const defaultValues = useMemo(
@@ -55,49 +68,104 @@ const User: React.FC = () => {
     };
   }, [handleSubmit]);
 
+  const handleScroll = (event: any) => {
+    console.log(event.currentTarget.scrollTop);
+    setScrollTop(event.currentTarget.scrollTop);
+  };
+
   return (
     <>
-      <Title>Minha Conta</Title>
-      <FormContainerWrapper>
-        <FormContainer
-          defaultValues={defaultValues}
-          onSuccess={(event) => handleSubmit(event)}
-        >
-          <TextFieldElement
-            fullWidth
-            variant="standard"
-            name="name"
-            label="NOME"
-            margin="normal"
-            onBlurCapture={(event) => handleSubmit(event)}
-          />
-          <TextFieldElement
-            fullWidth
-            variant="standard"
-            name="email"
-            label="E-MAIL"
-            margin="normal"
-            required
-            onBlurCapture={(event) => handleSubmit(event)}
-          />
-          <PasswordElement
-            fullWidth
-            variant="standard"
-            name="password"
-            label="NOVA SENHA"
-            margin="normal"
-          />
-          <PasswordRepeatElement
-            passwordFieldName={"password"}
-            name="passwordRepeat"
-            margin="normal"
-            label="CONFIRME A SENHA"
-            variant="standard"
-            fullWidth
-            onBlurCapture={(event) => handleSubmit(event)}
-          />
-        </FormContainer>
-      </FormContainerWrapper>
+      <DarkSideContainer>
+        <BodyMenuContainer></BodyMenuContainer>
+      </DarkSideContainer>
+      <LightSideContainer>
+        <BodyLayoutContainer onScroll={handleScroll}>
+          <Title scrollTop={scrollTop}>Minha Conta</Title>
+          <FormContainerWrapper>
+            <FormContainer
+              defaultValues={defaultValues}
+              onSuccess={(event) => handleSubmit(event)}
+            >
+              <TextFieldElement
+                fullWidth
+                variant="standard"
+                name="name"
+                label="NOME"
+                margin="normal"
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <TextFieldElement
+                fullWidth
+                variant="standard"
+                name="email"
+                label="E-MAIL"
+                margin="normal"
+                required
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <PasswordElement
+                fullWidth
+                variant="standard"
+                name="password"
+                label="NOVA SENHA"
+                margin="normal"
+              />
+              <br />
+              <PasswordRepeatElement
+                passwordFieldName={"password"}
+                name="passwordRepeat"
+                margin="normal"
+                label="CONFIRME A SENHA"
+                variant="standard"
+                fullWidth
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <PasswordRepeatElement
+                passwordFieldName={"password"}
+                name="passwordRepeat"
+                margin="normal"
+                label="CONFIRME A SENHA"
+                variant="standard"
+                fullWidth
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <PasswordRepeatElement
+                passwordFieldName={"password"}
+                name="passwordRepeat"
+                margin="normal"
+                label="CONFIRME A SENHA"
+                variant="standard"
+                fullWidth
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <PasswordRepeatElement
+                passwordFieldName={"password"}
+                name="passwordRepeat"
+                margin="normal"
+                label="CONFIRME A SENHA"
+                variant="standard"
+                fullWidth
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+              <br />
+              <PasswordRepeatElement
+                passwordFieldName={"password"}
+                name="passwordRepeat"
+                margin="normal"
+                label="CONFIRME A SENHA"
+                variant="standard"
+                fullWidth
+                onBlurCapture={(event) => handleSubmit(event)}
+              />
+            </FormContainer>
+          </FormContainerWrapper>
+        </BodyLayoutContainer>
+      </LightSideContainer>
     </>
   );
 };

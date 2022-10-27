@@ -5,7 +5,6 @@ import TitlePage from "components/TitlePage";
 import BodyLayout from "components/BodyLayout";
 
 import { Container } from "./styles";
-import theme from "styles/theme";
 
 const links = [
   {
@@ -29,7 +28,7 @@ const Alunos: React.FC = () => {
   return (
     <Container>
       <TitlePage titleLabel={"Alunos"} />
-      <BodyLayout links={links} backgroundColor={theme.logo.azul}>
+      <BodyLayout links={links}>
         <h2>Consultar Alunos</h2>
       </BodyLayout>
     </Container>

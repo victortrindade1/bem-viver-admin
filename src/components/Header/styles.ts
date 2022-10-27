@@ -12,6 +12,7 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  box-shadow: -5px 5px 20px 0px #00000040;
 
   div:last-of-type {
     margin-left: auto;

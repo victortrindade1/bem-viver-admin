@@ -9,10 +9,7 @@ import {
   LabelContainer,
 } from "./styles";
 
-const BodyMenu: React.FC<IBodyMenu> = ({
-  links,
-  backgroundColor,
-}: IBodyMenu) => {
+const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
   const breakpoint = useMediaQuery("(max-width:600px)");
 
   return (
@@ -25,7 +22,7 @@ const BodyMenu: React.FC<IBodyMenu> = ({
         <Container>
           {links &&
             links.map(({ Icon, label }) => (
-              <ButtonContainer backgroundColor={backgroundColor}>
+              <ButtonContainer>
                 <Icon size={25} />
                 <LabelContainer>{label}</LabelContainer>
               </ButtonContainer>

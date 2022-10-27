@@ -2,7 +2,7 @@ interface IColor {
   backgroundColor: string;
 }
 
-interface IBodyMenu extends IColor {
+interface IBodyMenu {
   links?: {
     label: string;
     url: string;

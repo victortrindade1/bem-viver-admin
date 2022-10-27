@@ -8,7 +8,7 @@
 
 ## Próximo passo
 
-Transferir User page pra default layout, pra aproveitar o menu header.
+Editar Default Layout pro estilo novo.
 
 Fazer validation no form
 

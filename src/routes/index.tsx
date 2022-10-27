@@ -120,14 +120,6 @@ export default function MyRoutes() {
                 </Suspense>
               }
             />
-          </Route>
-          <Route
-            element={
-              <AuthLayout>
-                <Outlet />
-              </AuthLayout>
-            }
-          >
             <Route
               path="/conta"
               element={

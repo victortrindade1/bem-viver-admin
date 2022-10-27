@@ -2,7 +2,7 @@ import React from "react";
 
 import BodyMenu from "./BodyMenu";
 
-import { Container, BodyContainer } from "./styles";
+import { Container, BodyContainer, BodyMenuContainer } from "./styles";
 
 interface IBodyLayout extends IBodyMenu {
   children: JSX.Element;
@@ -11,16 +11,15 @@ interface IBodyLayout extends IBodyMenu {
 const BodyLayout: React.FC<IBodyLayout> = ({
   children,
   links,
-  backgroundColor,
 }: IBodyLayout) => {
   // const breakpoint = useMediaQuery("(max-width:600px)");
 
   return (
     <Container>
-      {links && <BodyMenu links={links} backgroundColor={backgroundColor} />}
-      <BodyContainer backgroundColor={backgroundColor}>
-        {children}
-      </BodyContainer>
+      <BodyMenuContainer>
+        {links && <BodyMenu links={links} />}
+      </BodyMenuContainer>
+      <BodyContainer>{children}</BodyContainer>
     </Container>
   );
 };

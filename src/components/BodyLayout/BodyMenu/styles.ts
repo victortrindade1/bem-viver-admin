@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { lighten } from "polished";
 
 export const Container = styled.div`
   height: 100%;
@@ -16,13 +15,10 @@ export const MoreButtonContainer = styled.div`
   top: 16px;
 `;
 
-export const ButtonContainer = styled.div<IColor>`
+export const ButtonContainer = styled.div`
   height: 80px;
   width: 80px;
-  background-color: ${(props) =>
-    props.backgroundColor
-      ? lighten(0.35, props.backgroundColor)
-      : "transparent"};
+  background-color: #fff;
   margin-bottom: 19px;
   -webkit-box-shadow: 0px 8px 13px -10px #000000;
   box-shadow: 0px 8px 13px -10px #000000;
