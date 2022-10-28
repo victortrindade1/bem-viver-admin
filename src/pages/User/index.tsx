@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   FormContainer,
   TextFieldElement,
@@ -9,21 +9,22 @@ import {
 import { useAuth } from "contexts/auth";
 import api from "services/api";
 
-// import TitlePage from "components/TitlePage";
-// import BodyLayout from "components/BodyLayout";
+import TitlePage from "components/TitlePage";
 
 import {
+  BodyLayoutContainer,
+  Body,
   DarkSideContainer,
   LightSideContainer,
   BodyMenuContainer,
-  BodyLayoutContainer,
-  Title,
-  FormContainerWrapper,
 } from "./styles";
-import { useState } from "react";
 
 const User: React.FC = () => {
   const [scrollTop, setScrollTop] = useState(0);
+
+  const handleScroll = (event: any) => {
+    setScrollTop(event.currentTarget.scrollTop);
+  };
 
   const { user, updateUser } = useAuth();
 
@@ -68,11 +69,6 @@ const User: React.FC = () => {
     };
   }, [handleSubmit]);
 
-  const handleScroll = (event: any) => {
-    console.log(event.currentTarget.scrollTop);
-    setScrollTop(event.currentTarget.scrollTop);
-  };
-
   return (
     <>
       <DarkSideContainer>
@@ -80,8 +76,8 @@ const User: React.FC = () => {
       </DarkSideContainer>
       <LightSideContainer>
         <BodyLayoutContainer onScroll={handleScroll}>
-          <Title scrollTop={scrollTop}>Minha Conta</Title>
-          <FormContainerWrapper>
+          <TitlePage titleLabel="Minha Conta" scrollTop={scrollTop} />
+          <Body>
             <FormContainer
               defaultValues={defaultValues}
               onSuccess={(event) => handleSubmit(event)}
@@ -122,48 +118,8 @@ const User: React.FC = () => {
                 fullWidth
                 onBlurCapture={(event) => handleSubmit(event)}
               />
-              <br />
-              <PasswordRepeatElement
-                passwordFieldName={"password"}
-                name="passwordRepeat"
-                margin="normal"
-                label="CONFIRME A SENHA"
-                variant="standard"
-                fullWidth
-                onBlurCapture={(event) => handleSubmit(event)}
-              />
-              <br />
-              <PasswordRepeatElement
-                passwordFieldName={"password"}
-                name="passwordRepeat"
-                margin="normal"
-                label="CONFIRME A SENHA"
-                variant="standard"
-                fullWidth
-                onBlurCapture={(event) => handleSubmit(event)}
-              />
-              <br />
-              <PasswordRepeatElement
-                passwordFieldName={"password"}
-                name="passwordRepeat"
-                margin="normal"
-                label="CONFIRME A SENHA"
-                variant="standard"
-                fullWidth
-                onBlurCapture={(event) => handleSubmit(event)}
-              />
-              <br />
-              <PasswordRepeatElement
-                passwordFieldName={"password"}
-                name="passwordRepeat"
-                margin="normal"
-                label="CONFIRME A SENHA"
-                variant="standard"
-                fullWidth
-                onBlurCapture={(event) => handleSubmit(event)}
-              />
             </FormContainer>
-          </FormContainerWrapper>
+          </Body>
         </BodyLayoutContainer>
       </LightSideContainer>
     </>

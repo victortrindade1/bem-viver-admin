@@ -4,14 +4,17 @@ import { Container } from "./styles";
 
 interface ITitlePage {
   titleLabel: string;
+  scrollTop?: number;
 }
 
-const TitlePage: React.FC<ITitlePage> = ({ titleLabel }: ITitlePage) => {
-  return (
-    <Container>
-      <h1>{titleLabel}</h1>
-    </Container>
-  );
+const TitlePage: React.FC<ITitlePage> = ({
+  titleLabel,
+  scrollTop,
+}: ITitlePage) => {
+  if (scrollTop) {
+    return <Container scrollTop={scrollTop}>{titleLabel}</Container>;
+  }
+  return <Container>{titleLabel}</Container>;
 };
 
 export default TitlePage;

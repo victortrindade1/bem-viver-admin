@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ThemeProps } from "styled-components";
+// import { ThemeProps } from "styled-components";
 import media from "styled-media-query";
 
 export const DarkSideContainer = styled.div`
@@ -91,40 +91,9 @@ export const BodyLayoutContainer = styled.div`
   `};
 `;
 
-interface IScrollTop extends ThemeProps<any> {
-  scrollTop: number;
-}
-
-export const Title = styled.div<IScrollTop>`
-  font-family: "Fredoka";
-  color: rgba(0, 0, 0, 0.6);
-  font-weight: 600;
-  font-size: ${(props) => {
-    return props.scrollTop > 3 ? "20px" : "40px";
-  }};
-  position: fixed;
-  transition: 0.2s;
-  z-index: 1;
-  background-color: #fff;
-
-  ${({ scrollTop }) => media.lessThan("small")`
-    font-size: 20px;
-    text-align: center;
-    padding: ${scrollTop > 3 ? "5px" : "22px"};
-    width: 90%;
-  `};
-  ${media.greaterThan("small")`
-    width: calc(100% - 188px);
-    padding: 20px;
-  `};
-  ${media.greaterThan("medium")`
-    width: calc(100% - 232px);
-  `};
-`;
-
-export const FormContainerWrapper = styled.div`
+export const Body = styled.div`
   ${media.lessThan("small")`
-    margin: 0 30px;
+    margin: 60px 30px;
   `};
 
   ${media.greaterThan("small")`
