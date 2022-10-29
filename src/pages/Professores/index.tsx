@@ -1,14 +1,19 @@
 import React from "react";
 
-import TitlePage from "components/TitlePage";
+// import TitlePage from "components/TitlePage";
+import DarkSideLayout from "components/DarkSideLayout";
+import LightSideLayout from "components/LightSideLayout";
 
-import { Container } from "./styles";
+// import { Container } from "./styles";
 
 const Professores: React.FC = () => {
   return (
-    <Container>
-      <TitlePage titleLabel="Professores" />
-    </Container>
+    <>
+      <DarkSideLayout />
+      <LightSideLayout titleLabel="Professores">
+        <div></div>
+      </LightSideLayout>
+    </>
   );
 };
 

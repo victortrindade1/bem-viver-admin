@@ -2,28 +2,76 @@ import styled from "styled-components";
 import media from "styled-media-query";
 
 export const Container = styled.div<{ scrollTop?: number }>`
+  /* @-webkit-keyframes  */
+  @keyframes moving {
+    from {
+      transform: translate(0px, 0px);
+    }
+    to {
+      transform: translate(0px, -42px);
+      font-size: 20px;
+    }
+  }
+
+  @keyframes moving-back {
+    from {
+      transform: translate(0px, -42px);
+      font-size: 20px;
+    }
+    to {
+      transform: translate(0px, 0px);
+      font-size: 40px;
+    }
+  }
+
+  @keyframes mobile-moving {
+    from {
+      transform: translate(0px, 0px);
+    }
+    to {
+      transform: translate(0px, -52px);
+      color: #fff;
+    }
+  }
+
+  @keyframes mobile-moving-back {
+    from {
+      transform: translate(0px, -52px);
+      color: #fff;
+    }
+    to {
+      transform: translate(0px, 0px);
+      color: ${({ theme }) => theme.palette.primary.dark};
+    }
+  }
+
   font-family: "Fredoka";
   color: ${(props) => props.theme.palette.primary.dark};
   font-weight: 600;
   position: fixed;
-  transition: 0.5s;
-  z-index: 1;
 
   ${({ scrollTop }) => media.lessThan("small")`
     font-size: 20px;
     text-align: center;
-    padding: ${scrollTop && scrollTop > 30 ? "7px" : "22px"};
+    padding: 22px;
     width: 90%;
-    position: ${scrollTop && scrollTop > 30 && "absolute"};
-    top: ${scrollTop && scrollTop > 30 && 0};
-    color: ${scrollTop && scrollTop > 30 && "#fff"};
+
+    animation: ${
+      scrollTop && scrollTop > 30
+        ? "mobile-moving 0.3s ease-out forwards"
+        : "mobile-moving-back 0.3s ease-out forwards"
+    };
   `};
   ${({ scrollTop }) => media.greaterThan("small")`
     width: calc(100% - 188px);
     padding: 20px;
-    font-size: ${scrollTop && scrollTop > 30 ? "20px" : "40px"};
-    position: ${scrollTop && scrollTop > 30 && "absolute"};
-    top: ${scrollTop && scrollTop > 30 ? "-20px" : "100px"};
+    font-size: 40px;
+
+    animation: ${
+      scrollTop && scrollTop > 30
+        ? "moving 0.3s ease-out forwards"
+        : "moving-back 0.3s ease-out forwards"
+    };
   }};
   `};
   ${media.greaterThan("medium")`

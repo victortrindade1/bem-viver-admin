@@ -8,8 +8,7 @@
 
 ## Próximo passo
 
-Editar Default Layout pro estilo novo.
-
+Fazer submenu como era em Alunos
 Fazer validation no form
 
 ## Login
