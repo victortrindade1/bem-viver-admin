@@ -1,11 +1,4 @@
 import { lazy, Suspense } from "react";
-import { useAuth } from "contexts/auth";
-
-import AuthLayout from "pages/_layouts/auth";
-import DefaultLayout from "pages/_layouts/default";
-
-import LoadingPage from "pages/LoadingPage";
-
 import {
   Route,
   Navigate,
@@ -14,6 +7,13 @@ import {
   BrowserRouter,
   Routes,
 } from "react-router-dom";
+import { useAuth } from "contexts/auth";
+
+import AuthLayout from "pages/_layouts/auth";
+import DefaultLayout from "pages/_layouts/default";
+import LoadingPage from "pages/LoadingPage";
+
+import AnimationLayout from "components/AnimationLayout";
 
 const Dashboard = lazy(() => import("pages/Dashboard"));
 const Alunos = lazy(() => import("pages/Alunos"));
@@ -24,6 +24,7 @@ const Relatorios = lazy(() => import("pages/Relatorios"));
 const ConfigPage = lazy(() => import("pages/ConfigPage"));
 const Login = lazy(() => import("pages/Login"));
 const User = lazy(() => import("pages/User"));
+const CadastroAluno = lazy(() => import("pages/Aluno/Cadastro"));
 
 export default function MyRoutes() {
   const { signed, loading } = useAuth();
@@ -48,125 +49,135 @@ export default function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateWrapper />}>
-          <Route
-            element={
-              <DefaultLayout>
-                <Outlet />
-              </DefaultLayout>
-            }
-          >
+        <Route element={<AnimationLayout />}>
+          <Route element={<PrivateWrapper />}>
             <Route
-              index
               element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Dashboard />
-                </Suspense>
+                <DefaultLayout>
+                  <Outlet />
+                </DefaultLayout>
               }
-            />
-            <Route
-              path="alunos"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Alunos />
-                </Suspense>
-              }
-            />
-            <Route
-              path="turmas"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Turmas />
-                </Suspense>
-              }
-            />
-            <Route
-              path="dashboard"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Dashboard />
-                </Suspense>
-              }
-            />
-            <Route
-              path="professores"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Professores />
-                </Suspense>
-              }
-            />
-            <Route
-              path="financeiro"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Financeiro />
-                </Suspense>
-              }
-            />
-            <Route
-              path="relatorios"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Relatorios />
-                </Suspense>
-              }
-            />
-            <Route
-              path="configuracoes"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <ConfigPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/conta"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <User />
-                </Suspense>
-              }
-            />
+            >
+              <Route
+                index
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Dashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="alunos"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Alunos />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="aluno/:id/cadastro"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <CadastroAluno />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="turmas"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Turmas />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="dashboard"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Dashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="professores"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Professores />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="financeiro"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Financeiro />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="relatorios"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Relatorios />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="configuracoes"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <ConfigPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/conta"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <User />
+                  </Suspense>
+                }
+              />
+            </Route>
           </Route>
-        </Route>
 
-        <Route element={<PublicWrapper />}>
-          <Route
-            element={
-              <AuthLayout>
-                <Outlet />
-              </AuthLayout>
-            }
-          >
+          <Route element={<PublicWrapper />}>
             <Route
-              index
               element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Login />
-                </Suspense>
+                <AuthLayout>
+                  <Outlet />
+                </AuthLayout>
               }
-            />
-            <Route
-              path="/login"
-              element={
-                <Suspense fallback={<LoadingPage />}>
-                  <Login />
-                </Suspense>
-              }
-            />
+            >
+              <Route
+                index
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Login />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Login />
+                  </Suspense>
+                }
+              />
+            </Route>
+            {/* </Suspense> */}
           </Route>
-          {/* </Suspense> */}
-        </Route>
 
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>Ooopss... 404!</p>
-            </main>
-          }
-        />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>Ooopss... 404!</p>
+              </main>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

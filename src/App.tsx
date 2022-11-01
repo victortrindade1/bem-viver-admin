@@ -3,6 +3,7 @@ import {
   StyledEngineProvider,
 } from "@mui/material/styles";
 import { ThemeProvider } from "styled-components";
+import { AnimatePresence } from "framer-motion";
 
 import MyRoutes from "./routes";
 
@@ -17,7 +18,9 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
-            <MyRoutes />
+            <AnimatePresence>
+              <MyRoutes />
+            </AnimatePresence>
           </AuthProvider>
           <GlobalStyle />
         </ThemeProvider>

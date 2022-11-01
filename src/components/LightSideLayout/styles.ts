@@ -50,16 +50,6 @@ export const Body = styled.div`
 
   ${media.greaterThan("small")`
     width: 100%;
-    /* padding: 30px; */
+    margin-top: 88px;
   `};
-
-  /* ${media.greaterThan("small")`
-    max-width: 300px;
-    margin: 30px;
-    margin-top: 100px;
-  `};
-
-  ${media.greaterThan("medium")`
-    max-width: 300px;
-  `}; */
 `;

@@ -5,11 +5,13 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
 
+import { TitleBody } from "./styles";
+
 const links = [
   {
     label: "Novo",
     Icon: FaUserPlus,
-    url: "/aluno/1/cadastro",
+    url: "/professores",
   },
   {
     label: "Cobranças",
@@ -23,15 +25,15 @@ const links = [
   },
 ];
 
-const Alunos: React.FC = () => {
+const CadastroAluno: React.FC = () => {
   return (
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
-      <LightSideLayout titleLabel="Alunos">
-        <div></div>
+      <LightSideLayout titleLabel="Aluno">
+        <TitleBody>Cadastro</TitleBody>
       </LightSideLayout>
     </>
   );
 };
 
-export default Alunos;
+export default CadastroAluno;

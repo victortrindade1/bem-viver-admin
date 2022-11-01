@@ -8,7 +8,7 @@
 
 ## Próximo passo
 
-Fazer submenu como era em Alunos
+Page Cadastro. Vou implementar o Tab, e criar component do Tab
 Fazer validation no form
 
 ## Login

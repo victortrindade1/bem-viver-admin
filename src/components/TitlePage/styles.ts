@@ -50,7 +50,7 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
   font-weight: 600;
   position: fixed;
 
-  ${({ scrollTop, scrolled }) => media.lessThan("small")`
+  ${({ scrollTop }) => media.lessThan("small")`
     font-size: 20px;
     text-align: center;
     padding: 22px;
