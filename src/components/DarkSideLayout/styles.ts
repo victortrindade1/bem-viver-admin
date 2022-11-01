@@ -40,6 +40,7 @@ export const BodyMenuContainer = styled.div<IChildren>`
     border-radius: 4px 0px 0px 4px;
     height: 90%;
     min-height: calc(0.9 * (100vh - 72px));
+    overflow: auto;
   `};
   ${media.between("small", "medium")`
     width: 120px;

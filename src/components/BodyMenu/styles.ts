@@ -1,36 +1,38 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100%;
-  width: 200px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
-  padding-left: 15px;
   align-items: center;
 `;
 
 export const MoreButtonContainer = styled.div`
   position: absolute;
   right: 27px;
-  top: 16px;
+  top: 53px;
+
+  svg {
+    color: #fff;
+  }
 `;
 
 export const ButtonContainer = styled.div`
   height: 80px;
   width: 80px;
   background-color: #fff;
-  margin-bottom: 19px;
-  -webkit-box-shadow: 0px 8px 13px -10px #000000;
-  box-shadow: 0px 8px 13px -10px #000000;
+  margin: 7px;
+  box-shadow: -5px 5px 20px 0px #00000040;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${(props) => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.primary.dark};
 
   svg {
-    color: ${(props) => props.theme.palette.primary.main};
+    color: ${(props) => props.theme.palette.primary.dark};
     margin-bottom: 3px;
   }
 

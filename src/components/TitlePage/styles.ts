@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import media from "styled-media-query";
 
-export const Container = styled.div<{ scrollTop?: number }>`
+export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
   /* @-webkit-keyframes  */
   @keyframes moving {
     from {
@@ -50,7 +50,7 @@ export const Container = styled.div<{ scrollTop?: number }>`
   font-weight: 600;
   position: fixed;
 
-  ${({ scrollTop }) => media.lessThan("small")`
+  ${({ scrollTop, scrolled }) => media.lessThan("small")`
     font-size: 20px;
     text-align: center;
     padding: 22px;
@@ -70,7 +70,7 @@ export const Container = styled.div<{ scrollTop?: number }>`
     animation: ${
       scrollTop && scrollTop > 30
         ? "moving 0.3s ease-out forwards"
-        : "moving-back 0.3s ease-out forwards"
+        : "moving-back 0.1s ease-out forwards"
     };
   }};
   `};

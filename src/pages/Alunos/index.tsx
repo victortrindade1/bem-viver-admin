@@ -1,16 +1,15 @@
 import React from "react";
 import { FaUserPlus, FaCommentDollar, FaPaperPlane } from "react-icons/fa";
 
-import TitlePage from "components/TitlePage";
-import BodyLayout from "components/BodyLayout";
-
-import { Container } from "./styles";
+import DarkSideLayout from "components/DarkSideLayout";
+import LightSideLayout from "components/LightSideLayout";
+import BodyMenu from "components/BodyMenu";
 
 const links = [
   {
     label: "Novo",
     Icon: FaUserPlus,
-    url: "/alunos",
+    url: "/professores",
   },
   {
     label: "Cobranças",
@@ -26,12 +25,12 @@ const links = [
 
 const Alunos: React.FC = () => {
   return (
-    <Container>
-      <TitlePage titleLabel={"Alunos"} />
-      <BodyLayout links={links}>
-        <h2>Consultar Alunos</h2>
-      </BodyLayout>
-    </Container>
+    <>
+      <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
+      <LightSideLayout titleLabel="Alunos">
+        <div></div>
+      </LightSideLayout>
+    </>
   );
 };
 
