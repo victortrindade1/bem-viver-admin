@@ -31,7 +31,7 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
         <Container>
           {links &&
             links.map(({ Icon, label, url }) => (
-              <ButtonContainer onClick={() => handleCLick(url)}>
+              <ButtonContainer onClick={() => handleCLick(url)} key={label}>
                 <Icon size={25} />
                 <LabelContainer>{label}</LabelContainer>
               </ButtonContainer>
