@@ -52,9 +52,9 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
 
   ${({ scrollTop }) => media.lessThan("small")`
     font-size: 20px;
-    text-align: center;
-    padding: 22px;
-    width: 90%;
+    /* text-align: center; */
+    /* padding: 22px; */
+    /* width: 90%; */
 
     animation: ${
       scrollTop && scrollTop > 30

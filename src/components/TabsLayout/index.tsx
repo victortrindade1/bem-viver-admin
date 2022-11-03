@@ -56,6 +56,7 @@ const TabsLayout: React.FC<ITabsLayout> = ({ tabs }: ITabsLayout, props) => {
               label={item.tabLabel}
               {...a11yProps(index)}
               key={item.tabLabel}
+              style={{ fontFamily: "Fredoka" }}
             />
           ))}
         </Tabs>

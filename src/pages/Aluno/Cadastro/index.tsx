@@ -5,11 +5,12 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
 import TabsLayout from "components/TabsLayout";
+import TitleBody from "components/TitleBody";
 
 import DadosPessoais from "./DadosPessoais";
 import Endereco from "./Endereco";
 
-import { TitleBody } from "./styles";
+// import { TitleBody } from "./styles";
 
 const CadastroAluno: React.FC = () => {
   const tabs = [
@@ -45,7 +46,7 @@ const CadastroAluno: React.FC = () => {
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
       <LightSideLayout titleLabel="Aluno">
-        <TitleBody>Cadastro</TitleBody>
+        <TitleBody titleLabel="Cadastro" />
         <TabsLayout tabs={tabs} />
       </LightSideLayout>
     </>

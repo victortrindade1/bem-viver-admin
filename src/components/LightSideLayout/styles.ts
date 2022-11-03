@@ -25,8 +25,19 @@ export const Container = styled.div`
   `};
 `;
 
-export const BodyLayout = styled.div`
+export const Scrollable = styled.div`
   overflow: auto;
+  height: 100%;
+  height: -webkit-fill-available;
+  height: -moz-available;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const BodyLayout = styled.div`
+  overflow: hidden;
   background-color: #fff;
   box-shadow: 5px 5px 20px 0px #00000040;
 
@@ -34,18 +45,21 @@ export const BodyLayout = styled.div`
     border-radius: 0px 0px 4px 4px;
     width: 90%;
     margin-bottom: 30px;
+    padding: 20px;
   `};
   ${media.greaterThan("small")`
     border-radius: 0px 4px 4px 0px;
     height: 90%;
     width: 100%;
     margin-right: 30px;
+    padding: 20px;
   `};
 `;
 
 export const Body = styled.div`
   ${media.lessThan("small")`
-    margin: 60px 30px;
+    margin: 60px 0px;
+    width: 100%;
   `};
 
   ${media.greaterThan("small")`

@@ -38,7 +38,6 @@ export const ButtonContainer = styled.div`
 
   font-family: "Fredoka";
   font-size: 11px;
-  font-weight: bold;
 
   :hover {
     cursor: pointer;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import TitlePage from "components/TitlePage";
 
-import { Container, BodyLayout, Body } from "./styles";
+import { Container, BodyLayout, Body, Scrollable } from "./styles";
 interface ILightSideLayout {
   titleLabel: string;
   children: React.ReactNode;
@@ -20,9 +20,11 @@ const LightSideLayout: React.FC<ILightSideLayout> = ({
 
   return (
     <Container>
-      <BodyLayout onScroll={handleScroll}>
-        <TitlePage titleLabel={titleLabel} scrollTop={scrollTop} />
-        <Body>{children}</Body>
+      <BodyLayout>
+        <Scrollable onScroll={handleScroll}>
+          <TitlePage titleLabel={titleLabel} scrollTop={scrollTop} />
+          <Body>{children}</Body>
+        </Scrollable>
       </BodyLayout>
     </Container>
   );
