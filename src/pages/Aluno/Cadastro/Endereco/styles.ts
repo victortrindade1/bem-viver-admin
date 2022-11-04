@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import media from "styled-media-query";
 
-export const Grid = styled.div`
+export const Container = styled.div`
   display: grid;
   justify-content: space-around;
   margin-top: 30px;

@@ -24,7 +24,9 @@ const Relatorios = lazy(() => import("pages/Relatorios"));
 const ConfigPage = lazy(() => import("pages/ConfigPage"));
 const Login = lazy(() => import("pages/Login"));
 const User = lazy(() => import("pages/User"));
+const Aluno = lazy(() => import("pages/Aluno"));
 const CadastroAluno = lazy(() => import("pages/Aluno/Cadastro"));
+const ContatosAluno = lazy(() => import("pages/Aluno/Contatos"));
 
 export default function MyRoutes() {
   const { signed, loading } = useAuth();
@@ -75,13 +77,30 @@ export default function MyRoutes() {
                 }
               />
               <Route
-                path="aluno/:id/cadastro"
                 element={
-                  <Suspense fallback={<LoadingPage />}>
-                    <CadastroAluno />
-                  </Suspense>
+                  <Aluno>
+                    <Outlet />
+                  </Aluno>
                 }
-              />
+              >
+                <Route
+                  path="aluno/:id/cadastro"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <CadastroAluno />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="aluno/:id/contatos"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <ContatosAluno />
+                    </Suspense>
+                  }
+                />
+              </Route>
+
               <Route
                 path="turmas"
                 element={

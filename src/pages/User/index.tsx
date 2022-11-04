@@ -78,6 +78,7 @@ const User: React.FC = () => {
             <br />
             <TextFieldElement
               fullWidth
+              type={"email"}
               variant="standard"
               name="email"
               label="E-MAIL"

@@ -27,16 +27,17 @@ export const Container = styled.div`
 
 export const Scrollable = styled.div`
   overflow: auto;
-  height: 100%;
-  height: -webkit-fill-available;
-  height: -moz-available;
-
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
+
+  ${media.lessThan("small")`
+    justify-content: center;
+  `};
 `;
 
 export const BodyLayout = styled.div`
+  display: flex;
   overflow: hidden;
   background-color: #fff;
   box-shadow: 5px 5px 20px 0px #00000040;
@@ -57,13 +58,13 @@ export const BodyLayout = styled.div`
 `;
 
 export const Body = styled.div`
+  width: 100%;
+
   ${media.lessThan("small")`
     margin: 60px 0px;
-    width: 100%;
   `};
 
   ${media.greaterThan("small")`
-    width: 100%;
     margin-top: 88px;
   `};
 `;

@@ -8,8 +8,15 @@
 
 ## Próximo passo
 
-Page Cadastro. Vou implementar o Tab, e criar component do Tab
+Page Cadastro
+
+Fazer botão pra expandir cadastros do pai
+Depois q terminar page cadastro, componentizar a page.
+Componentizar TextFieldElement tb, pq tem sempre mesma configuraçao.
+Componentizar Accordion
+
 Fazer validation no form
+Um dia: fazer animaçao de subtitulo
 
 ## Login
 

@@ -63,8 +63,8 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
     };
   `};
   ${({ scrollTop }) => media.greaterThan("small")`
-    width: calc(100% - 188px);
-    padding: 20px;
+    /* width: calc(100% - 188px); */
+    /* padding: 20px; */
     font-size: 40px;
 
     animation: ${
@@ -75,6 +75,6 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
   }};
   `};
   ${media.greaterThan("medium")`
-    width: calc(100% - 232px);
+    /* width: calc(100% - 232px); */
   `};
 `;

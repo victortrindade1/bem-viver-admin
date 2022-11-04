@@ -44,4 +44,6 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const LabelContainer = styled.div``;
+export const LabelContainer = styled.div`
+  text-align: center;
+`;
