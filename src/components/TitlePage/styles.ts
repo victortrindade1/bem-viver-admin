@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import media from "styled-media-query";
 
-export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
+export const Container = styled.div<{ scrollTop?: number }>`
   /* @-webkit-keyframes  */
   @keyframes moving {
     from {
@@ -52,9 +52,6 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
 
   ${({ scrollTop }) => media.lessThan("small")`
     font-size: 20px;
-    /* text-align: center; */
-    /* padding: 22px; */
-    /* width: 90%; */
 
     animation: ${
       scrollTop && scrollTop > 30
@@ -63,8 +60,6 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
     };
   `};
   ${({ scrollTop }) => media.greaterThan("small")`
-    /* width: calc(100% - 188px); */
-    /* padding: 20px; */
     font-size: 40px;
 
     animation: ${
@@ -73,8 +68,5 @@ export const Container = styled.div<{ scrollTop?: number; scrolled?: boolean }>`
         : "moving-back 0.1s ease-out forwards"
     };
   }};
-  `};
-  ${media.greaterThan("medium")`
-    /* width: calc(100% - 232px); */
   `};
 `;

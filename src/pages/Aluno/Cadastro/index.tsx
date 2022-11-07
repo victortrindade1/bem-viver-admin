@@ -20,7 +20,15 @@ const CadastroAluno: React.FC = () => {
 
   return (
     <>
-      <TitleBody titleLabel="Cadastro" />
+      <TitleBody
+        titleLabel="Cadastro"
+        initialScroll={
+          window.innerWidth <= 450 ? 62 : window.innerWidth <= 768 ? 72 : 92
+        }
+        finalScroll={
+          window.innerWidth <= 450 ? 845 : window.innerWidth <= 768 ? 880 : 730
+        }
+      />
       <TabsLayout tabs={tabs} />
     </>
   );

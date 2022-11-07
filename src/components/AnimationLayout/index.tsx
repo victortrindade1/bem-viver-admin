@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 
 const pageVariants = {
   initial: {
-    opacity: 0.5,
+    opacity: 0.7,
   },
   in: {
     opacity: 1,
   },
   out: {
-    opacity: 0.5,
+    opacity: 0.7,
   },
 };
 

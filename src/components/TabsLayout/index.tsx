@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-// import { Container } from './styles';
+import { Container } from "./styles";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Container
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -22,7 +22,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && children}
-    </div>
+    </Container>
   );
 }
 

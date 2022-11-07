@@ -8,13 +8,8 @@
 
 ## Próximo passo
 
-Page Cadastro
-
-Fazer botão pra expandir cadastros do pai
-Depois q terminar page cadastro, componentizar a page.
-Componentizar TextFieldElement tb, pq tem sempre mesma configuraçao.
-Componentizar Accordion
-
+Fazer Contatos, Dados Escolares, Anamnese
+Colorir activepage do bodymenu
 Fazer validation no form
 Um dia: fazer animaçao de subtitulo
 
