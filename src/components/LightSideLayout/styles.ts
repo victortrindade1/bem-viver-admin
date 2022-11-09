@@ -41,19 +41,19 @@ export const BodyLayout = styled.div`
   overflow: hidden;
   background-color: #fff;
   box-shadow: 5px 5px 20px 0px #00000040;
+  padding: 0px 20px;
+  position: relative;
 
   ${media.lessThan("small")`
     border-radius: 0px 0px 4px 4px;
     width: 90%;
     margin-bottom: 30px;
-    padding: 20px;
   `};
   ${media.greaterThan("small")`
     border-radius: 0px 4px 4px 0px;
     height: 90%;
     width: 100%;
     margin-right: 30px;
-    padding: 20px;
   `};
 `;
 
@@ -65,6 +65,6 @@ export const Body = styled.div`
   `};
 
   ${media.greaterThan("small")`
-    margin-top: 88px;
+    margin-top: 108px;
   `};
 `;

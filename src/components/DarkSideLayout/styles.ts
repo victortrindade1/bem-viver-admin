@@ -28,7 +28,7 @@ export const Container = styled.div`
 export const BodyMenuContainer = styled.div<IChildren>`
   background-color: ${(props) => props.theme.palette.primary.main};
   box-shadow: -5px 5px 20px 0px #00000040;
-
+  z-index: 2;
   ${media.lessThan("small")`
     border-radius: 4px 4px 0px 0px;
     width: 90%;

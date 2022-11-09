@@ -8,6 +8,8 @@
 
 ## Próximo passo
 
+E se eu fizer 2 divs marcos pra cada sessao de titulo. Esses divs eu leio o scrollTop,
+e já passa como parâmetro initialScroll e finalScroll
 Fazer Contatos, Dados Escolares, Anamnese
 Colorir activepage do bodymenu
 Fazer validation no form

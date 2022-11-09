@@ -17,19 +17,12 @@ const CadastroAluno: React.FC = () => {
       component: Endereco,
     },
   ];
-
   return (
     <>
-      <TitleBody
-        titleLabel="Cadastro"
-        initialScroll={
-          window.innerWidth <= 450 ? 62 : window.innerWidth <= 768 ? 72 : 92
-        }
-        finalScroll={
-          window.innerWidth <= 450 ? 845 : window.innerWidth <= 768 ? 880 : 730
-        }
-      />
-      <TabsLayout tabs={tabs} />
+      <div>
+        <TitleBody titleLabel="Cadastro" />
+        <TabsLayout tabs={tabs} />
+      </div>
     </>
   );
 };

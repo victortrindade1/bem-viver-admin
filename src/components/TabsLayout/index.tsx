@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import { Container } from "./styles";
+import { Container, Wrapper } from "./styles";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,7 +49,7 @@ const TabsLayout: React.FC<ITabsLayout> = ({ tabs }: ITabsLayout, props) => {
 
   return (
     <div>
-      <div>
+      <Wrapper>
         <Tabs value={value} onChange={handleChange} aria-label="Tabs">
           {tabs.map((item, index) => (
             <Tab
@@ -60,7 +60,7 @@ const TabsLayout: React.FC<ITabsLayout> = ({ tabs }: ITabsLayout, props) => {
             />
           ))}
         </Tabs>
-      </div>
+      </Wrapper>
       {tabs.map((item, index) => (
         <TabPanel value={value} index={index} key={index}>
           {item.component({ ...props })}

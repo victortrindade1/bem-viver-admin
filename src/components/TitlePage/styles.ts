@@ -49,9 +49,14 @@ export const Container = styled.div<{ scrollTop?: number }>`
   color: ${(props) => props.theme.palette.primary.dark};
   font-weight: 600;
   position: fixed;
+  z-index: 2;
+  text-align: center;
+  margin-top: 20px;
 
   ${({ scrollTop }) => media.lessThan("small")`
     font-size: 20px;
+    left: 0;
+    right: 0;
 
     animation: ${
       scrollTop && scrollTop > 30
