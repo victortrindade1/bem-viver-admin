@@ -5,24 +5,24 @@ export const Container = styled.div`
   background: rgb(101, 189, 127);
   display: flex;
 
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     width: 100%;
     height: calc(100% - 80px);
     background: linear-gradient(0deg, rgba(101,189,127,1) 0%, rgba(197,250,213,1) 35%);
 
     justify-content: center;
   `};
-  ${media.greaterThan("small")`
+  ${media.greaterThan("medium")`
     background: linear-gradient(270deg, rgba(101,189,127,1) 0%, rgba(197,250,213,1) 35%);
 
     align-items: center;
-  `};
-  ${media.between("small", "medium")`
-    width: calc(100% - 150px);
-  `};
-  ${media.greaterThan("medium")`
     width: calc(100% - 200px);
   `};
+  /* ${media.between("small", "medium")`
+    width: calc(100% - 150px);
+  `}; */
+  /* ${media.greaterThan("medium")`
+  `}; */
 `;
 
 export const Scrollable = styled.div`
@@ -31,7 +31,7 @@ export const Scrollable = styled.div`
   justify-content: flex-start;
   width: 100%;
 
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     justify-content: center;
   `};
 `;
@@ -44,12 +44,12 @@ export const BodyLayout = styled.div`
   padding: 0px 20px;
   position: relative;
 
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     border-radius: 0px 0px 4px 4px;
     width: 90%;
     margin-bottom: 30px;
   `};
-  ${media.greaterThan("small")`
+  ${media.greaterThan("medium")`
     border-radius: 0px 4px 4px 0px;
     height: 90%;
     width: 100%;
@@ -60,11 +60,11 @@ export const BodyLayout = styled.div`
 export const Body = styled.div`
   width: 100%;
 
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     margin: 60px 0px;
   `};
 
-  ${media.greaterThan("small")`
+  ${media.greaterThan("medium")`
     margin-top: 108px;
   `};
 `;

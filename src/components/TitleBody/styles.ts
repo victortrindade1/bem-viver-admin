@@ -7,7 +7,7 @@ export const Container = styled.div`
   color: ${(props) => props.theme.palette.primary.dark};
   font-size: 20px;
 
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     font-size: 16px;
   `}
 `;
@@ -83,7 +83,7 @@ export const HiddenTitle = styled.div<{
     }
   }
 
-  ${({ scrollTop, finalScroll, initialScroll }) => media.lessThan("small")`
+  ${({ scrollTop, finalScroll, initialScroll }) => media.lessThan("medium")`
     padding: 2px 10px;
     border-radius: 0px 0px 4px 4px;
     width: fit-content;
@@ -98,24 +98,11 @@ export const HiddenTitle = styled.div<{
     };
   `};
 
-  ${media.greaterThan("small")`
+  ${({ scrollTop, initialScroll, finalScroll }) => media.greaterThan("medium")`
     padding: 1px 10px 1px 20px;
     left: -160px;
     top: 0px;
-  `}
 
-  ${({ scrollTop, initialScroll, finalScroll }) => media.between(
-    "small",
-    "medium"
-  )`
-    animation: ${
-      scrollTop > initialScroll && scrollTop < finalScroll
-        ? "medium-movingBody 0.3s ease-out forwards"
-        : "medium-movingBody-back 0.3s ease-out forwards"
-    };
-  `};
-
-  ${({ scrollTop, initialScroll, finalScroll }) => media.greaterThan("medium")`
     animation: ${
       scrollTop > initialScroll && scrollTop < finalScroll
         ? "movingBody 0.3s ease-out forwards"

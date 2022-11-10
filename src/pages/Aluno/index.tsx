@@ -26,7 +26,7 @@ const links = [
   {
     label: "Dados Escolares",
     Icon: FaGraduationCap,
-    url: "/alunos",
+    url: "/aluno/1/dadosescolares",
   },
   {
     label: "Anamnese",
@@ -35,6 +35,21 @@ const links = [
   },
   {
     label: "Cobranças",
+    Icon: FaMoneyCheckAlt,
+    url: "/alunos",
+  },
+  {
+    label: "fewfefe",
+    Icon: FaMoneyCheckAlt,
+    url: "/alunos",
+  },
+  {
+    label: "hrthht",
+    Icon: FaMoneyCheckAlt,
+    url: "/alunos",
+  },
+  {
+    label: "sdqwdwd",
     Icon: FaMoneyCheckAlt,
     url: "/alunos",
   },

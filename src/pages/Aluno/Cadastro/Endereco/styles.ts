@@ -8,6 +8,7 @@ export const Container = styled.div`
 
   ${media.lessThan("medium")`
     margin: 20px;
+    justify-content: start;
   `};
 
   ${media.greaterThan("medium")`

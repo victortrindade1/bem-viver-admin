@@ -17,6 +17,7 @@ const CadastroAluno: React.FC = () => {
       component: Endereco,
     },
   ];
+
   return (
     <>
       <div>

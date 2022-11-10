@@ -2,7 +2,11 @@
 
 ## Próximo passo
 
-Tirar o bodymenu extendido pra screen medium, pq as abas aparecem cortadas.
+Configurar DNS do gmail de Guilherme
+Servidor atual do menino:
+// ns230.prodns.com.br
+// ns231.prodns.com.br
+
 Fazer Contatos, Dados Escolares, Anamnese
 Colorir activepage do bodymenu
 Fazer validation no form

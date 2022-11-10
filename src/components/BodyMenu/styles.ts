@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const MoreButtonContainer = styled.div`
   position: absolute;
-  right: 27px;
+  right: 6vw;
   top: 53px;
 
   svg {

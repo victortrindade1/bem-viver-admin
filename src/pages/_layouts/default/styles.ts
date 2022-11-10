@@ -10,10 +10,10 @@ export const BodyChildren = styled.div`
   position: absolute;
   top: 72px;
   width: 100%;
-  ${media.lessThan("small")`
+  ${media.lessThan("medium")`
     flex-direction: column;
   `};
-  ${media.greaterThan("small")`
+  ${media.greaterThan("medium")`
     flex-direction: row;
   `};
 `;

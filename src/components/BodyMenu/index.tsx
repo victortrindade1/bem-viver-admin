@@ -15,7 +15,7 @@ import {
 const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
   const navigate = useNavigate();
 
-  const breakpoint = useMediaQuery("(max-width:450px)");
+  const breakpoint = useMediaQuery("(max-width:768px)");
 
   const handleCLick = (url: string) => {
     navigate(url);

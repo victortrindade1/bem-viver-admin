@@ -21,6 +21,7 @@ export default createGlobalStyle<{ theme: CustomTheme }>`
 
   body {
     -webkit-font-smoothing: antialiased !important;
+    scrollbar-color: #123456 green
   }
 
   body, input, button {

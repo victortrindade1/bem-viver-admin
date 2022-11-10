@@ -3,15 +3,19 @@ import media from "styled-media-query";
 
 export const Grid = styled.div`
   display: grid;
-  justify-content: space-around;
   margin-top: 30px;
 
-  ${media.lessThan("medium")`
+  ${media.lessThan("small")`
     margin: 20px;
-    justify-content: start;
+  `};
+
+  ${media.between("small", "medium")`
+    margin: 20px;
+    max-width: 50vw;
   `};
 
   ${media.greaterThan("medium")`
-    grid-template-columns: 0.4fr 0.4fr;
+    justify-content: space-around;
+    grid-template-columns: 0.26fr 0.26fr 0.26fr;
   `};
 `;

@@ -53,7 +53,7 @@ export const Container = styled.div<{ scrollTop?: number }>`
   text-align: center;
   margin-top: 20px;
 
-  ${({ scrollTop }) => media.lessThan("small")`
+  ${({ scrollTop }) => media.lessThan("medium")`
     font-size: 20px;
     left: 0;
     right: 0;
@@ -64,7 +64,7 @@ export const Container = styled.div<{ scrollTop?: number }>`
         : "mobile-moving-back 0.3s ease-out forwards"
     };
   `};
-  ${({ scrollTop }) => media.greaterThan("small")`
+  ${({ scrollTop }) => media.greaterThan("medium")`
     font-size: 40px;
 
     animation: ${
