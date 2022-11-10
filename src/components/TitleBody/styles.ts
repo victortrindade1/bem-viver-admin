@@ -27,6 +27,7 @@ export const HiddenTitle = styled.div<{
   align-items: center;
   border-radius: 0 10px 10px 0;
   font-family: "Fredoka";
+  visibility: ${(props) => props.scrollTop === 0 && "hidden"};
 
   @keyframes movingBody {
     from {

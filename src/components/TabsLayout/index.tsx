@@ -50,7 +50,13 @@ const TabsLayout: React.FC<ITabsLayout> = ({ tabs }: ITabsLayout, props) => {
   return (
     <div>
       <Wrapper>
-        <Tabs value={value} onChange={handleChange} aria-label="Tabs">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="Tabs"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
           {tabs.map((item, index) => (
             <Tab
               label={item.tabLabel}

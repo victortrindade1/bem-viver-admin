@@ -1,19 +1,12 @@
 # Bem Viver Admin
 
-## Referências
-
-`https://github.com/WallysonGalvao/rocketseat-gobarber` (TS)
-`https://github.com/victortrindade1/rocketseat-gobarber-web` (JS)
-`https://github.com/StefanoSaffran/gobarber` (TS)
-
 ## Próximo passo
 
-E se eu fizer 2 divs marcos pra cada sessao de titulo. Esses divs eu leio o scrollTop,
-e já passa como parâmetro initialScroll e finalScroll
+Tirar o bodymenu extendido pra screen medium, pq as abas aparecem cortadas.
 Fazer Contatos, Dados Escolares, Anamnese
 Colorir activepage do bodymenu
 Fazer validation no form
-Um dia: fazer animaçao de subtitulo
+Fazer máscara de telefone, cpf, cnpj
 
 ## Login
 
