@@ -5,5 +5,5 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding-top: 30px;
+  /* padding-top: 30px; */
 `;

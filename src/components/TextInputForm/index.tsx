@@ -3,15 +3,6 @@ import { TextFieldElement } from "react-hook-form-mui";
 
 // import { Container } from './styles';
 
-interface ITextInputForm {
-  name: string;
-  label: string;
-  onHandleSubmit(event: any): void;
-  isRequired?: boolean;
-  isFullWidth?: boolean;
-  type?: string;
-}
-
 const TextInputForm: React.FC<ITextInputForm> = ({
   name,
   label,
