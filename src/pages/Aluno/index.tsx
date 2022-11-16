@@ -59,7 +59,9 @@ const Aluno: React.FC<IChildren> = ({ children }) => {
   return (
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
-      <LightSideLayout titleLabel="Aluno">{children}</LightSideLayout>
+      <LightSideLayout titleLabel="Fulano Azeredo Trindade Torres">
+        {children}
+      </LightSideLayout>
     </>
   );
 };

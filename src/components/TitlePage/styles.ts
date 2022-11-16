@@ -67,6 +67,13 @@ export const Container = styled.div<{ scrollTop?: number }>`
   @media (min-width: ${media.mediumUp}) {
     font-size: 40px;
 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 65vw;
+    /* width: 100%; */
+    position: fixed;
+
     animation: ${(props) =>
       props.scrollTop && props.scrollTop > 30
         ? "moving 0.3s ease-out forwards"

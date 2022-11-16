@@ -3,7 +3,6 @@ interface ITextInputForm {
   label: string;
   onHandleSubmit(event: any): void;
   isRequired?: boolean;
-  isFullWidth?: boolean;
   type?: string;
   width?: string;
   isMultiline?: boolean;

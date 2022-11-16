@@ -56,7 +56,7 @@ const Endereco: React.FC = () => {
           <TextInputForm
             name="contatos_end_logradouro"
             label="Logradouro"
-            isFullWidth
+            width="100%"
             onHandleSubmit={handleSubmit}
           />
           <TextInputForm
