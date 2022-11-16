@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import media from "styled-media-query";
-import { lighten } from "polished";
+import media from "utils/media";
 
 export const Container = styled.div`
   font-family: "Fredoka";
@@ -8,9 +7,9 @@ export const Container = styled.div`
   font-size: 20px;
   padding-bottom: 30px;
 
-  ${media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     font-size: 16px;
-  `}
+  }
 `;
 
 export const HiddenTitle = styled.div<{
@@ -21,8 +20,7 @@ export const HiddenTitle = styled.div<{
   z-index: 1;
   font-size: 14px;
   position: absolute;
-  background-color: ${(props) =>
-    lighten(0.15, props.theme.palette.primary.main)};
+  background-color: ${(props) => props.theme.palette.primary.main};
   color: #fff;
   display: flex;
   align-items: center;
@@ -84,7 +82,7 @@ export const HiddenTitle = styled.div<{
     }
   }
 
-  ${({ scrollTop, finalScroll, initialScroll }) => media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     padding: 2px 10px;
     border-radius: 0px 0px 4px 4px;
     width: fit-content;
@@ -92,22 +90,22 @@ export const HiddenTitle = styled.div<{
     top: -30px;
     right: -20px;
 
-    animation: ${
-      scrollTop > initialScroll && scrollTop < finalScroll
+    animation: ${(props) =>
+      props.scrollTop > props.initialScroll &&
+      props.scrollTop < props.finalScroll
         ? "mobile-movingBody 0.3s ease-out forwards"
-        : "mobile-movingBody-back 0.3s ease-out forwards"
-    };
-  `};
+        : "mobile-movingBody-back 0.3s ease-out forwards"};
+  }
 
-  ${({ scrollTop, initialScroll, finalScroll }) => media.greaterThan("medium")`
+  @media (min-width: ${media.mediumUp}) {
     padding: 1px 10px 1px 20px;
     left: -160px;
     top: 0px;
 
-    animation: ${
-      scrollTop > initialScroll && scrollTop < finalScroll
+    animation: ${(props) =>
+      props.scrollTop > props.initialScroll &&
+      props.scrollTop < props.finalScroll
         ? "movingBody 0.3s ease-out forwards"
-        : "movingBody-back 0.3s ease-out forwards"
-    };
-  `};
+        : "movingBody-back 0.3s ease-out forwards"};
+  }
 `;

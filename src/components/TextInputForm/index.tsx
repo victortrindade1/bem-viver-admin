@@ -1,20 +1,21 @@
 import React from "react";
 import { TextFieldElement } from "react-hook-form-mui";
 
-// import { Container } from './styles';
+import { Container } from "./styles";
 
 const TextInputForm: React.FC<ITextInputForm> = ({
   name,
   label,
   onHandleSubmit,
   isRequired = false,
-  isFullWidth = false,
   type,
+  width = "167px",
+  isMultiline = false,
 }) => {
   return (
-    <>
+    <Container width={width}>
       <TextFieldElement
-        fullWidth={isFullWidth}
+        fullWidth
         variant="standard"
         name={name}
         label={label}
@@ -22,9 +23,10 @@ const TextInputForm: React.FC<ITextInputForm> = ({
         required={isRequired}
         onBlurCapture={(event) => onHandleSubmit(event)}
         type={type}
+        multiline={isMultiline}
+        // sx={{ marginTop: "0px" }}
       />
-      {!isFullWidth && <br />}
-    </>
+    </Container>
   );
 };
 

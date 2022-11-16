@@ -71,7 +71,7 @@ const DadosPessoais: React.FC = () => {
             <TextInputForm
               name="nome"
               label="Nome"
-              isFullWidth
+              width="100%"
               isRequired
               onHandleSubmit={handleSubmit}
             />
@@ -94,7 +94,7 @@ const DadosPessoais: React.FC = () => {
               name="dados_pessoais_num_certidao"
               label="N° Certidão de Nascimento"
               onHandleSubmit={handleSubmit}
-              isFullWidth
+              width="100%"
             />
             <TextInputForm
               name="dados_pessoais_folha_certidao"
@@ -114,7 +114,7 @@ const DadosPessoais: React.FC = () => {
                   name="contatos_pai_nome"
                   label="Filiação (Pai)"
                   onHandleSubmit={handleSubmit}
-                  isFullWidth
+                  width="100%"
                 />
               </>
               <>
@@ -144,6 +144,7 @@ const DadosPessoais: React.FC = () => {
                   label="E-mail (Pai)"
                   onHandleSubmit={handleSubmit}
                   type={"email"}
+                  width="100%"
                 />
               </>
             </AccordionTextInput>
@@ -153,7 +154,7 @@ const DadosPessoais: React.FC = () => {
                   name="contatos_mae_nome"
                   label="Filiação (Mãe)"
                   onHandleSubmit={handleSubmit}
-                  isFullWidth
+                  width="100%"
                 />
               </>
               <>
@@ -183,6 +184,7 @@ const DadosPessoais: React.FC = () => {
                   label="E-mail (Mãe)"
                   onHandleSubmit={handleSubmit}
                   type={"email"}
+                  width="100%"
                 />
               </>
             </AccordionTextInput>

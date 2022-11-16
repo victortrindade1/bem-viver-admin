@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "styled-media-query";
+import media from "utils/media";
 import MuiButton from "@mui/material/Button";
 import { darken } from "polished";
 
@@ -7,31 +7,27 @@ export const Title = styled.div`
   font-family: "Fredoka";
   color: rgba(0, 0, 0, 0.6);
   font-weight: 600;
-  ${media.lessThan("small")`
+  font-size: 40px;
+
+  @media (max-width: ${media.small}) {
     font-size: 20px;
     text-align: center;
     padding: 22px;
-  `};
-
-  ${media.greaterThan("small")`
-  font-size: 40px;
-
-  `};
+  }
 `;
 
 export const FormContainerWrapper = styled.div`
-  ${media.lessThan("small")`
+  @media (max-width: ${media.small}) {
     margin: 0 7vw;
-  `};
+  }
 
-  ${media.between("small", "medium")`
-  margin-top: 20vh;
-  `};
+  @media (min-width: ${media.smallUp}) and (max-width: ${media.medium}) {
+    margin-top: 20vh;
+  }
 
-  ${media.greaterThan("medium")`
-  margin-top: 8vh;
-
-  `};
+  @media (min-width: ${media.mediumUp}) {
+    margin-top: 8vh;
+  }
 `;
 
 export const LoginButtonContainer = styled.div`
@@ -40,13 +36,12 @@ export const LoginButtonContainer = styled.div`
   left: 0;
   right: 0;
 
-  ${media.lessThan("small")`
+  @media (max-width: ${media.small}) {
     bottom: -20px;
-  `};
-
-  ${media.greaterThan("small")`
+  }
+  @media (min-width: ${media.smallUp}) {
     bottom: 20px;
-  `};
+  }
 `;
 
 export const LoginButton = styled(MuiButton).attrs({

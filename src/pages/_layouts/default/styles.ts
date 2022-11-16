@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "styled-media-query";
+import media from "utils/media";
 
 export const Wrapper = styled.div``;
 
@@ -10,10 +10,9 @@ export const BodyChildren = styled.div`
   position: absolute;
   top: 72px;
   width: 100%;
-  ${media.lessThan("medium")`
+  flex-direction: row;
+
+  @media (max-width: ${media.medium}) {
     flex-direction: column;
-  `};
-  ${media.greaterThan("medium")`
-    flex-direction: row;
-  `};
+  }
 `;

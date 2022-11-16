@@ -5,6 +5,8 @@ interface ITextInputForm {
   isRequired?: boolean;
   isFullWidth?: boolean;
   type?: string;
+  width?: string;
+  isMultiline?: boolean;
 }
 
 interface ISelectForm {

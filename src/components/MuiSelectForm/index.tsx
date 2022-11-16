@@ -10,6 +10,7 @@ interface IMuiSelectForm {
   label: string;
   options: any;
   onSubmit(event: any): Promise<void>;
+  width?: string;
 }
 
 interface ISelectItem {
@@ -23,12 +24,13 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
   label,
   options,
   onSubmit,
+  width = "167px",
 }) => {
   const [valueSelected, setValueSelected] = useState(initialValue);
 
   return (
     <div>
-      <FormControl variant="standard" sx={{ minWidth: 120 }}>
+      <FormControl variant="standard" sx={{ minWidth: width }} margin="normal">
         <InputLabel id="inputId">{label}</InputLabel>
         <Select
           labelId="inputId"

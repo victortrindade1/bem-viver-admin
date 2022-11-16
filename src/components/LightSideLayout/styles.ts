@@ -1,28 +1,32 @@
 import styled from "styled-components";
-import media from "styled-media-query";
+import media from "utils/media";
 
 export const Container = styled.div`
   background: rgb(101, 189, 127);
   display: flex;
 
-  ${media.lessThan("medium")`
+  width: calc(100% - 200px);
+  background: linear-gradient(
+    270deg,
+    rgba(101, 189, 127, 1) 0%,
+    rgba(197, 250, 213, 1) 35%
+  );
+
+  @media (max-width: ${media.medium}) {
     width: 100%;
     height: calc(100% - 80px);
-    background: linear-gradient(0deg, rgba(101,189,127,1) 0%, rgba(197,250,213,1) 35%);
+    background: linear-gradient(
+      0deg,
+      rgba(101, 189, 127, 1) 0%,
+      rgba(197, 250, 213, 1) 35%
+    );
 
     justify-content: center;
-  `};
-  ${media.greaterThan("medium")`
-    background: linear-gradient(270deg, rgba(101,189,127,1) 0%, rgba(197,250,213,1) 35%);
+  }
 
+  @media (min-width: ${media.mediumUp}) {
     align-items: center;
-    width: calc(100% - 200px);
-  `};
-  /* ${media.between("small", "medium")`
-    width: calc(100% - 150px);
-  `}; */
-  /* ${media.greaterThan("medium")`
-  `}; */
+  }
 `;
 
 export const Scrollable = styled.div`
@@ -31,9 +35,9 @@ export const Scrollable = styled.div`
   justify-content: flex-start;
   width: 100%;
 
-  ${media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     justify-content: center;
-  `};
+  } ;
 `;
 
 export const BodyLayout = styled.div`
@@ -43,28 +47,26 @@ export const BodyLayout = styled.div`
   box-shadow: 5px 5px 20px 0px #00000040;
   padding: 0px 20px;
   position: relative;
+  width: 100%;
+  border-radius: 0px 4px 4px 0px;
 
-  ${media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     border-radius: 0px 0px 4px 4px;
     width: 90%;
     margin-bottom: 30px;
-  `};
-  ${media.greaterThan("medium")`
-    border-radius: 0px 4px 4px 0px;
+  }
+
+  @media (min-width: ${media.mediumUp}) {
     height: 90%;
-    width: 100%;
     margin-right: 30px;
-  `};
+  } ;
 `;
 
 export const Body = styled.div`
   width: 100%;
+  margin-top: 108px;
 
-  ${media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     margin: 60px 0px;
-  `};
-
-  ${media.greaterThan("medium")`
-    margin-top: 108px;
-  `};
+  } ;
 `;

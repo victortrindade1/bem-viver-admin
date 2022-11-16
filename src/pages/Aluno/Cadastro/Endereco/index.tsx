@@ -68,7 +68,7 @@ const Endereco: React.FC = () => {
             name="contatos_end_complemento"
             label="Complemento"
             onHandleSubmit={handleSubmit}
-            isFullWidth
+            width="100%"
           />
         </div>
         <div>

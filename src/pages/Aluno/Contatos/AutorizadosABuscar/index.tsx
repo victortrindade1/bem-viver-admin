@@ -60,7 +60,7 @@ const AutorizadosABuscar: React.FC = () => {
             <TextInputForm
               name="contatos_buscar1_nome"
               label="Nome 1"
-              isFullWidth
+              width="100%"
               onHandleSubmit={handleSubmit}
             />
             <TextInputForm
@@ -78,7 +78,7 @@ const AutorizadosABuscar: React.FC = () => {
             <TextInputForm
               name="contatos_buscar2_nome"
               label="Nome 2"
-              isFullWidth
+              width="100%"
               onHandleSubmit={handleSubmit}
             />
             <TextInputForm
@@ -96,7 +96,7 @@ const AutorizadosABuscar: React.FC = () => {
             <TextInputForm
               name="contatos_buscar3_nome"
               label="Nome 3"
-              isFullWidth
+              width="100%"
               onHandleSubmit={handleSubmit}
             />
             <TextInputForm

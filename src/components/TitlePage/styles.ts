@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "styled-media-query";
+import media from "utils/media";
 
 export const Container = styled.div<{ scrollTop?: number }>`
   /* @-webkit-keyframes  */
@@ -53,25 +53,23 @@ export const Container = styled.div<{ scrollTop?: number }>`
   text-align: center;
   margin-top: 20px;
 
-  ${({ scrollTop }) => media.lessThan("medium")`
+  @media (max-width: ${media.medium}) {
     font-size: 20px;
     left: 0;
     right: 0;
 
-    animation: ${
-      scrollTop && scrollTop > 30
+    animation: ${(props) =>
+      props.scrollTop && props.scrollTop > 30
         ? "mobile-moving 0.3s ease-out forwards"
-        : "mobile-moving-back 0.3s ease-out forwards"
-    };
-  `};
-  ${({ scrollTop }) => media.greaterThan("medium")`
+        : "mobile-moving-back 0.3s ease-out forwards"};
+  }
+
+  @media (min-width: ${media.mediumUp}) {
     font-size: 40px;
 
-    animation: ${
-      scrollTop && scrollTop > 30
+    animation: ${(props) =>
+      props.scrollTop && props.scrollTop > 30
         ? "moving 0.3s ease-out forwards"
-        : "moving-back 0.1s ease-out forwards"
-    };
-  }};
-  `};
+        : "moving-back 0.1s ease-out forwards"};
+  }
 `;
