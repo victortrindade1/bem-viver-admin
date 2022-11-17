@@ -10,10 +10,11 @@ const TextInputForm: React.FC<ITextInputForm> = ({
   isRequired = false,
   type,
   width = "167px",
+  minWidth = "80px",
   isMultiline = false,
 }) => {
   return (
-    <Container width={width}>
+    <Container width={width} minWidth={minWidth}>
       <TextFieldElement
         fullWidth
         variant="standard"

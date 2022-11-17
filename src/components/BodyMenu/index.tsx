@@ -8,7 +8,8 @@ import { IBodyMenu } from "types/layout";
 import {
   Container,
   MoreButtonContainer,
-  ButtonContainer,
+  NavLinkStyled,
+  // ButtonContainer,
   LabelContainer,
 } from "./styles";
 
@@ -31,10 +32,17 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
         <Container>
           {links &&
             links.map(({ Icon, label, url }) => (
-              <ButtonContainer onClick={() => handleCLick(url)} key={label}>
+              <NavLinkStyled
+                to={url}
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+                onClick={() => handleCLick(url)}
+                key={label}
+              >
+                {/* <ButtonContainer onClick={() => handleCLick(url)} key={label}> */}
                 <Icon size={25} />
                 <LabelContainer>{label}</LabelContainer>
-              </ButtonContainer>
+                {/* </ButtonContainer> */}
+              </NavLinkStyled>
             ))}
         </Container>
       )}

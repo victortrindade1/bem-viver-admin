@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { lighten } from "polished";
 
 export const Container = styled.div`
   margin-top: 15px;
@@ -18,7 +20,7 @@ export const MoreButtonContainer = styled.div`
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const NavLinkStyled = styled(NavLink)`
   height: 80px;
   width: 80px;
   background-color: #fff;
@@ -30,6 +32,11 @@ export const ButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   color: ${(props) => props.theme.palette.primary.dark};
+
+  &.active {
+    background-color: ${(props) =>
+      lighten(0.15, props.theme.palette.primary.main)};
+  }
 
   svg {
     color: ${(props) => props.theme.palette.primary.dark};

@@ -5,6 +5,7 @@ interface ITextInputForm {
   isRequired?: boolean;
   type?: string;
   width?: string;
+  minWidth?: string;
   isMultiline?: boolean;
 }
 

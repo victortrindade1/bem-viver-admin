@@ -2,19 +2,10 @@
 
 ## Próximo passo
 
-Configurar DNS do gmail de Guilherme
-Servidor atual do menino:
-// ns230.prodns.com.br
-// ns231.prodns.com.br
-
-Fazer Contatos, Dados Escolares, Anamnese
-Colorir activepage do bodymenu
 Fazer validation no form
 Fazer máscara de telefone, cpf, cnpj
 
 ## Login
-
-Estou implementando o auth context. Estou em: Manipulando estados globais com ContextAPI
 
 O usuário receberá o convite por e-mail. Será o link de ediçao de cadastro, junto com um usuário e senha. Clicou no link, direciona pra tela de ediçao de cadastro admin.
 

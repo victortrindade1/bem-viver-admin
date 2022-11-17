@@ -31,7 +31,7 @@ const links = [
   {
     label: "Anamnese",
     Icon: FaHeartbeat,
-    url: "/alunos",
+    url: "/aluno/1/anamnese",
   },
   {
     label: "Cobranças",

@@ -28,6 +28,7 @@ const Aluno = lazy(() => import("pages/Aluno"));
 const CadastroAluno = lazy(() => import("pages/Aluno/Cadastro"));
 const ContatosAluno = lazy(() => import("pages/Aluno/Contatos"));
 const DadosEscolaresAluno = lazy(() => import("pages/Aluno/DadosEscolares"));
+const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
 
 export default function MyRoutes() {
   const { signed, loading } = useAuth();
@@ -105,6 +106,14 @@ export default function MyRoutes() {
                   element={
                     <Suspense fallback={<LoadingPage />}>
                       <DadosEscolaresAluno />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="aluno/:id/anamnese"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <AnamneseAluno />
                     </Suspense>
                   }
                 />
