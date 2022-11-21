@@ -1,10 +1,12 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-import { FormContainer, SwitchElement } from "react-hook-form-mui";
+// import { SwitchElement } from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
+
 // import useMediaQuery from "@mui/material/useMediaQuery";
 
 import TitleBody from "components/TitleBody";
 import MuiSelectForm from "components/MuiSelectForm";
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
 
@@ -18,7 +20,16 @@ const DadosEscolares: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -35,7 +46,7 @@ const DadosEscolares: React.FC = () => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -44,7 +55,7 @@ const DadosEscolares: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   const sistemaOptions = [
     {
@@ -64,10 +75,7 @@ const DadosEscolares: React.FC = () => {
   return (
     <div>
       <TitleBody titleLabel="Dados Escolares" />
-      <FormContainer
-        defaultValues={defaultValues}
-        onSuccess={(event) => handleSubmit(event)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
             <MuiSelectForm
@@ -75,23 +83,27 @@ const DadosEscolares: React.FC = () => {
               name={"sistema"}
               label={"Sistema"}
               options={sistemaOptions}
-              onSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"ano"}
               label={"Ano"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               width="80px"
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"turno"}
               label={"Turno"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"turma"}
               label={"Turma"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
@@ -100,52 +112,58 @@ const DadosEscolares: React.FC = () => {
               name={"periodo"}
               label={"Período"}
               options={sistemaOptions}
-              onSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
             <MuiSelectForm
               initialValue={defaultValues.sistema}
               name={"horarioEntrada"}
               label={"Horário de Entrada"}
               options={sistemaOptions}
-              onSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
             <MuiSelectForm
               initialValue={defaultValues.sistema}
               name={"horarioSaida"}
               label={"Horário de Saída"}
               options={sistemaOptions}
-              onSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           {/* {isMedium && <div />} */}
 
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name={"observacoes"}
               label={"Observações"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               isMultiline={true}
               width="100%"
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"matricula"}
               label={"Matrícula"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"dataMatricula"}
               label={"Data de Matrícula"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <SwitchElement
+            {/* <SwitchElement
               label="Aluno Ativo"
               labelPlacement="end"
               name={"ativo"}
               sx={{ margin: "16px 0px 8px" }}
-            />
+            /> */}
           </div>
         </Grid>
-      </FormContainer>
+      </form>
     </div>
   );
 };

@@ -2,6 +2,8 @@
 
 ## Próximo passo
 
+fazer component do switch element
+
 Fazer validation no form
 Fazer máscara de telefone, cpf, cnpj
 
@@ -23,10 +25,10 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 - Webpack rewired by Craco and react-app-alias
   - To use styled components with Material UI
   - Absolute imports
-- Reactotron
+- Reactotron (maybe not)
 - Axios (requests)
-- React-Hook-Form-Mui
-  - Lib that makes react-hook-form and MUI together very practice
+- React-Hook-Form
+  - Auxiliates forms
 - styled-media-query (Media-Query CSS in Styled Components)
 - Polished (makes color darker or ligther)
 - ContextAPI (Global states)

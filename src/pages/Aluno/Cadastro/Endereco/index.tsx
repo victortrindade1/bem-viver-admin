@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-import { FormContainer } from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
 
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Container } from "./styles";
 
@@ -18,7 +18,16 @@ const Endereco: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -35,7 +44,7 @@ const Endereco: React.FC = () => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -44,52 +53,55 @@ const Endereco: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   return (
-    <FormContainer
-      defaultValues={defaultValues}
-      onSuccess={(event) => handleSubmit(event)}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Container>
         <div>
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_logradouro"
             label="Logradouro"
             width="100%"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
           />
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_num"
             label="Número"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
           />
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_complemento"
             label="Complemento"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
             width="100%"
           />
         </div>
         <div>
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_bairro"
             label="Bairro"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
           />
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_cep"
             label="CEP"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
           />
-          <TextInputForm
+          <MuiTextInputForm
             name="contatos_end_cidade"
             label="Cidade"
-            onHandleSubmit={handleSubmit}
+            onHandleSubmit={onSubmit}
+            control={control}
           />
         </div>
       </Container>
-    </FormContainer>
+    </form>
   );
 };
 

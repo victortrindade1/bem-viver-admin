@@ -1,10 +1,11 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-import { FormContainer } from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
 
 import AccordionTextInput from "components/AccordionTextInput";
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 const DadosPessoais: React.FC = () => {
   const defaultValues: any = useMemo(
@@ -32,7 +33,16 @@ const DadosPessoais: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -49,7 +59,7 @@ const DadosPessoais: React.FC = () => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -58,91 +68,103 @@ const DadosPessoais: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   return (
     <>
-      <FormContainer
-        defaultValues={defaultValues}
-        onSuccess={(event) => handleSubmit(event)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="nome"
               label="Nome"
+              // placeholder="Nome do aluno"
               width="100%"
               isRequired
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="dados_pessoais_rg"
               label="RG"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputFormMasked
+              mask="999.999.999-99"
               name="dados_pessoais_cpf"
               label="CPF"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="dados_pessoais_data_nascimento"
               label="Nascimento"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="dados_pessoais_num_certidao"
               label="N° Certidão de Nascimento"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               width="100%"
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="dados_pessoais_folha_certidao"
               label="Folha Certidão Nascimento"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="dados_pessoais_livro_certidao"
               label="Livro Certidão Nascimento"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
             <AccordionTextInput>
               <>
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_nome"
                   label="Filiação (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                   width="100%"
                 />
               </>
               <>
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_rg"
                   label="RG (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
 
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_cpf"
                   label="CPF (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_cnpj"
                   label="CNPJ (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_data_nascimento"
                   label="Nascimento (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_pai_email"
                   label="E-mail (Pai)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                   type={"email"}
                   width="100%"
                 />
@@ -150,39 +172,45 @@ const DadosPessoais: React.FC = () => {
             </AccordionTextInput>
             <AccordionTextInput>
               <>
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_nome"
                   label="Filiação (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                   width="100%"
                 />
               </>
               <>
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_rg"
                   label="RG (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
 
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_cpf"
                   label="CPF (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_cnpj"
                   label="CNPJ (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_data_nascimento"
                   label="Nascimento (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                 />
-                <TextInputForm
+                <MuiTextInputForm
                   name="contatos_mae_email"
                   label="E-mail (Mãe)"
-                  onHandleSubmit={handleSubmit}
+                  onHandleSubmit={onSubmit}
+                  control={control}
                   type={"email"}
                   width="100%"
                 />
@@ -190,7 +218,8 @@ const DadosPessoais: React.FC = () => {
             </AccordionTextInput>
           </div>
         </Grid>
-      </FormContainer>
+        {/* </FormContainer> */}
+      </form>
     </>
   );
 };

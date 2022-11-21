@@ -53,8 +53,20 @@ export default function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AnimationLayout />}>
-          <Route element={<PrivateWrapper />}>
+        <Route
+          element={
+            <Suspense fallback={<LoadingPage />}>
+              <AnimationLayout />
+            </Suspense>
+          }
+        >
+          <Route
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <PrivateWrapper />
+              </Suspense>
+            }
+          >
             <Route
               element={
                 <DefaultLayout>

@@ -12,6 +12,8 @@ const TextInputForm: React.FC<ITextInputForm> = ({
   width = "167px",
   minWidth = "80px",
   isMultiline = false,
+  placeholder,
+  // control,
 }) => {
   return (
     <Container width={width} minWidth={minWidth}>
@@ -25,6 +27,8 @@ const TextInputForm: React.FC<ITextInputForm> = ({
         onBlurCapture={(event) => onHandleSubmit(event)}
         type={type}
         multiline={isMultiline}
+        // control={control}
+        placeholder={placeholder}
         // sx={{ marginTop: "0px" }}
       />
     </Container>

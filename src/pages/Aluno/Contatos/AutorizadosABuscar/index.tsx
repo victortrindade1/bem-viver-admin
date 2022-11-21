@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-import { FormContainer } from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
 
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
 
@@ -21,7 +21,16 @@ const AutorizadosABuscar: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -38,7 +47,7 @@ const AutorizadosABuscar: React.FC = () => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -47,71 +56,77 @@ const AutorizadosABuscar: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   return (
     <>
-      <FormContainer
-        defaultValues={defaultValues}
-        onSuccess={(event) => handleSubmit(event)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar1_nome"
               label="Nome 1"
               width="100%"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar1_parentesco"
               label="Grau de Parentesco"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar1_contato"
               label="Contato"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar2_nome"
               label="Nome 2"
               width="100%"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar2_parentesco"
               label="Grau de Parentesco"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar2_contato"
               label="Contato"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar3_nome"
               label="Nome 3"
               width="100%"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar3_parentesco"
               label="Grau de Parentesco"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_buscar3_contato"
               label="Contato"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
         </Grid>
-      </FormContainer>
+      </form>
     </>
   );
 };

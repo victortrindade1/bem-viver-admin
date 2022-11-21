@@ -4,26 +4,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-interface IMuiSelectForm {
-  initialValue: string;
-  name: string;
-  label: string;
-  options: any;
-  onSubmit(event: any): Promise<void>;
-  width?: string;
-}
-
-interface ISelectItem {
-  id: string;
-  value: string;
-}
-
 const MuiSelectForm: React.FC<IMuiSelectForm> = ({
   initialValue,
   name,
   label,
   options,
-  onSubmit,
+  onHandleSubmit,
   width = "167px",
 }) => {
   const [valueSelected, setValueSelected] = useState(initialValue);
@@ -35,7 +21,7 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
         <Select
           labelId="inputId"
           value={valueSelected}
-          onChange={onSubmit}
+          onChange={onHandleSubmit}
           label={label}
           name={name}
         >

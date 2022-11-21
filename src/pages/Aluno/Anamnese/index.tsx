@@ -1,8 +1,8 @@
-import React, { useMemo, useEffect, useCallback } from "react";
-import { FormContainer } from "react-hook-form-mui";
+import React, { useMemo, useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 import TitleBody from "components/TitleBody";
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
 
@@ -14,7 +14,16 @@ const Anamnese: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -45,58 +54,61 @@ const Anamnese: React.FC = () => {
   return (
     <>
       <TitleBody titleLabel="Anamnese" />
-      <FormContainer
-        defaultValues={defaultValues}
-        onSuccess={(event) => handleSubmit(event)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name={"pediatra"}
               label={"Pediatra"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
               width="100%"
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"contato"}
               label={"Contato"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name={"alergias"}
               label={"Alergias"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               isMultiline={true}
               width="100%"
               minWidth="167px"
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"medicacao"}
               label={"Medicação / Horário"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               isMultiline={true}
               width="100%"
               minWidth="167px"
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name={"temperatura"}
               label={"Temperatura Banho"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name={"observacoes"}
               label={"Observações"}
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
               isMultiline={true}
               width="100%"
             />
           </div>
         </Grid>
-      </FormContainer>
+      </form>
     </>
   );
 };

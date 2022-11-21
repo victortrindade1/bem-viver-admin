@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-import { FormContainer } from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
 
-import TextInputForm from "components/TextInputForm";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
 
@@ -21,7 +21,16 @@ const ContatosPessoais: React.FC = () => {
     []
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
 
@@ -38,7 +47,7 @@ const ContatosPessoais: React.FC = () => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -47,53 +56,56 @@ const ContatosPessoais: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   return (
     <>
-      <FormContainer
-        defaultValues={defaultValues}
-        onSuccess={(event) => handleSubmit(event)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_pai_tel"
               label="Telefone Pai"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_pai_cel"
               label="Celular Pai"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_mae_tel"
               label="Telefone Mãe"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_mae_cel"
               label="Celular Mãe"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
           <div>
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_resp_tel"
               label="Telefone Responsável"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
-            <TextInputForm
+            <MuiTextInputForm
               name="contatos_resp_cel"
               label="Celular Responsável"
-              onHandleSubmit={handleSubmit}
+              onHandleSubmit={onSubmit}
+              control={control}
             />
           </div>
         </Grid>
-      </FormContainer>
+      </form>
     </>
   );
 };
