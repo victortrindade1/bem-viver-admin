@@ -9,6 +9,7 @@ import MuiSelectForm from "components/MuiSelectForm";
 import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Grid } from "./styles";
+import MuiSwitchForm from "components/MuiSwitchForm";
 
 const DadosEscolares: React.FC = () => {
   // const isMedium = useMediaQuery("(max-width:1170px)");
@@ -136,14 +137,6 @@ const DadosEscolares: React.FC = () => {
 
           <div>
             <MuiTextInputForm
-              name={"observacoes"}
-              label={"Observações"}
-              onHandleSubmit={onSubmit}
-              control={control}
-              isMultiline={true}
-              width="100%"
-            />
-            <MuiTextInputForm
               name={"matricula"}
               label={"Matrícula"}
               onHandleSubmit={onSubmit}
@@ -155,12 +148,15 @@ const DadosEscolares: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            {/* <SwitchElement
-              label="Aluno Ativo"
-              labelPlacement="end"
-              name={"ativo"}
-              sx={{ margin: "16px 0px 8px" }}
-            /> */}
+            <MuiSwitchForm label="Aluno Ativo" name="ativo" />
+            <MuiTextInputForm
+              name={"observacoes"}
+              label={"Observações"}
+              onHandleSubmit={onSubmit}
+              control={control}
+              isMultiline={true}
+              width="100%"
+            />
           </div>
         </Grid>
       </form>

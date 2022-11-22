@@ -45,7 +45,9 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
         setUser(JSON.parse(storagedUser));
 
         // Token da session da API
-        api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
+        api.defaults.headers.Authorization = `Bearer ${JSON.parse(
+          storagedToken
+        )}`;
       }
       setLoading(false);
     }
