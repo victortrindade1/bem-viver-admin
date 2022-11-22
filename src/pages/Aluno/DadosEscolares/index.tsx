@@ -1,8 +1,5 @@
 import React, { useMemo, useCallback, useEffect } from "react";
-// import { SwitchElement } from "react-hook-form-mui";
 import { useForm } from "react-hook-form";
-
-// import useMediaQuery from "@mui/material/useMediaQuery";
 
 import TitleBody from "components/TitleBody";
 import MuiSelectForm from "components/MuiSelectForm";
@@ -12,8 +9,6 @@ import { Grid } from "./styles";
 import MuiSwitchForm from "components/MuiSwitchForm";
 
 const DadosEscolares: React.FC = () => {
-  // const isMedium = useMediaQuery("(max-width:1170px)");
-
   const defaultValues: any = useMemo(
     () => ({
       sistema: "Escola",

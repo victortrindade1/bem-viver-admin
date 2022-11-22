@@ -2,12 +2,8 @@
 
 ## Próximo passo
 
-A page User qnd é recarregada, não faz submit pq dá token invalid. Se é logada, funciona.
-
-Acabar com o react-hook-form-mui
-
 O select eu nao usei o Controller do react-hook-form. Isso seria necessário?
-
+Sim, tem até exemplo do select no RHF
 Fazer validation no form
 Fazer máscara de telefone, cpf, cnpj
 

@@ -33,7 +33,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
               label={label}
               margin="normal"
               required={isRequired}
-              onBlurCapture={(event) => onHandleSubmit(event)}
+              onBlurCapture={(event) => onHandleSubmit && onHandleSubmit(event)}
               onChange={props.field.onChange}
               onBlur={props.field.onBlur}
               type={type}

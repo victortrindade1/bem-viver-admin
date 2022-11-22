@@ -1,10 +1,5 @@
 import React, { useEffect, useCallback, useMemo } from "react";
-import {
-  FormContainer,
-  TextFieldElement,
-  PasswordElement,
-  PasswordRepeatElement,
-} from "react-hook-form-mui";
+import { useForm } from "react-hook-form";
 
 import { useAuth } from "contexts/auth";
 import api from "services/api";
@@ -13,11 +8,12 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 
 import { FormWrapper } from "./styles";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 const User: React.FC = () => {
   const { user, updateUser } = useAuth();
 
-  const defaultValues = useMemo(
+  const defaultValues: any = useMemo(
     () => ({
       name: user?.name,
       email: user?.email,
@@ -25,9 +21,22 @@ const User: React.FC = () => {
     [user]
   );
 
-  const handleSubmit = useCallback(
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+    // shouldUnregister: true, // só submita se mudar valor
+  });
+
+  const onSubmit = useCallback(
     async (event: any) => {
       event.preventDefault();
+
+      if (defaultValues[event.target.name] === event.target.value) {
+        return;
+      }
 
       const dataSubmit: any = {
         ...user,
@@ -37,17 +46,17 @@ const User: React.FC = () => {
       await api.put(`/users/${user?.id}`, dataSubmit);
 
       updateUser(dataSubmit);
-      // window.location.reload();
+
       await localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
     },
-    [updateUser, user]
+    [updateUser, user, defaultValues]
   );
 
   // Trigger Enter
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Enter") {
-        handleSubmit(event);
+        onSubmit(event);
       }
     };
 
@@ -56,55 +65,47 @@ const User: React.FC = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [handleSubmit]);
+  }, [onSubmit]);
 
   return (
     <>
       <DarkSideLayout />
       <LightSideLayout titleLabel="Minha Conta">
         <FormWrapper>
-          <FormContainer
-            defaultValues={defaultValues}
-            onSuccess={(event) => handleSubmit(event)}
-          >
-            <TextFieldElement
-              fullWidth
-              variant="standard"
-              name="name"
-              label="NOME"
-              margin="normal"
-              onBlurCapture={(event) => handleSubmit(event)}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <MuiTextInputForm
+              name={"name"}
+              label={"NOME"}
+              onHandleSubmit={onSubmit}
+              width="100%"
+              control={control}
             />
-            <br />
-            <TextFieldElement
-              fullWidth
+            <MuiTextInputForm
+              name={"email"}
+              label={"E-MAIL"}
+              onHandleSubmit={onSubmit}
+              width="100%"
+              control={control}
+              isRequired
               type={"email"}
-              variant="standard"
-              name="email"
-              label="E-MAIL"
-              margin="normal"
-              required
-              onBlurCapture={(event) => handleSubmit(event)}
             />
-            <br />
-            <PasswordElement
-              fullWidth
-              variant="standard"
-              name="password"
-              label="NOVA SENHA"
-              margin="normal"
+            <MuiTextInputForm
+              name={"password"}
+              label={"NOVA SENHA"}
+              onHandleSubmit={onSubmit}
+              width="100%"
+              control={control}
+              type={"password"}
             />
-            <br />
-            <PasswordRepeatElement
-              passwordFieldName={"password"}
-              name="passwordRepeat"
-              margin="normal"
-              label="CONFIRME A SENHA"
-              variant="standard"
-              fullWidth
-              onBlurCapture={(event) => handleSubmit(event)}
+            <MuiTextInputForm
+              name={"passwordRepeat"}
+              label={"CONFIRME A SENHA"}
+              onHandleSubmit={onSubmit}
+              width="100%"
+              control={control}
+              type={"password"}
             />
-          </FormContainer>
+          </form>
         </FormWrapper>
       </LightSideLayout>
     </>

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import InputMask from "react-input-mask";
-// import { TextFieldElement } from "react-hook-form-mui";
+
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import { Container } from "./styles";
-// import { useState } from "react";
-import MuiTextInputForm from "components/MuiTextInputForm";
 
 const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   name,

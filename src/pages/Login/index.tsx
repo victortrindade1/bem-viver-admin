@@ -1,11 +1,8 @@
-import React from "react";
-import {
-  FormContainer,
-  TextFieldElement,
-  PasswordElement,
-} from "react-hook-form-mui";
+import React, { useCallback } from "react";
+import { useForm } from "react-hook-form";
 
 import { useAuth } from "contexts/auth";
+import MuiTextInputForm from "components/MuiTextInputForm";
 
 import {
   Title,
@@ -14,46 +11,54 @@ import {
   FormContainerWrapper,
 } from "./styles";
 
-const defaultValues = {
-  email: "",
-  password: "",
-};
-
 const Login: React.FC = () => {
+  const defaultValues = {
+    email: "",
+    password: "",
+  };
+
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+  });
+
   const { signIn } = useAuth();
 
-  function handleSubmit(data: IAuth) {
-    signIn(data);
-  }
+  const onSubmit = useCallback(
+    async (data: IAuth) => {
+      await signIn(data);
+    },
+    [signIn]
+  );
 
   return (
     <>
       <Title>Login</Title>
       <FormContainerWrapper>
-        <FormContainer
-          defaultValues={defaultValues}
-          onSuccess={(data: IAuth) => handleSubmit(data)}
-        >
-          <TextFieldElement
-            fullWidth
-            variant="standard"
-            name="email"
-            label="E-MAIL"
-            margin="normal"
-            required
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <MuiTextInputForm
+            name={"email"}
+            label={"E-MAIL"}
+            width="100%"
+            control={control}
+            isRequired
+            type={"email"}
           />
-          <PasswordElement
-            fullWidth
-            variant="standard"
-            name="password"
-            label="SENHA"
-            margin="normal"
-            required
+          <MuiTextInputForm
+            name={"password"}
+            label={"SENHA"}
+            width="100%"
+            control={control}
+            isRequired
+            type={"password"}
           />
           <LoginButtonContainer>
             <LoginButton type="submit">Entrar</LoginButton>
           </LoginButtonContainer>
-        </FormContainer>
+        </form>
       </FormContainerWrapper>
     </>
   );

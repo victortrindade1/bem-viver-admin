@@ -3,7 +3,7 @@ interface IMuiSelectForm {
   name: string;
   label: string;
   options: any;
-  onHandleSubmit(event: any): Promise<void>;
+  onHandleSubmit?(event: any): Promise<void>;
   width?: string;
   control: any;
 }
@@ -16,7 +16,7 @@ interface ISelectItem {
 interface ITextInputForm {
   name: string;
   label: string;
-  onHandleSubmit(event: any): void;
+  onHandleSubmit?(event: any): void;
   isRequired?: boolean;
   type?: string;
   width?: string;
