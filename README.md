@@ -3,10 +3,11 @@
 ## Próximo passo
 
 Trocar Ano, turno e turma pra select
-O select eu nao usei o Controller do react-hook-form. Isso seria necessário?
-Sim, tem até exemplo do select no RHF
+
 Fazer validation no form
-Fazer máscara de telefone, cpf, cnpj
+
+Seria interessante se a cada submit q atualiza, atualizar tb um aluno global com context.
+Assim, atualizaria na tela sem precisar fazer uma request pra atualizar os dados.
 
 ## Login
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import TitleBody from "components/TitleBody";
 import MuiSelectForm from "components/MuiSelectForm";
 import MuiTextInputForm from "components/MuiTextInputForm";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 import { Grid } from "./styles";
 import MuiSwitchForm from "components/MuiSwitchForm";
@@ -12,6 +13,12 @@ const DadosEscolares: React.FC = () => {
   const defaultValues: any = useMemo(
     () => ({
       sistema: "Escola",
+      ano: "1",
+      turno: "1",
+      turma: "1",
+      periodo: "1",
+      horarioEntrada: "1",
+      horarioSaida: "1",
     }),
     []
   );
@@ -68,6 +75,96 @@ const DadosEscolares: React.FC = () => {
     },
   ];
 
+  const anoOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
+  const turnoOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
+  const turmaOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
+  const periodoOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
+  const horarioEntradaOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
+  const horarioSaidaOptions = [
+    {
+      id: "1",
+      value: "1",
+    },
+    {
+      id: "2",
+      value: "2",
+    },
+    {
+      id: "3",
+      value: "3",
+    },
+  ];
+
   return (
     <div>
       <TitleBody titleLabel="Dados Escolares" />
@@ -75,61 +172,58 @@ const DadosEscolares: React.FC = () => {
         <Grid>
           <div>
             <MuiSelectForm
-              initialValue={defaultValues.sistema}
               name={"sistema"}
               label={"Sistema"}
               options={sistemaOptions}
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiSelectForm
               name={"ano"}
               label={"Ano"}
               onHandleSubmit={onSubmit}
               control={control}
               width="80px"
+              options={anoOptions}
             />
-            <MuiTextInputForm
+            <MuiSelectForm
               name={"turno"}
               label={"Turno"}
               onHandleSubmit={onSubmit}
               control={control}
+              options={turnoOptions}
             />
-            <MuiTextInputForm
+            <MuiSelectForm
               name={"turma"}
               label={"Turma"}
               onHandleSubmit={onSubmit}
               control={control}
+              options={turmaOptions}
             />
           </div>
           <div>
             <MuiSelectForm
-              initialValue={defaultValues.sistema}
               name={"periodo"}
               label={"Período"}
-              options={sistemaOptions}
+              options={periodoOptions}
               onHandleSubmit={onSubmit}
               control={control}
             />
             <MuiSelectForm
-              initialValue={defaultValues.sistema}
               name={"horarioEntrada"}
               label={"Horário de Entrada"}
-              options={sistemaOptions}
+              options={horarioEntradaOptions}
               onHandleSubmit={onSubmit}
               control={control}
             />
             <MuiSelectForm
-              initialValue={defaultValues.sistema}
               name={"horarioSaida"}
               label={"Horário de Saída"}
-              options={sistemaOptions}
+              options={horarioSaidaOptions}
               onHandleSubmit={onSubmit}
               control={control}
             />
           </div>
-          {/* {isMedium && <div />} */}
-
           <div>
             <MuiTextInputForm
               name={"matricula"}
@@ -137,7 +231,8 @@ const DadosEscolares: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="99/99/9999"
               name={"dataMatricula"}
               label={"Data de Matrícula"}
               onHandleSubmit={onSubmit}

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import TitleBody from "components/TitleBody";
 import MuiTextInputForm from "components/MuiTextInputForm";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 import { Grid } from "./styles";
 
@@ -64,7 +65,8 @@ const Anamnese: React.FC = () => {
               width="100%"
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name={"contato"}
               label={"Contato"}
               onHandleSubmit={onSubmit}

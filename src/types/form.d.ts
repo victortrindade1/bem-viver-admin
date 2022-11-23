@@ -1,11 +1,13 @@
 interface IMuiSelectForm {
-  initialValue: string;
+  // initialValue: string;
   name: string;
   label: string;
   options: any;
   onHandleSubmit?(event: any): Promise<void>;
   width?: string;
+  minWidth?: string;
   control: any;
+  isRequired?: boolean;
 }
 
 interface ISelectItem {
