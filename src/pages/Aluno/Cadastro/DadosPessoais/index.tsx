@@ -97,7 +97,8 @@ const DadosPessoais: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="99/99/9999"
               name="dados_pessoais_data_nascimento"
               label="Nascimento"
               onHandleSubmit={onSubmit}
@@ -141,20 +142,22 @@ const DadosPessoais: React.FC = () => {
                   onHandleSubmit={onSubmit}
                   control={control}
                 />
-
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="999.999.999-99"
                   name="contatos_pai_cpf"
                   label="CPF (Pai)"
                   onHandleSubmit={onSubmit}
                   control={control}
                 />
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="99.999.999/9999-99"
                   name="contatos_pai_cnpj"
                   label="CNPJ (Pai)"
                   onHandleSubmit={onSubmit}
                   control={control}
                 />
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="99/99/9999"
                   name="contatos_pai_data_nascimento"
                   label="Nascimento (Pai)"
                   onHandleSubmit={onSubmit}
@@ -188,19 +191,22 @@ const DadosPessoais: React.FC = () => {
                   control={control}
                 />
 
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="999.999.999-99"
                   name="contatos_mae_cpf"
                   label="CPF (Mãe)"
                   onHandleSubmit={onSubmit}
                   control={control}
                 />
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="99.999.999/9999-99"
                   name="contatos_mae_cnpj"
                   label="CNPJ (Mãe)"
                   onHandleSubmit={onSubmit}
                   control={control}
                 />
-                <MuiTextInputForm
+                <MuiTextInputFormMasked
+                  mask="99/99/9999"
                   name="contatos_mae_data_nascimento"
                   label="Nascimento (Mãe)"
                   onHandleSubmit={onSubmit}

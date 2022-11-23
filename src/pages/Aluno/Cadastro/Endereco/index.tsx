@@ -2,6 +2,7 @@ import React, { useMemo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import MuiTextInputForm from "components/MuiTextInputForm";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 import { Container } from "./styles";
 
@@ -87,7 +88,8 @@ const Endereco: React.FC = () => {
             onHandleSubmit={onSubmit}
             control={control}
           />
-          <MuiTextInputForm
+          <MuiTextInputFormMasked
+            mask="99999-999"
             name="contatos_end_cep"
             label="CEP"
             onHandleSubmit={onSubmit}

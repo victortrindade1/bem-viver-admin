@@ -2,6 +2,7 @@ import React, { useMemo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import MuiTextInputForm from "components/MuiTextInputForm";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 import { Grid } from "./styles";
 
@@ -76,7 +77,8 @@ const AutorizadosABuscar: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_buscar1_contato"
               label="Contato"
               onHandleSubmit={onSubmit}
@@ -97,7 +99,8 @@ const AutorizadosABuscar: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_buscar2_contato"
               label="Contato"
               onHandleSubmit={onSubmit}
@@ -118,7 +121,8 @@ const AutorizadosABuscar: React.FC = () => {
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_buscar3_contato"
               label="Contato"
               onHandleSubmit={onSubmit}

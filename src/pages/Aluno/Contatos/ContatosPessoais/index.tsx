@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import MuiTextInputForm from "components/MuiTextInputForm";
+import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
 import { Grid } from "./styles";
 
@@ -63,43 +63,49 @@ const ContatosPessoais: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <MuiTextInputForm
-              name="contatos_pai_tel"
-              label="Telefone Pai"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputForm
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_pai_cel"
               label="Celular Pai"
               onHandleSubmit={onSubmit}
               control={control}
             />
-          </div>
-          <div>
-            <MuiTextInputForm
-              name="contatos_mae_tel"
-              label="Telefone Mãe"
+            <MuiTextInputFormMasked
+              mask="(99) 9999-9999"
+              name="contatos_pai_tel"
+              label="Telefone Pai"
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+          </div>
+          <div>
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_mae_cel"
               label="Celular Mãe"
               onHandleSubmit={onSubmit}
               control={control}
             />
-          </div>
-          <div>
-            <MuiTextInputForm
-              name="contatos_resp_tel"
-              label="Telefone Responsável"
+            <MuiTextInputFormMasked
+              mask="(99) 9999-9999"
+              name="contatos_mae_tel"
+              label="Telefone Mãe"
               onHandleSubmit={onSubmit}
               control={control}
             />
-            <MuiTextInputForm
+          </div>
+          <div>
+            <MuiTextInputFormMasked
+              mask="(99) 99999-9999"
               name="contatos_resp_cel"
               label="Celular Responsável"
+              onHandleSubmit={onSubmit}
+              control={control}
+            />
+            <MuiTextInputFormMasked
+              mask="(99) 9999-9999"
+              name="contatos_resp_tel"
+              label="Telefone Responsável"
               onHandleSubmit={onSubmit}
               control={control}
             />
