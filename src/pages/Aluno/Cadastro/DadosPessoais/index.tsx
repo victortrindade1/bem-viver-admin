@@ -1,16 +1,68 @@
-import React, { useMemo, useCallback, useEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import AccordionTextInput from "components/AccordionTextInput";
 import MuiTextInputForm from "components/MuiTextInputForm";
-
-import { Grid } from "./styles";
 import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 
+import { Grid } from "./styles";
+
 const DadosPessoais: React.FC = () => {
+  const validationSchema = Yup.object().shape({
+    nome: Yup.string().required("Campo obrigatório"),
+    dados_pessoais_rg: Yup.string().min(14, "RG incorreto."),
+    dados_pessoais_cpf: Yup.string()
+      .min(14, "CPF incorreto.")
+      .max(14, "CPF incorreto."),
+    dados_pessoais_data_nascimento: Yup.string()
+      .min(10, "Data incorreta")
+      .max(10, "Data incorreta"),
+    dados_pessoais_num_certidao: Yup.string(),
+    dados_pessoais_folha_certidao: Yup.string(),
+    dados_pessoais_livro_certidao: Yup.string(),
+    contatos_pai_nome: Yup.string(),
+    contatos_pai_rg: Yup.string(),
+    contatos_pai_cpf: Yup.string()
+      .min(14, "CPF incorreto.")
+      .max(14, "CPF incorreto."),
+    contatos_pai_cnpj: Yup.string()
+      .min(18, "CNPJ incorreto.")
+      .max(18, "CNPJ incorreto."),
+    contatos_pai_data_nascimento: Yup.string()
+      .min(10, "Data incorreta")
+      .max(10, "Data incorreta"),
+    contatos_pai_email: Yup.string().email("E-mail incorreto."),
+    contatos_mae_nome: Yup.string(),
+    contatos_mae_rg: Yup.string(),
+    contatos_mae_cpf: Yup.string()
+      .min(14, "CPF incorreto.")
+      .max(14, "CPF incorreto."),
+    contatos_mae_cnpj: Yup.string()
+      .min(18, "CNPJ incorreto.")
+      .max(18, "CNPJ incorreto."),
+    contatos_mae_data_nascimento: Yup.string()
+      .min(10, "Data incorreta")
+      .max(10, "Data incorreta"),
+    contatos_mae_email: Yup.string().email("E-mail incorreto."),
+    contatos_resp_nome: Yup.string(),
+    contatos_resp_rg: Yup.string(),
+    contatos_resp_cpf: Yup.string()
+      .min(14, "CPF incorreto.")
+      .max(14, "CPF incorreto."),
+    contatos_resp_cnpj: Yup.string()
+      .min(18, "CNPJ incorreto.")
+      .max(18, "CNPJ incorreto."),
+    contatos_resp_data_nascimento: Yup.string()
+      .min(10, "Data incorreta")
+      .max(10, "Data incorreta"),
+    contatos_resp_email: Yup.string().email("E-mail incorreto."),
+  });
+
   const defaultValues: any = useMemo(
     () => ({
-      nome: "teste",
+      nome: "Teste",
       dados_pessoais_rg: "",
       dados_pessoais_cpf: "",
       dados_pessoais_data_nascimento: "",
@@ -29,6 +81,12 @@ const DadosPessoais: React.FC = () => {
       contatos_mae_cnpj: "",
       contatos_mae_data_nascimento: "",
       contatos_mae_email: "",
+      contatos_resp_nome: "",
+      contatos_resp_rg: "",
+      contatos_resp_cpf: "",
+      contatos_resp_cnpj: "",
+      contatos_resp_data_nascimento: "",
+      contatos_resp_email: "",
     }),
     []
   );
@@ -36,197 +94,285 @@ const DadosPessoais: React.FC = () => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    register,
+    formState: { errors },
   } = useForm({
     defaultValues,
-    // shouldUnregister: true, // só submita se mudar valor
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = useCallback(
     async (event: any) => {
-      event.preventDefault();
+      try {
+        event.preventDefault();
 
-      if (defaultValues[event.target.name] === event.target.value) {
-        return;
+        if (defaultValues[event.target.name] === event.target.value) {
+          return;
+        }
+
+        console.log(event);
+        console.log(errors);
+      } catch (error) {
+        console.log(error);
       }
-
-      console.log(event);
     },
-    [defaultValues]
+    [defaultValues, errors]
   );
 
-  // Trigger Enter
-  useEffect(() => {
-    const keyDownHandler = (event: any) => {
-      if (event.key === "Enter") {
-        onSubmit(event);
-      }
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, [onSubmit]);
-
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid>
-          <div>
-            <MuiTextInputForm
-              name="nome"
-              label="Nome"
-              // placeholder="Nome do aluno"
-              width="100%"
-              isRequired
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputForm
-              name="dados_pessoais_rg"
-              label="RG"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputFormMasked
-              mask="999.999.999-99"
-              name="dados_pessoais_cpf"
-              label="CPF"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputFormMasked
-              mask="99/99/9999"
-              name="dados_pessoais_data_nascimento"
-              label="Nascimento"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputForm
-              name="dados_pessoais_num_certidao"
-              label="N° Certidão de Nascimento"
-              onHandleSubmit={onSubmit}
-              control={control}
-              width="100%"
-            />
-            <MuiTextInputForm
-              name="dados_pessoais_folha_certidao"
-              label="Folha Certidão Nascimento"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-            <MuiTextInputForm
-              name="dados_pessoais_livro_certidao"
-              label="Livro Certidão Nascimento"
-              onHandleSubmit={onSubmit}
-              control={control}
-            />
-          </div>
-          <div>
-            <AccordionTextInput>
-              <>
-                <MuiTextInputForm
-                  name="contatos_pai_nome"
-                  label="Filiação (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                  width="100%"
-                />
-              </>
-              <>
-                <MuiTextInputForm
-                  name="contatos_pai_rg"
-                  label="RG (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputFormMasked
-                  mask="999.999.999-99"
-                  name="contatos_pai_cpf"
-                  label="CPF (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputFormMasked
-                  mask="99.999.999/9999-99"
-                  name="contatos_pai_cnpj"
-                  label="CNPJ (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputFormMasked
-                  mask="99/99/9999"
-                  name="contatos_pai_data_nascimento"
-                  label="Nascimento (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputForm
-                  name="contatos_pai_email"
-                  label="E-mail (Pai)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                  type={"email"}
-                  width="100%"
-                />
-              </>
-            </AccordionTextInput>
-            <AccordionTextInput>
-              <>
-                <MuiTextInputForm
-                  name="contatos_mae_nome"
-                  label="Filiação (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                  width="100%"
-                />
-              </>
-              <>
-                <MuiTextInputForm
-                  name="contatos_mae_rg"
-                  label="RG (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Grid>
+        <div>
+          <MuiTextInputForm
+            register={register}
+            name="nome"
+            label="Nome"
+            width="100%"
+            isRequired
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+          />
+          <MuiTextInputForm
+            name="dados_pessoais_rg"
+            register={register}
+            label="RG"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+          />
+          <MuiTextInputFormMasked
+            register={register}
+            mask="999.999.999-99"
+            name="dados_pessoais_cpf"
+            label="CPF"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+          />
+          <MuiTextInputFormMasked
+            mask="99/99/9999"
+            name="dados_pessoais_data_nascimento"
+            label="Nascimento"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+            register={register}
+          />
+          <MuiTextInputForm
+            register={register}
+            name="dados_pessoais_num_certidao"
+            label="N° Certidão de Nascimento"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+            width="100%"
+          />
+          <MuiTextInputForm
+            name="dados_pessoais_folha_certidao"
+            label="Folha Certidão Nascimento"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+            register={register}
+          />
+          <MuiTextInputForm
+            name="dados_pessoais_livro_certidao"
+            label="Livro Certidão Nascimento"
+            onHandleSubmit={onSubmit}
+            control={control}
+            errors={errors}
+            register={register}
+          />
+        </div>
+        <div>
+          <AccordionTextInput>
+            <>
+              <MuiTextInputForm
+                name="contatos_pai_nome"
+                label="Filiação (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                width="100%"
+              />
+            </>
+            <>
+              <MuiTextInputForm
+                name="contatos_pai_rg"
+                label="RG (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="999.999.999-99"
+                name="contatos_pai_cpf"
+                label="CPF (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99.999.999/9999-99"
+                name="contatos_pai_cnpj"
+                label="CNPJ (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99/99/9999"
+                name="contatos_pai_data_nascimento"
+                label="Nascimento (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputForm
+                name="contatos_pai_email"
+                label="E-mail (Pai)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                type={"email"}
+                width="100%"
+              />
+            </>
+          </AccordionTextInput>
+          <AccordionTextInput>
+            <>
+              <MuiTextInputForm
+                name="contatos_mae_nome"
+                label="Filiação (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                width="100%"
+              />
+            </>
+            <>
+              <MuiTextInputForm
+                name="contatos_mae_rg"
+                label="RG (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
 
-                <MuiTextInputFormMasked
-                  mask="999.999.999-99"
-                  name="contatos_mae_cpf"
-                  label="CPF (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputFormMasked
-                  mask="99.999.999/9999-99"
-                  name="contatos_mae_cnpj"
-                  label="CNPJ (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputFormMasked
-                  mask="99/99/9999"
-                  name="contatos_mae_data_nascimento"
-                  label="Nascimento (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                />
-                <MuiTextInputForm
-                  name="contatos_mae_email"
-                  label="E-mail (Mãe)"
-                  onHandleSubmit={onSubmit}
-                  control={control}
-                  type={"email"}
-                  width="100%"
-                />
-              </>
-            </AccordionTextInput>
-          </div>
-        </Grid>
-        {/* </FormContainer> */}
-      </form>
-    </>
+              <MuiTextInputFormMasked
+                mask="999.999.999-99"
+                name="contatos_mae_cpf"
+                label="CPF (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99.999.999/9999-99"
+                name="contatos_mae_cnpj"
+                label="CNPJ (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99/99/9999"
+                name="contatos_mae_data_nascimento"
+                label="Nascimento (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputForm
+                name="contatos_mae_email"
+                label="E-mail (Mãe)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                type={"email"}
+                width="100%"
+              />
+            </>
+          </AccordionTextInput>
+          <AccordionTextInput>
+            <>
+              <MuiTextInputForm
+                name="contatos_resp_nome"
+                label="Filiação (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                width="100%"
+              />
+            </>
+            <>
+              <MuiTextInputForm
+                name="contatos_resp_rg"
+                label="RG (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+
+              <MuiTextInputFormMasked
+                mask="999.999.999-99"
+                name="contatos_resp_cpf"
+                label="CPF (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99.999.999/9999-99"
+                name="contatos_resp_cnpj"
+                label="CNPJ (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputFormMasked
+                mask="99/99/9999"
+                name="contatos_resp_data_nascimento"
+                label="Nascimento (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+              />
+              <MuiTextInputForm
+                name="contatos_resp_email"
+                label="E-mail (Responsável)"
+                onHandleSubmit={onSubmit}
+                control={control}
+                errors={errors}
+                register={register}
+                type={"email"}
+                width="100%"
+              />
+            </>
+          </AccordionTextInput>
+        </div>
+      </Grid>
+    </form>
   );
 };
 

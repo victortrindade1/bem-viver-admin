@@ -1,15 +1,27 @@
-import React, { useMemo, useCallback, useEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import TitleBody from "components/TitleBody";
 import MuiSelectForm from "components/MuiSelectForm";
 import MuiTextInputForm from "components/MuiTextInputForm";
 import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
-
-import { Grid } from "./styles";
 import MuiSwitchForm from "components/MuiSwitchForm";
 
+import { Grid } from "./styles";
+
 const DadosEscolares: React.FC = () => {
+  const validationSchema = Yup.object().shape({
+    sistema: Yup.string(),
+    ano: Yup.string(),
+    turno: Yup.string(),
+    turma: Yup.string(),
+    periodo: Yup.string(),
+    horarioEntrada: Yup.string(),
+    horarioSaida: Yup.string(),
+  });
+
   const defaultValues: any = useMemo(
     () => ({
       sistema: "Escola",
@@ -26,39 +38,31 @@ const DadosEscolares: React.FC = () => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    register,
+    formState: { errors },
   } = useForm({
     defaultValues,
-    // shouldUnregister: true, // só submita se mudar valor
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = useCallback(
     async (event: any) => {
-      event.preventDefault();
+      try {
+        event.preventDefault();
 
-      if (defaultValues[event.target.name] === event.target.value) {
-        return;
+        if (defaultValues[event.target.name] === event.target.value) {
+          return;
+        }
+
+        console.log(event);
+      } catch (error) {
+        console.log(error);
       }
-
-      console.log(event);
     },
     [defaultValues]
   );
-
-  // Trigger Enter
-  useEffect(() => {
-    const keyDownHandler = (event: any) => {
-      if (event.key === "Enter") {
-        onSubmit(event);
-      }
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, [onSubmit]);
 
   const sistemaOptions = [
     {
@@ -177,12 +181,14 @@ const DadosEscolares: React.FC = () => {
               options={sistemaOptions}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
             <MuiSelectForm
               name={"ano"}
               label={"Ano"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
               width="80px"
               options={anoOptions}
             />
@@ -191,6 +197,7 @@ const DadosEscolares: React.FC = () => {
               label={"Turno"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
               options={turnoOptions}
             />
             <MuiSelectForm
@@ -198,6 +205,7 @@ const DadosEscolares: React.FC = () => {
               label={"Turma"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
               options={turmaOptions}
             />
           </div>
@@ -208,6 +216,7 @@ const DadosEscolares: React.FC = () => {
               options={periodoOptions}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
             <MuiSelectForm
               name={"horarioEntrada"}
@@ -215,6 +224,7 @@ const DadosEscolares: React.FC = () => {
               options={horarioEntradaOptions}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
             <MuiSelectForm
               name={"horarioSaida"}
@@ -222,28 +232,35 @@ const DadosEscolares: React.FC = () => {
               options={horarioSaidaOptions}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
           </div>
           <div>
             <MuiTextInputForm
+              register={register}
               name={"matricula"}
               label={"Matrícula"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
             <MuiTextInputFormMasked
+              register={register}
               mask="99/99/9999"
               name={"dataMatricula"}
               label={"Data de Matrícula"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
             />
             <MuiSwitchForm label="Aluno Ativo" name="ativo" />
             <MuiTextInputForm
+              register={register}
               name={"observacoes"}
               label={"Observações"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
               isMultiline={true}
               width="100%"
             />

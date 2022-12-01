@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import {
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 
 import { Container } from "./styles";
@@ -17,13 +20,18 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
   minWidth = "80px",
   control,
   options,
+  errors,
   ...rest
 }) => {
   const [valueSelected, setValueSelected] = useState(null);
 
   return (
     <Container width={width} minWidth={minWidth}>
-      <FormControl variant="standard" margin="normal">
+      <FormControl
+        error={Boolean(errors[name])}
+        variant="standard"
+        margin="normal"
+      >
         <Controller
           name={name}
           // rules={{
@@ -61,6 +69,9 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
             );
           }}
         />
+        {errors[name] && (
+          <FormHelperText>{errors[name].message}</FormHelperText>
+        )}
       </FormControl>
     </Container>
   );

@@ -1,5 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import TitleBody from "components/TitleBody";
 import MuiTextInputForm from "components/MuiTextInputForm";
@@ -8,6 +10,10 @@ import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
 import { Grid } from "./styles";
 
 const Anamnese: React.FC = () => {
+  const validationSchema = Yup.object().shape({
+    pediatra: Yup.string(),
+  });
+
   const defaultValues: any = useMemo(
     () => ({
       pediatra: "Celina Silva",
@@ -18,39 +24,31 @@ const Anamnese: React.FC = () => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    register,
+    formState: { errors },
   } = useForm({
     defaultValues,
-    // shouldUnregister: true, // só submita se mudar valor
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = useCallback(
     async (event: any) => {
-      event.preventDefault();
+      try {
+        event.preventDefault();
 
-      if (defaultValues[event.target.name] === event.target.value) {
-        return;
+        if (defaultValues[event.target.name] === event.target.value) {
+          return;
+        }
+
+        console.log(event);
+      } catch (error) {
+        console.log(error);
       }
-
-      console.log(event);
     },
     [defaultValues]
   );
-
-  // // Trigger Enter
-  // useEffect(() => {
-  //   const keyDownHandler = (event: any) => {
-  //     if (event.key === "Enter") {
-  //       handleSubmit(event);
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", keyDownHandler);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", keyDownHandler);
-  //   };
-  // }, [handleSubmit]);
 
   return (
     <>
@@ -64,6 +62,8 @@ const Anamnese: React.FC = () => {
               onHandleSubmit={onSubmit}
               width="100%"
               control={control}
+              errors={errors}
+              register={register}
             />
             <MuiTextInputFormMasked
               mask="(99) 99999-9999"
@@ -71,6 +71,8 @@ const Anamnese: React.FC = () => {
               label={"Contato"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
+              register={register}
             />
           </div>
           <div>
@@ -79,6 +81,8 @@ const Anamnese: React.FC = () => {
               label={"Alergias"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
+              register={register}
               isMultiline={true}
               width="100%"
               minWidth="167px"
@@ -88,6 +92,8 @@ const Anamnese: React.FC = () => {
               label={"Medicação / Horário"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
+              register={register}
               isMultiline={true}
               width="100%"
               minWidth="167px"
@@ -99,12 +105,16 @@ const Anamnese: React.FC = () => {
               label={"Temperatura Banho"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
+              register={register}
             />
             <MuiTextInputForm
               name={"observacoes"}
               label={"Observações"}
               onHandleSubmit={onSubmit}
               control={control}
+              errors={errors}
+              register={register}
               isMultiline={true}
               width="100%"
             />

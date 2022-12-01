@@ -8,6 +8,7 @@ interface IMuiSelectForm {
   minWidth?: string;
   control: any;
   isRequired?: boolean;
+  errors?: any;
 }
 
 interface ISelectItem {
@@ -16,6 +17,8 @@ interface ISelectItem {
 }
 
 interface ITextInputForm {
+  // id?: string;
+  register?: any;
   name: string;
   label: string;
   onHandleSubmit?(event: any): void;
@@ -26,10 +29,13 @@ interface ITextInputForm {
   isMultiline?: boolean;
   placeholder?: string;
   control: any;
+  errors?: any;
+  disabled?: boolean;
 }
 
 interface IMaskTextInputForm extends ITextInputForm {
   mask: string;
+  inputRef?: any;
 }
 
 // interface ISelectForm {

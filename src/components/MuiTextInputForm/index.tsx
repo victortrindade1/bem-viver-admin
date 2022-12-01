@@ -1,10 +1,12 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
+import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 import { Container } from "./styles";
 
 const MuiTextInputForm: React.FC<ITextInputForm> = ({
+  register,
   name,
   label,
   onHandleSubmit,
@@ -15,36 +17,43 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   isMultiline = false,
   placeholder,
   control,
-  // errors,
-  ...rest
+  errors,
+  disabled = false,
 }) => {
   return (
     <Container width={width} minWidth={minWidth}>
-      <Controller
-        name={name}
-        control={control}
-        render={(props) => {
-          return (
-            <TextField
-              fullWidth
-              variant="standard"
-              name={name}
-              value={props.field.value}
-              label={label}
-              margin="normal"
-              required={isRequired}
-              onBlurCapture={(event) => onHandleSubmit && onHandleSubmit(event)}
-              onChange={props.field.onChange}
-              onBlur={props.field.onBlur}
-              type={type}
-              multiline={isMultiline}
-              placeholder={placeholder}
-              // disabled={false}
-              {...rest}
-            />
-          );
-        }}
-      />
+      <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { value }, fieldState: { error }, formState }) => {
+            return (
+              <TextField
+                {...register(name)}
+                name={name}
+                label={label}
+                fullWidth
+                variant="standard"
+                value={value}
+                margin="normal"
+                required={isRequired}
+                onBlurCapture={(event) =>
+                  !errors[name] && onHandleSubmit && onHandleSubmit(event)
+                }
+                type={type}
+                multiline={isMultiline}
+                placeholder={placeholder}
+                error={!!error}
+                helperText={!!formState.errors?.message}
+                disabled={disabled || formState.isSubmitting}
+              />
+            );
+          }}
+        />
+        {errors[name] && (
+          <FormHelperText>{errors[name].message}</FormHelperText>
+        )}
+      </FormControl>
     </Container>
   );
 };

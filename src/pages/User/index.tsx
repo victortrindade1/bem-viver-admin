@@ -24,7 +24,7 @@ const User: React.FC = () => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm({
     defaultValues,
     // shouldUnregister: true, // só submita se mudar valor
@@ -79,6 +79,7 @@ const User: React.FC = () => {
               onHandleSubmit={onSubmit}
               width="100%"
               control={control}
+              errors={errors}
             />
             <MuiTextInputForm
               name={"email"}
@@ -86,6 +87,7 @@ const User: React.FC = () => {
               onHandleSubmit={onSubmit}
               width="100%"
               control={control}
+              errors={errors}
               isRequired
               type={"email"}
             />
@@ -95,6 +97,7 @@ const User: React.FC = () => {
               onHandleSubmit={onSubmit}
               width="100%"
               control={control}
+              errors={errors}
               type={"password"}
             />
             <MuiTextInputForm
@@ -103,6 +106,7 @@ const User: React.FC = () => {
               onHandleSubmit={onSubmit}
               width="100%"
               control={control}
+              errors={errors}
               type={"password"}
             />
           </form>

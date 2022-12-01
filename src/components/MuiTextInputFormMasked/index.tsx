@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import InputMask from "react-input-mask";
-
-import MuiTextInputForm from "components/MuiTextInputForm";
+import TextField from "@mui/material/TextField";
+import { FormControl, FormHelperText } from "@mui/material";
+import { Controller } from "react-hook-form";
 
 import { Container } from "./styles";
 
 const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
+  register,
   name,
   label,
   onHandleSubmit,
@@ -17,29 +19,55 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   placeholder,
   control,
   mask,
+  errors,
+  disabled = false,
 }) => {
-  // console.log(props);
-
-  const [state, setState] = useState("");
-
-  const onChange = (event: any) => setState(event.target.value);
-
   return (
     <Container width={width} minWidth={minWidth}>
-      <InputMask mask={mask} value={state} onChange={onChange}>
-        <MuiTextInputForm
+      <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>
+        <Controller
           name={name}
-          label={label}
-          onHandleSubmit={onHandleSubmit}
-          isRequired={isRequired}
-          type={type}
-          width={width}
-          minWidth={minWidth}
-          isMultiline={isMultiline}
-          placeholder={placeholder}
           control={control}
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+            formState,
+          }) => {
+            return (
+              <InputMask
+                {...register(name)}
+                mask={mask}
+                maskPlaceholder={null}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                disabled={disabled || formState.isSubmitting}
+              >
+                <TextField
+                  name={name}
+                  label={label}
+                  fullWidth
+                  variant="standard"
+                  margin="normal"
+                  required={isRequired}
+                  onBlurCapture={(event) =>
+                    !errors[name] && onHandleSubmit && onHandleSubmit(event)
+                  }
+                  type={type}
+                  multiline={isMultiline}
+                  placeholder={placeholder}
+                  error={!!error}
+                  helperText={!!formState.errors?.message}
+                />
+              </InputMask>
+            );
+          }}
         />
-      </InputMask>
+
+        {errors[name] && (
+          <FormHelperText>{errors[name].message}</FormHelperText>
+        )}
+      </FormControl>
     </Container>
   );
 };

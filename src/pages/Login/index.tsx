@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm({
     defaultValues,
   });
@@ -44,6 +44,7 @@ const Login: React.FC = () => {
             label={"E-MAIL"}
             width="100%"
             control={control}
+            errors={errors}
             isRequired
             type={"email"}
           />
@@ -52,6 +53,7 @@ const Login: React.FC = () => {
             label={"SENHA"}
             width="100%"
             control={control}
+            errors={errors}
             isRequired
             type={"password"}
           />
