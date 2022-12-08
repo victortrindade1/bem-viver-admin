@@ -4,6 +4,7 @@ interface IMuiSelectForm {
   label: string;
   options: any;
   onHandleSubmit?(event: any): Promise<void>;
+  // onHandleSubmit?: any;
   width?: string;
   minWidth?: string;
   control: any;
@@ -21,7 +22,8 @@ interface ITextInputForm {
   register?: any;
   name: string;
   label: string;
-  onHandleSubmit?(event: any): void;
+  // onHandleSubmit?(event: any): void;
+  onHandleSubmit?: any;
   isRequired?: boolean;
   type?: string;
   width?: string;

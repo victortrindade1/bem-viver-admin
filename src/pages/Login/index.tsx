@@ -20,6 +20,7 @@ const Login: React.FC = () => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -40,6 +41,7 @@ const Login: React.FC = () => {
       <FormContainerWrapper>
         <form onSubmit={handleSubmit(onSubmit)}>
           <MuiTextInputForm
+            register={register}
             name={"email"}
             label={"E-MAIL"}
             width="100%"
@@ -49,6 +51,7 @@ const Login: React.FC = () => {
             type={"email"}
           />
           <MuiTextInputForm
+            register={register}
             name={"password"}
             label={"SENHA"}
             width="100%"

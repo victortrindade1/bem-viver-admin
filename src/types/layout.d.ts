@@ -16,3 +16,11 @@ interface IBodyMenu {
     // color?: string;
   }[];
 }
+
+interface IButton {
+  label: string;
+  type?: "button" | "reset" | "submit";
+  width?: string;
+  margin?: string;
+  handleClick?: () => void;
+}

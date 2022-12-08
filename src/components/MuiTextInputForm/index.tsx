@@ -19,6 +19,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   control,
   errors,
   disabled = false,
+  ...rest
 }) => {
   return (
     <Container width={width} minWidth={minWidth}>
@@ -32,6 +33,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                 {...register(name)}
                 name={name}
                 label={label}
+                key={name}
                 fullWidth
                 variant="standard"
                 value={value}
@@ -46,6 +48,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                 error={!!error}
                 helperText={!!formState.errors?.message}
                 disabled={disabled || formState.isSubmitting}
+                {...rest}
               />
             );
           }}

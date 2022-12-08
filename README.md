@@ -2,6 +2,8 @@
 
 ## Próximo passo
 
+to fazendo 2 coisas ao msm tempo: mudando backend pra editar senha; consertar transition do title qnd carrega page.
+
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
 Como faz pra zerar o erro se apagar todo o campo já com erro?

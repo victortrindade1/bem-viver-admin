@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import media from "utils/media";
 
-export const Container = styled.div<{ scrollTop?: number }>`
+export const Container = styled.div<{
+  scrollTop?: number;
+  isInitialScroll?: boolean;
+}>`
   /* @-webkit-keyframes  */
   @keyframes moving {
     from {
@@ -77,6 +80,7 @@ export const Container = styled.div<{ scrollTop?: number }>`
     animation: ${(props) =>
       props.scrollTop && props.scrollTop > 30
         ? "moving 0.3s ease-out forwards"
-        : "moving-back 0.1s ease-out forwards"};
+        : props.isInitialScroll === false &&
+          "moving-back 0.3s ease-out forwards"};
   }
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container } from "./styles";
 
@@ -11,10 +11,19 @@ const TitlePage: React.FC<ITitlePage> = ({
   titleLabel,
   scrollTop,
 }: ITitlePage) => {
-  if (scrollTop) {
-    return <Container scrollTop={scrollTop}>{titleLabel}</Container>;
-  }
-  return <Container>{titleLabel}</Container>;
+  const [initialScroll, setInitialScroll] = useState(true);
+
+  useEffect(() => {
+    if (scrollTop && scrollTop > 30) {
+      setInitialScroll(false);
+    }
+  }, [scrollTop]);
+
+  return (
+    <Container isInitialScroll={initialScroll} scrollTop={scrollTop}>
+      {titleLabel}
+    </Container>
+  );
 };
 
 export default TitlePage;
