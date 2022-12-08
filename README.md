@@ -2,7 +2,9 @@
 
 ## Próximo passo
 
-to fazendo 2 coisas ao msm tempo: mudando backend pra editar senha; consertar transition do title qnd carrega page.
+Validation password repeat
+
+Colocar olhinho na senha do login
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 

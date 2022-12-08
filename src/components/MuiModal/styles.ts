@@ -60,7 +60,7 @@ export const IconContainer = styled.div`
 export const Title = styled.div`
   color: ${(props) => props.theme.palette.primary.main};
   font-family: "Fredoka";
-  font-size: 12px;
+  font-size: 14px;
   padding-top: 10px;
 `;
 

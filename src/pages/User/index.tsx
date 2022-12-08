@@ -1,8 +1,7 @@
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-// import MuiButton from "@mui/material/Button";
 
 import { useAuth } from "contexts/auth";
 
@@ -13,6 +12,8 @@ import LightSideLayout from "components/LightSideLayout";
 import MuiTextInputForm from "components/MuiTextInputForm";
 import Button from "components/Button";
 import MuiModal from "components/MuiModal";
+
+import useEnterSubmit from "utils/useEnterSubmit";
 
 import { Container } from "./styles";
 
@@ -47,7 +48,6 @@ const User: React.FC = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setFocus,
     register,
   } = useForm({
     defaultValues,
@@ -74,11 +74,11 @@ const User: React.FC = () => {
       await api.put(`/users/${user?.id}`, dataSubmit);
 
       await localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
-
-      setFocus("email");
     },
-    [updateUser, user, defaultValues, setFocus]
+    [updateUser, user, defaultValues]
   );
+
+  useEnterSubmit(onSubmit);
 
   return (
     <>
@@ -89,7 +89,6 @@ const User: React.FC = () => {
             <MuiTextInputForm
               register={register}
               name={"name"}
-              // key="name"
               label={"NOME"}
               onHandleSubmit={onSubmit}
               width="100%"
@@ -98,7 +97,6 @@ const User: React.FC = () => {
             />
             <MuiTextInputForm
               register={register}
-              // key="email"
               name={"email"}
               label={"E-MAIL"}
               onHandleSubmit={onSubmit}
@@ -108,7 +106,6 @@ const User: React.FC = () => {
               isRequired
               type={"email"}
             />
-
             <Button
               label="ALTERAR SENHA"
               width="167px"
@@ -126,7 +123,6 @@ const User: React.FC = () => {
                   name={"oldPassword"}
                   label={"SENHA ATUAL"}
                   onHandleSubmit={onSubmit}
-                  // width="100%"
                   control={control}
                   errors={errors}
                   type={"password"}
@@ -136,7 +132,6 @@ const User: React.FC = () => {
                   name={"password"}
                   label={"NOVA SENHA"}
                   onHandleSubmit={onSubmit}
-                  // width="100%"
                   control={control}
                   errors={errors}
                   type={"password"}
@@ -146,7 +141,6 @@ const User: React.FC = () => {
                   name={"passwordRepeat"}
                   label={"CONFIRME A SENHA"}
                   onHandleSubmit={onSubmit}
-                  // width="100%"
                   control={control}
                   errors={errors}
                   type={"password"}
