@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 
 import { Container } from "./styles";
 
@@ -23,6 +27,15 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   ...rest
 }) => {
   // const { setFocus } = useForm();
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   // Trigger Enter
   useEffect(() => {
@@ -48,11 +61,6 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
     };
   }, [onEnter, errors, name]);
 
-  // const handleEnter = async ({ onSubmit, focusNext }: any) => {
-  //   onSubmit && (await onSubmit());
-  //   focusNext && setFocus(focusNext);
-  // };
-
   return (
     <Container width={width} minWidth={minWidth}>
       <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>
@@ -75,12 +83,25 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                 onBlurCapture={(event: any) => {
                   return !errors[name] && onBlur && onBlur(event);
                 }}
-                type={type}
+                type={showPassword ? "text" : type}
                 multiline={isMultiline}
                 placeholder={placeholder}
                 error={!!error}
                 helperText={!!formState.errors?.message}
                 disabled={disabled || formState.isSubmitting}
+                InputProps={{
+                  endAdornment: type === "password" && (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
                 {...rest}
               />
             );
