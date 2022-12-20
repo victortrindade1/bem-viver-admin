@@ -131,7 +131,7 @@ const DadosPessoais: React.FC = () => {
             label="Nome"
             width="100%"
             isRequired
-            onHandleSubmit={onSubmit}
+            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -139,7 +139,7 @@ const DadosPessoais: React.FC = () => {
             name="dados_pessoais_rg"
             register={register}
             label="RG"
-            onHandleSubmit={onSubmit}
+            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -148,7 +148,7 @@ const DadosPessoais: React.FC = () => {
             mask="999.999.999-99"
             name="dados_pessoais_cpf"
             label="CPF"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -156,7 +156,7 @@ const DadosPessoais: React.FC = () => {
             mask="99/99/9999"
             name="dados_pessoais_data_nascimento"
             label="Nascimento"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
             register={register}
@@ -165,7 +165,7 @@ const DadosPessoais: React.FC = () => {
             register={register}
             name="dados_pessoais_num_certidao"
             label="N° Certidão de Nascimento"
-            onHandleSubmit={onSubmit}
+            onBlur={onSubmit}
             control={control}
             errors={errors}
             width="100%"
@@ -173,7 +173,7 @@ const DadosPessoais: React.FC = () => {
           <MuiTextInputForm
             name="dados_pessoais_folha_certidao"
             label="Folha Certidão Nascimento"
-            onHandleSubmit={onSubmit}
+            onBlur={onSubmit}
             control={control}
             errors={errors}
             register={register}
@@ -181,7 +181,7 @@ const DadosPessoais: React.FC = () => {
           <MuiTextInputForm
             name="dados_pessoais_livro_certidao"
             label="Livro Certidão Nascimento"
-            onHandleSubmit={onSubmit}
+            onBlur={onSubmit}
             control={control}
             errors={errors}
             register={register}
@@ -193,7 +193,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_pai_nome"
                 label="Filiação (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -204,7 +204,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_pai_rg"
                 label="RG (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -213,7 +213,7 @@ const DadosPessoais: React.FC = () => {
                 mask="999.999.999-99"
                 name="contatos_pai_cpf"
                 label="CPF (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -222,7 +222,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99.999.999/9999-99"
                 name="contatos_pai_cnpj"
                 label="CNPJ (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -231,7 +231,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99/99/9999"
                 name="contatos_pai_data_nascimento"
                 label="Nascimento (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -239,7 +239,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_pai_email"
                 label="E-mail (Pai)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -253,7 +253,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_mae_nome"
                 label="Filiação (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -264,7 +264,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_mae_rg"
                 label="RG (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -274,7 +274,7 @@ const DadosPessoais: React.FC = () => {
                 mask="999.999.999-99"
                 name="contatos_mae_cpf"
                 label="CPF (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -283,7 +283,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99.999.999/9999-99"
                 name="contatos_mae_cnpj"
                 label="CNPJ (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -292,7 +292,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99/99/9999"
                 name="contatos_mae_data_nascimento"
                 label="Nascimento (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -300,7 +300,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_mae_email"
                 label="E-mail (Mãe)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -314,7 +314,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_resp_nome"
                 label="Filiação (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -325,7 +325,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_resp_rg"
                 label="RG (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -335,7 +335,7 @@ const DadosPessoais: React.FC = () => {
                 mask="999.999.999-99"
                 name="contatos_resp_cpf"
                 label="CPF (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -344,7 +344,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99.999.999/9999-99"
                 name="contatos_resp_cnpj"
                 label="CNPJ (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -353,7 +353,7 @@ const DadosPessoais: React.FC = () => {
                 mask="99/99/9999"
                 name="contatos_resp_data_nascimento"
                 label="Nascimento (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlurProp={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}
@@ -361,7 +361,7 @@ const DadosPessoais: React.FC = () => {
               <MuiTextInputForm
                 name="contatos_resp_email"
                 label="E-mail (Responsável)"
-                onHandleSubmit={onSubmit}
+                onBlur={onSubmit}
                 control={control}
                 errors={errors}
                 register={register}

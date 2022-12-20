@@ -3,8 +3,8 @@ interface IMuiSelectForm {
   name: string;
   label: string;
   options: any;
-  onHandleSubmit?(event: any): Promise<void>;
-  // onHandleSubmit?: any;
+  onBlur?(event: any): Promise<void>;
+  // onSubmit?: any;
   width?: string;
   minWidth?: string;
   control: any;
@@ -22,8 +22,9 @@ interface ITextInputForm {
   register?: any;
   name: string;
   label: string;
-  // onHandleSubmit?(event: any): void;
-  onHandleSubmit?: any;
+  // onSubmit?(event: any): void;
+  onBlur?: any;
+  onEnter?: any;
   isRequired?: boolean;
   type?: string;
   width?: string;
@@ -38,12 +39,13 @@ interface ITextInputForm {
 interface IMaskTextInputForm extends ITextInputForm {
   mask: string;
   inputRef?: any;
+  onBlurProp: any; // Não pude usar onBlur pq existe na lib react-input-mask
 }
 
 // interface ISelectForm {
 //   name: string;
 //   label: string;
-//   onHandleSubmit(event: any): void;
+//   onSubmit(event: any): void;
 //   isRequired?: boolean;
 //   isFullWidth?: boolean;
 //   width?: string;

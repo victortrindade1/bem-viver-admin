@@ -179,14 +179,14 @@ const DadosEscolares: React.FC = () => {
               name={"sistema"}
               label={"Sistema"}
               options={sistemaOptions}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
             <MuiSelectForm
               name={"ano"}
               label={"Ano"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               width="80px"
@@ -195,7 +195,7 @@ const DadosEscolares: React.FC = () => {
             <MuiSelectForm
               name={"turno"}
               label={"Turno"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               options={turnoOptions}
@@ -203,7 +203,7 @@ const DadosEscolares: React.FC = () => {
             <MuiSelectForm
               name={"turma"}
               label={"Turma"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               options={turmaOptions}
@@ -214,7 +214,7 @@ const DadosEscolares: React.FC = () => {
               name={"periodo"}
               label={"Período"}
               options={periodoOptions}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -222,7 +222,7 @@ const DadosEscolares: React.FC = () => {
               name={"horarioEntrada"}
               label={"Horário de Entrada"}
               options={horarioEntradaOptions}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -230,7 +230,7 @@ const DadosEscolares: React.FC = () => {
               name={"horarioSaida"}
               label={"Horário de Saída"}
               options={horarioSaidaOptions}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -240,7 +240,7 @@ const DadosEscolares: React.FC = () => {
               register={register}
               name={"matricula"}
               label={"Matrícula"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -249,7 +249,7 @@ const DadosEscolares: React.FC = () => {
               mask="99/99/9999"
               name={"dataMatricula"}
               label={"Data de Matrícula"}
-              onHandleSubmit={onSubmit}
+              onBlurProp={onSubmit}
               control={control}
               errors={errors}
             />
@@ -258,7 +258,7 @@ const DadosEscolares: React.FC = () => {
               register={register}
               name={"observacoes"}
               label={"Observações"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               isMultiline={true}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
@@ -9,7 +9,8 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   register,
   name,
   label,
-  onHandleSubmit,
+  onBlur,
+  onEnter,
   isRequired = false,
   type,
   width = "167px",
@@ -21,6 +22,37 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   disabled = false,
   ...rest
 }) => {
+  // const { setFocus } = useForm();
+
+  // Trigger Enter
+  useEffect(() => {
+    const keyDownHandler = async (event: any) => {
+      if (inputName !== event.target) return;
+
+      if (event.key === "Enter") {
+        if (event.target) {
+          !errors[name] && onEnter && (await onEnter(event));
+          // nextFocus && setFocus(nextFocus);
+        } else {
+          !errors[name] && (await onEnter());
+          // nextFocus && setFocus(nextFocus);
+        }
+      }
+    };
+
+    const inputName = document.getElementById(name);
+
+    inputName && inputName.addEventListener("keydown", keyDownHandler, false);
+    return () => {
+      inputName && inputName.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [onEnter, errors, name]);
+
+  // const handleEnter = async ({ onSubmit, focusNext }: any) => {
+  //   onSubmit && (await onSubmit());
+  //   focusNext && setFocus(focusNext);
+  // };
+
   return (
     <Container width={width} minWidth={minWidth}>
       <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>
@@ -31,6 +63,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
             return (
               <TextField
                 {...register(name)}
+                id={name}
                 name={name}
                 label={label}
                 key={name}
@@ -39,9 +72,9 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                 value={value}
                 margin="normal"
                 required={isRequired}
-                onBlurCapture={(event) =>
-                  !errors[name] && onHandleSubmit && onHandleSubmit(event)
-                }
+                onBlurCapture={(event: any) => {
+                  return !errors[name] && onBlur && onBlur(event);
+                }}
                 type={type}
                 multiline={isMultiline}
                 placeholder={placeholder}

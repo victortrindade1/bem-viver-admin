@@ -10,6 +10,7 @@ const Button: React.FC<IButton> = ({
   width = "100%",
   margin = "16px 0px 8px 0px",
   handleClick,
+  ...rest
 }) => {
   return (
     <MuiButtonStyled
@@ -18,6 +19,7 @@ const Button: React.FC<IButton> = ({
       width={width}
       margin={margin}
       onClick={handleClick}
+      {...rest}
     >
       {label}
     </MuiButtonStyled>

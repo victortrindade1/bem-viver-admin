@@ -86,7 +86,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_pai_cel"
             label="Celular Pai"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -95,7 +95,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 9999-9999"
             name="contatos_pai_tel"
             label="Telefone Pai"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -106,7 +106,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_mae_cel"
             label="Celular Mãe"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -115,7 +115,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 9999-9999"
             name="contatos_mae_tel"
             label="Telefone Mãe"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -126,7 +126,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_resp_cel"
             label="Celular Responsável"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -135,7 +135,7 @@ const ContatosPessoais: React.FC = () => {
             mask="(99) 9999-9999"
             name="contatos_resp_tel"
             label="Telefone Responsável"
-            onHandleSubmit={onSubmit}
+            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />

@@ -10,7 +10,7 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   register,
   name,
   label,
-  onHandleSubmit,
+  onBlurProp,
   isRequired = false,
   type,
   width = "167px",
@@ -51,7 +51,7 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
                   margin="normal"
                   required={isRequired}
                   onBlurCapture={(event) =>
-                    !errors[name] && onHandleSubmit && onHandleSubmit(event)
+                    !errors[name] && onBlurProp && onBlurProp(event)
                   }
                   type={type}
                   multiline={isMultiline}

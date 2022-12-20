@@ -13,8 +13,6 @@ import MuiTextInputForm from "components/MuiTextInputForm";
 import Button from "components/Button";
 import MuiModal from "components/MuiModal";
 
-import useEnterSubmit from "utils/useEnterSubmit";
-
 import { Container } from "./styles";
 
 const User: React.FC = () => {
@@ -28,8 +26,22 @@ const User: React.FC = () => {
     email: Yup.string()
       .email("E-mail incorreto.")
       .required("Campo obrigatório."),
-    password: Yup.string(),
-    passwordRepeat: Yup.string(),
+    oldPassword: Yup.string().min(
+      6,
+      "Password precisa ter no mínimo 6 caracteres."
+    ),
+    password: Yup.string()
+      .min(6, "Password precisa ter no mínimo 6 caracteres.")
+      .when("oldPassword", (oldPassword, field) =>
+        oldPassword ? field.required("Campo obrigatório.") : field
+      ),
+    confirmPassword: Yup.string().when("password", (password, field) =>
+      password
+        ? field
+            .required("Campo obrigatório.")
+            .oneOf([Yup.ref("password")], "Confirme corretamente a nova senha.")
+        : field
+    ),
   });
 
   const { user, updateUser } = useAuth();
@@ -38,8 +50,9 @@ const User: React.FC = () => {
     () => ({
       name: user?.name,
       email: user?.email,
+      oldPassword: "",
       password: "",
-      passwordRepeat: "",
+      confirmPassword: "",
     }),
     [user]
   );
@@ -49,6 +62,7 @@ const User: React.FC = () => {
     handleSubmit,
     formState: { errors },
     register,
+    setFocus,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -57,19 +71,32 @@ const User: React.FC = () => {
   });
 
   const onSubmit = useCallback(
-    async (event: any) => {
-      event.preventDefault();
+    // props pode ser um event do submit do input ou um obj do submit do button
+    async (props: any) => {
+      props.target && props.preventDefault();
 
-      if (defaultValues[event.target.name] === event.target.value) {
-        return;
+      // Tenho q fazer esse condicional tb pra qnd o props for um obj
+      if (props.target) {
+        if (defaultValues[props.target.name] === props.target.value) {
+          return;
+        }
       }
 
-      const dataSubmit: any = {
-        ...user,
-        [event.target.name]: event.target.value,
-      };
+      let dataSubmit: any = {};
 
-      await updateUser(dataSubmit);
+      props.target
+        ? // Só atualiza um input pelo target
+          (dataSubmit = {
+            ...user,
+            [props.target.name]: props.target.value,
+          })
+        : // Atualiza todos inputs pelo submit do button
+          (dataSubmit = {
+            ...user,
+            ...props,
+          });
+
+      updateUser(dataSubmit);
 
       await api.put(`/users/${user?.id}`, dataSubmit);
 
@@ -78,19 +105,29 @@ const User: React.FC = () => {
     [updateUser, user, defaultValues]
   );
 
-  useEnterSubmit(onSubmit);
+  // const handleEnter = async ({ onSubmit, focusNext }: any) => {
+  //   onSubmit && (await onSubmit());
+  //   focusNext && setFocus(focusNext);
+  // };
 
   return (
     <>
       <DarkSideLayout />
       <LightSideLayout titleLabel="Minha Conta">
         <Container>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <>
             <MuiTextInputForm
               register={register}
               name={"name"}
               label={"NOME"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
+              onEnter={onSubmit}
+              // onEnter={(event: any) =>
+              //   handleEnter({
+              //     onSubmit: () => onSubmit(event),
+              //     focusNext: "email",
+              //   })
+              // }
               width="100%"
               control={control}
               errors={errors}
@@ -99,7 +136,8 @@ const User: React.FC = () => {
               register={register}
               name={"email"}
               label={"E-MAIL"}
-              onHandleSubmit={onSubmit}
+              onBlur={onSubmit}
+              onEnter={onSubmit}
               width="100%"
               control={control}
               errors={errors}
@@ -116,13 +154,14 @@ const User: React.FC = () => {
               open={openModal}
               handleClose={handleCloseModal}
               title="Cadastre uma nova senha"
+              onSubmit={handleSubmit(onSubmit)}
             >
               <>
                 <MuiTextInputForm
                   register={register}
                   name={"oldPassword"}
                   label={"SENHA ATUAL"}
-                  onHandleSubmit={onSubmit}
+                  onEnter={() => setFocus("password")}
                   control={control}
                   errors={errors}
                   type={"password"}
@@ -131,23 +170,26 @@ const User: React.FC = () => {
                   register={register}
                   name={"password"}
                   label={"NOVA SENHA"}
-                  onHandleSubmit={onSubmit}
+                  // onBlur={onSubmit}
+                  onEnter={() => setFocus("confirmPassword")}
                   control={control}
                   errors={errors}
                   type={"password"}
                 />
                 <MuiTextInputForm
                   register={register}
-                  name={"passwordRepeat"}
+                  name={"confirmPassword"}
                   label={"CONFIRME A SENHA"}
-                  onHandleSubmit={onSubmit}
+                  // onSubmit={!errors && onSubmit}
+                  // onBlur={onSubmit}
+                  // onEnter={onSubmit}
                   control={control}
                   errors={errors}
                   type={"password"}
                 />
               </>
             </MuiModal>
-          </form>
+          </>
         </Container>
       </LightSideLayout>
     </>

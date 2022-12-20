@@ -13,7 +13,7 @@ import { Container } from "./styles";
 const MuiSelectForm: React.FC<IMuiSelectForm> = ({
   name,
   label,
-  onHandleSubmit,
+  onBlur,
   isRequired = false,
   // initialValue,
   width = "167px",
@@ -47,7 +47,7 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
                   fullWidth
                   labelId="inputId"
                   value={!valueSelected ? props.field.value : valueSelected}
-                  onChange={onHandleSubmit}
+                  onChange={onBlur}
                   label={label}
                   name={props.field.name}
                   required={isRequired}

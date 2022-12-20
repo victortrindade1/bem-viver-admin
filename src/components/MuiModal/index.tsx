@@ -20,6 +20,7 @@ interface IMuiModal {
   children: any;
   open: boolean;
   handleClose: () => void;
+  onSubmit?: any;
 }
 
 const MuiModal: React.FC<IMuiModal> = ({
@@ -27,6 +28,7 @@ const MuiModal: React.FC<IMuiModal> = ({
   children,
   open,
   handleClose,
+  onSubmit,
 }) => {
   return (
     <Modal open={open} onClose={handleClose}>
@@ -39,7 +41,7 @@ const MuiModal: React.FC<IMuiModal> = ({
         </Header>
         <Body>{children}</Body>
         <ButtonContainer>
-          <Button label="ENVIAR" />
+          <Button label="ENVIAR" type="submit" handleClick={onSubmit} />
         </ButtonContainer>
       </Container>
     </Modal>

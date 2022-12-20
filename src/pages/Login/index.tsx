@@ -21,6 +21,7 @@ const Login: React.FC = () => {
     control,
     handleSubmit,
     register,
+    setFocus,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -45,6 +46,7 @@ const Login: React.FC = () => {
             name={"email"}
             label={"E-MAIL"}
             width="100%"
+            onEnter={() => setFocus("password")}
             control={control}
             errors={errors}
             isRequired

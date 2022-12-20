@@ -2,17 +2,11 @@
 
 ## Próximo passo
 
-Validation password repeat
-
 Colocar olhinho na senha do login
 
+Fazer toast
+
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
-
-Como faz pra zerar o erro se apagar todo o campo já com erro?
-Fazer validation no form
-
-Seria interessante se a cada submit q atualiza, atualizar tb um aluno global com context.
-Assim, atualizaria na tela sem precisar fazer uma request pra atualizar os dados.
 
 ## Login
 
