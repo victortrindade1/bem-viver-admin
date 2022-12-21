@@ -1,6 +1,19 @@
-import { createGlobalStyle } from "styled-components";
-import { CustomTheme } from "./styled";
 import "./fonts";
+import "react-toastify/dist/ReactToastify.css";
+import { createGlobalStyle } from "styled-components";
+import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
+
+import { CustomTheme } from "./styled";
+
+export const StyledToast = styled(ToastContainer)`
+  .Toastify__toast.Toastify__toast--success {
+    background: ${(props) => props.theme.palette.secondary.main}80;
+  }
+  .Toastify__toast.Toastify__toast--error {
+    background: #ffbaba80;
+  }
+`;
 
 export default createGlobalStyle<{ theme: CustomTheme }>`
   * {
@@ -21,7 +34,6 @@ export default createGlobalStyle<{ theme: CustomTheme }>`
 
   body {
     -webkit-font-smoothing: antialiased !important;
-    scrollbar-color: #123456 green
   }
 
   body, input, button {

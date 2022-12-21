@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { useAuth } from "contexts/auth";
 
@@ -73,34 +74,43 @@ const User: React.FC = () => {
   const onSubmit = useCallback(
     // props pode ser um event do submit do input ou um obj do submit do button
     async (props: any) => {
-      props.target && props.preventDefault();
+      try {
+        props.target && props.preventDefault();
 
-      // Tenho q fazer esse condicional tb pra qnd o props for um obj
-      if (props.target) {
-        if (defaultValues[props.target.name] === props.target.value) {
-          return;
+        // Tenho q fazer esse condicional tb pra qnd o props for um obj
+        if (props.target) {
+          if (defaultValues[props.target.name] === props.target.value) {
+            return;
+          }
         }
+
+        let dataSubmit: any = {};
+
+        props.target
+          ? // Só atualiza um input pelo target
+            (dataSubmit = {
+              ...user,
+              [props.target.name]: props.target.value,
+            })
+          : // Atualiza todos inputs pelo submit do button
+            (dataSubmit = {
+              ...user,
+              ...props,
+            });
+
+        updateUser(dataSubmit);
+
+        await api.put(`/users/${user?.id}`, dataSubmit);
+
+        await localStorage.setItem(
+          "@AdminAuth:user",
+          JSON.stringify(dataSubmit)
+        );
+
+        toast.success("Dados salvos com sucesso!");
+      } catch (error) {
+        toast.error("Não foi possível salvar.");
       }
-
-      let dataSubmit: any = {};
-
-      props.target
-        ? // Só atualiza um input pelo target
-          (dataSubmit = {
-            ...user,
-            [props.target.name]: props.target.value,
-          })
-        : // Atualiza todos inputs pelo submit do button
-          (dataSubmit = {
-            ...user,
-            ...props,
-          });
-
-      updateUser(dataSubmit);
-
-      await api.put(`/users/${user?.id}`, dataSubmit);
-
-      await localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
     },
     [updateUser, user, defaultValues]
   );

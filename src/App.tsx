@@ -11,6 +11,7 @@ import { AuthProvider } from "./contexts/auth";
 
 import theme from "styles/theme";
 import GlobalStyle from "styles/global";
+import { StyledToast } from "styles/global";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <AuthProvider>
             <AnimatePresence>
               <MyRoutes />
+              <StyledToast autoClose={1500} />
             </AnimatePresence>
           </AuthProvider>
           <GlobalStyle />

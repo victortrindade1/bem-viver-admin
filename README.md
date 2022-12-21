@@ -2,11 +2,19 @@
 
 ## Próximo passo
 
-Colocar olhinho na senha do login
-
 Fazer toast
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
+
+Tirar nome do usuário do header qnd for mobile.
+
+Fazer body menu mobile
+
+Fazer botão de voltar
+
+Inverter menu pra direita no mobile
+
+Fazer menu mobile
 
 ## Login
 
