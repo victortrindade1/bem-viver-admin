@@ -75,6 +75,7 @@ const User: React.FC = () => {
     // props pode ser um event do submit do input ou um obj do submit do button
     async (props: any) => {
       try {
+        console.log("on submit");
         props.target && props.preventDefault();
 
         // Tenho q fazer esse condicional tb pra qnd o props for um obj
@@ -102,10 +103,7 @@ const User: React.FC = () => {
 
         await api.put(`/users/${user?.id}`, dataSubmit);
 
-        await localStorage.setItem(
-          "@AdminAuth:user",
-          JSON.stringify(dataSubmit)
-        );
+        localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
 
         toast.success("Dados salvos com sucesso!");
       } catch (error) {
@@ -129,9 +127,13 @@ const User: React.FC = () => {
             <MuiTextInputForm
               register={register}
               name={"name"}
-              label={"NOME"}
-              onBlur={onSubmit}
-              onEnter={onSubmit}
+              label={"Nome"}
+              // onBlur={onSubmit}
+              onEnter={async (e: any) => {
+                setFocus("email");
+                await onSubmit(e);
+                // console.log("set focus");
+              }}
               // onEnter={(event: any) =>
               //   handleEnter({
               //     onSubmit: () => onSubmit(event),
@@ -145,7 +147,7 @@ const User: React.FC = () => {
             <MuiTextInputForm
               register={register}
               name={"email"}
-              label={"E-MAIL"}
+              label={"E-Mail"}
               onBlur={onSubmit}
               onEnter={onSubmit}
               width="100%"
@@ -155,7 +157,7 @@ const User: React.FC = () => {
               type={"email"}
             />
             <Button
-              label="ALTERAR SENHA"
+              label="Alterar senha"
               width="167px"
               handleClick={handleOpenModal}
               margin="40px 0px"
@@ -170,7 +172,7 @@ const User: React.FC = () => {
                 <MuiTextInputForm
                   register={register}
                   name={"oldPassword"}
-                  label={"SENHA ATUAL"}
+                  label={"Senha Atual"}
                   onEnter={() => setFocus("password")}
                   control={control}
                   errors={errors}
@@ -179,7 +181,7 @@ const User: React.FC = () => {
                 <MuiTextInputForm
                   register={register}
                   name={"password"}
-                  label={"NOVA SENHA"}
+                  label={"Nova Senha"}
                   // onBlur={onSubmit}
                   onEnter={() => setFocus("confirmPassword")}
                   control={control}
@@ -189,7 +191,7 @@ const User: React.FC = () => {
                 <MuiTextInputForm
                   register={register}
                   name={"confirmPassword"}
-                  label={"CONFIRME A SENHA"}
+                  label={"Confirmar Senha"}
                   // onSubmit={!errors && onSubmit}
                   // onBlur={onSubmit}
                   // onEnter={onSubmit}

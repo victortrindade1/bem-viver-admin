@@ -95,6 +95,7 @@ const DadosPessoais: React.FC = () => {
     control,
     handleSubmit,
     register,
+    // setFocus,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -113,12 +114,11 @@ const DadosPessoais: React.FC = () => {
         }
 
         console.log(event);
-        console.log(errors);
       } catch (error) {
         console.log(error);
       }
     },
-    [defaultValues, errors]
+    [defaultValues]
   );
 
   return (
@@ -134,6 +134,7 @@ const DadosPessoais: React.FC = () => {
             onBlur={onSubmit}
             control={control}
             errors={errors}
+            onEnter={onSubmit}
           />
           <MuiTextInputForm
             name="dados_pessoais_rg"

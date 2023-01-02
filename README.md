@@ -2,7 +2,20 @@
 
 ## Próximo passo
 
-Fazer toast
+Cara, não deu bom usar o ContextAPI junto com o setFocus do react-hook-form.
+Qnd altera, rerenderiza a tela e perde o foco do input q eu quero. Vou subir
+esse código, e depois instalar o Redux pra ver se tenho algum sucesso.
+Boa sorte pra mim com esse monte de lib q vem agora...
+
+Vou tirar o setFocus do react-hook-form e usar o do React
+https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering
+
+Comunicar api de alunos:
+Na tela Alunos faz request de n alunos, retornando todos os dados deles.
+Ao clicar em um aluno, os dados desse aluno alimenta um ContextAPI.
+Ao editar qqr input, faz request do update mas não faz request pra recarregar
+os dados do aluno. Em vez disso, altera a Context. Todo defaultValue vai pegar
+da Context. Daí vamos esbarrar no setFocus não funcionando após atualizar o Context.
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
@@ -15,6 +28,8 @@ Fazer botão de voltar
 Inverter menu pra direita no mobile
 
 Fazer menu mobile
+
+Colocar foto da criança no perfil
 
 ## Login
 

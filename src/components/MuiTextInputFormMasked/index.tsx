@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import InputMask from "react-input-mask";
 import TextField from "@mui/material/TextField";
 import { FormControl, FormHelperText } from "@mui/material";
@@ -11,6 +11,7 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   name,
   label,
   onBlurProp,
+  onEnter,
   isRequired = false,
   type,
   width = "167px",
@@ -22,6 +23,28 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   errors,
   disabled = false,
 }) => {
+  // Trigger Enter
+  useEffect(() => {
+    const keyDownHandler = async (event: any) => {
+      if (inputName !== event.target) return;
+
+      if (event.key === "Enter") {
+        if (event.target) {
+          !errors[name] && onEnter && (await onEnter(event));
+        } else {
+          !errors[name] && (await onEnter());
+        }
+      }
+    };
+
+    const inputName = document.getElementById(name);
+
+    inputName && inputName.addEventListener("keydown", keyDownHandler, false);
+    return () => {
+      inputName && inputName.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [onEnter, errors, name]);
+
   return (
     <Container width={width} minWidth={minWidth}>
       <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>

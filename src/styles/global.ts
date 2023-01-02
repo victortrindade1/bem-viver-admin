@@ -15,7 +15,7 @@ export const StyledToast = styled(ToastContainer)`
   }
 `;
 
-export default createGlobalStyle<{ theme: CustomTheme }>`
+export const GlobalStyle = createGlobalStyle<{ theme: CustomTheme }>`
   * {
     margin: 0;
     padding: 0;

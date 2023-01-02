@@ -16,18 +16,15 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
     api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
     // Login persist
-    await localStorage.setItem(
-      "@AdminAuth:user",
-      JSON.stringify(response.data.user)
-    );
-    await localStorage.setItem(
+    localStorage.setItem("@AdminAuth:user", JSON.stringify(response.data.user));
+    localStorage.setItem(
       "@AdminAuth:token",
       JSON.stringify(response.data.token)
     );
   }
 
-  async function signOut() {
-    await localStorage.clear();
+  function signOut() {
+    localStorage.clear();
 
     setUser(null);
   }
@@ -37,9 +34,9 @@ export const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   }
 
   useEffect(() => {
-    async function loadStoragedData() {
-      const storagedUser = await localStorage.getItem("@AdminAuth:user");
-      const storagedToken = await localStorage.getItem("@AdminAuth:token");
+    function loadStoragedData() {
+      const storagedUser = localStorage.getItem("@AdminAuth:user");
+      const storagedToken = localStorage.getItem("@AdminAuth:token");
 
       if (storagedUser && storagedToken) {
         setUser(JSON.parse(storagedUser));

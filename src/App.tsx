@@ -10,8 +10,7 @@ import MyRoutes from "./routes";
 import { AuthProvider } from "./contexts/auth";
 
 import theme from "styles/theme";
-import GlobalStyle from "styles/global";
-import { StyledToast } from "styles/global";
+import { GlobalStyle, StyledToast } from "styles/global";
 
 function App() {
   return (
@@ -20,8 +19,10 @@ function App() {
         <ThemeProvider theme={theme}>
           <AuthProvider>
             <AnimatePresence>
-              <MyRoutes />
-              <StyledToast autoClose={1500} />
+              <>
+                <MyRoutes />
+                <StyledToast autoClose={1500} />
+              </>
             </AnimatePresence>
           </AuthProvider>
           <GlobalStyle />

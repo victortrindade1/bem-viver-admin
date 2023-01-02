@@ -26,6 +26,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   disabled = false,
   ...rest
 }) => {
+  const { ref } = register;
   // const { setFocus } = useForm();
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -44,10 +45,11 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
 
       if (event.key === "Enter") {
         if (event.target) {
-          !errors[name] && onEnter && (await onEnter(event));
+          console.log("on enter");
+          !errors[name] && onEnter && onEnter(event);
           // nextFocus && setFocus(nextFocus);
         } else {
-          !errors[name] && (await onEnter());
+          !errors[name] && onEnter();
           // nextFocus && setFocus(nextFocus);
         }
       }
@@ -71,6 +73,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
             return (
               <TextField
                 {...register(name)}
+                inputRef={ref}
                 id={name}
                 name={name}
                 label={label}
