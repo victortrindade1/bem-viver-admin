@@ -1,6 +1,9 @@
 import api from "services/api";
 
-export default async function signInService(data: IAuth): Promise<IResponse> {
-  const response = await api.post("/sessions", data);
+export default async function signInService({
+  email,
+  password,
+}: IAuth): Promise<IResponseSessionStore> {
+  const response = await api.post("/sessions", { email, password });
   return response;
 }

@@ -10,14 +10,16 @@ import {
   FaFileInvoiceDollar,
   FaCog,
 } from "react-icons/fa";
-
-import Drawer from "@mui/material/Drawer";
+import { Menu, MenuItem, Drawer } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import logo from "assets/svg/logo.svg";
 
-import { useAuth } from "contexts/auth";
+import { useAppDispatch, useAppSelector } from "hooks";
 
+import { selectUser, signOut } from "store/slices/auth";
+
+import theme from "styles/theme";
 import {
   Container,
   MenuBtnContainer,
@@ -31,9 +33,6 @@ import {
   MenuIconContainer,
   MenuLabelContainer,
 } from "./styles";
-
-import theme from "styles/theme";
-import { Menu, MenuItem } from "@mui/material";
 
 const links: { label: string; Icon: IconType; href: string }[] = [
   {
@@ -73,9 +72,12 @@ const Header: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+
   const navigate = useNavigate();
 
-  const { signOut, user } = useAuth();
+  // const { signOut, user } = useAuth();
 
   const toggleDrawer =
     (isOpened?: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -96,7 +98,7 @@ const Header: React.FC = () => {
   };
 
   const handleSignOut = () => {
-    signOut();
+    dispatch(signOut());
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

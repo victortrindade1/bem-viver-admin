@@ -7,13 +7,15 @@ import {
   BrowserRouter,
   Routes,
 } from "react-router-dom";
-import { useAuth } from "contexts/auth";
+// import { useAuth } from "contexts/auth";
 
 import AuthLayout from "pages/_layouts/auth";
 import DefaultLayout from "pages/_layouts/default";
 import LoadingPage from "pages/LoadingPage";
 
 import AnimationLayout from "components/AnimationLayout";
+import { useAppSelector } from "hooks";
+import { RootState } from "store";
 
 const Dashboard = lazy(() => import("pages/Dashboard"));
 const Alunos = lazy(() => import("pages/Alunos"));
@@ -31,9 +33,11 @@ const DadosEscolaresAluno = lazy(() => import("pages/Aluno/DadosEscolares"));
 const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
 
 export default function MyRoutes() {
-  const { signed, loading } = useAuth();
+  // const { signed, loading } = useAuth();
+  const signed = useAppSelector((state: RootState) => state.auth.signed);
+  const status = useAppSelector((state: RootState) => state.auth.status);
 
-  if (loading) {
+  if (status === "loading") {
     return <LoadingPage />;
   }
 

@@ -2,6 +2,8 @@
 
 ## Próximo passo
 
+O Redux tem um lance de fazer sort nas listas. Pra usar, veja createEntityAdapter
+
 Cara, não deu bom usar o ContextAPI junto com o setFocus do react-hook-form.
 Qnd altera, rerenderiza a tela e perde o foco do input q eu quero. Vou subir
 esse código, e depois instalar o Redux pra ver se tenho algum sucesso.

@@ -1,27 +1,27 @@
-interface ISubmitUser {
-  name?: string;
-  email?: string;
-  newPassword?: string;
-  confirmPassword?: string;
-}
+// interface ISubmitUser {
+//   name?: string;
+//   email?: string;
+//   newPassword?: string;
+//   confirmPassword?: string;
+// }
 
 interface IAuth {
   email: string;
   password: string;
 }
 
-interface IAuthProvider {
-  children: React.ReactNode;
-}
+// interface IAuthProvider {
+//   children: React.ReactNode;
+// }
 
-interface AuthContextData {
-  signed: boolean;
-  user: IUser | null;
-  signIn(data: IAuth): Promise<void>;
-  signOut(): void;
-  loading: boolean;
-  updateUser(data: IUser): void;
-}
+// interface AuthContextData {
+//   signed: boolean;
+//   user: IUser | null;
+//   signIn(data: IAuth): Promise<void>;
+//   signOut(): void;
+//   loading: boolean;
+//   updateUser(data: IUser): void;
+// }
 
 interface IUser {
   id: number;
@@ -29,11 +29,11 @@ interface IUser {
   email: string;
   isAdmin: boolean;
   avatar?: any;
+  token: string;
 }
 
-interface IResponse {
+interface IResponseSessionStore {
   data: {
-    token: string;
     user: IUser;
   };
 }

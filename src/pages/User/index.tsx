@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-
-import { useAuth } from "contexts/auth";
+import { useAppDispatch, useAppSelector } from "hooks";
+// import { useAuth } from "contexts/auth_OBSOLETO";
 
 import api from "services/api";
 
@@ -15,8 +15,12 @@ import Button from "components/Button";
 import MuiModal from "components/MuiModal";
 
 import { Container } from "./styles";
+import { selectUser, updateUser } from "store/slices/auth";
 
 const User: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => setOpenModal(true);
@@ -45,7 +49,7 @@ const User: React.FC = () => {
     ),
   });
 
-  const { user, updateUser } = useAuth();
+  // const { user, updateUser } = useAuth();
 
   const defaultValues: any = useMemo(
     () => ({
@@ -99,7 +103,7 @@ const User: React.FC = () => {
               ...props,
             });
 
-        updateUser(dataSubmit);
+        dispatch(updateUser(dataSubmit));
 
         await api.put(`/users/${user?.id}`, dataSubmit);
 
@@ -110,7 +114,7 @@ const User: React.FC = () => {
         toast.error("Não foi possível salvar.");
       }
     },
-    [updateUser, user, defaultValues]
+    [dispatch, user, defaultValues]
   );
 
   // const handleEnter = async ({ onSubmit, focusNext }: any) => {

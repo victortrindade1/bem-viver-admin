@@ -1,7 +1,11 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
-import { useAuth } from "contexts/auth";
+import { useAppDispatch } from "hooks";
+
+// import { useAuth } from "contexts/auth";
+import { signIn } from "store/slices/auth";
+
 import MuiTextInputForm from "components/MuiTextInputForm";
 
 import {
@@ -12,6 +16,8 @@ import {
 } from "./styles";
 
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const defaultValues = {
     email: "",
     password: "",
@@ -27,13 +33,15 @@ const Login: React.FC = () => {
     defaultValues,
   });
 
-  const { signIn } = useAuth();
+  // const { signIn } = useAuth();
 
   const onSubmit = useCallback(
     async (data: IAuth) => {
-      await signIn(data);
+      // await signIn(data);
+      // console.log("data", data);
+      dispatch(signIn(data));
     },
-    [signIn]
+    [dispatch]
   );
 
   return (
