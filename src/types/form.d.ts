@@ -23,7 +23,7 @@ interface ITextInputForm {
   name: string;
   label: string;
   // onSubmit?(event: any): void;
-  onBlur?: any;
+  // onBlur?: any;
   onEnter?: any;
   isRequired?: boolean;
   type?: string;
@@ -37,9 +37,9 @@ interface ITextInputForm {
 }
 
 interface IMaskTextInputForm extends ITextInputForm {
-  mask: string;
-  inputRef?: any;
-  onBlurProp: any; // Não pude usar onBlur pq existe na lib react-input-mask
+  mask?: string;
+  // inputRef?: any;
+  // onBlurProp: any; // Não pude usar onBlur pq existe na lib react-input-mask
 }
 
 // interface ISelectForm {

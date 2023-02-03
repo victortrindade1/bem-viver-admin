@@ -81,7 +81,6 @@ const AutorizadosABuscar: React.FC = () => {
             name="contatos_buscar1_nome"
             label="Nome 1"
             width="100%"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -89,7 +88,6 @@ const AutorizadosABuscar: React.FC = () => {
             register={register}
             name="contatos_buscar1_parentesco"
             label="Grau de Parentesco"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -98,7 +96,6 @@ const AutorizadosABuscar: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_buscar1_contato"
             label="Contato"
-            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -109,7 +106,6 @@ const AutorizadosABuscar: React.FC = () => {
             name="contatos_buscar2_nome"
             label="Nome 2"
             width="100%"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -117,7 +113,6 @@ const AutorizadosABuscar: React.FC = () => {
             register={register}
             name="contatos_buscar2_parentesco"
             label="Grau de Parentesco"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -126,7 +121,6 @@ const AutorizadosABuscar: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_buscar2_contato"
             label="Contato"
-            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -137,7 +131,6 @@ const AutorizadosABuscar: React.FC = () => {
             name="contatos_buscar3_nome"
             label="Nome 3"
             width="100%"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -145,7 +138,6 @@ const AutorizadosABuscar: React.FC = () => {
             register={register}
             name="contatos_buscar3_parentesco"
             label="Grau de Parentesco"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -154,7 +146,6 @@ const AutorizadosABuscar: React.FC = () => {
             mask="(99) 99999-9999"
             name="contatos_buscar3_contato"
             label="Contato"
-            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import InputMask from "react-input-mask";
 import TextField from "@mui/material/TextField";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
@@ -9,11 +10,12 @@ import IconButton from "@mui/material/IconButton";
 
 import { Container } from "./styles";
 
-const MuiTextInputForm: React.FC<ITextInputForm> = ({
+const TextForm: React.FC<IMaskTextInputForm> = ({
+  mask,
   register,
   name,
   label,
-  // onBlur,
+  // onBlurProp,
   onEnter,
   isRequired = false,
   type,
@@ -27,7 +29,7 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   ...rest
 }) => {
   const { ref } = register;
-  // const { setFocus } = useForm();
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -66,9 +68,49 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
         <Controller
           name={name}
           control={control}
-          render={({ field: { value }, fieldState: { error }, formState }) => {
-            return (
-              <>
+          render={({
+            // field: { onChange, onBlur, value },
+            field: { value },
+            fieldState: { error },
+            formState,
+          }) => {
+            console.log(mask);
+            if (mask) {
+              console.log("entrei errado");
+              return (
+                <InputMask
+                  {...register(name)}
+                  mask={mask}
+                  maskPlaceholder={null}
+                  value={value}
+                  // onChange={onChange}
+                  // onBlur={onBlur}
+                  disabled={disabled || formState.isSubmitting}
+                >
+                  <TextField
+                    inputRef={ref}
+                    id={name}
+                    name={name}
+                    label={label}
+                    key={name}
+                    fullWidth
+                    variant="standard"
+                    margin="normal"
+                    required={isRequired}
+                    // onBlurCapture={(event) =>
+                    //   !errors[name] && onBlurProp && onBlurProp(event)
+                    // }
+                    type={type}
+                    multiline={isMultiline}
+                    placeholder={placeholder}
+                    error={!!error}
+                    helperText={!!formState.errors?.message}
+                    {...rest}
+                  />
+                </InputMask>
+              );
+            } else {
+              return (
                 <TextField
                   {...register(name)}
                   inputRef={ref}
@@ -81,9 +123,6 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                   value={value}
                   margin="normal"
                   required={isRequired}
-                  // onBlurCapture={(event: any) => {
-                  //   return !errors[name] && onBlur && onBlur(event);
-                  // }}
                   type={showPassword ? "text" : type}
                   multiline={isMultiline}
                   placeholder={placeholder}
@@ -105,10 +144,11 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                   }}
                   {...rest}
                 />
-              </>
-            );
+              );
+            }
           }}
         />
+
         {errors[name] && (
           <FormHelperText>{errors[name].message}</FormHelperText>
         )}
@@ -117,4 +157,4 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
   );
 };
 
-export default MuiTextInputForm;
+export default TextForm;

@@ -7,10 +7,11 @@ import { Controller } from "react-hook-form";
 import { Container } from "./styles";
 
 const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
+  mask,
   register,
   name,
   label,
-  onBlurProp,
+  // onBlurProp,
   onEnter,
   isRequired = false,
   type,
@@ -19,20 +20,22 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
   isMultiline = false,
   placeholder,
   control,
-  mask,
   errors,
   disabled = false,
+  ...rest
 }) => {
-  // Trigger Enter
+  const { ref } = register;
+
+  // Trigger Enter or Tab
   useEffect(() => {
     const keyDownHandler = async (event: any) => {
       if (inputName !== event.target) return;
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" || event.key === "Tab") {
         if (event.target) {
-          !errors[name] && onEnter && (await onEnter(event));
+          onEnter && onEnter(event);
         } else {
-          !errors[name] && (await onEnter());
+          onEnter();
         }
       }
     };
@@ -67,20 +70,24 @@ const TextInputFormMasked: React.FC<IMaskTextInputForm> = ({
                 disabled={disabled || formState.isSubmitting}
               >
                 <TextField
+                  inputRef={ref}
+                  id={name}
                   name={name}
                   label={label}
+                  key={name}
                   fullWidth
                   variant="standard"
                   margin="normal"
                   required={isRequired}
-                  onBlurCapture={(event) =>
-                    !errors[name] && onBlurProp && onBlurProp(event)
-                  }
+                  // onBlurCapture={(event) =>
+                  //   !errors[name] && onBlurProp && onBlurProp(event)
+                  // }
                   type={type}
                   multiline={isMultiline}
                   placeholder={placeholder}
                   error={!!error}
                   helperText={!!formState.errors?.message}
+                  {...rest}
                 />
               </InputMask>
             );

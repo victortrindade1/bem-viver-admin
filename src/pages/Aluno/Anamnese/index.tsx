@@ -59,7 +59,6 @@ const Anamnese: React.FC = () => {
             <MuiTextInputForm
               name={"pediatra"}
               label={"Pediatra"}
-              onBlur={onSubmit}
               width="100%"
               control={control}
               errors={errors}
@@ -69,7 +68,6 @@ const Anamnese: React.FC = () => {
               mask="(99) 99999-9999"
               name={"contato"}
               label={"Contato"}
-              onBlurProp={onSubmit}
               control={control}
               errors={errors}
               register={register}
@@ -79,7 +77,6 @@ const Anamnese: React.FC = () => {
             <MuiTextInputForm
               name={"alergias"}
               label={"Alergias"}
-              onBlur={onSubmit}
               control={control}
               errors={errors}
               register={register}
@@ -90,7 +87,6 @@ const Anamnese: React.FC = () => {
             <MuiTextInputForm
               name={"medicacao"}
               label={"Medicação / Horário"}
-              onBlur={onSubmit}
               control={control}
               errors={errors}
               register={register}
@@ -103,7 +99,6 @@ const Anamnese: React.FC = () => {
             <MuiTextInputForm
               name={"temperatura"}
               label={"Temperatura Banho"}
-              onBlur={onSubmit}
               control={control}
               errors={errors}
               register={register}
@@ -111,7 +106,6 @@ const Anamnese: React.FC = () => {
             <MuiTextInputForm
               name={"observacoes"}
               label={"Observações"}
-              onBlur={onSubmit}
               control={control}
               errors={errors}
               register={register}

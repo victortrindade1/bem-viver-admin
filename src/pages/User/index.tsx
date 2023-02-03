@@ -2,15 +2,12 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "hooks";
-// import { useAuth } from "contexts/auth_OBSOLETO";
-
-import api from "services/api";
 
 import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import MuiTextInputForm from "components/MuiTextInputForm";
+// import TextForm from "components/TextForm";
 import Button from "components/Button";
 import MuiModal from "components/MuiModal";
 
@@ -23,7 +20,9 @@ const User: React.FC = () => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const handleOpenModal = () => setOpenModal(true);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
   const handleCloseModal = () => setOpenModal(false);
 
   const validationSchema = Yup.object().shape({
@@ -49,8 +48,6 @@ const User: React.FC = () => {
     ),
   });
 
-  // const { user, updateUser } = useAuth();
-
   const defaultValues: any = useMemo(
     () => ({
       name: user?.name,
@@ -68,6 +65,7 @@ const User: React.FC = () => {
     formState: { errors },
     register,
     setFocus,
+    reset,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -75,52 +73,60 @@ const User: React.FC = () => {
     reValidateMode: "onChange",
   });
 
+  // const errors = useMemo(() => formState.errors, [formState]);
+
   const onSubmit = useCallback(
     // props pode ser um event do submit do input ou um obj do submit do button
     async (props: any) => {
-      try {
-        console.log("on submit");
-        props.target && props.preventDefault();
+      console.log("é pra estar aqui 2");
+      console.log(props);
+      props.target && props.preventDefault();
 
-        // Tenho q fazer esse condicional tb pra qnd o props for um obj
-        if (props.target) {
-          if (defaultValues[props.target.name] === props.target.value) {
-            return;
-          }
+      // Não atualiza se não mudar valor
+      if (props.target) {
+        if (defaultValues[props.target.name] === props.target.value) {
+          return;
         }
-
-        let dataSubmit: any = {};
-
-        props.target
-          ? // Só atualiza um input pelo target
-            (dataSubmit = {
-              ...user,
-              [props.target.name]: props.target.value,
-            })
-          : // Atualiza todos inputs pelo submit do button
-            (dataSubmit = {
-              ...user,
-              ...props,
-            });
-
-        dispatch(updateUser(dataSubmit));
-
-        await api.put(`/users/${user?.id}`, dataSubmit);
-
-        localStorage.setItem("@AdminAuth:user", JSON.stringify(dataSubmit));
-
-        toast.success("Dados salvos com sucesso!");
-      } catch (error) {
-        toast.error("Não foi possível salvar.");
+      } else {
+        if (defaultValues === props) {
+          return;
+        }
       }
-    },
-    [dispatch, user, defaultValues]
-  );
 
-  // const handleEnter = async ({ onSubmit, focusNext }: any) => {
-  //   onSubmit && (await onSubmit());
-  //   focusNext && setFocus(focusNext);
-  // };
+      let dataSubmit: any = {};
+
+      if (props.target) {
+        // Só atualiza um input pelo target
+        dataSubmit = {
+          ...user,
+          [props.target.name]: props.target.value,
+          // Tira o foco se não tiver sido redirecionado para outro input
+        };
+        props.target.blur();
+      } else {
+        // Atualiza todos inputs pelo submit do button
+        dataSubmit = {
+          ...user,
+          ...props,
+        };
+      }
+
+      // Pega user atualizado pra usar no reset atualizado
+      const responseUpdate: any = await dispatch(updateUser(dataSubmit));
+      const updatedUser = responseUpdate.payload.data;
+
+      reset({
+        name: updatedUser?.name,
+        email: updatedUser?.email,
+        oldPassword: "",
+        password: "",
+        confirmPassword: "",
+      });
+
+      setOpenModal(false);
+    },
+    [dispatch, user, defaultValues, reset]
+  );
 
   return (
     <>
@@ -132,18 +138,7 @@ const User: React.FC = () => {
               register={register}
               name={"name"}
               label={"Nome"}
-              // onBlur={onSubmit}
-              onEnter={async (e: any) => {
-                setFocus("email");
-                await onSubmit(e);
-                // console.log("set focus");
-              }}
-              // onEnter={(event: any) =>
-              //   handleEnter({
-              //     onSubmit: () => onSubmit(event),
-              //     focusNext: "email",
-              //   })
-              // }
+              onEnter={(e: any) => onSubmit(e)}
               width="100%"
               control={control}
               errors={errors}
@@ -152,13 +147,12 @@ const User: React.FC = () => {
               register={register}
               name={"email"}
               label={"E-Mail"}
-              onBlur={onSubmit}
-              onEnter={onSubmit}
               width="100%"
               control={control}
               errors={errors}
               isRequired
               type={"email"}
+              disabled
             />
             <Button
               label="Alterar senha"
@@ -172,38 +166,36 @@ const User: React.FC = () => {
               title="Cadastre uma nova senha"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <>
-                <MuiTextInputForm
-                  register={register}
-                  name={"oldPassword"}
-                  label={"Senha Atual"}
-                  onEnter={() => setFocus("password")}
-                  control={control}
-                  errors={errors}
-                  type={"password"}
-                />
-                <MuiTextInputForm
-                  register={register}
-                  name={"password"}
-                  label={"Nova Senha"}
-                  // onBlur={onSubmit}
-                  onEnter={() => setFocus("confirmPassword")}
-                  control={control}
-                  errors={errors}
-                  type={"password"}
-                />
-                <MuiTextInputForm
-                  register={register}
-                  name={"confirmPassword"}
-                  label={"Confirmar Senha"}
-                  // onSubmit={!errors && onSubmit}
-                  // onBlur={onSubmit}
-                  // onEnter={onSubmit}
-                  control={control}
-                  errors={errors}
-                  type={"password"}
-                />
-              </>
+              <MuiTextInputForm
+                register={register}
+                name={"oldPassword"}
+                label={"Senha Atual"}
+                onEnter={() => setFocus("password")}
+                control={control}
+                errors={errors}
+                type={"password"}
+              />
+              <MuiTextInputForm
+                register={register}
+                name={"password"}
+                label={"Nova Senha"}
+                onEnter={() => setFocus("confirmPassword")}
+                control={control}
+                errors={errors}
+                type={"password"}
+              />
+              <MuiTextInputForm
+                register={register}
+                name={"confirmPassword"}
+                label={"Confirmar Senha"}
+                onEnter={async (e: any) => {
+                  await handleSubmit(onSubmit)();
+                  errors && e.target.focus();
+                }}
+                control={control}
+                errors={errors}
+                type={"password"}
+              />
             </MuiModal>
           </>
         </Container>

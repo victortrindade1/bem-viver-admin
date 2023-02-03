@@ -33,8 +33,8 @@ const DadosEscolaresAluno = lazy(() => import("pages/Aluno/DadosEscolares"));
 const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
 
 export default function MyRoutes() {
-  // const { signed, loading } = useAuth();
   const signed = useAppSelector((state: RootState) => state.auth.signed);
+
   const status = useAppSelector((state: RootState) => state.auth.status);
 
   if (status === "loading") {

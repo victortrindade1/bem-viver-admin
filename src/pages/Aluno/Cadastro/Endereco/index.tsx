@@ -70,7 +70,6 @@ const Endereco: React.FC = () => {
             name="contatos_end_logradouro"
             label="Logradouro"
             width="100%"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -78,7 +77,6 @@ const Endereco: React.FC = () => {
             register={register}
             name="contatos_end_num"
             label="Número"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -86,7 +84,6 @@ const Endereco: React.FC = () => {
             register={register}
             name="contatos_end_complemento"
             label="Complemento"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
             width="100%"
@@ -97,7 +94,6 @@ const Endereco: React.FC = () => {
             register={register}
             name="contatos_end_bairro"
             label="Bairro"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />
@@ -106,7 +102,6 @@ const Endereco: React.FC = () => {
             mask="99999-999"
             name="contatos_end_cep"
             label="CEP"
-            onBlurProp={onSubmit}
             control={control}
             errors={errors}
           />
@@ -114,7 +109,6 @@ const Endereco: React.FC = () => {
             register={register}
             name="contatos_end_cidade"
             label="Cidade"
-            onBlur={onSubmit}
             control={control}
             errors={errors}
           />

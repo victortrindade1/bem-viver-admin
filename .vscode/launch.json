@@ -7,8 +7,9 @@
     {
       "name": "Launch localhost",
       "type": "chrome",
-      "userDataDir": false,
+      "userDataDir": true,
       "request": "launch",
+      "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
     }
