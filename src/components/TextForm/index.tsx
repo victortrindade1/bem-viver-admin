@@ -15,7 +15,6 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
   register,
   name,
   label,
-  // onBlurProp,
   onEnter,
   isRequired = false,
   type,
@@ -69,22 +68,19 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
           name={name}
           control={control}
           render={({
-            // field: { onChange, onBlur, value },
-            field: { value },
+            field: { onChange, onBlur, value },
             fieldState: { error },
             formState,
           }) => {
-            console.log(mask);
             if (mask) {
-              console.log("entrei errado");
               return (
                 <InputMask
                   {...register(name)}
                   mask={mask}
                   maskPlaceholder={null}
                   value={value}
-                  // onChange={onChange}
-                  // onBlur={onBlur}
+                  onChange={onChange}
+                  onBlur={onBlur}
                   disabled={disabled || formState.isSubmitting}
                 >
                   <TextField
@@ -97,9 +93,6 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
                     variant="standard"
                     margin="normal"
                     required={isRequired}
-                    // onBlurCapture={(event) =>
-                    //   !errors[name] && onBlurProp && onBlurProp(event)
-                    // }
                     type={type}
                     multiline={isMultiline}
                     placeholder={placeholder}

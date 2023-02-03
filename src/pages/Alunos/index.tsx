@@ -5,25 +5,27 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
 
-const links = [
-  {
-    label: "Novo",
-    Icon: FaUserPlus,
-    url: "/aluno/1/cadastro",
-  },
-  {
-    label: "Cobranças",
-    Icon: FaCommentDollar,
-    url: "/alunos",
-  },
-  {
-    label: "Notificações",
-    Icon: FaPaperPlane,
-    url: "/alunos",
-  },
-];
-
 const Alunos: React.FC = () => {
+  const links = [
+    {
+      label: "Novo",
+      Icon: FaUserPlus,
+      url: "/alunos/novo",
+    },
+    {
+      label: "Cobranças",
+      Icon: FaCommentDollar,
+      url: "/alunos",
+      // disabled: true,
+    },
+    {
+      label: "Notificações",
+      Icon: FaPaperPlane,
+      url: "/alunos",
+      // disabled: true,
+    },
+  ];
+
   return (
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>

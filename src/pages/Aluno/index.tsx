@@ -38,21 +38,6 @@ const links = [
     Icon: FaMoneyCheckAlt,
     url: "/alunos",
   },
-  {
-    label: "fewfefe",
-    Icon: FaMoneyCheckAlt,
-    url: "/alunos",
-  },
-  {
-    label: "hrthht",
-    Icon: FaMoneyCheckAlt,
-    url: "/alunos",
-  },
-  {
-    label: "sdqwdwd",
-    Icon: FaMoneyCheckAlt,
-    url: "/alunos",
-  },
 ];
 
 const Aluno: React.FC<IChildren> = ({ children }) => {

@@ -13,6 +13,7 @@ interface IBodyMenu {
     label: string;
     url: string;
     Icon: IconType;
+    disabled?: boolean;
     // color?: string;
   }[];
 }

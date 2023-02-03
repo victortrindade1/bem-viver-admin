@@ -114,6 +114,20 @@ export const updateAluno = createAsyncThunk(
   }
 );
 
+export const showAluno = createAsyncThunk(
+  "aluno/show",
+  async (alunoId: number) => {
+    try {
+      const response = await api.get(`/alunos/${alunoId}`);
+
+      return response;
+    } catch (error) {
+      toast.error("Não foi possível carregar dados.");
+      throw new Error("Não foi possível carregar dados.");
+    }
+  }
+);
+
 const alunoSlice = createSlice({
   name: "aluno",
   initialState,
@@ -125,11 +139,12 @@ const alunoSlice = createSlice({
       })
       .addCase(storeAluno.fulfilled, (state, action: any) => {
         state.statusAsync = "idle";
-        console.log(action);
+        // state = action.payload
+        console.log("Action - store aluno", action);
       })
       .addCase(storeAluno.rejected, (state, action: any) => {
         state.statusAsync = "failed";
-        console.log(action);
+        console.log("Action - reject store aluno", action);
       })
       .addCase(updateAluno.pending, (state) => {
         state.statusAsync = "loading";

@@ -9,7 +9,6 @@ import {
   Container,
   MoreButtonContainer,
   NavLinkStyled,
-  // ButtonContainer,
   LabelContainer,
 } from "./styles";
 
@@ -31,19 +30,22 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
       ) : (
         <Container>
           {links &&
-            links.map(({ Icon, label, url }) => (
-              <NavLinkStyled
-                to={url}
-                className={({ isActive }) => (isActive ? "active" : "inactive")}
-                onClick={() => handleCLick(url)}
-                key={label}
-              >
-                {/* <ButtonContainer onClick={() => handleCLick(url)} key={label}> */}
-                <Icon size={25} />
-                <LabelContainer>{label}</LabelContainer>
-                {/* </ButtonContainer> */}
-              </NavLinkStyled>
-            ))}
+            links.map(
+              ({ Icon, label, url, disabled }) =>
+                !disabled && (
+                  <NavLinkStyled
+                    to={url}
+                    className={({ isActive }) =>
+                      isActive ? "active" : "inactive"
+                    }
+                    onClick={() => handleCLick(url)}
+                    key={label}
+                  >
+                    <Icon size={25} />
+                    <LabelContainer>{label}</LabelContainer>
+                  </NavLinkStyled>
+                )
+            )}
         </Container>
       )}
     </>

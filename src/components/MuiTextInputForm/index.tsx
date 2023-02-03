@@ -81,9 +81,6 @@ const MuiTextInputForm: React.FC<ITextInputForm> = ({
                   value={value}
                   margin="normal"
                   required={isRequired}
-                  // onBlurCapture={(event: any) => {
-                  //   return !errors[name] && onBlur && onBlur(event);
-                  // }}
                   type={showPassword ? "text" : type}
                   multiline={isMultiline}
                   placeholder={placeholder}

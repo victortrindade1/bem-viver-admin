@@ -7,7 +7,6 @@ import {
   BrowserRouter,
   Routes,
 } from "react-router-dom";
-// import { useAuth } from "contexts/auth";
 
 import AuthLayout from "pages/_layouts/auth";
 import DefaultLayout from "pages/_layouts/default";
@@ -31,6 +30,7 @@ const CadastroAluno = lazy(() => import("pages/Aluno/Cadastro"));
 const ContatosAluno = lazy(() => import("pages/Aluno/Contatos"));
 const DadosEscolaresAluno = lazy(() => import("pages/Aluno/DadosEscolares"));
 const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
+const AlunoNew = lazy(() => import("pages/AlunoNew"));
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -83,6 +83,14 @@ export default function MyRoutes() {
                 element={
                   <Suspense fallback={<LoadingPage />}>
                     <Dashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="alunos/novo"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <AlunoNew />
                   </Suspense>
                 }
               />

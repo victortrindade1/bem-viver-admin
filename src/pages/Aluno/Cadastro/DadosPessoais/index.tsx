@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import AccordionTextInput from "components/AccordionTextInput";
-import MuiTextInputForm from "components/MuiTextInputForm";
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
-
-import { Grid } from "./styles";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectAluno, updateAluno } from "store/slices/aluno";
+
+import AccordionTextInput from "components/AccordionTextInput";
+import TextForm from "components/TextForm";
+
+import { Grid } from "./styles";
 
 const DadosPessoais: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -98,50 +98,29 @@ const DadosPessoais: React.FC = () => {
 
   const {
     control,
-    // handleSubmit,
     formState: { errors },
     register,
     setFocus,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = useCallback(
-    // props pode ser um event do submit do input ou um obj do submit do button
-    (props: any) => {
-      props.target && props.preventDefault();
+    (e: any) => {
+      e.preventDefault();
 
       // Não atualiza se não mudar valor
-      if (props.target) {
-        if (defaultValues[props.target.name] === props.target.value) {
-          return;
-        }
-      } else {
-        if (defaultValues === props) {
-          return;
-        }
+      if (defaultValues[e.target.name] === e.target.value) {
+        return;
       }
 
-      let dataSubmit: any = {};
-
-      if (props.target) {
-        // Só atualiza um input pelo target
-        dataSubmit = {
-          ...aluno,
-          [props.target.name]: props.target.value,
-          // Tira o foco se não tiver sido redirecionado para outro input
-        };
-        props.target.blur();
-      } else {
-        // Atualiza todos inputs pelo submit do button
-        dataSubmit = {
-          ...aluno,
-          ...props,
-        };
-      }
+      const dataSubmit = {
+        ...aluno,
+        [e.target.name]: e.target.value,
+      };
 
       dispatch(updateAluno(dataSubmit));
     },
@@ -149,13 +128,9 @@ const DadosPessoais: React.FC = () => {
   );
 
   return (
-    // Ainda não sei se é ou não necessário a tag <form>
-    // Será se for preciso usar um reset geral, mas talvez não precise se a cada
-    // vez essa tela for alimentada pelo state. Qnd precisar, eu vejo.
-    // <form onSubmit={handleSubmit(onSubmit)}>
     <Grid>
       <div>
-        <MuiTextInputForm
+        <TextForm
           isRequired
           register={register}
           name="nome"
@@ -168,7 +143,7 @@ const DadosPessoais: React.FC = () => {
           control={control}
           errors={errors}
         />
-        <MuiTextInputForm
+        <TextForm
           register={register}
           name="dados_pessoais_rg"
           label="RG"
@@ -179,95 +154,139 @@ const DadosPessoais: React.FC = () => {
           control={control}
           errors={errors}
         />
-        <MuiTextInputFormMasked
+        <TextForm
           register={register}
           mask="999.999.999-99"
           name="dados_pessoais_cpf"
           label="CPF"
+          onEnter={(e: any) => {
+            setFocus("dados_pessoais_data_nascimento");
+            onSubmit(e);
+          }}
           control={control}
           errors={errors}
         />
-        <MuiTextInputFormMasked
+        <TextForm
+          register={register}
           mask="99/99/9999"
           name="dados_pessoais_data_nascimento"
           label="Nascimento"
+          onEnter={(e: any) => {
+            setFocus("dados_pessoais_num_certidao");
+            onSubmit(e);
+          }}
           control={control}
           errors={errors}
-          register={register}
         />
-        <MuiTextInputForm
+        <TextForm
           register={register}
           name="dados_pessoais_num_certidao"
           label="N° Certidão de Nascimento"
+          onEnter={(e: any) => {
+            setFocus("dados_pessoais_folha_certidao");
+            onSubmit(e);
+          }}
+          width="100%"
           control={control}
           errors={errors}
-          width="100%"
         />
-        <MuiTextInputForm
+        <TextForm
+          register={register}
           name="dados_pessoais_folha_certidao"
           label="Folha Certidão Nascimento"
+          onEnter={(e: any) => {
+            setFocus("dados_pessoais_livro_certidao");
+            onSubmit(e);
+          }}
           control={control}
           errors={errors}
-          register={register}
         />
-        <MuiTextInputForm
+        <TextForm
+          register={register}
           name="dados_pessoais_livro_certidao"
           label="Livro Certidão Nascimento"
+          onEnter={(e: any) => {
+            setFocus("contatos_pai_nome");
+            onSubmit(e);
+          }}
           control={control}
           errors={errors}
-          register={register}
         />
       </div>
       <div>
         <AccordionTextInput>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_pai_nome"
               label="Filiação (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_pai_rg");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
               width="100%"
             />
           </>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_pai_rg"
               label="RG (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_pai_cpf");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="999.999.999-99"
               name="contatos_pai_cpf"
               label="CPF (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_pai_cnpj");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99.999.999/9999-99"
               name="contatos_pai_cnpj"
               label="CNPJ (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_pai_data_nascimento");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99/99/9999"
               name="contatos_pai_data_nascimento"
               label="Nascimento (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_pai_email");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_pai_email"
               label="E-mail (Pai)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_nome");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
               type={"email"}
               width="100%"
             />
@@ -275,54 +294,78 @@ const DadosPessoais: React.FC = () => {
         </AccordionTextInput>
         <AccordionTextInput>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_mae_nome"
               label="Filiação (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_rg");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
               width="100%"
             />
           </>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_mae_rg"
               label="RG (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_cpf");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
 
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="999.999.999-99"
               name="contatos_mae_cpf"
               label="CPF (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_cnpj");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99.999.999/9999-99"
               name="contatos_mae_cnpj"
               label="CNPJ (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_data_nascimento");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99/99/9999"
               name="contatos_mae_data_nascimento"
               label="Nascimento (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_mae_email");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_mae_email"
               label="E-mail (Mãe)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_nome");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
               type={"email"}
               width="100%"
             />
@@ -330,54 +373,75 @@ const DadosPessoais: React.FC = () => {
         </AccordionTextInput>
         <AccordionTextInput>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_resp_nome"
               label="Filiação (Responsável)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_rg");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
               width="100%"
             />
           </>
           <>
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_resp_rg"
               label="RG (Responsável)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_cpf");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
 
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="999.999.999-99"
               name="contatos_resp_cpf"
               label="CPF (Responsável)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_cnpj");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99.999.999/9999-99"
               name="contatos_resp_cnpj"
               label="CNPJ (Responsável)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_data_nascimento");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputFormMasked
+            <TextForm
+              register={register}
               mask="99/99/9999"
               name="contatos_resp_data_nascimento"
               label="Nascimento (Responsável)"
+              onEnter={(e: any) => {
+                setFocus("contatos_resp_email");
+                onSubmit(e);
+              }}
               control={control}
               errors={errors}
-              register={register}
             />
-            <MuiTextInputForm
+            <TextForm
+              register={register}
               name="contatos_resp_email"
               label="E-mail (Responsável)"
+              onEnter={(e: any) => onSubmit(e)}
               control={control}
               errors={errors}
-              register={register}
               type={"email"}
               width="100%"
             />
@@ -385,7 +449,6 @@ const DadosPessoais: React.FC = () => {
         </AccordionTextInput>
       </div>
     </Grid>
-    // </form>
   );
 };
 

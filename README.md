@@ -2,13 +2,23 @@
 
 ## Próximo passo
 
+Novo aluno:
+Criei uma nova rota só pra retornar o novo id.
+
+Dá pra fazer uma consulta index, acha pages. Faz outra consulta com page=pages se pages !== 1.
+Retorna o id + 1 do primeiro elemento da lista (se for decrescente, como hj é).
+Dá pra colocar essa consulta num useEffect, pra qnd abrir a página já fazer.
+Não vai ter trigger de input. Vou triggar pelo botão só, pq são vários itens juntos
+nesse primeiro submit. E tb dá pra gerar de boa a matrícula e popular no input sem
+ficar triggando sem querer.
+Inclusive dá pra colocar um loading no input da matrícula.
+
+Eu tenho que criar trigger pra action store do aluno. Assim terei um state.
+Eu criei o showAluno, mas só vou precisar qnd criar a lista de alunos na tela alunos.
+
+Tenho q ver esse store do aluno q ta usando id do state. pode ser q tenha q tirar esse id do state pra store
+
 Depois q eu terminar Dados Pessoais, vou tentar criar uma função genérica pra onSubmit
-Comunicar api de alunos:
-Na tela Alunos faz request de n alunos, retornando todos os dados deles.
-Ao clicar em um aluno, os dados desse aluno alimenta um state.
-Ao editar qqr input, faz request do update mas não faz request pra recarregar
-os dados do aluno. Em vez disso, altera a Context. Todo defaultValue vai pegar
-da Context. Daí vamos esbarrar no setFocus não funcionando após atualizar o Context.
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 

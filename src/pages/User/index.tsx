@@ -2,17 +2,17 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+
 import { useAppDispatch, useAppSelector } from "hooks";
+import { selectUser, updateUser } from "store/slices/auth";
 
 import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
-import MuiTextInputForm from "components/MuiTextInputForm";
-// import TextForm from "components/TextForm";
+import TextForm from "components/TextForm";
 import Button from "components/Button";
 import MuiModal from "components/MuiModal";
 
 import { Container } from "./styles";
-import { selectUser, updateUser } from "store/slices/auth";
 
 const User: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -73,13 +73,9 @@ const User: React.FC = () => {
     reValidateMode: "onChange",
   });
 
-  // const errors = useMemo(() => formState.errors, [formState]);
-
   const onSubmit = useCallback(
     // props pode ser um event do submit do input ou um obj do submit do button
     async (props: any) => {
-      console.log("é pra estar aqui 2");
-      console.log(props);
       props.target && props.preventDefault();
 
       // Não atualiza se não mudar valor
@@ -100,9 +96,7 @@ const User: React.FC = () => {
         dataSubmit = {
           ...user,
           [props.target.name]: props.target.value,
-          // Tira o foco se não tiver sido redirecionado para outro input
         };
-        props.target.blur();
       } else {
         // Atualiza todos inputs pelo submit do button
         dataSubmit = {
@@ -134,7 +128,7 @@ const User: React.FC = () => {
       <LightSideLayout titleLabel="Minha Conta">
         <Container>
           <>
-            <MuiTextInputForm
+            <TextForm
               register={register}
               name={"name"}
               label={"Nome"}
@@ -143,7 +137,7 @@ const User: React.FC = () => {
               control={control}
               errors={errors}
             />
-            <MuiTextInputForm
+            <TextForm
               register={register}
               name={"email"}
               label={"E-Mail"}
@@ -166,7 +160,7 @@ const User: React.FC = () => {
               title="Cadastre uma nova senha"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <MuiTextInputForm
+              <TextForm
                 register={register}
                 name={"oldPassword"}
                 label={"Senha Atual"}
@@ -175,7 +169,7 @@ const User: React.FC = () => {
                 errors={errors}
                 type={"password"}
               />
-              <MuiTextInputForm
+              <TextForm
                 register={register}
                 name={"password"}
                 label={"Nova Senha"}
@@ -184,7 +178,7 @@ const User: React.FC = () => {
                 errors={errors}
                 type={"password"}
               />
-              <MuiTextInputForm
+              <TextForm
                 register={register}
                 name={"confirmPassword"}
                 label={"Confirmar Senha"}
