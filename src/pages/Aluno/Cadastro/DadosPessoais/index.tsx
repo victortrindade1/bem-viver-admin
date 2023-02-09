@@ -17,7 +17,7 @@ const DadosPessoais: React.FC = () => {
 
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
-    dados_pessoais_rg: Yup.string().min(14, "RG incorreto."),
+    dados_pessoais_rg: Yup.string(),
     dados_pessoais_cpf: Yup.string()
       .min(14, "CPF incorreto.")
       .max(14, "CPF incorreto."),
@@ -156,7 +156,7 @@ const DadosPessoais: React.FC = () => {
         />
         <TextForm
           register={register}
-          mask="999.999.999-99"
+          maskType="cpf"
           name="dados_pessoais_cpf"
           label="CPF"
           onEnter={(e: any) => {
@@ -168,7 +168,8 @@ const DadosPessoais: React.FC = () => {
         />
         <TextForm
           register={register}
-          mask="99/99/9999"
+          maskType="date"
+          placeholder={"dd/mm/aaaa"}
           name="dados_pessoais_data_nascimento"
           label="Nascimento"
           onEnter={(e: any) => {
@@ -189,6 +190,7 @@ const DadosPessoais: React.FC = () => {
           width="100%"
           control={control}
           errors={errors}
+          type="text"
         />
         <TextForm
           register={register}
@@ -243,7 +245,7 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="999.999.999-99"
+              maskType="cpf"
               name="contatos_pai_cpf"
               label="CPF (Pai)"
               onEnter={(e: any) => {
@@ -255,7 +257,7 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99.999.999/9999-99"
+              maskType="cnpj"
               name="contatos_pai_cnpj"
               label="CNPJ (Pai)"
               onEnter={(e: any) => {
@@ -267,7 +269,8 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99/99/9999"
+              maskType="date"
+              placeholder={"dd/mm/aaaa"}
               name="contatos_pai_data_nascimento"
               label="Nascimento (Pai)"
               onEnter={(e: any) => {
@@ -322,7 +325,7 @@ const DadosPessoais: React.FC = () => {
 
             <TextForm
               register={register}
-              mask="999.999.999-99"
+              maskType="cpf"
               name="contatos_mae_cpf"
               label="CPF (Mãe)"
               onEnter={(e: any) => {
@@ -334,7 +337,7 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99.999.999/9999-99"
+              maskType="cnpj"
               name="contatos_mae_cnpj"
               label="CNPJ (Mãe)"
               onEnter={(e: any) => {
@@ -346,7 +349,8 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99/99/9999"
+              maskType="date"
+              placeholder={"dd/mm/aaaa"}
               name="contatos_mae_data_nascimento"
               label="Nascimento (Mãe)"
               onEnter={(e: any) => {
@@ -401,7 +405,7 @@ const DadosPessoais: React.FC = () => {
 
             <TextForm
               register={register}
-              mask="999.999.999-99"
+              maskType="cpf"
               name="contatos_resp_cpf"
               label="CPF (Responsável)"
               onEnter={(e: any) => {
@@ -413,7 +417,7 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99.999.999/9999-99"
+              maskType="cnpj"
               name="contatos_resp_cnpj"
               label="CNPJ (Responsável)"
               onEnter={(e: any) => {
@@ -425,7 +429,8 @@ const DadosPessoais: React.FC = () => {
             />
             <TextForm
               register={register}
-              mask="99/99/9999"
+              maskType="date"
+              placeholder={"dd/mm/aaaa"}
               name="contatos_resp_data_nascimento"
               label="Nascimento (Responsável)"
               onEnter={(e: any) => {

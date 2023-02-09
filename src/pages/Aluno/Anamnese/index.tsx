@@ -4,8 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import TitleBody from "components/TitleBody";
-import MuiTextInputForm from "components/MuiTextInputForm";
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
+import TextForm from "components/TextForm";
+// import TextForm from "components/TextForm";
+// import TextForm from "components/TextForm";
 
 import { Grid } from "./styles";
 
@@ -56,7 +57,7 @@ const Anamnese: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid>
           <div>
-            <MuiTextInputForm
+            <TextForm
               name={"pediatra"}
               label={"Pediatra"}
               width="100%"
@@ -64,8 +65,8 @@ const Anamnese: React.FC = () => {
               errors={errors}
               register={register}
             />
-            <MuiTextInputFormMasked
-              mask="(99) 99999-9999"
+            <TextForm
+              maskType="tel"
               name={"contato"}
               label={"Contato"}
               control={control}
@@ -74,7 +75,7 @@ const Anamnese: React.FC = () => {
             />
           </div>
           <div>
-            <MuiTextInputForm
+            <TextForm
               name={"alergias"}
               label={"Alergias"}
               control={control}
@@ -84,7 +85,7 @@ const Anamnese: React.FC = () => {
               width="100%"
               minWidth="167px"
             />
-            <MuiTextInputForm
+            <TextForm
               name={"medicacao"}
               label={"Medicação / Horário"}
               control={control}
@@ -96,14 +97,14 @@ const Anamnese: React.FC = () => {
             />
           </div>
           <div>
-            <MuiTextInputForm
+            <TextForm
               name={"temperatura"}
               label={"Temperatura Banho"}
               control={control}
               errors={errors}
               register={register}
             />
-            <MuiTextInputForm
+            <TextForm
               name={"observacoes"}
               label={"Observações"}
               control={control}

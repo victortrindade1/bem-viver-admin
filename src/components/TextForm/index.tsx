@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import InputMask from "react-input-mask";
+import React, { useEffect, useCallback } from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
@@ -8,10 +7,18 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
+import {
+  formataCep,
+  formataCNPJ,
+  formataCPF,
+  formataDate,
+  formataTelefone,
+} from "utils/regex";
+
 import { Container } from "./styles";
 
-const TextForm: React.FC<IMaskTextInputForm> = ({
-  mask,
+const TextForm: React.FC<ITextForm> = ({
+  maskType,
   register,
   name,
   label,
@@ -27,8 +34,6 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
   disabled = false,
   ...rest
 }) => {
-  const { ref } = register;
-
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -38,6 +43,30 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
   ) => {
     event.preventDefault();
   };
+
+  // Aplica máscara
+  const handleOnChange = useCallback(
+    (e: any) => {
+      e.preventDefault();
+
+      const typeOfMask = maskType;
+      switch (typeOfMask) {
+        case "date":
+          return formataDate(e.target.value);
+        case "cpf":
+          return formataCPF(e.target.value);
+        case "cnpj":
+          return formataCNPJ(e.target.value);
+        case "tel":
+          return formataTelefone(e.target.value);
+        case "cep":
+          return formataCep(e.target.value);
+        default:
+          return;
+      }
+    },
+    [maskType]
+  );
 
   // Trigger Enter or Tab
   useEffect(() => {
@@ -67,78 +96,51 @@ const TextForm: React.FC<IMaskTextInputForm> = ({
         <Controller
           name={name}
           control={control}
+          defaultValue={""}
           render={({
-            field: { onChange, onBlur, value },
+            field: { value, ref, onBlur, onChange },
             fieldState: { error },
             formState,
           }) => {
-            if (mask) {
-              return (
-                <InputMask
-                  {...register(name)}
-                  mask={mask}
-                  maskPlaceholder={null}
-                  value={value}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  disabled={disabled || formState.isSubmitting}
-                >
-                  <TextField
-                    inputRef={ref}
-                    id={name}
-                    name={name}
-                    label={label}
-                    key={name}
-                    fullWidth
-                    variant="standard"
-                    margin="normal"
-                    required={isRequired}
-                    type={type}
-                    multiline={isMultiline}
-                    placeholder={placeholder}
-                    error={!!error}
-                    helperText={!!formState.errors?.message}
-                    {...rest}
-                  />
-                </InputMask>
-              );
-            } else {
-              return (
-                <TextField
-                  {...register(name)}
-                  inputRef={ref}
-                  id={name}
-                  name={name}
-                  label={label}
-                  key={name}
-                  fullWidth
-                  variant="standard"
-                  value={value}
-                  margin="normal"
-                  required={isRequired}
-                  type={showPassword ? "text" : type}
-                  multiline={isMultiline}
-                  placeholder={placeholder}
-                  error={!!error}
-                  helperText={!!formState.errors?.message}
-                  disabled={disabled || formState.isSubmitting}
-                  InputProps={{
-                    endAdornment: type === "password" && (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...rest}
-                />
-              );
-            }
+            return (
+              <TextField
+                {...register(name)}
+                onBlur={onBlur}
+                onChange={(e: any) =>
+                  maskType ? onChange(handleOnChange(e)) : onChange(e)
+                }
+                inputRef={ref}
+                id={name}
+                name={name}
+                label={label}
+                key={name}
+                fullWidth
+                variant="standard"
+                value={value}
+                margin="normal"
+                required={isRequired}
+                type={showPassword ? "text" : type}
+                multiline={isMultiline}
+                placeholder={placeholder}
+                error={!!error}
+                helperText={!!formState.errors?.message}
+                disabled={disabled || formState.isSubmitting}
+                InputProps={{
+                  endAdornment: type === "password" && (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                {...rest}
+              />
+            );
           }}
         />
 

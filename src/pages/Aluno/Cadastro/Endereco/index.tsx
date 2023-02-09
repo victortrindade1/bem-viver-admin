@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import MuiTextInputForm from "components/MuiTextInputForm";
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
+import TextForm from "components/TextForm";
 
 import { Container } from "./styles";
 
@@ -65,7 +64,7 @@ const Endereco: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Container>
         <div>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_end_logradouro"
             label="Logradouro"
@@ -73,14 +72,14 @@ const Endereco: React.FC = () => {
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_end_num"
             label="Número"
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_end_complemento"
             label="Complemento"
@@ -90,22 +89,22 @@ const Endereco: React.FC = () => {
           />
         </div>
         <div>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_end_bairro"
             label="Bairro"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
+            maskType="cep"
             register={register}
-            mask="99999-999"
             name="contatos_end_cep"
             label="CEP"
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_end_cidade"
             label="Cidade"

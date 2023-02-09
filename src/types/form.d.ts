@@ -17,13 +17,10 @@ interface ISelectItem {
   value: string;
 }
 
-interface ITextInputForm {
-  // id?: string;
-  register?: any;
+interface ITextForm {
+  register: any;
   name: string;
   label: string;
-  // onSubmit?(event: any): void;
-  // onBlur?: any;
   onEnter?: any;
   isRequired?: boolean;
   type?: string;
@@ -34,12 +31,7 @@ interface ITextInputForm {
   control: any;
   errors?: any;
   disabled?: boolean;
-}
-
-interface IMaskTextInputForm extends ITextInputForm {
-  mask?: string;
-  // inputRef?: any;
-  // onBlurProp: any; // Não pude usar onBlur pq existe na lib react-input-mask
+  maskType?: "date" | "cpf" | "cnpj" | "tel" | "cep";
 }
 
 // interface ISelectForm {

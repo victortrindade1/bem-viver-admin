@@ -6,7 +6,7 @@ import { useAppDispatch } from "hooks";
 // import { useAuth } from "contexts/auth";
 import { signIn } from "store/slices/auth";
 
-import MuiTextInputForm from "components/MuiTextInputForm";
+import TextForm from "components/TextForm";
 
 import {
   Title,
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
       <Title>Login</Title>
       <FormContainerWrapper>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name={"email"}
             label={"E-MAIL"}
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
             isRequired
             type={"email"}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name={"password"}
             label={"SENHA"}

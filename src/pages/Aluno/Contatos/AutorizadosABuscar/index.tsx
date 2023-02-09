@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import MuiTextInputForm from "components/MuiTextInputForm";
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
+import TextForm from "components/TextForm";
 
 import { Grid } from "./styles";
 
@@ -76,7 +75,7 @@ const AutorizadosABuscar: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid>
         <div>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar1_nome"
             label="Nome 1"
@@ -84,16 +83,16 @@ const AutorizadosABuscar: React.FC = () => {
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar1_parentesco"
             label="Grau de Parentesco"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_buscar1_contato"
             label="Contato"
             control={control}
@@ -101,7 +100,7 @@ const AutorizadosABuscar: React.FC = () => {
           />
         </div>
         <div>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar2_nome"
             label="Nome 2"
@@ -109,16 +108,16 @@ const AutorizadosABuscar: React.FC = () => {
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar2_parentesco"
             label="Grau de Parentesco"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_buscar2_contato"
             label="Contato"
             control={control}
@@ -126,7 +125,7 @@ const AutorizadosABuscar: React.FC = () => {
           />
         </div>
         <div>
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar3_nome"
             label="Nome 3"
@@ -134,16 +133,16 @@ const AutorizadosABuscar: React.FC = () => {
             control={control}
             errors={errors}
           />
-          <MuiTextInputForm
+          <TextForm
             register={register}
             name="contatos_buscar3_parentesco"
             label="Grau de Parentesco"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_buscar3_contato"
             label="Contato"
             control={control}

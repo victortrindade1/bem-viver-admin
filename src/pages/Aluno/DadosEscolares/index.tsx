@@ -5,8 +5,7 @@ import * as Yup from "yup";
 
 import TitleBody from "components/TitleBody";
 import MuiSelectForm from "components/MuiSelectForm";
-import MuiTextInputForm from "components/MuiTextInputForm";
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
+import TextForm from "components/TextForm";
 import MuiSwitchForm from "components/MuiSwitchForm";
 
 import { Grid } from "./styles";
@@ -229,23 +228,23 @@ const DadosEscolares: React.FC = () => {
             />
           </div>
           <div>
-            <MuiTextInputForm
+            <TextForm
               register={register}
               name={"matricula"}
               label={"Matrícula"}
               control={control}
               errors={errors}
             />
-            <MuiTextInputFormMasked
+            <TextForm
               register={register}
-              mask="99/99/9999"
+              maskType="date"
               name={"dataMatricula"}
               label={"Data de Matrícula"}
               control={control}
               errors={errors}
             />
             <MuiSwitchForm label="Aluno Ativo" name="ativo" />
-            <MuiTextInputForm
+            <TextForm
               register={register}
               name={"observacoes"}
               label={"Observações"}

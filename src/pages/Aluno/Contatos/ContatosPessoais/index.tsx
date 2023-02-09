@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import MuiTextInputFormMasked from "components/MuiTextInputFormMasked";
+import TextForm from "components/TextForm";
 
 import { Grid } from "./styles";
 
@@ -81,17 +81,17 @@ const ContatosPessoais: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid>
         <div>
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_pai_cel"
             label="Celular Pai"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 9999-9999"
+            maskType="tel"
             name="contatos_pai_tel"
             label="Telefone Pai"
             control={control}
@@ -99,17 +99,17 @@ const ContatosPessoais: React.FC = () => {
           />
         </div>
         <div>
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_mae_cel"
             label="Celular Mãe"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 9999-9999"
+            maskType="tel"
             name="contatos_mae_tel"
             label="Telefone Mãe"
             control={control}
@@ -117,17 +117,17 @@ const ContatosPessoais: React.FC = () => {
           />
         </div>
         <div>
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 99999-9999"
+            maskType="tel"
             name="contatos_resp_cel"
             label="Celular Responsável"
             control={control}
             errors={errors}
           />
-          <MuiTextInputFormMasked
+          <TextForm
             register={register}
-            mask="(99) 9999-9999"
+            maskType="tel"
             name="contatos_resp_tel"
             label="Telefone Responsável"
             control={control}

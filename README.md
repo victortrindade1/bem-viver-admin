@@ -2,6 +2,9 @@
 
 ## Próximo passo
 
+Tá dando ruim no setFocus pro mask. to cogitando não usar react-input-mask e fazer
+as máscaras na unha. Não dá tanto trabalho... vamos ver.
+
 Novo aluno:
 Criei uma nova rota só pra retornar o novo id.
 
