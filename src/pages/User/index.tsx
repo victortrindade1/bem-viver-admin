@@ -151,7 +151,7 @@ const User: React.FC = () => {
             <Button
               label="Alterar senha"
               width="167px"
-              handleClick={handleOpenModal}
+              onClick={handleOpenModal}
               margin="40px 0px"
             />
             <MuiModal

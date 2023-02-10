@@ -10,7 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import MyRoutes from "./routes";
 
-// import { AuthProvider } from "./contexts/auth_OBSOLETO";
 import { store } from "./store";
 
 import theme from "styles/theme";
@@ -25,14 +24,12 @@ function App() {
         <ThemeProvider theme={theme}>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-              {/* <AuthProvider> */}
               <AnimatePresence>
                 <>
                   <MyRoutes />
                   <StyledToast autoClose={1500} />
                 </>
               </AnimatePresence>
-              {/* </AuthProvider> */}
             </PersistGate>
           </Provider>
           <GlobalStyle />

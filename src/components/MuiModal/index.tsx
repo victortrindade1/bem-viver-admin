@@ -41,7 +41,7 @@ const MuiModal: React.FC<IMuiModal> = ({
         </Header>
         <Body>{children}</Body>
         <ButtonContainer>
-          <Button label="ENVIAR" type="submit" handleClick={onSubmit} />
+          <Button label="ENVIAR" type="submit" onClick={onSubmit} />
         </ButtonContainer>
       </Container>
     </Modal>

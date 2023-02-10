@@ -70,14 +70,16 @@ const TextForm: React.FC<ITextForm> = ({
 
   // Trigger Enter or Tab
   useEffect(() => {
-    const keyDownHandler = async (event: any) => {
+    const keyDownHandler = (event: any) => {
       if (inputName !== event.target) return;
 
-      if (event.key === "Enter" || event.key === "Tab") {
+      // if (event.key === "Enter" || event.key === "Tab") {
+      if (event.key === "Enter") {
         if (event.target) {
+          event.preventDefault();
           onEnter && onEnter(event);
         } else {
-          onEnter();
+          onEnter && onEnter();
         }
       }
     };

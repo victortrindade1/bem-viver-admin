@@ -9,7 +9,7 @@ const Button: React.FC<IButton> = ({
   type,
   width = "100%",
   margin = "16px 0px 8px 0px",
-  handleClick,
+  onClick,
   ...rest
 }) => {
   return (
@@ -18,7 +18,8 @@ const Button: React.FC<IButton> = ({
       type={type}
       width={width}
       margin={margin}
-      onClick={handleClick}
+      onClick={onClick}
+      // ref={buttonRef}
       {...rest}
     >
       {label}

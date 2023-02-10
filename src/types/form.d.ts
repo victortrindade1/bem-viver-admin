@@ -32,6 +32,7 @@ interface ITextForm {
   errors?: any;
   disabled?: boolean;
   maskType?: "date" | "cpf" | "cnpj" | "tel" | "cep";
+  onBlur?: any;
 }
 
 // interface ISelectForm {

@@ -15,6 +15,7 @@ import LoadingPage from "pages/LoadingPage";
 import AnimationLayout from "components/AnimationLayout";
 import { useAppSelector } from "hooks";
 import { RootState } from "store";
+import api from "services/api";
 
 const Dashboard = lazy(() => import("pages/Dashboard"));
 const Alunos = lazy(() => import("pages/Alunos"));
@@ -34,7 +35,7 @@ const AlunoNew = lazy(() => import("pages/AlunoNew"));
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
-
+  const token = useAppSelector((state: RootState) => state.auth.user?.token);
   const status = useAppSelector((state: RootState) => state.auth.status);
 
   if (status === "loading") {
@@ -43,6 +44,12 @@ export default function MyRoutes() {
 
   const PrivateWrapper = () => {
     const location = useLocation();
+
+    // Aplica token
+    if (token && signed) {
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+    }
+
     return signed ? (
       <Outlet />
     ) : (

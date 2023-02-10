@@ -23,5 +23,6 @@ interface IButton {
   type?: "button" | "reset" | "submit";
   width?: string;
   margin?: string;
-  handleClick?: () => void;
+  // onClick?: (e?: any) => void;
+  onClick?: any;
 }

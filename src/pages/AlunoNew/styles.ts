@@ -11,3 +11,29 @@ export const Container = styled.div`
     max-width: 400px;
   } ;
 `;
+
+export const IdadeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  > div:nth-child(2) {
+    margin-left: 30px;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const PreMatriculaContainer = styled.div``;
+
+export const PreLinkButton = styled.div`
+  margin-top: 10px;
+  color: ${(props) => props.theme.palette.primary.main};
+  text-decoration: underline;
+  width: fit-content;
+  :hover {
+    cursor: pointer;
+  }
+`;

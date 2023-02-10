@@ -2,26 +2,9 @@
 
 ## Próximo passo
 
-Tá dando ruim no setFocus pro mask. to cogitando não usar react-input-mask e fazer
-as máscaras na unha. Não dá tanto trabalho... vamos ver.
-
 Novo aluno:
-Criei uma nova rota só pra retornar o novo id.
 
-Dá pra fazer uma consulta index, acha pages. Faz outra consulta com page=pages se pages !== 1.
-Retorna o id + 1 do primeiro elemento da lista (se for decrescente, como hj é).
-Dá pra colocar essa consulta num useEffect, pra qnd abrir a página já fazer.
-Não vai ter trigger de input. Vou triggar pelo botão só, pq são vários itens juntos
-nesse primeiro submit. E tb dá pra gerar de boa a matrícula e popular no input sem
-ficar triggando sem querer.
-Inclusive dá pra colocar um loading no input da matrícula.
-
-Eu tenho que criar trigger pra action store do aluno. Assim terei um state.
-Eu criei o showAluno, mas só vou precisar qnd criar a lista de alunos na tela alunos.
-
-Tenho q ver esse store do aluno q ta usando id do state. pode ser q tenha q tirar esse id do state pra store
-
-Depois q eu terminar Dados Pessoais, vou tentar criar uma função genérica pra onSubmit
+Conectar AlunoNew com o redux \o/
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
