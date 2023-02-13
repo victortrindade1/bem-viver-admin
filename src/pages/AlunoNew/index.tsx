@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useAppDispatch } from "hooks";
+import { storeAluno } from "store/slices/aluno";
+
 import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import TextForm from "components/TextForm";
@@ -21,6 +24,8 @@ import {
 } from "./styles";
 
 const AlunoNew: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [preIsVisible, setPreIsVisible] = useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -88,13 +93,20 @@ const AlunoNew: React.FC = () => {
     }
   };
 
-  const onSubmit = (data: any, e: any) => console.log(data, e);
+  const onSubmit = (alunoDados: AlunoDados, e: any) => {
+    console.log("onSubmit", alunoDados, e);
+
+    const response = dispatch(storeAluno(alunoDados));
+
+    console.log("response", response);
+  };
+
   const onError = (errors: any, e: any) => console.log(errors, e);
 
   const newMatricula = useCallback(async () => {
-    const newId = await api.post("/alunos/novo/matricula");
-    const year = format(new Date(), "yyyy");
-    setValue("matricula", `${year}${newId.data}`);
+    const newMatricula = await api.post("/alunos/novo/matricula");
+
+    setValue("matricula", newMatricula.data);
   }, [setValue]);
 
   useEffect(() => {
@@ -102,6 +114,19 @@ const AlunoNew: React.FC = () => {
   }, [newMatricula]);
 
   const handleOnClickPreMatricula = () => {
+    if (!preIsVisible) {
+      setValue(
+        "dados_escolares_data_pre_matricula",
+        format(new Date(), "dd/MM/yyyy")
+      );
+      setValue("dados_escolares_data_matricula", "");
+    } else {
+      setValue("dados_escolares_data_pre_matricula", "");
+      setValue(
+        "dados_escolares_data_matricula",
+        format(new Date(), "dd/MM/yyyy")
+      );
+    }
     setPreIsVisible(!preIsVisible);
   };
 
@@ -111,6 +136,7 @@ const AlunoNew: React.FC = () => {
       <LightSideLayout titleLabel="Novo Aluno">
         <Container>
           <form onSubmit={handleSubmit(onSubmit, onError)}>
+            {/* <form onSubmit={handleSubmit(onSubmit)}> */}
             <TextForm
               register={register}
               name={"nome"}

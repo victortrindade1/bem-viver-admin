@@ -13,7 +13,8 @@ import { Grid } from "./styles";
 
 const DadosPessoais: React.FC = () => {
   const dispatch = useAppDispatch();
-  const aluno = useAppSelector(selectAluno);
+  const alunoState = useAppSelector(selectAluno);
+  const aluno = alunoState.alunoDados;
 
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
@@ -117,9 +118,11 @@ const DadosPessoais: React.FC = () => {
         return;
       }
 
-      const dataSubmit = {
-        ...aluno,
-        [e.target.name]: e.target.value,
+      const dataSubmit: AlunoState = {
+        alunoDados: {
+          ...aluno,
+          [e.target.name]: e.target.value,
+        },
       };
 
       dispatch(updateAluno(dataSubmit));

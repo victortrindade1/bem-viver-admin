@@ -4,7 +4,7 @@
 
 Novo aluno:
 
-Conectar AlunoNew com o redux \o/
+Tenho que revisar o yup do backend no update aluno. De repente fazer igual o yup do frontend.
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
@@ -18,7 +18,7 @@ Inverter menu pra direita no mobile
 
 Fazer menu mobile
 
-Colocar foto da criança no perfil
+Colocar foto da criança no perfil e de avatar pro user
 
 ## Login
 
@@ -38,7 +38,6 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 - Webpack rewired by Craco and react-app-alias
   - To use styled components with Material UI
   - Absolute imports
-- Reactotron (maybe not)
 - Axios (requests)
 - React-Hook-Form
   - Auxiliates forms
@@ -46,7 +45,4 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 - Polished (makes color darker or ligther)
 - ContextAPI (Global states)
 - Redux Toolkit (Global states)
-
-### OBS
-
-O Redux tem um lance de fazer sort nas listas. Pra usar, veja createEntityAdapter
+- date-fns

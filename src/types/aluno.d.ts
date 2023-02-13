@@ -1,5 +1,9 @@
 interface AlunoState {
-  statusAsync: "idle" | "loading" | "failed";
+  statusAsync?: "idle" | "loading" | "failed";
+  alunoDados: AlunoDados;
+}
+
+interface AlunoDados {
   id: number;
   ativo: boolean;
   matricula: string;
