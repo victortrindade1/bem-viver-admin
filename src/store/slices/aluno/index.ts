@@ -100,14 +100,17 @@ export const storeAluno = createAsyncThunk(
 
 export const updateAluno = createAsyncThunk(
   "aluno/update",
-  async ({ alunoDados }: AlunoState) => {
+  async (alunoDados: AlunoDados) => {
+    console.log("updateAluno dados:", alunoDados);
     try {
-      const response = await api.put(`/alunos/${alunoDados?.id}`, alunoDados);
+      const response = await api.put(`/alunos/${alunoDados.id}`, alunoDados);
 
       toast.success("Dados salvos com sucesso!");
 
       return response;
     } catch (error) {
+      console.log(error);
+
       toast.error("Erro ao salvar dados.");
 
       throw new Error("Erro ao salvar dados.");
@@ -152,6 +155,8 @@ const alunoSlice = createSlice({
       })
       .addCase(updateAluno.fulfilled, (state, action: any) => {
         state.statusAsync = "idle";
+        state.alunoDados = action.payload.data;
+
         console.log(action);
       })
       .addCase(updateAluno.rejected, (state, action: any) => {

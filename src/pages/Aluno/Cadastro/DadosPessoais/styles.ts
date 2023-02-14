@@ -15,3 +15,11 @@ export const Grid = styled.div`
     grid-template-columns: 0.4fr 0.4fr;
   }
 `;
+
+export const IdadeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  > div:nth-child(2) {
+    margin-left: 30px;
+  }
+`;

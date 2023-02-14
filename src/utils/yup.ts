@@ -2,6 +2,8 @@ import * as Yup from "yup";
 
 export const dateFormat = /^\d{2}\/\d{2}\/\d{4}$/;
 
+export const cepFormat = /^\d{5}-\d{3}$/;
+
 export const nullableIntegerBetween0and100 = Yup.number()
   .integer("Somente números inteiros são aceitos.")
   .typeError("Somente números inteiros são aceitos.")

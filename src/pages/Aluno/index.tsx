@@ -11,40 +11,44 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
 import { IChildren } from "types/layout";
-
-const links = [
-  {
-    label: "Cadastro",
-    Icon: FaAddressCard,
-    url: "/aluno/1/cadastro",
-  },
-  {
-    label: "Contatos",
-    Icon: FaAddressBook,
-    url: "/aluno/1/contatos",
-  },
-  {
-    label: "Dados Escolares",
-    Icon: FaGraduationCap,
-    url: "/aluno/1/dadosescolares",
-  },
-  {
-    label: "Anamnese",
-    Icon: FaHeartbeat,
-    url: "/aluno/1/anamnese",
-  },
-  {
-    label: "Cobranças",
-    Icon: FaMoneyCheckAlt,
-    url: "/alunos",
-  },
-];
+import { useAppSelector } from "hooks";
+import { selectAluno } from "store/slices/aluno";
 
 const Aluno: React.FC<IChildren> = ({ children }) => {
+  const aluno = useAppSelector(selectAluno);
+
+  const links = [
+    {
+      label: "Cadastro",
+      Icon: FaAddressCard,
+      url: `/aluno/${aluno.alunoDados.id}/cadastro`,
+    },
+    {
+      label: "Contatos",
+      Icon: FaAddressBook,
+      url: `/aluno/${aluno.alunoDados.id}/contatos`,
+    },
+    {
+      label: "Dados Escolares",
+      Icon: FaGraduationCap,
+      url: `/aluno/${aluno.alunoDados.id}/dadosescolares`,
+    },
+    {
+      label: "Anamnese",
+      Icon: FaHeartbeat,
+      url: `/aluno/${aluno.alunoDados.id}/anamnese`,
+    },
+    {
+      label: "Cobranças",
+      Icon: FaMoneyCheckAlt,
+      url: "/alunos",
+    },
+  ];
+
   return (
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
-      <LightSideLayout titleLabel="Fulano Azeredo Trindade Torres">
+      <LightSideLayout titleLabel={aluno.alunoDados.nome}>
         {children}
       </LightSideLayout>
     </>

@@ -3,38 +3,49 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
+import { useAppDispatch, useAppSelector } from "hooks";
+import { selectAluno, updateAluno } from "store/slices/aluno";
+
 import TextForm from "components/TextForm";
+
+import { cepFormat } from "utils/yup";
 
 import { Container } from "./styles";
 
 const Endereco: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const alunoState = useAppSelector(selectAluno);
+  const aluno = alunoState.alunoDados;
+
   const validationSchema = Yup.object().shape({
     contatos_end_logradouro: Yup.string(),
     contatos_end_num: Yup.string(),
     contatos_end_complemento: Yup.string(),
     contatos_end_bairro: Yup.string(),
     contatos_end_cep: Yup.string()
-      .min(9, "CEP incorreto.")
-      .max(9, "CEP incorreto."),
+      .nullable()
+      .transform((curr, orig) => (orig === "" ? null : curr))
+      .matches(cepFormat, "Cep incorreto"),
     contatos_end_cidade: Yup.string(),
   });
 
   const defaultValues: any = useMemo(
     () => ({
-      contatos_end_logradouro: "",
-      contatos_end_num: "",
-      contatos_end_complemento: "",
-      contatos_end_bairro: "",
-      contatos_end_cep: "",
-      contatos_end_cidade: "",
+      contatos_end_logradouro: aluno?.contatos_end_logradouro,
+      contatos_end_num: aluno?.contatos_end_num,
+      contatos_end_complemento: aluno?.contatos_end_complemento,
+      contatos_end_bairro: aluno?.contatos_end_bairro,
+      contatos_end_cep: aluno?.contatos_end_cep,
+      contatos_end_cidade: aluno?.contatos_end_cidade,
     }),
-    []
+    [aluno]
   );
 
   const {
     control,
     handleSubmit,
     register,
+    setFocus,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -44,20 +55,21 @@ const Endereco: React.FC = () => {
   });
 
   const onSubmit = useCallback(
-    async (event: any) => {
-      try {
-        event.preventDefault();
+    async (e: any) => {
+      e.preventDefault();
 
-        if (defaultValues[event.target.name] === event.target.value) {
-          return;
-        }
-
-        console.log(event);
-      } catch (error) {
-        console.log(error);
+      if (defaultValues[e.target.name] === e.target.value) {
+        return;
       }
+
+      const dataSubmit: any = {
+        id: aluno.id,
+        [e.target.name]: e.target.value,
+      };
+
+      await dispatch(updateAluno(dataSubmit));
     },
-    [defaultValues]
+    [dispatch, defaultValues, aluno]
   );
 
   return (
@@ -71,6 +83,10 @@ const Endereco: React.FC = () => {
             width="100%"
             control={control}
             errors={errors}
+            onEnter={() => {
+              setFocus("contatos_end_num");
+            }}
+            onBlur={onSubmit}
           />
           <TextForm
             register={register}
@@ -78,6 +94,10 @@ const Endereco: React.FC = () => {
             label="Número"
             control={control}
             errors={errors}
+            onEnter={() => {
+              setFocus("contatos_end_complemento");
+            }}
+            onBlur={onSubmit}
           />
           <TextForm
             register={register}
@@ -86,6 +106,10 @@ const Endereco: React.FC = () => {
             control={control}
             errors={errors}
             width="100%"
+            onEnter={() => {
+              setFocus("contatos_end_bairro");
+            }}
+            onBlur={onSubmit}
           />
         </div>
         <div>
@@ -95,6 +119,10 @@ const Endereco: React.FC = () => {
             label="Bairro"
             control={control}
             errors={errors}
+            onEnter={() => {
+              setFocus("contatos_end_cep");
+            }}
+            onBlur={onSubmit}
           />
           <TextForm
             maskType="cep"
@@ -103,6 +131,10 @@ const Endereco: React.FC = () => {
             label="CEP"
             control={control}
             errors={errors}
+            onEnter={() => {
+              setFocus("contatos_end_cidade");
+            }}
+            onBlur={onSubmit}
           />
           <TextForm
             register={register}
@@ -110,6 +142,7 @@ const Endereco: React.FC = () => {
             label="Cidade"
             control={control}
             errors={errors}
+            onBlur={onSubmit}
           />
         </div>
       </Container>

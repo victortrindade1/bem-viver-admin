@@ -2,9 +2,9 @@
 
 ## Próximo passo
 
-Novo aluno:
+Endereço aluno:
 
-Tenho que revisar o yup do backend no update aluno. De repente fazer igual o yup do frontend.
+Preenchimento do endereço automático colocando o cep.
 
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
@@ -27,6 +27,10 @@ O usuário receberá o convite por e-mail. Será o link de ediçao de cadastro, 
 Nessa tela tem nome, tem edição do e-mail, nova senha e confirmação da nova senha.
 
 Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criarei o usuário admin inicial. O próximo já tem que ser criação do próprio usuário.
+
+## Talvez pro futuro
+
+Lista crescente (até 5) pros contatos e autorizados a buscar, em vez d 3 fixos.
 
 ## Configuração do projeto
 

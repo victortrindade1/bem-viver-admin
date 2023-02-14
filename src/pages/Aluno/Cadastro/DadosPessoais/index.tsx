@@ -1,5 +1,6 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { differenceInYears, parse } from "date-fns";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
@@ -9,7 +10,7 @@ import { selectAluno, updateAluno } from "store/slices/aluno";
 import AccordionTextInput from "components/AccordionTextInput";
 import TextForm from "components/TextForm";
 
-import { Grid } from "./styles";
+import { Grid, IdadeContainer } from "./styles";
 
 const DadosPessoais: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -102,6 +103,9 @@ const DadosPessoais: React.FC = () => {
     formState: { errors },
     register,
     setFocus,
+    setValue,
+    setError,
+    watch,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -109,8 +113,28 @@ const DadosPessoais: React.FC = () => {
     reValidateMode: "onChange",
   });
 
+  const handleIdade = useCallback(() => {
+    const bornDate = watch("dados_pessoais_data_nascimento");
+    const parsedBornDate = parse(bornDate, "dd/MM/yyyy", new Date());
+    let age = differenceInYears(new Date(), parsedBornDate);
+    if (isNaN(age)) {
+      age = -1;
+    }
+    setValue("idade", age);
+    if (age < 0 || age > 110) {
+      // Até 110 anos dá pra estudar!
+      setError("dados_pessoais_data_nascimento", {
+        message: "Idade incorreta.",
+      });
+    }
+  }, [setError, setValue, watch]);
+
+  useEffect(() => {
+    handleIdade();
+  }, [handleIdade]);
+
   const onSubmit = useCallback(
-    (e: any) => {
+    async (e: any) => {
       e.preventDefault();
 
       // Não atualiza se não mudar valor
@@ -118,16 +142,14 @@ const DadosPessoais: React.FC = () => {
         return;
       }
 
-      const dataSubmit: AlunoState = {
-        alunoDados: {
-          ...aluno,
-          [e.target.name]: e.target.value,
-        },
+      const dataSubmit: any = {
+        id: aluno.id,
+        [e.target.name]: e.target.value,
       };
 
-      dispatch(updateAluno(dataSubmit));
+      await dispatch(updateAluno(dataSubmit));
     },
-    [dispatch, aluno, defaultValues]
+    [dispatch, defaultValues, aluno]
   );
 
   return (
@@ -138,10 +160,10 @@ const DadosPessoais: React.FC = () => {
           register={register}
           name="nome"
           label="Nome"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("dados_pessoais_rg");
-            onSubmit(e);
           }}
+          onBlur={onSubmit}
           width="100%"
           control={control}
           errors={errors}
@@ -150,10 +172,11 @@ const DadosPessoais: React.FC = () => {
           register={register}
           name="dados_pessoais_rg"
           label="RG"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("dados_pessoais_cpf");
-            onSubmit(e);
+            // onSubmit(e);
           }}
+          onBlur={onSubmit}
           control={control}
           errors={errors}
         />
@@ -162,34 +185,50 @@ const DadosPessoais: React.FC = () => {
           maskType="cpf"
           name="dados_pessoais_cpf"
           label="CPF"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("dados_pessoais_data_nascimento");
-            onSubmit(e);
           }}
+          onBlur={onSubmit}
           control={control}
           errors={errors}
         />
-        <TextForm
-          register={register}
-          maskType="date"
-          placeholder={"dd/mm/aaaa"}
-          name="dados_pessoais_data_nascimento"
-          label="Nascimento"
-          onEnter={(e: any) => {
-            setFocus("dados_pessoais_num_certidao");
-            onSubmit(e);
-          }}
-          control={control}
-          errors={errors}
-        />
+        <IdadeContainer>
+          <TextForm
+            register={register}
+            maskType="date"
+            placeholder={"dd/mm/aaaa"}
+            name="dados_pessoais_data_nascimento"
+            label="Nascimento"
+            onEnter={() => {
+              setFocus("dados_pessoais_num_certidao");
+            }}
+            onBlur={(e: any) => {
+              handleIdade();
+              onSubmit(e);
+            }}
+            control={control}
+            errors={errors}
+          />
+          <TextForm
+            register={register}
+            name={"idade"}
+            label={"Idade"}
+            control={control}
+            errors={errors}
+            width={"50px"}
+            minWidth={"50px"}
+            disabled
+          />
+        </IdadeContainer>
+
         <TextForm
           register={register}
           name="dados_pessoais_num_certidao"
           label="N° Certidão de Nascimento"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("dados_pessoais_folha_certidao");
-            onSubmit(e);
           }}
+          onBlur={onSubmit}
           width="100%"
           control={control}
           errors={errors}
@@ -199,10 +238,10 @@ const DadosPessoais: React.FC = () => {
           register={register}
           name="dados_pessoais_folha_certidao"
           label="Folha Certidão Nascimento"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("dados_pessoais_livro_certidao");
-            onSubmit(e);
           }}
+          onBlur={onSubmit}
           control={control}
           errors={errors}
         />
@@ -210,10 +249,10 @@ const DadosPessoais: React.FC = () => {
           register={register}
           name="dados_pessoais_livro_certidao"
           label="Livro Certidão Nascimento"
-          onEnter={(e: any) => {
+          onEnter={() => {
             setFocus("contatos_pai_nome");
-            onSubmit(e);
           }}
+          onBlur={onSubmit}
           control={control}
           errors={errors}
         />
@@ -225,10 +264,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_pai_nome"
               label="Filiação (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_pai_rg");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               width="100%"
@@ -239,10 +278,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_pai_rg"
               label="RG (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_pai_cpf");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -251,10 +290,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cpf"
               name="contatos_pai_cpf"
               label="CPF (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_pai_cnpj");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -263,10 +302,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cnpj"
               name="contatos_pai_cnpj"
               label="CNPJ (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_pai_data_nascimento");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -276,10 +315,10 @@ const DadosPessoais: React.FC = () => {
               placeholder={"dd/mm/aaaa"}
               name="contatos_pai_data_nascimento"
               label="Nascimento (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_pai_email");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -287,10 +326,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_pai_email"
               label="E-mail (Pai)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_nome");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               type={"email"}
@@ -304,10 +343,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_mae_nome"
               label="Filiação (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_rg");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               width="100%"
@@ -318,10 +357,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_mae_rg"
               label="RG (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_cpf");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -331,10 +370,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cpf"
               name="contatos_mae_cpf"
               label="CPF (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_cnpj");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -343,10 +382,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cnpj"
               name="contatos_mae_cnpj"
               label="CNPJ (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_data_nascimento");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -356,10 +395,10 @@ const DadosPessoais: React.FC = () => {
               placeholder={"dd/mm/aaaa"}
               name="contatos_mae_data_nascimento"
               label="Nascimento (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_mae_email");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -367,10 +406,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_mae_email"
               label="E-mail (Mãe)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_nome");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               type={"email"}
@@ -384,10 +423,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_resp_nome"
               label="Filiação (Responsável)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_rg");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               width="100%"
@@ -398,10 +437,10 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_resp_rg"
               label="RG (Responsável)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_cpf");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -411,10 +450,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cpf"
               name="contatos_resp_cpf"
               label="CPF (Responsável)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_cnpj");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -423,10 +462,10 @@ const DadosPessoais: React.FC = () => {
               maskType="cnpj"
               name="contatos_resp_cnpj"
               label="CNPJ (Responsável)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_data_nascimento");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -436,10 +475,10 @@ const DadosPessoais: React.FC = () => {
               placeholder={"dd/mm/aaaa"}
               name="contatos_resp_data_nascimento"
               label="Nascimento (Responsável)"
-              onEnter={(e: any) => {
+              onEnter={() => {
                 setFocus("contatos_resp_email");
-                onSubmit(e);
               }}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
             />
@@ -447,7 +486,7 @@ const DadosPessoais: React.FC = () => {
               register={register}
               name="contatos_resp_email"
               label="E-mail (Responsável)"
-              onEnter={(e: any) => onSubmit(e)}
+              onBlur={onSubmit}
               control={control}
               errors={errors}
               type={"email"}

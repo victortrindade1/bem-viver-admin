@@ -22,9 +22,12 @@ import {
   PreMatriculaContainer,
   PreLinkButton,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const AlunoNew: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const [preIsVisible, setPreIsVisible] = useState(false);
 
@@ -93,12 +96,10 @@ const AlunoNew: React.FC = () => {
     }
   };
 
-  const onSubmit = (alunoDados: AlunoDados, e: any) => {
-    console.log("onSubmit", alunoDados, e);
+  const onSubmit = async (alunoDados: AlunoDados, e: any) => {
+    const response: any = await dispatch(storeAluno(alunoDados));
 
-    const response = dispatch(storeAluno(alunoDados));
-
-    console.log("response", response);
+    navigate(`/aluno/${response.payload.data.id}/cadastro`);
   };
 
   const onError = (errors: any, e: any) => console.log(errors, e);
