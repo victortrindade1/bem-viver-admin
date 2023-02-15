@@ -4,8 +4,6 @@
 
 Endereço aluno:
 
-Preenchimento do endereço automático colocando o cep.
-
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
 Tirar nome do usuário do header qnd for mobile.

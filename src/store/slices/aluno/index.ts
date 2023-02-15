@@ -101,7 +101,6 @@ export const storeAluno = createAsyncThunk(
 export const updateAluno = createAsyncThunk(
   "aluno/update",
   async (alunoDados: AlunoDados) => {
-    console.log("updateAluno dados:", alunoDados);
     try {
       const response = await api.put(`/alunos/${alunoDados.id}`, alunoDados);
 
@@ -138,6 +137,7 @@ const alunoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // storeAluno
       .addCase(storeAluno.pending, (state) => {
         state.statusAsync = "loading";
       })
@@ -149,15 +149,13 @@ const alunoSlice = createSlice({
         state.statusAsync = "failed";
         console.log("Action - reject store aluno", action);
       })
-
+      // updateAluno
       .addCase(updateAluno.pending, (state) => {
         state.statusAsync = "loading";
       })
       .addCase(updateAluno.fulfilled, (state, action: any) => {
         state.statusAsync = "idle";
         state.alunoDados = action.payload.data;
-
-        console.log(action);
       })
       .addCase(updateAluno.rejected, (state, action: any) => {
         state.statusAsync = "failed";

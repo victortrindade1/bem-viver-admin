@@ -11,6 +11,7 @@ import TextForm from "components/TextForm";
 import { cepFormat } from "utils/yup";
 
 import { Container } from "./styles";
+import axios from "axios";
 
 const Endereco: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -31,21 +32,21 @@ const Endereco: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      contatos_end_logradouro: aluno?.contatos_end_logradouro,
-      contatos_end_num: aluno?.contatos_end_num,
-      contatos_end_complemento: aluno?.contatos_end_complemento,
-      contatos_end_bairro: aluno?.contatos_end_bairro,
-      contatos_end_cep: aluno?.contatos_end_cep,
-      contatos_end_cidade: aluno?.contatos_end_cidade,
+      contatos_end_logradouro: aluno.contatos_end_logradouro || "",
+      contatos_end_num: aluno.contatos_end_num || "",
+      contatos_end_complemento: aluno.contatos_end_complemento || "",
+      contatos_end_bairro: aluno.contatos_end_bairro || "",
+      contatos_end_cep: aluno.contatos_end_cep || "",
+      contatos_end_cidade: aluno.contatos_end_cidade || "",
     }),
     [aluno]
   );
 
   const {
     control,
-    handleSubmit,
     register,
     setFocus,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -69,84 +70,121 @@ const Endereco: React.FC = () => {
 
       await dispatch(updateAluno(dataSubmit));
     },
-    [dispatch, defaultValues, aluno]
+    [dispatch, aluno, defaultValues]
   );
 
+  const handleCep = async (e: any) => {
+    e.preventDefault();
+
+    let cep = e.target.value;
+    cep = cep.replace("-", "");
+
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+      if (!response.data.erro) {
+        setFocus("contatos_end_logradouro");
+        setValue("contatos_end_logradouro", response.data.logradouro);
+
+        setFocus("contatos_end_bairro");
+        setValue("contatos_end_bairro", response.data.bairro);
+
+        setFocus("contatos_end_cidade");
+        setValue(
+          "contatos_end_cidade",
+          `${response.data.localidade} - ${response.data.uf}`
+        );
+
+        setFocus("contatos_end_num");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Container>
-        <div>
-          <TextForm
-            register={register}
-            name="contatos_end_logradouro"
-            label="Logradouro"
-            width="100%"
-            control={control}
-            errors={errors}
-            onEnter={() => {
-              setFocus("contatos_end_num");
-            }}
-            onBlur={onSubmit}
-          />
-          <TextForm
-            register={register}
-            name="contatos_end_num"
-            label="Número"
-            control={control}
-            errors={errors}
-            onEnter={() => {
-              setFocus("contatos_end_complemento");
-            }}
-            onBlur={onSubmit}
-          />
-          <TextForm
-            register={register}
-            name="contatos_end_complemento"
-            label="Complemento"
-            control={control}
-            errors={errors}
-            width="100%"
-            onEnter={() => {
-              setFocus("contatos_end_bairro");
-            }}
-            onBlur={onSubmit}
-          />
-        </div>
-        <div>
-          <TextForm
-            register={register}
-            name="contatos_end_bairro"
-            label="Bairro"
-            control={control}
-            errors={errors}
-            onEnter={() => {
-              setFocus("contatos_end_cep");
-            }}
-            onBlur={onSubmit}
-          />
-          <TextForm
-            maskType="cep"
-            register={register}
-            name="contatos_end_cep"
-            label="CEP"
-            control={control}
-            errors={errors}
-            onEnter={() => {
-              setFocus("contatos_end_cidade");
-            }}
-            onBlur={onSubmit}
-          />
-          <TextForm
-            register={register}
-            name="contatos_end_cidade"
-            label="Cidade"
-            control={control}
-            errors={errors}
-            onBlur={onSubmit}
-          />
-        </div>
-      </Container>
-    </form>
+    <Container>
+      <div>
+        <TextForm
+          maskType="cep"
+          register={register}
+          name="contatos_end_cep"
+          label="CEP"
+          control={control}
+          errors={errors}
+          onEnter={() => {
+            setFocus("contatos_end_logradouro");
+          }}
+          onBlur={(e: any) => {
+            handleCep(e);
+            onSubmit(e);
+          }}
+          width={"90px"}
+        />
+        <TextForm
+          register={register}
+          name="contatos_end_logradouro"
+          label="Logradouro"
+          width="100%"
+          control={control}
+          errors={errors}
+          onEnter={() => {
+            setFocus("contatos_end_num");
+          }}
+          onBlur={onSubmit}
+        />
+        <TextForm
+          register={register}
+          name="contatos_end_num"
+          label="Número"
+          control={control}
+          errors={errors}
+          onEnter={() => {
+            setFocus("contatos_end_complemento");
+          }}
+          onBlur={onSubmit}
+          width={"90px"}
+        />
+      </div>
+      <div>
+        <TextForm
+          register={register}
+          name="contatos_end_complemento"
+          label="Complemento"
+          control={control}
+          errors={errors}
+          width="100%"
+          onEnter={() => {
+            setFocus("contatos_end_bairro");
+          }}
+          onBlur={onSubmit}
+        />
+        <TextForm
+          register={register}
+          name="contatos_end_bairro"
+          label="Bairro"
+          control={control}
+          errors={errors}
+          onEnter={() => {
+            setFocus("contatos_end_cidade");
+          }}
+          onBlur={onSubmit}
+        />
+        <TextForm
+          register={register}
+          name="contatos_end_cidade"
+          label="Cidade"
+          placeholder="Cidade - UF"
+          control={control}
+          errors={errors}
+          onBlur={onSubmit}
+          onEnter={() => {
+            setFocus("contatos_end_cep");
+          }}
+          width="100%"
+        />
+      </div>
+    </Container>
   );
 };
 
