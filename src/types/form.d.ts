@@ -1,20 +1,10 @@
-interface IMuiSelectForm {
-  // initialValue: string;
-  name: string;
-  label: string;
+interface IMuiSelectForm extends ITextForm {
   options: any;
-  onBlur?(event: any): Promise<void>;
-  // onSubmit?: any;
-  width?: string;
-  minWidth?: string;
-  control: any;
-  isRequired?: boolean;
-  errors?: any;
 }
 
 interface ISelectItem {
-  id: string;
-  value: string;
+  id: number;
+  label: string;
 }
 
 interface ITextForm {

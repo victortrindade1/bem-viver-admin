@@ -68,7 +68,7 @@ const TextForm: React.FC<ITextForm> = ({
     [maskType]
   );
 
-  // Trigger Enter or Tab
+  // Trigger Enter
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (inputName !== event.target) return;

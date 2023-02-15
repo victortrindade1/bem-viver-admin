@@ -2,8 +2,9 @@
 
 ## Próximo passo
 
-Endereço aluno:
+Dados Escolares:
 
+Melhorar layout responsivo.
 Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
 
 Tirar nome do usuário do header qnd for mobile.
@@ -28,7 +29,8 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 
 ## Talvez pro futuro
 
-Lista crescente (até 5) pros contatos e autorizados a buscar, em vez d 3 fixos.
+- Lista crescente (até 5) pros contatos e autorizados a buscar, em vez d 3 fixos.
+- Nos nomes autorizados a buscar, sugerir os dos pais ou responsável.
 
 ## Configuração do projeto
 
