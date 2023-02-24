@@ -13,10 +13,12 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "./slices/auth";
 import alunoReducer from "./slices/aluno";
+import dadosEscolaresReducer from "./slices/dadosEscolares";
 
 const reducers = combineReducers({
   auth: authReducer,
   aluno: alunoReducer,
+  dadosEscolares: dadosEscolaresReducer,
 });
 
 const persistConfig = {

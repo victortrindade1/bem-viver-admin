@@ -10,7 +10,7 @@ import { Controller } from "react-hook-form";
 
 import { Container } from "./styles";
 
-const MuiSelectForm: React.FC<IMuiSelectForm> = ({
+const SelectForm: React.FC<ISelectForm> = ({
   register,
   name,
   label,
@@ -66,7 +66,7 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
           control={control}
           defaultValue={""}
           render={({
-            field: { ref, onBlur, onChange },
+            field: { value, ref, onBlur, onChange },
             fieldState: { error },
             formState,
           }) => {
@@ -84,7 +84,7 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
                   label={label}
                   key={name}
                   fullWidth
-                  value={valueSelected}
+                  value={options.length ? valueSelected || value : ""}
                   required={isRequired}
                   type={type}
                   multiline={isMultiline}
@@ -93,17 +93,19 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
                   disabled={disabled || formState.isSubmitting}
                   {...rest}
                 >
-                  {options.map((item: any) => (
-                    <MenuItem
-                      key={item.id}
-                      value={item || ""}
-                      onClick={() => {
-                        setValueSelected(item);
-                      }}
-                    >
-                      {item.label}
-                    </MenuItem>
-                  ))}
+                  {options.map((item: string) => {
+                    return (
+                      <MenuItem
+                        key={item}
+                        value={item}
+                        onClick={() => {
+                          setValueSelected(item);
+                        }}
+                      >
+                        <>{item}</>
+                      </MenuItem>
+                    );
+                  })}
                 </Select>
               </>
             );
@@ -117,4 +119,4 @@ const MuiSelectForm: React.FC<IMuiSelectForm> = ({
   );
 };
 
-export default MuiSelectForm;
+export default SelectForm;

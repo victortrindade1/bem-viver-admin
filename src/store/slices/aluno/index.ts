@@ -73,10 +73,10 @@ const initialState: AlunoState = {
     periodo_id: 0,
     horaentrada_id: 0,
     horasaida_id: 0,
-    dados_escolares_turma: null,
-    dados_escolares_periodo: null,
-    dados_escolares_horaentrada: null,
-    dados_escolares_horasaida: null,
+    dados_turma: null,
+    dados_periodo: null,
+    dados_horaentrada: null,
+    dados_horasaida: null,
   },
 };
 
@@ -117,6 +117,7 @@ export const updateAluno = createAsyncThunk(
   }
 );
 
+/*
 export const showAluno = createAsyncThunk(
   "aluno/show",
   async (alunoId: number) => {
@@ -130,6 +131,7 @@ export const showAluno = createAsyncThunk(
     }
   }
 );
+*/
 
 const alunoSlice = createSlice({
   name: "aluno",

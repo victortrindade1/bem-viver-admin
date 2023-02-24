@@ -69,10 +69,26 @@ interface AlunoDados {
   periodo_id: number | null;
   horaentrada_id: number | null;
   horasaida_id: number | null;
-  dados_escolares_turma: TurmaState | null;
-  dados_escolares_periodo: PeriodoState | null;
-  dados_escolares_horaentrada: HoraEntradaState | null;
-  dados_escolares_horasaida: HoraSaidaState | null;
+  dados_turma: TurmaState | null;
+  dados_periodo: PeriodoState | null;
+  dados_horaentrada: HoraEntradaState | null;
+  dados_horasaida: HoraSaidaState | null;
+}
+
+interface SistemaState {
+  id: number;
+  sistema: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface AnoState {
+  id: number;
+  ano: string;
+  sistema_id: number | null;
+  dados_sistema: SistemaState | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface TurmaState {
@@ -82,7 +98,8 @@ interface TurmaState {
   updatedAt: string;
   ano_id: number | null;
   turno_id: number | null;
-  dados_escolares_turno: TurnoState | null;
+  dados_turno: TurnoState | null;
+  dados_ano: AnoState | null;
 }
 
 interface TurnoState {

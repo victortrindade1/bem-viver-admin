@@ -4,8 +4,11 @@
 
 Dados Escolares:
 
+To no submit do aluno ativo
+
 Melhorar layout responsivo.
-Melhorar o select e o switch. verificar como fica o yup nesses 2 comps.
+
+Qnd inicia novo aluno só com pré-matrícula, dá erro.
 
 Tirar nome do usuário do header qnd for mobile.
 
@@ -29,8 +32,27 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 
 ## Talvez pro futuro
 
+- Página inicial de cada aluno. Qnd seleciona o aluno, não ir pra página de cadastro, e sim pra página do aluno, onde tem informações gerais mais rápido. Lá teria:
+
+  - Nome com idade do aluno
+  - Foto
+  - Status de pagamento
+  - Matrícula, data da matrícula e data da pré-matrícula (tiraria de dados escolares)
+  - Nome dos pais e responsáveis com telefone pra contato
+
 - Lista crescente (até 5) pros contatos e autorizados a buscar, em vez d 3 fixos.
 - Nos nomes autorizados a buscar, sugerir os dos pais ou responsável.
+
+- Em Dados Escolares, em vez de primeiro escolher a turma, escolher o ano e turno,
+  e só então aparecer o select de turma já filtrado pras turmas daquele ano e turno.
+
+- Verificar se é simples ou não deixar o select como um input tb onde a gnt começa a digitar a turma e ele filtra nas opções.
+
+- Fazer um loading pra aparecer enquanto busca nos selects ou até msm em input (ex: nova matricula)... hj é rápido, mas pode nao ser.
+
+## Lá pro final
+
+Colocar valores seed no banco pra ano, período, data de entrada e saída, turno.
 
 ## Configuração do projeto
 

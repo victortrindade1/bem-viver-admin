@@ -14,6 +14,7 @@ import {
   LoginButton,
   FormContainerWrapper,
 } from "./styles";
+import { loadDados } from "store/slices/dadosEscolares";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ const Login: React.FC = () => {
       // await signIn(data);
       // console.log("data", data);
       dispatch(signIn(data));
+      dispatch(loadDados());
     },
     [dispatch]
   );

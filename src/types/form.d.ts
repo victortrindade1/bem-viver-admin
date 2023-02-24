@@ -1,4 +1,4 @@
-interface IMuiSelectForm extends ITextForm {
+interface ISelectForm extends ITextForm {
   options: any;
 }
 
@@ -26,15 +26,10 @@ interface ITextForm {
   onChange?: any;
 }
 
-// interface ISelectForm {
-//   name: string;
-//   label: string;
-//   onSubmit(event: any): void;
-//   isRequired?: boolean;
-//   isFullWidth?: boolean;
-//   width?: string;
-//   options: {
-//     id: string;
-//     label: string;
-//   }[];
-// }
+interface ISwitchForm {
+  register?: any;
+  label: string;
+  name: string;
+  control: any;
+  onChange?: any;
+}

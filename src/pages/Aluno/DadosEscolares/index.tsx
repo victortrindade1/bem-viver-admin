@@ -1,22 +1,37 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectAluno, updateAluno } from "store/slices/aluno";
+import { selectDadosEscolares } from "store/slices/dadosEscolares";
 
 import TitleBody from "components/TitleBody";
-import MuiSelectForm from "components/MuiSelectForm";
+import SelectForm from "components/SelectForm";
 import TextForm from "components/TextForm";
-import MuiSwitchForm from "components/MuiSwitchForm";
+import SwitchForm from "components/SwitchForm";
 
 import { Grid } from "./styles";
+import { toast } from "react-toastify";
 
 const DadosEscolares: React.FC = () => {
+  const [dados, setDados] = useState({
+    sistemas: [],
+    anos: [],
+    turnos: [],
+    turmas: [],
+    periodos: [],
+    horaentradas: [],
+    horasaidas: [],
+  });
+
   const dispatch = useAppDispatch();
   const alunoState = useAppSelector(selectAluno);
-  const aluno = alunoState.alunoDados;
+  const aluno: any = alunoState.alunoDados;
+
+  const dadosEscolaresState = useAppSelector(selectDadosEscolares);
+  const dadosEscolares: any = dadosEscolaresState.dados;
 
   const validationSchema = Yup.object().shape({
     sistema: Yup.string(),
@@ -24,27 +39,32 @@ const DadosEscolares: React.FC = () => {
     turno: Yup.string(),
     turma: Yup.string(),
     periodo: Yup.string(),
-    horarioEntrada: Yup.string(),
-    horarioSaida: Yup.string(),
+    horaentrada: Yup.string(),
+    horasaida: Yup.string(),
+    matricula: Yup.string(),
+    dados_escolares_observacoes: Yup.string(),
+    // ativo: Yup.boolean(),
   });
 
   const defaultValues: any = useMemo(
     () => ({
-      sistema: "Escola",
-      ano: "1",
-      turno: "1",
-      turma: "1",
-      periodo: "1",
-      horarioEntrada: "1",
-      horarioSaida: "1",
+      turma: aluno?.dados_turma?.turma || "",
+      periodo: aluno?.dados_periodo?.periodo || "",
+      horaentrada: aluno?.dados_horaentrada?.horaentrada || "",
+      horasaida: aluno?.dados_horasaida?.horasaida || "",
+      matricula: aluno?.matricula || "",
+      dados_escolares_observacoes: aluno?.dados_escolares_observacoes || "",
+      dataMatricula: aluno?.dados_escolares_data_matricula || "",
+      ativo: aluno?.ativo || false,
     }),
-    []
+    [aluno]
   );
 
   const {
     control,
     register,
     setFocus,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -55,125 +75,189 @@ const DadosEscolares: React.FC = () => {
 
   const onSubmit = useCallback(
     async (e: any) => {
-      console.log(e);
-      // e.preventDefault();
+      try {
+        e.preventDefault();
 
-      // if (defaultValues[e.target.name] === e.target.value) {
-      //   return;
-      // }
+        if (defaultValues[e.target.name] === e.target.value) {
+          return;
+        }
 
-      // const dataSubmit: any = {
-      //   id: aluno.id,
-      //   [e.target.name]: e.target.value,
-      // };
+        const dataSubmit: any = {
+          id: aluno.id,
+          [e.target.name]: e.target.value,
+        };
 
-      // await dispatch(updateAluno(dataSubmit));
+        await dispatch(updateAluno(dataSubmit));
+      } catch (error) {
+        // Esse try catch interage com o usuário. Não tire!
+        toast.error("Não foi possível alterar os dados");
+        // console.log(error);
+      }
     },
     [dispatch, aluno, defaultValues]
   );
 
-  const turmaOptions = [
-    {
-      id: 1,
-      label: "turma 1",
-    },
-    {
-      id: 2,
-      label: "turma 2",
-    },
-    {
-      id: 3,
-      label: "turma 3",
-    },
-  ];
+  const onSubmitSelect = useCallback(
+    // Aqui submita apenas o id de cada select.
+    // Ex: turma_id: 2
+    async (e: any) => {
+      e.preventDefault();
 
-  const periodoOptions = [
-    {
-      id: 1,
-      label: "1",
-    },
-    {
-      id: 2,
-      label: "2",
-    },
-    {
-      id: 3,
-      label: "3",
-    },
-  ];
+      const { id } = dadosEscolares[e.target.name + "s"].find(
+        (item: any) => item[e.target.name] === e.target.value
+      );
 
-  const horarioEntradaOptions = [
-    {
-      id: 1,
-      label: "1",
-    },
-    {
-      id: 2,
-      label: "2",
-    },
-    {
-      id: 3,
-      label: "3",
-    },
-  ];
+      if (aluno[e.target.name + "_id"] === id) {
+        return;
+      }
 
-  const horarioSaidaOptions = [
-    {
-      id: 1,
-      label: "1",
+      const dataSubmit: any = {
+        id: aluno.id,
+        [e.target.name + "_id"]: id,
+      };
+
+      await dispatch(updateAluno(dataSubmit));
     },
-    {
-      id: 2,
-      label: "2",
+    [dispatch, aluno, dadosEscolares]
+  );
+
+  const onSubmitSwitch = (e: any) => {
+    console.log("to aqui");
+    console.log("event", e);
+  };
+
+  const loadSelects = useCallback(() => {
+    setDados({
+      turmas: dadosEscolares.turmas.map((item: any) => item.turma),
+      sistemas: dadosEscolares.sistemas.map((item: any) => item.sistema),
+      anos: dadosEscolares.anos.map((item: any) => item.ano),
+      turnos: dadosEscolares.turnos.map((item: any) => item.turno),
+      periodos: dadosEscolares.periodos.map((item: any) => item.periodo),
+      horaentradas: dadosEscolares.horaentradas.map(
+        (item: any) => item.horaentrada
+      ),
+      horasaidas: dadosEscolares.horasaidas.map((item: any) => item.horasaida),
+    });
+  }, [dadosEscolares]);
+
+  const turmaOptions = dados.turmas;
+  const periodoOptions = dados.periodos;
+  const horarioEntradaOptions = dados.horaentradas;
+  const horarioSaidaOptions = dados.horasaidas;
+
+  const handleChangeAnoTurnoSistema = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+
+      // A turma foi mudada pelo usuário
+      const turma = await dadosEscolares?.turmas?.find(
+        (item: any) => item.turma === e.target.value
+      );
+      const { dados_ano } = turma;
+      const { dados_turno } = turma;
+
+      const ano = dados_ano ? dados_ano.ano : "Indefinido";
+      const turno = dados_turno ? dados_turno.turno : "Indefinido";
+      const sistema = dados_ano?.dados_sistema
+        ? dados_ano.dados_sistema.sistema
+        : "Indefinido";
+      setValue("ano", ano);
+      setValue("turno", turno);
+      setValue("sistema", sistema);
     },
-    {
-      id: 3,
-      label: "3",
-    },
-  ];
+    [dadosEscolares.turmas, setValue]
+  );
+
+  const handleLoadAnoTurnoSistema = useCallback(() => {
+    // Adicionar Ano, Turno e Sistema
+    setValue("ano", aluno.dados_turma?.dados_ano?.ano || "Indefinido");
+    setValue("turno", aluno.dados_turma?.dados_turno?.turno || "Indefinido");
+    // console.log(aluno);
+    setValue(
+      "sistema",
+      aluno.dados_turma?.dados_ano?.dados_sistema?.sistema || "Indefinido"
+    );
+  }, [
+    aluno.dados_turma?.dados_turno?.turno,
+    aluno.dados_turma?.dados_ano?.ano,
+    aluno.dados_turma?.dados_ano?.dados_sistema?.sistema,
+    setValue,
+  ]);
+
+  useEffect(() => {
+    loadSelects();
+    handleLoadAnoTurnoSistema();
+  }, [loadSelects, handleLoadAnoTurnoSistema]);
 
   return (
     <div>
       <TitleBody titleLabel="Dados Escolares" />
       <Grid>
         <div>
-          <MuiSelectForm
+          <SelectForm
             register={register}
             name={"turma"}
             label={"Turma"}
             control={control}
             errors={errors}
             options={turmaOptions}
-            onChange={onSubmit}
+            onChange={(e: any) => {
+              onSubmitSelect(e);
+              handleChangeAnoTurnoSistema(e);
+            }}
+          />
+          <TextForm
+            register={register}
+            name={"ano"}
+            label={"Ano"}
+            control={control}
+            errors={errors}
+            disabled
+          />
+          <TextForm
+            register={register}
+            name={"turno"}
+            label={"Turno"}
+            control={control}
+            errors={errors}
+            disabled
+          />
+          <TextForm
+            register={register}
+            name={"sistema"}
+            label={"Sistema"}
+            control={control}
+            errors={errors}
+            disabled
           />
         </div>
         <div>
-          <MuiSelectForm
+          <SelectForm
             register={register}
             name={"periodo"}
             label={"Período"}
             options={periodoOptions}
             control={control}
             errors={errors}
-            onChange={onSubmit}
+            onChange={onSubmitSelect}
           />
-          <MuiSelectForm
+          <SelectForm
             register={register}
-            name={"horarioEntrada"}
+            name={"horaentrada"}
             label={"Horário de Entrada"}
             options={horarioEntradaOptions}
             control={control}
             errors={errors}
-            onChange={onSubmit}
+            onChange={onSubmitSelect}
           />
-          <MuiSelectForm
+          <SelectForm
             register={register}
-            name={"horarioSaida"}
+            name={"horasaida"}
             label={"Horário de Saída"}
             options={horarioSaidaOptions}
             control={control}
             errors={errors}
-            onChange={onSubmit}
+            onChange={onSubmitSelect}
           />
         </div>
         <div>
@@ -183,6 +267,11 @@ const DadosEscolares: React.FC = () => {
             label={"Matrícula"}
             control={control}
             errors={errors}
+            onEnter={() => {
+              setFocus("dados_escolares_observacoes");
+            }}
+            onBlur={onSubmit}
+            // disabled
           />
           <TextForm
             register={register}
@@ -191,16 +280,26 @@ const DadosEscolares: React.FC = () => {
             label={"Data de Matrícula"}
             control={control}
             errors={errors}
+            disabled
           />
-          <MuiSwitchForm label="Aluno Ativo" name="ativo" />
+          <SwitchForm
+            label="Aluno Ativo"
+            name="ativo"
+            control={control}
+            onChange={onSubmitSwitch}
+          />
           <TextForm
             register={register}
-            name={"observacoes"}
+            name={"dados_escolares_observacoes"}
             label={"Observações"}
             control={control}
             errors={errors}
             isMultiline={true}
             width="100%"
+            onEnter={() => {
+              setFocus("matricula");
+            }}
+            onBlur={onSubmit}
           />
         </div>
       </Grid>

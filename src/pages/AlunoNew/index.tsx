@@ -106,7 +106,6 @@ const AlunoNew: React.FC = () => {
 
   const newMatricula = useCallback(async () => {
     const newMatricula = await api.post("/alunos/novo/matricula");
-
     setValue("matricula", newMatricula.data);
   }, [setValue]);
 
