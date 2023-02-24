@@ -22,6 +22,7 @@ const SwitchForm: React.FC<ISwitchForm> = ({
             <FormControlLabel
               control={
                 <Switch
+                  value={valueProp}
                   checked={valueProp}
                   onChange={(e: any) => {
                     customOnChange(e);

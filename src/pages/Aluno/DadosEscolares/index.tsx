@@ -2,6 +2,7 @@ import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectAluno, updateAluno } from "store/slices/aluno";
@@ -13,7 +14,6 @@ import TextForm from "components/TextForm";
 import SwitchForm from "components/SwitchForm";
 
 import { Grid } from "./styles";
-import { toast } from "react-toastify";
 
 const DadosEscolares: React.FC = () => {
   const [dados, setDados] = useState({
@@ -27,6 +27,7 @@ const DadosEscolares: React.FC = () => {
   });
 
   const dispatch = useAppDispatch();
+
   const alunoState = useAppSelector(selectAluno);
   const aluno: any = alunoState.alunoDados;
 
@@ -43,7 +44,7 @@ const DadosEscolares: React.FC = () => {
     horasaida: Yup.string(),
     matricula: Yup.string(),
     dados_escolares_observacoes: Yup.string(),
-    // ativo: Yup.boolean(),
+    ativo: Yup.boolean(),
   });
 
   const defaultValues: any = useMemo(
@@ -91,7 +92,6 @@ const DadosEscolares: React.FC = () => {
       } catch (error) {
         // Esse try catch interage com o usuário. Não tire!
         toast.error("Não foi possível alterar os dados");
-        // console.log(error);
       }
     },
     [dispatch, aluno, defaultValues]
@@ -121,10 +121,22 @@ const DadosEscolares: React.FC = () => {
     [dispatch, aluno, dadosEscolares]
   );
 
-  const onSubmitSwitch = (e: any) => {
-    console.log("to aqui");
-    console.log("event", e);
-  };
+  const onSubmitSwitch = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+
+      if (defaultValues[e.target.name] === e.target.checked) {
+        return;
+      }
+
+      const dataSubmit: any = {
+        id: aluno.id,
+        [e.target.name]: e.target.checked,
+      };
+      await dispatch(updateAluno(dataSubmit));
+    },
+    [dispatch, aluno, defaultValues]
+  );
 
   const loadSelects = useCallback(() => {
     setDados({
@@ -172,7 +184,6 @@ const DadosEscolares: React.FC = () => {
     // Adicionar Ano, Turno e Sistema
     setValue("ano", aluno.dados_turma?.dados_ano?.ano || "Indefinido");
     setValue("turno", aluno.dados_turma?.dados_turno?.turno || "Indefinido");
-    // console.log(aluno);
     setValue(
       "sistema",
       aluno.dados_turma?.dados_ano?.dados_sistema?.sistema || "Indefinido"
