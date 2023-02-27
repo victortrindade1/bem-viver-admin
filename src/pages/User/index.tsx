@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { FaKey } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectUser, updateUser } from "store/slices/auth";
@@ -13,6 +14,7 @@ import Button from "components/Button";
 import MuiModal from "components/MuiModal";
 
 import { Container } from "./styles";
+import theme from "styles/theme";
 
 const User: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -159,6 +161,7 @@ const User: React.FC = () => {
               handleClose={handleCloseModal}
               title="Cadastre uma nova senha"
               onSubmit={handleSubmit(onSubmit)}
+              icon={<FaKey color={theme.palette.primary.main} />}
             >
               <TextForm
                 register={register}

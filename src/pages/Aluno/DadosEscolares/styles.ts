@@ -20,3 +20,11 @@ export const Grid = styled.div`
     grid-template-columns: 0.26fr 0.26fr 0.26fr;
   } ;
 `;
+
+export const ModalText = styled.div`
+  span {
+    color: ${(props) => [props.theme.palette.warning.main]};
+    font-weight: bold;
+    font-size: 26px;
+  }
+`;

@@ -56,6 +56,7 @@ interface AlunoDados {
   contatos_buscar3_contato: string | null;
   dados_escolares_data_pre_matricula: string | null;
   dados_escolares_data_matricula: string | null;
+  dados_escolares_data_encerramento: string | null;
   dados_escolares_observacoes: string | null;
   anamnese_pediatra: string | null;
   anamnese_contato_pediatra: string | null;

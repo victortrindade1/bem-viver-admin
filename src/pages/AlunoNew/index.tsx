@@ -136,7 +136,6 @@ const AlunoNew: React.FC = () => {
       <LightSideLayout titleLabel="Novo Aluno">
         <Container>
           <form onSubmit={handleSubmit(onSubmit, onError)}>
-            {/* <form onSubmit={handleSubmit(onSubmit)}> */}
             <TextForm
               register={register}
               name={"nome"}

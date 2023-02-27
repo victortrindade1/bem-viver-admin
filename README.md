@@ -2,9 +2,9 @@
 
 ## Próximo passo
 
-Anamnese
+Dados Escolares:
 
-Qnd inicia novo aluno só com pré-matrícula, dá erro.
+Fazer data de encerramento. Já tem no backend (menos no db).
 
 Tirar nome do usuário do header qnd for mobile.
 

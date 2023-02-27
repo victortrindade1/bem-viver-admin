@@ -59,6 +59,7 @@ const initialState: AlunoState = {
     contatos_buscar3_contato: null,
     dados_escolares_data_pre_matricula: null,
     dados_escolares_data_matricula: null,
+    dados_escolares_data_encerramento: null,
     dados_escolares_observacoes: null,
     anamnese_pediatra: null,
     anamnese_contato_pediatra: null,

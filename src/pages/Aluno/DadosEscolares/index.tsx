@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { format } from "date-fns";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectAluno, updateAluno } from "store/slices/aluno";
@@ -12,10 +14,21 @@ import TitleBody from "components/TitleBody";
 import SelectForm from "components/SelectForm";
 import TextForm from "components/TextForm";
 import SwitchForm from "components/SwitchForm";
+import MuiModal from "components/MuiModal";
 
-import { Grid } from "./styles";
+import { Grid, ModalText } from "./styles";
+import theme from "styles/theme";
 
 const DadosEscolares: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => setOpenModal(false);
+
+  const [preIsVisible, setPreIsVisible] = useState(false);
+  const [encerramentoIsVisible, setEncerramentoIsVisible] = useState(false);
+
   const [dados, setDados] = useState({
     sistemas: [],
     anos: [],
@@ -44,6 +57,8 @@ const DadosEscolares: React.FC = () => {
     horasaida: Yup.string(),
     matricula: Yup.string(),
     dados_escolares_observacoes: Yup.string(),
+    dados_escolares_data_matricula: Yup.string(),
+    dados_escolares_data_encerramento: Yup.string(),
     ativo: Yup.boolean(),
   });
 
@@ -55,7 +70,12 @@ const DadosEscolares: React.FC = () => {
       horasaida: aluno?.dados_horasaida?.horasaida || "",
       matricula: aluno?.matricula || "",
       dados_escolares_observacoes: aluno?.dados_escolares_observacoes || "",
-      dataMatricula: aluno?.dados_escolares_data_matricula || "",
+      dados_escolares_data_matricula:
+        aluno?.dados_escolares_data_matricula || "",
+      dados_escolares_data_pre_matricula:
+        aluno?.dados_escolares_data_pre_matricula || "",
+      dados_escolares_data_encerramento:
+        aluno?.dados_escolares_data_encerramento || "",
       ativo: aluno?.ativo || false,
     }),
     [aluno]
@@ -66,6 +86,7 @@ const DadosEscolares: React.FC = () => {
     register,
     setFocus,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -73,6 +94,17 @@ const DadosEscolares: React.FC = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
+
+  const dataMatricula = watch("dados_escolares_data_matricula");
+
+  const handleSubmitModal = async () => {
+    const dataSubmit: any = {
+      id: aluno.id,
+      dados_escolares_data_matricula: dataMatricula,
+    };
+
+    await dispatch(updateAluno(dataSubmit));
+  };
 
   const onSubmit = useCallback(
     async (e: any) => {
@@ -121,6 +153,7 @@ const DadosEscolares: React.FC = () => {
     [dispatch, aluno, dadosEscolares]
   );
 
+  // Switch ATIVO/INATIVO
   const onSubmitSwitch = useCallback(
     async (e: any) => {
       e.preventDefault();
@@ -133,9 +166,26 @@ const DadosEscolares: React.FC = () => {
         id: aluno.id,
         [e.target.name]: e.target.checked,
       };
+
+      if (e.target.checked) {
+        dataSubmit.dados_escolares_data_matricula = format(
+          new Date(),
+          "dd/MM/yyyy"
+        );
+      } else {
+        dataSubmit.dados_escolares_data_encerramento = format(
+          new Date(),
+          "dd/MM/yyyy"
+        );
+        setValue(
+          "dados_escolares_data_encerramento",
+          format(new Date(), "dd/MM/yyyy")
+        );
+      }
+
       await dispatch(updateAluno(dataSubmit));
     },
-    [dispatch, aluno, defaultValues]
+    [dispatch, aluno, defaultValues, setValue]
   );
 
   const loadSelects = useCallback(() => {
@@ -195,10 +245,24 @@ const DadosEscolares: React.FC = () => {
     setValue,
   ]);
 
+  const handleInputIsVisible = useCallback(() => {
+    aluno?.dados_escolares_data_pre_matricula
+      ? setPreIsVisible(true)
+      : setPreIsVisible(false);
+
+    aluno?.dados_escolares_data_encerramento
+      ? setEncerramentoIsVisible(true)
+      : setEncerramentoIsVisible(false);
+  }, [
+    aluno?.dados_escolares_data_pre_matricula,
+    aluno?.dados_escolares_data_encerramento,
+  ]);
+
   useEffect(() => {
     loadSelects();
     handleLoadAnoTurnoSistema();
-  }, [loadSelects, handleLoadAnoTurnoSistema]);
+    handleInputIsVisible();
+  }, [loadSelects, handleLoadAnoTurnoSistema, handleInputIsVisible]);
 
   return (
     <div>
@@ -287,12 +351,38 @@ const DadosEscolares: React.FC = () => {
           <TextForm
             register={register}
             maskType="date"
-            name={"dataMatricula"}
+            name={"dados_escolares_data_matricula"}
             label={"Data de Matrícula"}
             control={control}
             errors={errors}
-            disabled
+            disabled={!!aluno?.dados_escolares_data_matricula}
+            onEnter={() => {
+              setFocus("dados_escolares_observacoes");
+            }}
+            onBlur={handleOpenModal}
           />
+          {preIsVisible && (
+            <TextForm
+              register={register}
+              maskType="date"
+              name={"dados_escolares_data_pre_matricula"}
+              label={"Data de Pré-Matrícula"}
+              control={control}
+              errors={errors}
+              disabled
+            />
+          )}
+          {encerramentoIsVisible && (
+            <TextForm
+              register={register}
+              maskType="date"
+              name={"dados_escolares_data_encerramento"}
+              label={"Data de Encerramento"}
+              control={control}
+              errors={errors}
+              disabled
+            />
+          )}
           <SwitchForm
             label="Aluno Ativo"
             name="ativo"
@@ -314,6 +404,18 @@ const DadosEscolares: React.FC = () => {
           />
         </div>
       </Grid>
+      <MuiModal
+        open={openModal}
+        handleClose={handleCloseModal}
+        title="Data da Matrícula"
+        onSubmit={handleSubmitModal}
+        icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
+      >
+        <ModalText>
+          A data de matrícula <span>{dataMatricula}</span> está correta? Este
+          dado não poderá ser alterado!
+        </ModalText>
+      </MuiModal>
     </div>
   );
 };

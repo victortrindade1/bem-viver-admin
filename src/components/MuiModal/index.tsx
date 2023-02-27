@@ -1,6 +1,5 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import { FaKey } from "react-icons/fa";
 
 import Button from "components/Button";
 
@@ -13,14 +12,13 @@ import {
   ButtonContainer,
 } from "./styles";
 
-import theme from "styles/theme";
-
 interface IMuiModal {
   title?: string;
   children: any;
   open: boolean;
   handleClose: () => void;
   onSubmit?: any;
+  icon: any;
 }
 
 const MuiModal: React.FC<IMuiModal> = ({
@@ -29,20 +27,21 @@ const MuiModal: React.FC<IMuiModal> = ({
   open,
   handleClose,
   onSubmit,
+  icon,
 }) => {
   return (
     <Modal open={open} onClose={handleClose}>
       <Container>
         <Header>
-          <IconContainer>
-            <FaKey color={theme.palette.primary.main} />
-          </IconContainer>
+          <IconContainer>{icon}</IconContainer>
           <Title>{title}</Title>
         </Header>
         <Body>{children}</Body>
-        <ButtonContainer>
-          <Button label="ENVIAR" type="submit" onClick={onSubmit} />
-        </ButtonContainer>
+        {onSubmit && (
+          <ButtonContainer>
+            <Button label="ENVIAR" type="submit" onClick={onSubmit} />
+          </ButtonContainer>
+        )}
       </Container>
     </Modal>
   );
