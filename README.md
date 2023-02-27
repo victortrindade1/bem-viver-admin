@@ -2,11 +2,7 @@
 
 ## Próximo passo
 
-Dados Escolares:
-
-To no submit do aluno ativo
-
-Melhorar layout responsivo.
+Anamnese
 
 Qnd inicia novo aluno só com pré-matrícula, dá erro.
 
@@ -21,6 +17,8 @@ Inverter menu pra direita no mobile
 Fazer menu mobile
 
 Colocar foto da criança no perfil e de avatar pro user
+
+Melhorar layout responsivo.
 
 ## Login
 

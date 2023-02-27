@@ -3,29 +3,44 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
+import { useAppDispatch, useAppSelector } from "hooks";
+import { selectAluno, updateAluno } from "store/slices/aluno";
+
 import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
-// import TextForm from "components/TextForm";
-// import TextForm from "components/TextForm";
 
 import { Grid } from "./styles";
 
 const Anamnese: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const alunoState = useAppSelector(selectAluno);
+  const aluno = alunoState.alunoDados;
+
   const validationSchema = Yup.object().shape({
-    pediatra: Yup.string(),
+    anamnese_pediatra: Yup.string(),
+    anamnese_contato_pediatra: Yup.string(),
+    anamnese_alergias: Yup.string(),
+    anamnese_medicacao: Yup.string(),
+    anamnese_temperatura_banho: Yup.string(),
+    anamnese_observacoes: Yup.string(),
   });
 
   const defaultValues: any = useMemo(
     () => ({
-      pediatra: "Celina Silva",
+      anamnese_pediatra: aluno.anamnese_pediatra || "",
+      anamnese_contato_pediatra: aluno.anamnese_contato_pediatra || "",
+      anamnese_alergias: aluno.anamnese_alergias || "",
+      anamnese_medicacao: aluno.anamnese_medicacao || "",
+      anamnese_temperatura_banho: aluno.anamnese_temperatura_banho || "",
+      anamnese_observacoes: aluno.anamnese_observacoes || "",
     }),
-    []
+    [aluno]
   );
 
   const {
     control,
-    handleSubmit,
     register,
+    setFocus,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -35,87 +50,110 @@ const Anamnese: React.FC = () => {
   });
 
   const onSubmit = useCallback(
-    async (event: any) => {
-      try {
-        event.preventDefault();
+    async (e: any) => {
+      e.preventDefault();
 
-        if (defaultValues[event.target.name] === event.target.value) {
-          return;
-        }
-
-        console.log(event);
-      } catch (error) {
-        console.log(error);
+      if (defaultValues[e.target.name] === e.target.value) {
+        return;
       }
+
+      const dataSubmit: any = {
+        id: aluno.id,
+        [e.target.name]: e.target.value,
+      };
+
+      await dispatch(updateAluno(dataSubmit));
     },
-    [defaultValues]
+    [dispatch, aluno, defaultValues]
   );
 
   return (
     <>
       <TitleBody titleLabel="Anamnese" />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid>
-          <div>
-            <TextForm
-              name={"pediatra"}
-              label={"Pediatra"}
-              width="100%"
-              control={control}
-              errors={errors}
-              register={register}
-            />
-            <TextForm
-              maskType="tel"
-              name={"contato"}
-              label={"Contato"}
-              control={control}
-              errors={errors}
-              register={register}
-            />
-          </div>
-          <div>
-            <TextForm
-              name={"alergias"}
-              label={"Alergias"}
-              control={control}
-              errors={errors}
-              register={register}
-              isMultiline={true}
-              width="100%"
-              minWidth="167px"
-            />
-            <TextForm
-              name={"medicacao"}
-              label={"Medicação / Horário"}
-              control={control}
-              errors={errors}
-              register={register}
-              isMultiline={true}
-              width="100%"
-              minWidth="167px"
-            />
-          </div>
-          <div>
-            <TextForm
-              name={"temperatura"}
-              label={"Temperatura Banho"}
-              control={control}
-              errors={errors}
-              register={register}
-            />
-            <TextForm
-              name={"observacoes"}
-              label={"Observações"}
-              control={control}
-              errors={errors}
-              register={register}
-              isMultiline={true}
-              width="100%"
-            />
-          </div>
-        </Grid>
-      </form>
+      <Grid>
+        <div>
+          <TextForm
+            name={"anamnese_pediatra"}
+            label={"Pediatra"}
+            width="100%"
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_contato_pediatra");
+            }}
+            onBlur={onSubmit}
+          />
+          <TextForm
+            maskType="tel"
+            name={"anamnese_contato_pediatra"}
+            label={"Contato"}
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_alergias");
+            }}
+            onBlur={onSubmit}
+          />
+        </div>
+        <div>
+          <TextForm
+            name={"anamnese_alergias"}
+            label={"Alergias"}
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_medicacao");
+            }}
+            onBlur={onSubmit}
+            isMultiline={true}
+            width="100%"
+            minWidth="167px"
+          />
+          <TextForm
+            name={"anamnese_medicacao"}
+            label={"Medicação / Horário"}
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_temperatura_banho");
+            }}
+            onBlur={onSubmit}
+            isMultiline={true}
+            width="100%"
+            minWidth="167px"
+          />
+        </div>
+        <div>
+          <TextForm
+            name={"anamnese_temperatura_banho"}
+            label={"Temperatura Banho"}
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_observacoes");
+            }}
+            onBlur={onSubmit}
+          />
+          <TextForm
+            name={"anamnese_observacoes"}
+            label={"Observações"}
+            control={control}
+            errors={errors}
+            register={register}
+            onEnter={() => {
+              setFocus("anamnese_pediatra");
+            }}
+            onBlur={onSubmit}
+            isMultiline={true}
+            width="100%"
+          />
+        </div>
+      </Grid>
     </>
   );
 };
