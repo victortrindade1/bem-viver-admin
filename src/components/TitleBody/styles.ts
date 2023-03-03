@@ -17,7 +17,7 @@ export const HiddenTitle = styled.div<{
   initialScroll: any;
   finalScroll: number;
 }>`
-  z-index: 1;
+  z-index: 2;
   font-size: 14px;
   position: absolute;
   background-color: ${(props) => props.theme.palette.primary.main};

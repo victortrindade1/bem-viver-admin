@@ -6,27 +6,44 @@ import { Container, HiddenTitle } from "./styles";
 
 interface ITitleBody {
   titleLabel: string;
+  editedInitialScroll?: number | null;
+  customFinalScroll?: number | null;
 }
 
 /**
  * Só funciona legal se todo o bloco estiver entre divs
  */
-const TitleBody: React.FC<ITitleBody> = ({ titleLabel }) => {
+const TitleBody: React.FC<ITitleBody> = ({
+  titleLabel,
+  editedInitialScroll,
+  customFinalScroll,
+}) => {
   const { scrollTop } = useScrollTop();
   const [initialScroll, setInitialScroll] = useState<any>(0);
   const [finalScroll, setFinalScroll] = useState<any>(9999);
 
-  useEffect(() => {
-    const element = document.getElementById(titleLabel);
+  const element = document.getElementById(titleLabel);
+  // const nextElement = element?.parentElement?.nextElementSibling;
 
+  useEffect(() => {
     setInitialScroll(
-      element?.parentElement && element?.parentElement?.offsetTop
+      editedInitialScroll
+        ? editedInitialScroll
+        : element?.parentElement && element?.parentElement?.offsetTop
     );
     setFinalScroll(
-      element?.parentElement &&
-        element?.parentElement?.offsetHeight + element?.parentElement?.offsetTop
+      customFinalScroll
+        ? customFinalScroll
+        : element?.parentElement &&
+            element?.parentElement?.offsetHeight +
+              element?.parentElement?.offsetTop
     );
-  }, [titleLabel]);
+  }, [element?.parentElement, customFinalScroll, editedInitialScroll]);
+
+  // useEffect(() => {
+  //   changedInitialScroll && setInitialScroll(changedInitialScroll);
+  //   changedFinalScroll && setFinalScroll(changedFinalScroll);
+  // }, [changedInitialScroll, changedFinalScroll]);
 
   return (
     <>

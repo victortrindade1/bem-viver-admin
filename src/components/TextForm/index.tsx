@@ -4,6 +4,7 @@ import { FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Search from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
@@ -32,6 +33,7 @@ const TextForm: React.FC<ITextForm> = ({
   control,
   errors,
   disabled = false,
+  variant = "standard",
   ...rest
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -94,7 +96,7 @@ const TextForm: React.FC<ITextForm> = ({
 
   return (
     <Container width={width} minWidth={minWidth}>
-      <FormControl error={Boolean(errors[name])} variant="standard" fullWidth>
+      <FormControl error={Boolean(errors[name])} variant={variant} fullWidth>
         <Controller
           name={name}
           control={control}
@@ -117,7 +119,7 @@ const TextForm: React.FC<ITextForm> = ({
                 label={label}
                 key={name}
                 fullWidth
-                variant="standard"
+                variant={variant}
                 value={value}
                 margin="normal"
                 required={isRequired}
@@ -128,15 +130,21 @@ const TextForm: React.FC<ITextForm> = ({
                 helperText={!!formState.errors?.message}
                 disabled={disabled || formState.isSubmitting}
                 InputProps={{
-                  endAdornment: type === "password" && (
+                  endAdornment: (type === "password" || type === "search") && (
                     <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
+                      {type === "password" ? (
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      ) : (
+                        <IconButton aria-label="search input">
+                          <Search />
+                        </IconButton>
+                      )}
                     </InputAdornment>
                   ),
                 }}

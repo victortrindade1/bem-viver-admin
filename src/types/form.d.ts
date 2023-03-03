@@ -24,6 +24,7 @@ interface ITextForm {
   maskType?: "date" | "cpf" | "cnpj" | "tel" | "cep";
   onBlur?: any;
   onChange?: any;
+  variant?: "standard" | "outlined";
 }
 
 interface ISwitchForm {

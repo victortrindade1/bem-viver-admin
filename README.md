@@ -4,7 +4,7 @@
 
 Dados Escolares:
 
-Fazer data de encerramento. Já tem no backend (menos no db).
+Estou em Alunos
 
 Tirar nome do usuário do header qnd for mobile.
 

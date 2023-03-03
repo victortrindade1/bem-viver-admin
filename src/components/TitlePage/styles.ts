@@ -11,14 +11,14 @@ export const Container = styled.div<{
       transform: translate(0px, 0px);
     }
     to {
-      transform: translate(0px, -42px);
+      transform: translate(0px, -62px);
       font-size: 20px;
     }
   }
 
   @keyframes moving-back {
     from {
-      transform: translate(0px, -42px);
+      transform: translate(0px, -62px);
       font-size: 20px;
     }
     to {
@@ -32,14 +32,14 @@ export const Container = styled.div<{
       transform: translate(0px, 0px);
     }
     to {
-      transform: translate(0px, -52px);
+      transform: translate(0px, -72px);
       color: #fff;
     }
   }
 
   @keyframes mobile-moving-back {
     from {
-      transform: translate(0px, -52px);
+      transform: translate(0px, -72px);
       color: #fff;
     }
     to {
