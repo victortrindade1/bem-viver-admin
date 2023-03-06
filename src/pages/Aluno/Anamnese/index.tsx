@@ -27,12 +27,12 @@ const Anamnese: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      anamnese_pediatra: aluno.anamnese_pediatra || "",
-      anamnese_contato_pediatra: aluno.anamnese_contato_pediatra || "",
-      anamnese_alergias: aluno.anamnese_alergias || "",
-      anamnese_medicacao: aluno.anamnese_medicacao || "",
-      anamnese_temperatura_banho: aluno.anamnese_temperatura_banho || "",
-      anamnese_observacoes: aluno.anamnese_observacoes || "",
+      anamnese_pediatra: aluno?.anamnese_pediatra || "",
+      anamnese_contato_pediatra: aluno?.anamnese_contato_pediatra || "",
+      anamnese_alergias: aluno?.anamnese_alergias || "",
+      anamnese_medicacao: aluno?.anamnese_medicacao || "",
+      anamnese_temperatura_banho: aluno?.anamnese_temperatura_banho || "",
+      anamnese_observacoes: aluno?.anamnese_observacoes || "",
     }),
     [aluno]
   );
@@ -58,7 +58,7 @@ const Anamnese: React.FC = () => {
       }
 
       const dataSubmit: any = {
-        id: aluno.id,
+        id: aluno?.id,
         [e.target.name]: e.target.value,
       };
 

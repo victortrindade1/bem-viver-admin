@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "./styles";
 
 interface ITitlePage {
-  titleLabel: string;
+  titleLabel?: string;
   scrollTop?: number;
 }
 

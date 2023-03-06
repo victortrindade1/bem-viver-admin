@@ -29,6 +29,7 @@ export const BodyMenuContainer = styled.div<IChildren>`
   border-radius: 4px 0px 0px 4px;
   width: 170px;
   height: 90%;
+  position: relative; // para fixar lixeira no final
 
   @media (max-width: ${media.medium}) {
     border-radius: 4px 4px 0px 0px;

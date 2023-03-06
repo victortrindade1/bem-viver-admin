@@ -32,12 +32,12 @@ const Endereco: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      contatos_end_logradouro: aluno.contatos_end_logradouro || "",
-      contatos_end_num: aluno.contatos_end_num || "",
-      contatos_end_complemento: aluno.contatos_end_complemento || "",
-      contatos_end_bairro: aluno.contatos_end_bairro || "",
-      contatos_end_cep: aluno.contatos_end_cep || "",
-      contatos_end_cidade: aluno.contatos_end_cidade || "",
+      contatos_end_logradouro: aluno?.contatos_end_logradouro || "",
+      contatos_end_num: aluno?.contatos_end_num || "",
+      contatos_end_complemento: aluno?.contatos_end_complemento || "",
+      contatos_end_bairro: aluno?.contatos_end_bairro || "",
+      contatos_end_cep: aluno?.contatos_end_cep || "",
+      contatos_end_cidade: aluno?.contatos_end_cidade || "",
     }),
     [aluno]
   );
@@ -64,7 +64,7 @@ const Endereco: React.FC = () => {
       }
 
       const dataSubmit: any = {
-        id: aluno.id,
+        id: aluno?.id,
         [e.target.name]: e.target.value,
       };
 

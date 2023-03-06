@@ -8,6 +8,18 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > div:last-of-type {
+    position: absolute;
+    bottom: 15px;
+    color: #00000050;
+
+    :hover {
+      cursor: pointer;
+      color: ${(props) => props.theme.palette.warning.main};
+      transition: color 0.5s;
+    }
+  }
 `;
 
 export const MoreButtonContainer = styled.div`
@@ -54,3 +66,5 @@ export const NavLinkStyled = styled(NavLink)`
 export const LabelContainer = styled.div`
   text-align: center;
 `;
+
+export const TrashContainer = styled.div``;

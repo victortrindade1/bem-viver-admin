@@ -1,10 +1,14 @@
 import React, { useMemo, useState } from "react";
-import { FaUserPlus, FaCommentDollar, FaPaperPlane } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+// import { FaUserPlus, FaCommentDollar, FaPaperPlane } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { GridColDef } from "@mui/x-data-grid";
+
+import { useAppDispatch } from "hooks";
 
 import api from "services/api";
 
@@ -14,8 +18,13 @@ import BodyMenu from "components/BodyMenu";
 import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
 import MuiDataGrid from "components/MuiDataGrid";
+import { showAluno } from "store/slices/aluno";
 
 const Alunos: React.FC = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
   const [alunos, setAlunos] = useState([]);
 
   const breakpoint = useMediaQuery("(max-width:768px)");
@@ -26,18 +35,18 @@ const Alunos: React.FC = () => {
       Icon: FaUserPlus,
       url: "/alunos/novo",
     },
-    {
-      label: "Cobranças",
-      Icon: FaCommentDollar,
-      url: "/alunos",
-      // disabled: true,
-    },
-    {
-      label: "Notificações",
-      Icon: FaPaperPlane,
-      url: "/alunos",
-      // disabled: true,
-    },
+    // {
+    //   label: "Cobranças",
+    //   Icon: FaCommentDollar,
+    //   url: "/alunos",
+    //   // disabled: true,
+    // },
+    // {
+    //   label: "Notificações",
+    //   Icon: FaPaperPlane,
+    //   url: "/alunos",
+    //   // disabled: true,
+    // },
   ];
 
   const validationSchema = Yup.object().shape({
@@ -55,6 +64,7 @@ const Alunos: React.FC = () => {
     control,
     register,
     // setFocus,
+    setError,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -104,6 +114,14 @@ const Alunos: React.FC = () => {
 
     const alunosResponse = response.data.items;
 
+    if (alunosResponse.length === 0) {
+      setError("search", {
+        message: "Nenhum dado encontrado.",
+      });
+      setAlunos([]);
+      return;
+    }
+
     const alunosDataTable = alunosResponse.map((item: AlunoDados) => ({
       id: item.id,
       nome: item.nome,
@@ -116,8 +134,10 @@ const Alunos: React.FC = () => {
     e.target.blur();
   };
 
-  const handleSelectAluno = (props: any) => {
-    console.log(props);
+  const handleSelectAluno = async (aluno: any) => {
+    const response: any = await dispatch(showAluno(aluno.id));
+
+    navigate(`/aluno/${response.payload.data.id}/cadastro`);
   };
 
   return (

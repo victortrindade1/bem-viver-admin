@@ -5,7 +5,7 @@ import TitlePage from "components/TitlePage";
 import { Container, BodyLayout, Body, Scrollable } from "./styles";
 import { useScrollTop } from "contexts/scrollTop";
 interface ILightSideLayout {
-  titleLabel: string;
+  titleLabel?: string;
   children: React.ReactNode;
 }
 

@@ -2,9 +2,22 @@
 
 ## Próximo passo
 
-Dados Escolares:
+Falta fazer o modal de pergunta pra deletar aluno
 
-Estou em Alunos
+Vou fazer professores. Vou usar datagrid de novo. No ano, turma (colunas q
+podem ter mais de 1 dado) vou tentar primeiro printar os dados em linha por
+escrito mesmo, bem simples.
+Depois vou tentar colocar div neles, pra ficarem bonitinhos como uma tag.
+Vou ver como vai ficar no final. Se tiver uma imagem muito poluída, eu pensei em colocar um ícone de reticências onde clica e mostra um mini pop-up com os dados.
+
+No backend:
+
+Vou criar a tabela horaaulas, que apresentará a grade de horário
+semanal. Vai ter os campos:
+
+- materia_id
+- professor_id
+- data/hora
 
 Tirar nome do usuário do header qnd for mobile.
 
@@ -19,6 +32,10 @@ Fazer menu mobile
 Colocar foto da criança no perfil e de avatar pro user
 
 Melhorar layout responsivo.
+
+Fazer um monte de loading... tem q ter pra cada consulta no backend.
+
+Usar datepicker do Mui.
 
 ## Login
 

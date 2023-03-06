@@ -1,6 +1,6 @@
 interface AlunoState {
   statusAsync?: "idle" | "loading" | "failed";
-  alunoDados: AlunoDados;
+  alunoDados: AlunoDados | null;
 }
 
 interface AlunoDados {

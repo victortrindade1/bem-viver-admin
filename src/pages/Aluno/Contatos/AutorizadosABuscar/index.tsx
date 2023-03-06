@@ -35,15 +35,15 @@ const AutorizadosABuscar: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      contatos_buscar1_nome: aluno.contatos_buscar1_nome || "",
-      contatos_buscar1_parentesco: aluno.contatos_buscar1_parentesco || "",
-      contatos_buscar1_contato: aluno.contatos_buscar1_contato || "",
-      contatos_buscar2_nome: aluno.contatos_buscar2_nome || "",
-      contatos_buscar2_parentesco: aluno.contatos_buscar2_parentesco || "",
-      contatos_buscar2_contato: aluno.contatos_buscar2_contato || "",
-      contatos_buscar3_nome: aluno.contatos_buscar3_nome || "",
-      contatos_buscar3_parentesco: aluno.contatos_buscar3_parentesco || "",
-      contatos_buscar3_contato: aluno.contatos_buscar3_contato || "",
+      contatos_buscar1_nome: aluno?.contatos_buscar1_nome || "",
+      contatos_buscar1_parentesco: aluno?.contatos_buscar1_parentesco || "",
+      contatos_buscar1_contato: aluno?.contatos_buscar1_contato || "",
+      contatos_buscar2_nome: aluno?.contatos_buscar2_nome || "",
+      contatos_buscar2_parentesco: aluno?.contatos_buscar2_parentesco || "",
+      contatos_buscar2_contato: aluno?.contatos_buscar2_contato || "",
+      contatos_buscar3_nome: aluno?.contatos_buscar3_nome || "",
+      contatos_buscar3_parentesco: aluno?.contatos_buscar3_parentesco || "",
+      contatos_buscar3_contato: aluno?.contatos_buscar3_contato || "",
     }),
     [aluno]
   );
@@ -69,7 +69,7 @@ const AutorizadosABuscar: React.FC = () => {
       }
 
       const dataSubmit: any = {
-        id: aluno.id,
+        id: aluno?.id,
         [e.target.name]: e.target.value,
       };
 

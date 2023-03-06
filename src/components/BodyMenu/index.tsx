@@ -1,6 +1,6 @@
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { FaEllipsisV } from "react-icons/fa";
+import { FaEllipsisV, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { IBodyMenu } from "types/layout";
@@ -10,9 +10,10 @@ import {
   MoreButtonContainer,
   NavLinkStyled,
   LabelContainer,
+  TrashContainer,
 } from "./styles";
 
-const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
+const BodyMenu: React.FC<IBodyMenu> = ({ links, actionDelete }: IBodyMenu) => {
   const navigate = useNavigate();
 
   const breakpoint = useMediaQuery("(max-width:768px)");
@@ -46,6 +47,11 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links }: IBodyMenu) => {
                   </NavLinkStyled>
                 )
             )}
+          {actionDelete && (
+            <TrashContainer>
+              <FaTrashAlt onClick={actionDelete} size={25} />
+            </TrashContainer>
+          )}
         </Container>
       )}
     </>

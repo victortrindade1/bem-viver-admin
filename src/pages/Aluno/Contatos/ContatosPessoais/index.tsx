@@ -41,15 +41,15 @@ const ContatosPessoais: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      contatos_pai_tel: aluno.contatos_pai_tel || "",
-      contatos_pai_cel: aluno.contatos_pai_cel || "",
-      contatos_pai_email: aluno.contatos_pai_email || "",
-      contatos_mae_tel: aluno.contatos_mae_tel || "",
-      contatos_mae_cel: aluno.contatos_mae_cel || "",
-      contatos_mae_email: aluno.contatos_mae_email || "",
-      contatos_resp_tel: aluno.contatos_resp_tel || "",
-      contatos_resp_cel: aluno.contatos_resp_cel || "",
-      contatos_resp_email: aluno.contatos_resp_email || "",
+      contatos_pai_tel: aluno?.contatos_pai_tel || "",
+      contatos_pai_cel: aluno?.contatos_pai_cel || "",
+      contatos_pai_email: aluno?.contatos_pai_email || "",
+      contatos_mae_tel: aluno?.contatos_mae_tel || "",
+      contatos_mae_cel: aluno?.contatos_mae_cel || "",
+      contatos_mae_email: aluno?.contatos_mae_email || "",
+      contatos_resp_tel: aluno?.contatos_resp_tel || "",
+      contatos_resp_cel: aluno?.contatos_resp_cel || "",
+      contatos_resp_email: aluno?.contatos_resp_email || "",
     }),
     [aluno]
   );
@@ -75,7 +75,7 @@ const ContatosPessoais: React.FC = () => {
       }
 
       const dataSubmit: any = {
-        id: aluno.id,
+        id: aluno?.id,
         [e.target.name]: e.target.value,
       };
 

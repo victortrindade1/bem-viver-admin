@@ -118,7 +118,6 @@ export const updateAluno = createAsyncThunk(
   }
 );
 
-/*
 export const showAluno = createAsyncThunk(
   "aluno/show",
   async (alunoId: number) => {
@@ -132,12 +131,31 @@ export const showAluno = createAsyncThunk(
     }
   }
 );
-*/
+
+export const deleteAluno = createAsyncThunk(
+  "aluno/delete",
+  async (alunoId: number) => {
+    try {
+      const response = await api.delete(`/alunos/${alunoId}`);
+
+      toast.success("Dados excluídos com sucesso!");
+
+      return response;
+    } catch (error) {
+      toast.error("Não foi possível excluir dados.");
+      throw new Error("Não foi possível excluir dados.");
+    }
+  }
+);
 
 const alunoSlice = createSlice({
   name: "aluno",
   initialState,
-  reducers: {},
+  reducers: {
+    // store: (state, action) => {
+    //   state.alunoDados = action.payload.data;
+    // },
+  },
   extraReducers: (builder) => {
     builder
       // storeAluno
@@ -163,11 +181,35 @@ const alunoSlice = createSlice({
       .addCase(updateAluno.rejected, (state, action: any) => {
         state.statusAsync = "failed";
         console.log(action);
+      })
+      // showAluno
+      .addCase(showAluno.pending, (state) => {
+        state.statusAsync = "loading";
+      })
+      .addCase(showAluno.fulfilled, (state, action: any) => {
+        state.statusAsync = "idle";
+        state.alunoDados = action.payload.data;
+      })
+      .addCase(showAluno.rejected, (state, action: any) => {
+        state.statusAsync = "failed";
+        console.log(action);
+      })
+      // deleteAluno
+      .addCase(deleteAluno.pending, (state) => {
+        state.statusAsync = "loading";
+      })
+      .addCase(deleteAluno.fulfilled, (state) => {
+        state.statusAsync = "idle";
+        state.alunoDados = null;
+      })
+      .addCase(deleteAluno.rejected, (state, action: any) => {
+        state.statusAsync = "failed";
+        console.log(action);
       });
   },
 });
 
-// export const {} = alunoSlice.actions;
+// export const { store } = alunoSlice.actions;
 
 export const selectAluno = (state: RootState) => state.aluno;
 

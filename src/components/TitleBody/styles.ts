@@ -101,6 +101,7 @@ export const HiddenTitle = styled.div<{
     padding: 1px 10px 1px 20px;
     left: -160px;
     top: 0px;
+    height: 20px;
 
     animation: ${(props) =>
       props.scrollTop > props.initialScroll &&

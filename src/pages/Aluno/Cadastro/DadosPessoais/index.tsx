@@ -69,32 +69,32 @@ const DadosPessoais: React.FC = () => {
 
   const defaultValues: any = useMemo(
     () => ({
-      nome: aluno.nome || "",
-      dados_pessoais_rg: aluno.dados_pessoais_rg || "",
-      dados_pessoais_cpf: aluno.dados_pessoais_cpf || "",
+      nome: aluno?.nome || "",
+      dados_pessoais_rg: aluno?.dados_pessoais_rg || "",
+      dados_pessoais_cpf: aluno?.dados_pessoais_cpf || "",
       dados_pessoais_data_nascimento:
-        aluno.dados_pessoais_data_nascimento || "",
-      dados_pessoais_num_certidao: aluno.dados_pessoais_num_certidao || "",
-      dados_pessoais_folha_certidao: aluno.dados_pessoais_folha_certidao || "",
-      dados_pessoais_livro_certidao: aluno.dados_pessoais_livro_certidao || "",
-      contatos_pai_nome: aluno.contatos_pai_nome || "",
-      contatos_pai_rg: aluno.contatos_pai_rg || "",
-      contatos_pai_cpf: aluno.contatos_pai_cpf || "",
-      contatos_pai_cnpj: aluno.contatos_pai_cnpj || "",
-      contatos_pai_data_nascimento: aluno.contatos_pai_data_nascimento || "",
-      contatos_pai_email: aluno.contatos_pai_email || "",
-      contatos_mae_nome: aluno.contatos_mae_nome || "",
-      contatos_mae_rg: aluno.contatos_mae_rg || "",
-      contatos_mae_cpf: aluno.contatos_mae_cpf || "",
-      contatos_mae_cnpj: aluno.contatos_mae_cnpj || "",
-      contatos_mae_data_nascimento: aluno.contatos_mae_data_nascimento || "",
-      contatos_mae_email: aluno.contatos_mae_email || "",
-      contatos_resp_nome: aluno.contatos_resp_nome || "",
-      contatos_resp_rg: aluno.contatos_resp_rg || "",
-      contatos_resp_cpf: aluno.contatos_resp_cpf || "",
-      contatos_resp_cnpj: aluno.contatos_resp_cnpj || "",
-      contatos_resp_data_nascimento: aluno.contatos_resp_data_nascimento || "",
-      contatos_resp_email: aluno.contatos_resp_email || "",
+        aluno?.dados_pessoais_data_nascimento || "",
+      dados_pessoais_num_certidao: aluno?.dados_pessoais_num_certidao || "",
+      dados_pessoais_folha_certidao: aluno?.dados_pessoais_folha_certidao || "",
+      dados_pessoais_livro_certidao: aluno?.dados_pessoais_livro_certidao || "",
+      contatos_pai_nome: aluno?.contatos_pai_nome || "",
+      contatos_pai_rg: aluno?.contatos_pai_rg || "",
+      contatos_pai_cpf: aluno?.contatos_pai_cpf || "",
+      contatos_pai_cnpj: aluno?.contatos_pai_cnpj || "",
+      contatos_pai_data_nascimento: aluno?.contatos_pai_data_nascimento || "",
+      contatos_pai_email: aluno?.contatos_pai_email || "",
+      contatos_mae_nome: aluno?.contatos_mae_nome || "",
+      contatos_mae_rg: aluno?.contatos_mae_rg || "",
+      contatos_mae_cpf: aluno?.contatos_mae_cpf || "",
+      contatos_mae_cnpj: aluno?.contatos_mae_cnpj || "",
+      contatos_mae_data_nascimento: aluno?.contatos_mae_data_nascimento || "",
+      contatos_mae_email: aluno?.contatos_mae_email || "",
+      contatos_resp_nome: aluno?.contatos_resp_nome || "",
+      contatos_resp_rg: aluno?.contatos_resp_rg || "",
+      contatos_resp_cpf: aluno?.contatos_resp_cpf || "",
+      contatos_resp_cnpj: aluno?.contatos_resp_cnpj || "",
+      contatos_resp_data_nascimento: aluno?.contatos_resp_data_nascimento || "",
+      contatos_resp_email: aluno?.contatos_resp_email || "",
     }),
     [aluno]
   );
@@ -145,7 +145,7 @@ const DadosPessoais: React.FC = () => {
       }
 
       const dataSubmit: any = {
-        id: aluno.id,
+        id: aluno?.id,
         [e.target.name]: e.target.value,
       };
 
