@@ -22,6 +22,27 @@ interface IMuiModal {
   labelButton?: string;
 }
 
+/**
+ * Se quiser 2 ou mais modais no mesmo local, basta mais setOpen e handleClose e
+ * no render isola numa condicional.
+ * Ex:
+ * const [openModal1, setOpenModal1] = useState(false);
+ * const [openModal2, setOpenModal2] = useState(false);
+ *
+ * const Component = () => {
+ *    return (
+ *      <>
+ *        {openModal1 &&
+ *          <MuiModal props={props1}>{children1}</MuiModal>
+ *        }
+ *        {openModal2 &&
+ *          <MuiModal props={props2}>{children2}</MuiModal>
+ *        }
+ *      </>
+ *    )
+ * }
+ *
+ */
 const MuiModal: React.FC<IMuiModal> = ({
   title,
   children,

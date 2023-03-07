@@ -2,8 +2,6 @@
 
 ## Próximo passo
 
-Falta fazer o modal de pergunta pra deletar aluno
-
 Vou fazer professores. Vou usar datagrid de novo. No ano, turma (colunas q
 podem ter mais de 1 dado) vou tentar primeiro printar os dados em linha por
 escrito mesmo, bem simples.

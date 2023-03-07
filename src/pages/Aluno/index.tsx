@@ -70,6 +70,7 @@ const Aluno: React.FC<IChildren> = ({ children }) => {
       <LightSideLayout titleLabel={aluno.alunoDados?.nome}>
         {children}
       </LightSideLayout>
+
       <MuiModal
         title="Excluir Permanentemente"
         open={openModal}

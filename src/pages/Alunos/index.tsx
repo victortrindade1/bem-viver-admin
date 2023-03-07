@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { FaUserPlus, FaCommentDollar, FaPaperPlane } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { FaUserPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -9,7 +9,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { GridColDef } from "@mui/x-data-grid";
 
 import { useAppDispatch } from "hooks";
-
+import { showAluno } from "store/slices/aluno";
 import api from "services/api";
 
 import DarkSideLayout from "components/DarkSideLayout";
@@ -18,8 +18,7 @@ import BodyMenu from "components/BodyMenu";
 import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
 import MuiDataGrid from "components/MuiDataGrid";
-import { showAluno } from "store/slices/aluno";
-import { toast } from "react-toastify";
+import Tag from "components/Tag";
 
 const Alunos: React.FC = () => {
   const navigate = useNavigate();
@@ -98,6 +97,7 @@ const Alunos: React.FC = () => {
       flex: 0.5,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => <Tag label={params.value} />,
     },
     {
       field: "status",
@@ -124,14 +124,16 @@ const Alunos: React.FC = () => {
         return;
       }
 
-      const alunosDataTable = alunosResponse.map((item: AlunoDados) => ({
-        id: item.id,
-        nome: item.nome,
-        matricula: item.matricula,
-        ano: item.dados_turma?.dados_ano?.ano,
-        turma: item.dados_turma?.turma,
-        status: item.statuspagamento,
-      }));
+      const alunosDataTable = alunosResponse.map((item: AlunoDados) => {
+        return {
+          id: item.id,
+          nome: item.nome,
+          matricula: item.matricula,
+          ano: item.dados_turma?.dados_ano?.ano,
+          turma: item.dados_turma?.turma,
+          status: item.statuspagamento,
+        };
+      });
       setAlunos(alunosDataTable);
       e.target.blur();
     } catch (error) {
