@@ -33,12 +33,13 @@ export const Scrollable = styled.div`
   overflow: auto;
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
   width: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
 
   @media (max-width: ${media.medium}) {
-    justify-content: center;
+    /* justify-content: center; */
   } ;
 `;
 
@@ -66,9 +67,10 @@ export const BodyLayout = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  margin-top: 108px;
+  margin-top: 50px;
+  /* margin-top: 108px; */
 
   @media (max-width: ${media.medium}) {
-    margin: 60px 0px;
+    margin: 0px 0px;
   } ;
 `;

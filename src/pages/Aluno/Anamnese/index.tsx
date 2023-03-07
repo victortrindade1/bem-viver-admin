@@ -8,6 +8,7 @@ import { selectAluno, updateAluno } from "store/slices/aluno";
 
 import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
+import Breadcrumb from "components/Breadcrumb";
 
 import { Grid } from "./styles";
 
@@ -49,6 +50,17 @@ const Anamnese: React.FC = () => {
     reValidateMode: "onChange",
   });
 
+  const linksBreadcrumb = [
+    {
+      url: "/alunos",
+      label: "Alunos",
+    },
+    {
+      url: "/",
+      label: "Anamnese",
+    },
+  ];
+
   const onSubmit = useCallback(
     async (e: any) => {
       e.preventDefault();
@@ -69,6 +81,7 @@ const Anamnese: React.FC = () => {
 
   return (
     <>
+      <Breadcrumb links={linksBreadcrumb} />
       <TitleBody titleLabel="Anamnese" />
       <Grid>
         <div>

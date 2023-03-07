@@ -51,20 +51,22 @@ export const Container = styled.div<{
   font-family: "Fredoka";
   color: ${(props) => props.theme.palette.primary.dark};
   font-weight: 600;
-  position: fixed;
   z-index: 2;
-  text-align: center;
   margin-top: 20px;
 
   @media (max-width: ${media.medium}) {
+    position: fixed;
+    top: 100px;
+    color: #fff;
+    text-align: center;
     font-size: 20px;
     left: 0;
     right: 0;
 
-    animation: ${(props) =>
+    /* animation: ${(props) =>
       props.scrollTop && props.scrollTop > 30
         ? "mobile-moving 0.3s ease-out forwards"
-        : "mobile-moving-back 0.3s ease-out forwards"};
+        : "mobile-moving-back 0.3s ease-out forwards"}; */
   }
 
   @media (min-width: ${media.mediumUp}) {
@@ -72,15 +74,15 @@ export const Container = styled.div<{
 
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    /* overflow: hidden; */
     max-width: 65vw;
     /* width: 100%; */
-    position: fixed;
+    /* position: fixed; */
 
-    animation: ${(props) =>
+    /* animation: ${(props) =>
       props.scrollTop && props.scrollTop > 30
         ? "moving 0.3s ease-out forwards"
         : props.isInitialScroll === false &&
-          "moving-back 0.3s ease-out forwards"};
+          "moving-back 0.3s ease-out forwards"}; */
   }
 `;

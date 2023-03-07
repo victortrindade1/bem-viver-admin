@@ -15,6 +15,7 @@ import SelectForm from "components/SelectForm";
 import TextForm from "components/TextForm";
 import SwitchForm from "components/SwitchForm";
 import MuiModal from "components/MuiModal";
+import Breadcrumb from "components/Breadcrumb";
 
 import { Grid, ModalText } from "./styles";
 import theme from "styles/theme";
@@ -264,8 +265,20 @@ const DadosEscolares: React.FC = () => {
     handleInputIsVisible();
   }, [loadSelects, handleLoadAnoTurnoSistema, handleInputIsVisible]);
 
+  const linksBreadcrumb = [
+    {
+      url: "/alunos",
+      label: "Alunos",
+    },
+    {
+      url: "",
+      label: "Dados Escolares",
+    },
+  ];
+
   return (
     <div>
+      <Breadcrumb links={linksBreadcrumb} />
       <TitleBody titleLabel="Dados Escolares" />
       <Grid>
         <div>

@@ -11,6 +11,7 @@ import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import TextForm from "components/TextForm";
 import Button from "components/Button";
+import Breadcrumb from "components/Breadcrumb";
 
 import api from "services/api";
 import { dateFormat } from "utils/yup";
@@ -130,11 +131,24 @@ const AlunoNew: React.FC = () => {
     setPreIsVisible(!preIsVisible);
   };
 
+  const linksBreadcrumb = [
+    {
+      url: "/alunos",
+      label: "Alunos",
+    },
+    {
+      url: "",
+      label: "Novo Aluno",
+    },
+  ];
+
   return (
     <>
       <DarkSideLayout />
       <LightSideLayout titleLabel="Novo Aluno">
         <Container>
+          <Breadcrumb links={linksBreadcrumb} />
+
           <form onSubmit={handleSubmit(onSubmit, onError)}>
             <TextForm
               register={register}

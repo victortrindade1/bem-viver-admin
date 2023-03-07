@@ -19,6 +19,7 @@ import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
 import MuiDataGrid from "components/MuiDataGrid";
 import Tag from "components/Tag";
+import Breadcrumb from "components/Breadcrumb";
 
 const Alunos: React.FC = () => {
   const navigate = useNavigate();
@@ -147,11 +148,20 @@ const Alunos: React.FC = () => {
     navigate(`/aluno/${response.payload.data.id}/cadastro`);
   };
 
+  const linksBreadcrumb = [
+    {
+      url: "",
+      label: "Alunos",
+    },
+  ];
+
   return (
     <>
       <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
       <LightSideLayout titleLabel="Alunos">
         <>
+          <Breadcrumb links={linksBreadcrumb} />
+
           <TitleBody titleLabel="Consultar alunos" customFinalScroll={10000} />
 
           <TextForm
