@@ -16,7 +16,7 @@ interface IBodyMenu {
     disabled?: boolean;
     // color?: string;
   }[];
-  actionDelete?: any;
+  clickDelete?: any;
 }
 
 interface IButton {

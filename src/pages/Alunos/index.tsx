@@ -19,6 +19,7 @@ import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
 import MuiDataGrid from "components/MuiDataGrid";
 import { showAluno } from "store/slices/aluno";
+import { toast } from "react-toastify";
 
 const Alunos: React.FC = () => {
   const navigate = useNavigate();
@@ -108,30 +109,34 @@ const Alunos: React.FC = () => {
   ];
 
   const loadAlunos = async (e: any) => {
-    const response: any = await api.get(
-      `/alunos?q=${e.target.value}&limit=1000`
-    );
+    try {
+      const response: any = await api.get(
+        `/alunos?q=${e.target.value}&limit=1000`
+      );
 
-    const alunosResponse = response.data.items;
+      const alunosResponse = response.data.items;
 
-    if (alunosResponse.length === 0) {
-      setError("search", {
-        message: "Nenhum dado encontrado.",
-      });
-      setAlunos([]);
-      return;
+      if (alunosResponse.length === 0) {
+        setError("search", {
+          message: "Nenhum dado encontrado.",
+        });
+        setAlunos([]);
+        return;
+      }
+
+      const alunosDataTable = alunosResponse.map((item: AlunoDados) => ({
+        id: item.id,
+        nome: item.nome,
+        matricula: item.matricula,
+        ano: item.dados_turma?.dados_ano?.ano,
+        turma: item.dados_turma?.turma,
+        status: item.statuspagamento,
+      }));
+      setAlunos(alunosDataTable);
+      e.target.blur();
+    } catch (error) {
+      toast.error("Não foi possível carregar os dados.");
     }
-
-    const alunosDataTable = alunosResponse.map((item: AlunoDados) => ({
-      id: item.id,
-      nome: item.nome,
-      matricula: item.matricula,
-      ano: item.dados_turma?.dados_ano?.ano,
-      turma: item.dados_turma?.turma,
-      status: item.statuspagamento,
-    }));
-    setAlunos(alunosDataTable);
-    e.target.blur();
   };
 
   const handleSelectAluno = async (aluno: any) => {

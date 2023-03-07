@@ -60,7 +60,7 @@ export const IconContainer = styled.div`
 export const Title = styled.div`
   color: ${(props) => props.theme.palette.primary.main};
   font-family: "Fredoka";
-  font-size: 14px;
+  font-size: 18px;
   padding-top: 10px;
 `;
 
@@ -76,6 +76,7 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: ${(props) => props.theme.palette.primary.dark};
 `;
 
 export const ButtonContainer = styled.div`

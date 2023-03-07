@@ -13,7 +13,7 @@ import {
   TrashContainer,
 } from "./styles";
 
-const BodyMenu: React.FC<IBodyMenu> = ({ links, actionDelete }: IBodyMenu) => {
+const BodyMenu: React.FC<IBodyMenu> = ({ links, clickDelete }: IBodyMenu) => {
   const navigate = useNavigate();
 
   const breakpoint = useMediaQuery("(max-width:768px)");
@@ -47,9 +47,9 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links, actionDelete }: IBodyMenu) => {
                   </NavLinkStyled>
                 )
             )}
-          {actionDelete && (
+          {clickDelete && (
             <TrashContainer>
-              <FaTrashAlt onClick={actionDelete} size={25} />
+              <FaTrashAlt onClick={clickDelete} size={25} />
             </TrashContainer>
           )}
         </Container>

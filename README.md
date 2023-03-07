@@ -37,6 +37,8 @@ Fazer um monte de loading... tem q ter pra cada consulta no backend.
 
 Usar datepicker do Mui.
 
+Tem um problema chatinho q nao sei o pq acontece: qnd eu volto a usar o programa no outro dia, ele nao recebe a api, só qnd desloga e loga. senao, dá token invalido.
+
 ## Login
 
 O usuário receberá o convite por e-mail. Será o link de ediçao de cadastro, junto com um usuário e senha. Clicou no link, direciona pra tela de ediçao de cadastro admin.
