@@ -20,7 +20,7 @@ export const HiddenTitle = styled.div<{
   z-index: 2;
   font-size: 14px;
   position: absolute;
-  background-color: ${(props) => props.theme.palette.primary.main};
+  background-color: ${(props) => props.theme.palette.primary.main}80;
   color: #fff;
   display: flex;
   align-items: center;

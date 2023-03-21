@@ -67,7 +67,7 @@ export const BodyLayout = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  margin-top: 50px;
+  margin-top: 30px;
   /* margin-top: 108px; */
 
   @media (max-width: ${media.medium}) {

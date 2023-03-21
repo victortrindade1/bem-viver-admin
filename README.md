@@ -2,6 +2,26 @@
 
 ## Próximo passo
 
+Falta state para: mover, ocultar, tamanho coluna, filtro por coluna, densidade das linhas
+
+Não to conseguindo gerenciar bem a tabela pela sessionStorage. To pensando
+seriamente em criar um state global no redux pra gerenciar a tabela pelo redux,
+pq ta foda essa renderização o tempo todo.
+
+Com o redux:
+sempre grava o estado de: filter, sort, pagination, columnFilters
+renderizou a page, verifica o state. Se tiver, dá load na table.
+
+To bem na table. Já sei como voltar pra página e aparecer a mesma tabela.
+Falta implantar o state dos dados, e de repente state pra filtro, sort nativos.
+
+O Breadcrumbs tem q usar o vh pra posicionar, pq senao ele fica errado dependendo da altura da screen do usuário.
+
+Tá rolando um problema com o datagrid do mui... ele só deixa manipular o state
+dela se pagar. Ou seja, não dá pra ter a tabela já renderizada se voltar na
+página. Por isso, vou tentar usar a https://www.material-react-table.com/.
+Parece boa...
+
 Vou fazer professores. Vou usar datagrid de novo. No ano, turma (colunas q
 podem ter mais de 1 dado) vou tentar primeiro printar os dados em linha por
 escrito mesmo, bem simples.
