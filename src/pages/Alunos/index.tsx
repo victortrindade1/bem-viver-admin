@@ -206,6 +206,7 @@ const Alunos: React.FC = () => {
   );
 
   const handleSelectAluno = async (aluno: any) => {
+    console.log("aluno", aluno);
     const response: any = await dispatch(showAluno(aluno.id));
 
     navigate(`/aluno/${response.payload.data.id}/cadastro`);

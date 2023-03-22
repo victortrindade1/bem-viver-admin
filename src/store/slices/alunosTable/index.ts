@@ -8,19 +8,14 @@ const initialState = {
     pageIndex: 0,
     pageSize: 15,
   },
-  columnFilters: [
-    {
-      id: "",
-      value: "",
-    },
-  ],
+  columnFilters: [{ id: "", value: "" }],
   columnVisibility: {},
   columnSizing: {},
   density: "comfortable",
 };
 
 const alunosTableSlice = createSlice({
-  name: "alunosTableSlice",
+  name: "alunosTableConfig",
   initialState,
   reducers: {
     store: (state, action) => {

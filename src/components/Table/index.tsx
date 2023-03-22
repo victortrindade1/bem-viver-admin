@@ -68,7 +68,7 @@ const Table: React.FC<ITable> = ({
       renderRowActions={({ row, table }) => (
         <div>
           <Tooltip arrow placement="left" title="Cadastro">
-            <IconButton onClick={() => onClick(table.getRow(row.id))}>
+            <IconButton onClick={() => onClick(row.original)}>
               <FaAddressCard />
             </IconButton>
           </Tooltip>
