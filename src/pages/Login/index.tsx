@@ -38,10 +38,8 @@ const Login: React.FC = () => {
 
   const onSubmit = useCallback(
     async (data: IAuth) => {
-      // await signIn(data);
-      // console.log("data", data);
-      dispatch(signIn(data));
-      dispatch(loadDados());
+      await dispatch(signIn(data));
+      await dispatch(loadDados());
     },
     [dispatch]
   );

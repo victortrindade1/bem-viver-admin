@@ -12,11 +12,10 @@ const initialState = {
   columnVisibility: {},
   columnSizing: {},
   density: "comfortable",
-  // globalFilter: "",
 };
 
-const alunosTableSlice = createSlice({
-  name: "alunosTableConfig",
+const professoresTableSlice = createSlice({
+  name: "professoresTableConfig",
   initialState,
   reducers: {
     store: (state, action) => {
@@ -28,13 +27,13 @@ const alunosTableSlice = createSlice({
       state.columnVisibility = action.payload.columnVisibility;
       state.columnSizing = action.payload.columnSizing;
       state.density = action.payload.density;
-      // state.globalFilter = action.payload.globalFilter;
     },
   },
 });
 
-export const { store } = alunosTableSlice.actions;
+export const { store } = professoresTableSlice.actions;
 
-export const selectAlunosTable = (state: RootState) => state.alunosTable;
+export const selectProfessoresTable = (state: RootState) =>
+  state.professoresTable;
 
-export default alunosTableSlice.reducer;
+export default professoresTableSlice.reducer;

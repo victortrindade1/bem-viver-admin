@@ -1,10 +1,9 @@
-/*
 // Escolhe uma das opções de cores do array
 export const stringToColor = function (str: string): string {
   var colors = [
-    "#e51c23",
-    "#e91e63",
-    "#9c27b0",
+    // "#e51c23",
+    // "#e91e63",
+    // "#9c27b0",
     "#673ab7",
     "#3f51b5",
     "#5677fc",
@@ -15,9 +14,28 @@ export const stringToColor = function (str: string): string {
     "#8bc34a",
     "#afb42b",
     "#ff9800",
-    "#ff5722",
+    // "#ff5722",
     "#795548",
     "#607d8b",
+    "#80cbc4",
+    "#81c784",
+    "#4caf50",
+    "#689f38",
+    "#cddc39",
+    "#ffee58",
+    "#fbc02d",
+    "#ffa726",
+    "#ff7043",
+    "#f06292",
+    // "#e91e63",
+    "#ce93d8",
+    "#9c27b0",
+    // "#673ab7",
+    "#3f51b5",
+    "#2196f3",
+    "#00bcd4",
+    "#009688",
+    "#4db6ac",
   ];
   var hash = 0;
 
@@ -29,8 +47,8 @@ export const stringToColor = function (str: string): string {
   hash = ((hash % colors.length) + colors.length) % colors.length;
   return colors[hash];
 };
-*/
 
+/*
 // Cores estilo random
 export const stringToColor = function (str: string) {
   var hash = 0;
@@ -44,3 +62,4 @@ export const stringToColor = function (str: string) {
   }
   return colour;
 };
+*/

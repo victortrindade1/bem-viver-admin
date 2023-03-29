@@ -10,7 +10,6 @@ interface ITag {
 
 const Tag: React.FC<ITag> = ({ label = "" }) => {
   const color = stringToColor(label);
-
   return (
     <>{label ? <Container color={color}>{label}</Container> : <div>-</div>}</>
   );

@@ -4,20 +4,21 @@ import { motion } from "framer-motion";
 
 const pageVariants = {
   initial: {
-    opacity: 0,
+    opacity: 0.5,
   },
   in: {
     opacity: 1,
   },
   out: {
-    opacity: 0,
+    opacity: 0.5,
   },
 };
 
 const pageTransition = {
   type: "spring",
+  // type: "linear",
   ease: "easeOut",
-  duration: 1.5,
+  duration: 1,
 };
 
 const AnimationLayout: React.FC = () => {
@@ -25,15 +26,16 @@ const AnimationLayout: React.FC = () => {
 
   return (
     // <AnimatePresence>
-    <motion.div
+    <motion.main
       key={pathname}
       initial="initial"
       animate="in"
+      // exit="exit"
       variants={pageVariants}
       transition={pageTransition}
     >
       <Outlet />
-    </motion.div>
+    </motion.main>
     // </AnimatePresence>
   );
 };

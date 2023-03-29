@@ -31,7 +31,7 @@ export const Container = styled.div`
     }
   }
   @media (min-width: ${media.mediumUp}) {
-    top: 85px;
+    top: 78px;
     left: 215px;
   }
 `;

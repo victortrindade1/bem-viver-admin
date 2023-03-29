@@ -2,25 +2,16 @@
 
 ## Próximo passo
 
-Falta state para: mover, ocultar, tamanho coluna, filtro por coluna, densidade das linhas
+Bug: quando controla a largura da coluna da table, depois de um tempo fica a tela
+toda branca.
 
-Não to conseguindo gerenciar bem a tabela pela sessionStorage. To pensando
-seriamente em criar um state global no redux pra gerenciar a tabela pelo redux,
-pq ta foda essa renderização o tempo todo.
+Problema do backend: Não consigo saber pra qual(is) turmas um certo professor ensina determinada(s) matérias.
 
-Com o redux:
-sempre grava o estado de: filter, sort, pagination, columnFilters
-renderizou a page, verifica o state. Se tiver, dá load na table.
+Vou criar a tabela horaaulas. Apesar de inserir os valores pelo insomnia, o crud mesmo só será feito na page Turmas, onde montará o horário.
 
-To bem na table. Já sei como voltar pra página e aparecer a mesma tabela.
-Falta implantar o state dos dados, e de repente state pra filtro, sort nativos.
+Vou fazer uma grande tag pra Matéria - Turma - Ano numa única coluna
 
-O Breadcrumbs tem q usar o vh pra posicionar, pq senao ele fica errado dependendo da altura da screen do usuário.
-
-Tá rolando um problema com o datagrid do mui... ele só deixa manipular o state
-dela se pagar. Ou seja, não dá pra ter a tabela já renderizada se voltar na
-página. Por isso, vou tentar usar a https://www.material-react-table.com/.
-Parece boa...
+Consertar o titlebody q tá animando errado.
 
 Vou fazer professores. Vou usar datagrid de novo. No ano, turma (colunas q
 podem ter mais de 1 dado) vou tentar primeiro printar os dados em linha por
@@ -30,18 +21,16 @@ Vou ver como vai ficar no final. Se tiver uma imagem muito poluída, eu pensei e
 
 No backend:
 
-Vou criar a tabela horaaulas, que apresentará a grade de horário
-semanal. Vai ter os campos:
+Intervalo: toda linha sem materia e professor é automaticamente intervalo.
+No frontend, vai ter uma flag "Intervalo". Criar um intervalo já cria um novo cadastro sem matéria e professor.
 
-- materia_id
-- professor_id
-- data/hora
+No backend:
+
+Criar campos de desligamento do professor, com boolean pra ativo, data de desligamento
 
 Tirar nome do usuário do header qnd for mobile.
 
 Fazer body menu mobile
-
-Fazer botão de voltar
 
 Inverter menu pra direita no mobile
 

@@ -25,6 +25,8 @@ interface ITable {
   onColumnVisibilityChange: any;
   onColumnSizingChange: any;
   onDensityChange: any;
+  // globalFilter?: any;
+  // onGlobalFilterChange?: any;
 }
 
 const Table: React.FC<ITable> = ({
@@ -48,6 +50,8 @@ const Table: React.FC<ITable> = ({
   onColumnVisibilityChange,
   onColumnSizingChange,
   onDensityChange,
+  // globalFilter,
+  // onGlobalFilterChange,
 }) => {
   return (
     <MaterialReactTable
@@ -56,7 +60,7 @@ const Table: React.FC<ITable> = ({
       enableRowSelection={false}
       enableColumnOrdering
       enableStickyHeader
-      enableGlobalFilter={false}
+      enableGlobalFilter={true}
       muiTableContainerProps={{ sx: { maxHeight: "600px" } }}
       enableStickyFooter
       localization={{
@@ -79,7 +83,7 @@ const Table: React.FC<ITable> = ({
         isError
           ? {
               color: "error",
-              children: "Error loading data",
+              children: "Não foi possível carregar os dados",
             }
           : undefined
       }
@@ -95,6 +99,7 @@ const Table: React.FC<ITable> = ({
         columnVisibility,
         columnSizing,
         density,
+        // globalFilter,
       }}
       onPaginationChange={onPaginationChange}
       onSortingChange={onSortingChange}
@@ -102,6 +107,7 @@ const Table: React.FC<ITable> = ({
       onColumnVisibilityChange={onColumnVisibilityChange}
       onColumnSizingChange={onColumnSizingChange}
       onDensityChange={onDensityChange}
+      // onGlobalFilterChange={onGlobalFilterChange}
       // autoResetPageIndex={false}
       autoResetAll={false}
     />

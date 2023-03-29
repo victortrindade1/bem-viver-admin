@@ -69,6 +69,7 @@ const Alunos: React.FC = () => {
     alunosTable.columnSizing
   );
   const [density, setDensity] = useState(alunosTable.density);
+  // const [globalFilter, setGlobalFilter] = useState();
 
   const breakpoint = useMediaQuery("(max-width:768px)");
 
@@ -161,8 +162,6 @@ const Alunos: React.FC = () => {
           },
         });
 
-        console.log("response", response);
-
         const alunosResponse = response.data.items;
 
         if (alunosResponse.length === 0) {
@@ -174,7 +173,7 @@ const Alunos: React.FC = () => {
           setIsLoading(false);
           setIsRefetching(false);
           setColumnFilters([]);
-          // setColumnVisibility([])
+          // setColumnVisibility()
           return;
         }
 
@@ -206,7 +205,6 @@ const Alunos: React.FC = () => {
   );
 
   const handleSelectAluno = async (aluno: any) => {
-    console.log("aluno", aluno);
     const response: any = await dispatch(showAluno(aluno.id));
 
     navigate(`/aluno/${response.payload.data.id}/cadastro`);
@@ -222,6 +220,7 @@ const Alunos: React.FC = () => {
         columnSizing,
         columnVisibility,
         density,
+        // globalFilter,
       })
     );
   }, [
@@ -233,6 +232,7 @@ const Alunos: React.FC = () => {
     columnSizing,
     columnVisibility,
     density,
+    // globalFilter,
   ]);
 
   // Carrega última tabela aberta
@@ -303,6 +303,8 @@ const Alunos: React.FC = () => {
               onColumnVisibilityChange={setColumnVisibility}
               onColumnSizingChange={setColumnSizing}
               onDensityChange={setDensity}
+              // globalFilter={globalFilter}
+              // onGlobalFilterChange={setGlobalFilter}
             />
           </TableContainer>
         </>
