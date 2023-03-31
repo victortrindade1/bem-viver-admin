@@ -29,7 +29,7 @@ import Tag from "components/Tag";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { store, selectProfessoresTable } from "store/slices/professoresTable";
-import { showProfessor } from "store/slices/professor";
+import { showProfessor, cleanState } from "store/slices/professor";
 import api from "services/api";
 
 import { TableContainer, CellArrayContainer } from "./styles";
@@ -261,8 +261,8 @@ const Professores: React.FC = () => {
     navigate(`/professor/${response.payload.data.id}/cadastro`);
   };
 
-  // states config table
   useEffect(() => {
+    // states config table
     dispatch(
       store({
         pagination,
@@ -274,6 +274,11 @@ const Professores: React.FC = () => {
         density,
       })
     );
+    /**
+     * Limpa state Professor. A Page Professor recebe tanto novo cadastro qnt
+     * professor existente
+     */
+    dispatch(cleanState());
   }, [
     pagination,
     dispatch,

@@ -8,18 +8,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  > div:last-of-type {
-    position: absolute;
-    bottom: 15px;
-    color: #00000050;
-
-    :hover {
-      cursor: pointer;
-      color: ${(props) => props.theme.palette.warning.main};
-      transition: color 0.5s;
-    }
-  }
+  flex: 1;
 `;
 
 export const MoreButtonContainer = styled.div`
@@ -67,4 +56,20 @@ export const LabelContainer = styled.div`
   text-align: center;
 `;
 
-export const TrashContainer = styled.div``;
+export const TrashContainer = styled.div`
+  margin-top: auto;
+  color: #00000050;
+  /* align-self: flex-end; */
+  /* justify-self: flex-end; */
+  :hover {
+    cursor: pointer;
+    color: ${(props) => props.theme.palette.warning.main};
+    transition: color 0.5s;
+  }
+
+  font-family: "Fredoka";
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

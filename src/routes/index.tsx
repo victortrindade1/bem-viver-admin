@@ -32,6 +32,8 @@ const ContatosAluno = lazy(() => import("pages/Aluno/Contatos"));
 const DadosEscolaresAluno = lazy(() => import("pages/Aluno/DadosEscolares"));
 const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
 const AlunoNew = lazy(() => import("pages/AlunoNew"));
+const Professor = lazy(() => import("pages/Professor"));
+const CadastroProfessor = lazy(() => import("pages/Professor/Cadastro"));
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -85,6 +87,7 @@ export default function MyRoutes() {
                 </DefaultLayout>
               }
             >
+              {/* INDEX */}
               <Route
                 index
                 element={
@@ -93,6 +96,7 @@ export default function MyRoutes() {
                   </Suspense>
                 }
               />
+              {/* ALUNOS */}
               <Route
                 path="alunos/novo"
                 element={
@@ -109,6 +113,7 @@ export default function MyRoutes() {
                   </Suspense>
                 }
               />
+              {/* ALUNO */}
               <Route
                 element={
                   <Aluno>
@@ -149,6 +154,41 @@ export default function MyRoutes() {
                   }
                 />
               </Route>
+              {/* PROFESSORES */}
+
+              <Route
+                path="professores"
+                element={
+                  <Suspense fallback={<LoadingPage />}>
+                    <Professores />
+                  </Suspense>
+                }
+              />
+              {/* PROFESSOR */}
+              <Route
+                element={
+                  <Professor>
+                    <Outlet />
+                  </Professor>
+                }
+              >
+                <Route
+                  path="professores/novo"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <CadastroProfessor />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="professor/:id/cadastro"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <CadastroProfessor />
+                    </Suspense>
+                  }
+                />
+              </Route>
 
               <Route
                 path="turmas"
@@ -166,14 +206,7 @@ export default function MyRoutes() {
                   </Suspense>
                 }
               />
-              <Route
-                path="professores"
-                element={
-                  <Suspense fallback={<LoadingPage />}>
-                    <Professores />
-                  </Suspense>
-                }
-              />
+
               <Route
                 path="financeiro"
                 element={

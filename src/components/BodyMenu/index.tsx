@@ -50,6 +50,7 @@ const BodyMenu: React.FC<IBodyMenu> = ({ links, clickDelete }: IBodyMenu) => {
           {clickDelete && (
             <TrashContainer>
               <FaTrashAlt onClick={clickDelete} size={25} />
+              Excluir
             </TrashContainer>
           )}
         </Container>

@@ -2,24 +2,30 @@
 
 ## Próximo passo
 
+##########
+
+Estou indo pra page Professor:
+Vai ter os links do menu:
+
+- Cadastro
+  - Dados Pessoais
+  - Endereço
+- Dados Profissionais
+- Dados Escolares
+
+Em Dados Escolares, vai perguntar as matérias que leciona. Não vai precisar ser necessariamente o que vai dar de matéria na escola.
+Quando perguntar a matéria, vai mostrar todas e verificar se já existe. Se não existe, já vai salvar sozinho no banco a nova matéria.
+
+Na tela, terá uma tabela das matérias já cadastradas do professor e outra tabela das turmas que já atua.
+
+Não vai poder cadastrar turma pro professor aqui. isso vai acontecer no momento que montar o horário.
+
+##########
+
 Bug: quando controla a largura da coluna da table, depois de um tempo fica a tela
 toda branca.
 
-Problema do backend: Não consigo saber pra qual(is) turmas um certo professor ensina determinada(s) matérias.
-
-Vou criar a tabela horaaulas. Apesar de inserir os valores pelo insomnia, o crud mesmo só será feito na page Turmas, onde montará o horário.
-
-Vou fazer uma grande tag pra Matéria - Turma - Ano numa única coluna
-
-Consertar o titlebody q tá animando errado.
-
-Vou fazer professores. Vou usar datagrid de novo. No ano, turma (colunas q
-podem ter mais de 1 dado) vou tentar primeiro printar os dados em linha por
-escrito mesmo, bem simples.
-Depois vou tentar colocar div neles, pra ficarem bonitinhos como uma tag.
-Vou ver como vai ficar no final. Se tiver uma imagem muito poluída, eu pensei em colocar um ícone de reticências onde clica e mostra um mini pop-up com os dados.
-
-No backend:
+Consertar o titlebody q tá animando errado em Professores.
 
 Intervalo: toda linha sem materia e professor é automaticamente intervalo.
 No frontend, vai ter uma flag "Intervalo". Criar um intervalo já cria um novo cadastro sem matéria e professor.
@@ -45,6 +51,8 @@ Fazer um monte de loading... tem q ter pra cada consulta no backend.
 Usar datepicker do Mui.
 
 Tem um problema chatinho q nao sei o pq acontece: qnd eu volto a usar o programa no outro dia, ele nao recebe a api, só qnd desloga e loga. senao, dá token invalido.
+
+To pensando seriamente em tirar a animação do title body. to vendo q não tem feito sentido ter, uma vez q só tem aparecido um por tela
 
 ## Login
 

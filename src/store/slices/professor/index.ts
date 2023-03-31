@@ -78,7 +78,7 @@ export const showProfessor = createAsyncThunk(
   "professor/show",
   async (professorId: number) => {
     try {
-      const response = await api.get(`/professors/${professorId}`);
+      const response = await api.get(`/professores/${professorId}`);
 
       return response;
     } catch (error) {
@@ -108,9 +108,9 @@ const professorSlice = createSlice({
   name: "professor",
   initialState,
   reducers: {
-    // store: (state, action) => {
-    //   state.professorDados = action.payload.data;
-    // },
+    cleanState: (state) => {
+      state.professorDados = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -165,7 +165,7 @@ const professorSlice = createSlice({
   },
 });
 
-// export const { store } = professorSlice.actions;
+export const { cleanState } = professorSlice.actions;
 
 export const selectProfessor = (state: RootState) => state.professor;
 
