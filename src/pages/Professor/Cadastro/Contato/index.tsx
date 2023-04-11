@@ -10,28 +10,26 @@ import TextForm from "components/TextForm";
 
 import { Container } from "./styles";
 
-const DadosPessoais: React.FC = () => {
+const Contato: React.FC = () => {
   const dispatch = useAppDispatch();
   const professorState = useAppSelector(selectProfessor);
   const professor = professorState.professorDados;
 
   const validationSchema = Yup.object().shape({
-    professor_nome: Yup.string().required("Campo obrigatório"),
-    professor_rg: Yup.string(),
-    professor_cpf: Yup.string()
-      .min(14, "CPF incorreto.")
-      .max(14, "CPF incorreto."),
-    professor_data_nascimento: Yup.string()
-      .min(10, "Data incorreta")
-      .max(10, "Data incorreta"),
+    professor_celular: Yup.string()
+      .min(14, "Contato incorreto.")
+      .max(15, "Contato incorreto."),
+    professor_telefone: Yup.string()
+      .min(14, "Contato incorreto.")
+      .max(15, "Contato incorreto."),
+    professor_email: Yup.string().email(),
   });
 
   const defaultValues: any = useMemo(
     () => ({
-      professor_nome: professor?.professor_nome || "",
-      professor_rg: professor?.professor_rg || "",
-      professor_cpf: professor?.professor_cpf || "",
-      professor_data_nascimento: professor?.professor_data_nascimento || "",
+      professor_celular: professor?.professor_celular || "",
+      professor_telefone: professor?.professor_telefone || "",
+      professor_email: professor?.professor_email || "",
     }),
     [professor]
   );
@@ -70,51 +68,38 @@ const DadosPessoais: React.FC = () => {
   return (
     <Container>
       <TextForm
-        isRequired
         register={register}
-        name="professor_nome"
-        label="Nome"
+        name="professor_celular"
+        label="Celular"
+        maskType="tel"
         onEnter={() => {
-          setFocus("professor_rg");
+          setFocus("professor_telefone");
         }}
-        onBlur={onSubmit}
+        onBlur={!errors["professor_celular"] ? onSubmit : null}
+        control={control}
+        errors={errors}
+      />
+      <TextForm
+        register={register}
+        name="professor_telefone"
+        maskType="tel"
+        label="Telefone"
+        onEnter={() => {
+          setFocus("professor_email");
+        }}
+        onBlur={!errors["professor_telefone"] ? onSubmit : null}
+        control={control}
+        errors={errors}
+      />
+      <TextForm
+        register={register}
+        name="professor_email"
+        label="E-mail"
         width="100%"
-        control={control}
-        errors={errors}
-      />
-      <TextForm
-        register={register}
-        name="professor_rg"
-        label="RG"
         onEnter={() => {
-          setFocus("professor_cpf");
+          setFocus("professor_celular");
         }}
-        onBlur={onSubmit}
-        control={control}
-        errors={errors}
-      />
-      <TextForm
-        register={register}
-        maskType="cpf"
-        name="professor_cpf"
-        label="CPF"
-        onEnter={() => {
-          setFocus("professor_data_nascimento");
-        }}
-        onBlur={!errors["professor_cpf"] ? onSubmit : null}
-        control={control}
-        errors={errors}
-      />
-      <TextForm
-        register={register}
-        maskType="date"
-        placeholder={"dd/mm/aaaa"}
-        name="professor_data_nascimento"
-        label="Nascimento"
-        onBlur={!errors["professor_data_nascimento"] ? onSubmit : null}
-        onEnter={() => {
-          setFocus("professor_nome");
-        }}
+        onBlur={!errors["professor_email"] ? onSubmit : null}
         control={control}
         errors={errors}
       />
@@ -122,4 +107,4 @@ const DadosPessoais: React.FC = () => {
   );
 };
 
-export default DadosPessoais;
+export default Contato;

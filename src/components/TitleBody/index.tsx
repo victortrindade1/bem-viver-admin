@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { useScrollTop } from "contexts/scrollTop";
+// import { useScrollTop } from "contexts/scrollTop";
 
-import { Container, HiddenTitle } from "./styles";
+// import { Container, HiddenTitle } from "./styles";
+import { Container } from "./styles";
 
 interface ITitleBody {
   titleLabel: string;
@@ -15,30 +16,30 @@ interface ITitleBody {
  */
 const TitleBody: React.FC<ITitleBody> = ({
   titleLabel,
-  editedInitialScroll,
-  customFinalScroll,
+  // editedInitialScroll,
+  // customFinalScroll,
 }) => {
-  const { scrollTop } = useScrollTop();
-  const [initialScroll, setInitialScroll] = useState<any>(0);
-  const [finalScroll, setFinalScroll] = useState<any>(9999);
+  // const { scrollTop } = useScrollTop();
+  // const [initialScroll, setInitialScroll] = useState<any>(0);
+  // const [finalScroll, setFinalScroll] = useState<any>(9999);
 
-  const element = document.getElementById(titleLabel);
+  // const element = document.getElementById(titleLabel);
   // const nextElement = element?.parentElement?.nextElementSibling;
 
-  useEffect(() => {
-    setInitialScroll(
-      editedInitialScroll
-        ? editedInitialScroll
-        : element?.parentElement && element?.parentElement?.offsetTop
-    );
-    setFinalScroll(
-      customFinalScroll
-        ? customFinalScroll
-        : element?.parentElement &&
-            element?.parentElement?.offsetHeight +
-              element?.parentElement?.offsetTop
-    );
-  }, [element?.parentElement, customFinalScroll, editedInitialScroll]);
+  // useEffect(() => {
+  //   setInitialScroll(
+  //     editedInitialScroll
+  //       ? editedInitialScroll
+  //       : element?.parentElement && element?.parentElement?.offsetTop
+  //   );
+  //   setFinalScroll(
+  //     customFinalScroll
+  //       ? customFinalScroll
+  //       : element?.parentElement &&
+  //           element?.parentElement?.offsetHeight +
+  //             element?.parentElement?.offsetTop
+  //   );
+  // }, [element?.parentElement, customFinalScroll, editedInitialScroll]);
 
   // useEffect(() => {
   //   changedInitialScroll && setInitialScroll(changedInitialScroll);
@@ -48,14 +49,14 @@ const TitleBody: React.FC<ITitleBody> = ({
   return (
     <>
       <Container>{titleLabel}</Container>
-      <HiddenTitle
+      {/* <HiddenTitle
         scrollTop={scrollTop}
         initialScroll={initialScroll}
         finalScroll={finalScroll}
         id={titleLabel}
       >
         {titleLabel}
-      </HiddenTitle>
+      </HiddenTitle> */}
     </>
   );
 };

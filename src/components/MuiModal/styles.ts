@@ -76,6 +76,7 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: ${(props) => props.theme.palette.primary.dark};
 `;
 

@@ -12,6 +12,7 @@ export const Container = styled.div`
   }
 `;
 
+/*
 export const HiddenTitle = styled.div<{
   scrollTop: number;
   initialScroll: any;
@@ -20,7 +21,7 @@ export const HiddenTitle = styled.div<{
   z-index: 2;
   font-size: 14px;
   position: absolute;
-  background-color: ${(props) => props.theme.palette.primary.main}80;
+  background-color: ${(props) => props.theme.palette.primary.main};
   color: #fff;
   display: flex;
   align-items: center;
@@ -33,13 +34,13 @@ export const HiddenTitle = styled.div<{
       transform: translateX(0px);
     }
     to {
-      transform: translateX(160px);
+      transform: translateX(260px);
     }
   }
 
   @keyframes movingBody-back {
     from {
-      transform: translateX(160px);
+      transform: translateX(260px);
     }
     to {
       transform: translateX(0px);
@@ -51,13 +52,13 @@ export const HiddenTitle = styled.div<{
       transform: translateX(0px);
     }
     to {
-      transform: translateX(160px);
+      transform: translateX(260px);
     }
   }
 
   @keyframes medium-movingBody-back {
     from {
-      transform: translateX(160px);
+      transform: translateX(260px);
     }
     to {
       transform: translateX(0px);
@@ -99,7 +100,7 @@ export const HiddenTitle = styled.div<{
 
   @media (min-width: ${media.mediumUp}) {
     padding: 1px 10px 1px 20px;
-    left: -160px;
+    left: -260px;
     top: 0px;
     height: 20px;
 
@@ -110,3 +111,4 @@ export const HiddenTitle = styled.div<{
         : "movingBody-back 0.3s ease-out forwards"};
   }
 `;
+*/

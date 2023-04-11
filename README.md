@@ -22,11 +22,6 @@ Não vai poder cadastrar turma pro professor aqui. isso vai acontecer no momento
 
 ##########
 
-Bug: quando controla a largura da coluna da table, depois de um tempo fica a tela
-toda branca.
-
-Consertar o titlebody q tá animando errado em Professores.
-
 Intervalo: toda linha sem materia e professor é automaticamente intervalo.
 No frontend, vai ter uma flag "Intervalo". Criar um intervalo já cria um novo cadastro sem matéria e professor.
 

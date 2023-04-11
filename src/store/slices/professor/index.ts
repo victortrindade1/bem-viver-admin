@@ -9,6 +9,9 @@ const initialState: ProfessorState = {
   professorDados: {
     id: 0,
     professor_nome: "",
+    professor_celular: "",
+    professor_telefone: "",
+    professor_email: "",
     professor_cpf: "",
     professor_rg: "",
     professor_data_nascimento: "",
@@ -30,7 +33,7 @@ const initialState: ProfessorState = {
     end_cidade: "",
     createdAt: "",
     updatedAt: "",
-    turmas: [],
+    professor_horario: [],
   },
 };
 
@@ -38,7 +41,7 @@ export const storeProfessor = createAsyncThunk(
   "professor/store",
   async (professorDados: ProfessorDados) => {
     try {
-      const response = await api.post(`/professors`, professorDados);
+      const response = await api.post(`/professores`, professorDados);
 
       toast.success("Dados salvos com sucesso!");
 
@@ -57,7 +60,7 @@ export const updateProfessor = createAsyncThunk(
   async (professorDados: ProfessorDados) => {
     try {
       const response = await api.put(
-        `/professors/${professorDados.id}`,
+        `/professores/${professorDados.id}`,
         professorDados
       );
 
@@ -92,7 +95,7 @@ export const deleteProfessor = createAsyncThunk(
   "professor/delete",
   async (professorId: number) => {
     try {
-      const response = await api.delete(`/professors/${professorId}`);
+      const response = await api.delete(`/professores/${professorId}`);
 
       toast.success("Dados excluídos com sucesso!");
 

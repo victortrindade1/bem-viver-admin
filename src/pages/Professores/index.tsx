@@ -37,10 +37,10 @@ import { TableContainer, CellArrayContainer } from "./styles";
 interface IDataTable {
   id: number;
   professor_nome: string;
-  ano: string[];
+  // ano: string[];
   turma: string[];
   materia: string[];
-  turno: string[];
+  // turno: string[];
 }
 
 const Professores: React.FC = () => {
@@ -121,56 +121,36 @@ const Professores: React.FC = () => {
         header: "Nome",
       },
       {
-        accessorKey: "ano",
-        header: "Ano(s)",
-        Cell: ({ renderedCellValue }: any) => (
-          <CellArrayContainer>
-            {renderedCellValue.length > 0 ? (
-              renderedCellValue.map((item: any) => <Tag label={item} />)
-            ) : (
-              <Tag label={renderedCellValue} />
-            )}
-          </CellArrayContainer>
-        ),
-      },
-      {
         accessorKey: "turma",
         header: "Turma(s)",
         Cell: ({ renderedCellValue }: any) => (
           <CellArrayContainer>
-            {renderedCellValue.length > 0 ? (
-              renderedCellValue.map((item: any) => <Tag label={item} />)
-            ) : (
+            {renderedCellValue.length > 0 &&
+              renderedCellValue.map((item: any) => (
+                <Tag key={`${item}${item.id}`} label={item} />
+              ))}
+            {/* : (
               <Tag label={renderedCellValue} />
-            )}
+            )} */}
           </CellArrayContainer>
         ),
       },
       {
         accessorKey: "materia",
-        header: "Matéria(s)",
-        Cell: ({ renderedCellValue }: any) => (
-          <CellArrayContainer>
-            {renderedCellValue.length > 0 ? (
-              renderedCellValue.map((item: any) => <Tag label={item} />)
-            ) : (
-              <Tag label={renderedCellValue} />
-            )}
-          </CellArrayContainer>
-        ),
-      },
-      {
-        accessorKey: "turno",
-        header: "Turno(s)",
-        Cell: ({ renderedCellValue }: any) => (
-          <CellArrayContainer>
-            {renderedCellValue.length > 0 ? (
-              renderedCellValue.map((item: any) => <Tag label={item} />)
-            ) : (
-              <Tag label={renderedCellValue} />
-            )}
-          </CellArrayContainer>
-        ),
+        header: "Professor(a) de",
+        Cell: ({ renderedCellValue }: any) => {
+          return (
+            <CellArrayContainer>
+              {renderedCellValue.length > 0 &&
+                renderedCellValue.map((item: any) => (
+                  <Tag key={`${item}${item.id}`} label={item} isRandom />
+                ))}
+              {/* : (
+                 <Tag label={renderedCellValue} />
+               )} */}
+            </CellArrayContainer>
+          );
+        },
       },
     ],
     []
@@ -191,7 +171,7 @@ const Professores: React.FC = () => {
             q: filterInput,
           },
         });
-        console.log("response", response);
+
         const professoresResponse = response.data.items;
 
         if (professoresResponse.length === 0) {
@@ -206,37 +186,34 @@ const Professores: React.FC = () => {
           return;
         }
 
-        let anosArray: any = []; // Array com valores únicos
-        let turmasArray: any = [];
-        let materiasArray: any = []; // Array com valores únicos
-        let turnosArray: any = []; // Array com valores únicos
+        let turmaString = "";
+        let turmasArray: any = []; // Array com valores únicos
+        let materiasArray: any = [];
 
         const professoresDataTable: IDataTable[] = professoresResponse.map(
           (professor: ProfessorDados) => {
-            anosArray = [];
+            turmaString = "";
             turmasArray = [];
             materiasArray = [];
-            turnosArray = [];
 
-            professor.turmas?.map((turma: any) => {
-              !anosArray.includes(turma.dados_ano.ano) &&
-                anosArray.push(turma.dados_ano.ano);
-              turmasArray.push(turma.turma);
-              !turnosArray.includes(turma.dados_turno.turno) &&
-                turnosArray.push(turma.dados_turno.turno);
-              return { anosArray, turmasArray, turnosArray };
+            professor.professor_horario?.map((horario: any) => {
+              turmaString = `${horario.dados_turma.turma} - ${horario.dados_turma.dados_turno?.turno} - ${horario.dados_turma.dados_ano?.ano} (${horario.materia_horario?.materia})`;
+
+              !turmasArray.includes(turmaString) &&
+                turmasArray.push(turmaString);
+
+              return { turmasArray };
             });
-            professor.materias?.map((materia: any) =>
+
+            professor.materias_professor?.map((materia: any) =>
               materiasArray.push(materia.materia)
             );
 
             return {
               id: professor.id,
               professor_nome: professor.professor_nome,
-              ano: anosArray.sort(),
-              turma: turmasArray,
-              materia: materiasArray,
-              turno: turnosArray,
+              turma: turmasArray.sort(),
+              materia: materiasArray.sort(),
             };
           }
         );
@@ -316,7 +293,7 @@ const Professores: React.FC = () => {
             control={control}
             errors={errors}
             register={register}
-            placeholder={"Filtrar por Nome, Turma, Ano, Matéria ou Turno"}
+            placeholder={"Nome do(a) professor(a)"}
             type="search"
             variant="outlined"
             onEnter={async (e: any) => {
@@ -341,7 +318,7 @@ const Professores: React.FC = () => {
               isLoading={isLoading}
               isRefetching={isRefetching}
               rowCount={rowCount}
-              actionsLabel="Professor(a)"
+              actionsLabel="Cadastro"
               onPaginationChange={setPagination}
               pagination={pagination}
               onSortingChange={setSorting}

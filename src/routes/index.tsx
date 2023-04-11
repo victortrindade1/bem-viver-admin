@@ -34,6 +34,9 @@ const AnamneseAluno = lazy(() => import("pages/Aluno/Anamnese"));
 const AlunoNew = lazy(() => import("pages/AlunoNew"));
 const Professor = lazy(() => import("pages/Professor"));
 const CadastroProfessor = lazy(() => import("pages/Professor/Cadastro"));
+const DadosProfissionaisProfessor = lazy(
+  () => import("pages/Professor/DadosProfissionais")
+);
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -185,6 +188,14 @@ export default function MyRoutes() {
                   element={
                     <Suspense fallback={<LoadingPage />}>
                       <CadastroProfessor />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="professor/:id/dadosprofissionais"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <DadosProfissionaisProfessor />
                     </Suspense>
                   }
                 />

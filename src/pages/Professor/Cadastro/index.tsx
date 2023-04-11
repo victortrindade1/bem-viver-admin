@@ -5,6 +5,7 @@ import TitleBody from "components/TitleBody";
 import TabsLayout from "components/TabsLayout";
 
 import DadosPessoais from "./DadosPessoais";
+import Contato from "./Contato";
 import Endereco from "./Endereco";
 
 // import { Container } from './styles';
@@ -25,6 +26,10 @@ const Cadastro: React.FC = () => {
     {
       tabLabel: "Dados Pessoais",
       component: DadosPessoais,
+    },
+    {
+      tabLabel: "Contato",
+      component: Contato,
     },
     {
       tabLabel: "Endereço",

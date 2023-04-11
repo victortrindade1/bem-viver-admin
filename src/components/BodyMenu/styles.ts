@@ -37,6 +37,13 @@ export const NavLinkStyled = styled(NavLink)`
   &.active {
     background-color: ${(props) =>
       lighten(0.15, props.theme.palette.primary.main)};
+    color: ${(props) => lighten(0.15, props.theme.palette.primary.dark)};
+
+    svg {
+      color: ${(props) => lighten(0.15, props.theme.palette.primary.dark)};
+    }
+
+    cursor: default !important;
   }
 
   svg {

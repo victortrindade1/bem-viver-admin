@@ -19,7 +19,6 @@ const professoresTableSlice = createSlice({
   initialState,
   reducers: {
     store: (state, action) => {
-      console.log("action", action);
       state.filter = action.payload.filter;
       state.pagination = action.payload.pagination;
       state.sorting = action.payload.sorting;

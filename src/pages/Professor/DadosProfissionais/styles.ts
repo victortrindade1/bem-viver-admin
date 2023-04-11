@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import media from "utils/media";
 
 export const Grid = styled.div`
@@ -14,13 +15,5 @@ export const Grid = styled.div`
     display: grid;
 
     grid-template-columns: 0.4fr 0.4fr;
-  }
-`;
-
-export const IdadeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  > div:nth-child(2) {
-    margin-left: 30px;
   }
 `;

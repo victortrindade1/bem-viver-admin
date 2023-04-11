@@ -1,5 +1,5 @@
 // Escolhe uma das opções de cores do array
-export const stringToColor = function (str: string): string {
+export const stringToListColor = function (str: string): string {
   var colors = [
     // "#e51c23",
     // "#e91e63",
@@ -48,9 +48,8 @@ export const stringToColor = function (str: string): string {
   return colors[hash];
 };
 
-/*
 // Cores estilo random
-export const stringToColor = function (str: string) {
+export const stringToRandomColor = function (str: string) {
   var hash = 0;
   for (var i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -62,4 +61,3 @@ export const stringToColor = function (str: string) {
   }
   return colour;
 };
-*/

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { FaAddressCard, FaExclamationTriangle } from "react-icons/fa";
+import {
+  FaAddressCard,
+  FaExclamationTriangle,
+  FaUniversity,
+  FaBook,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { useAppSelector, useAppDispatch } from "hooks";
@@ -27,20 +32,17 @@ const Professor: React.FC<IChildren> = ({ children }) => {
     {
       label: "Cadastro",
       Icon: FaAddressCard,
-      // url: `/aluno/${aluno.alunoDados?.id}/cadastro`,
-      url: "/",
+      url: `/professor/${professor.professorDados?.id}/cadastro`,
     },
     {
       label: "Dados Profissionais",
-      Icon: FaAddressCard,
-      // url: `/aluno/${aluno.alunoDados?.id}/cadastro`,
-      url: "/",
+      Icon: FaUniversity,
+      url: `/professor/${professor.professorDados?.id}/dadosprofissionais`,
     },
     {
       label: "Dados Escolares",
-      Icon: FaAddressCard,
-      // url: `/aluno/${aluno.alunoDados?.id}/cadastro`,
-      url: "/",
+      Icon: FaBook,
+      url: `/professor/${professor.professorDados?.id}/dadosescolares`,
     },
   ];
 

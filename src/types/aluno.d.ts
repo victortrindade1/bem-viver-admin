@@ -101,6 +101,7 @@ interface TurmaState {
   turno_id: number | null;
   dados_turno: TurnoState | null;
   dados_ano: AnoState | null;
+  materias_horario?: MateriaState[];
 }
 
 interface TurnoState {

@@ -6,6 +6,9 @@ interface ProfessorState {
 interface ProfessorDados {
   id: number;
   professor_nome: string;
+  professor_celular: string;
+  professor_telefone: string;
+  professor_email: string;
   professor_cpf: string;
   professor_rg: string;
   professor_data_nascimento: string;
@@ -27,13 +30,30 @@ interface ProfessorDados {
   end_cidade: string;
   createdAt: string;
   updatedAt: string;
-  turmas?: TurmaState[];
-  materias?: MateriaState[];
+  professor_horario?: {
+    id: number;
+    materia_horario?: {
+      materia: string;
+    };
+    dados_turma?: {
+      turma: string;
+      dados_turno?: {
+        turno: string;
+      };
+      dados_ano?: {
+        ano: string;
+        dados_sistema?: {
+          sistema: string;
+        };
+      };
+    };
+  }[];
+  materias_professor?: MateriaState[];
 }
 
 interface MateriaState {
-  id: number;
+  // id: number;
   materia: string;
-  createdAt: string;
-  updatedAt: string;
+  // createdAt: string;
+  // updatedAt: string;
 }
