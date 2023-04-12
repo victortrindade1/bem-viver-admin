@@ -2,6 +2,8 @@
 
 ## Próximo passo
 
+Tenho q fazer um setFocus pro primeiro input de cada página qnd entra na página
+
 ##########
 
 Estou indo pra page Professor:

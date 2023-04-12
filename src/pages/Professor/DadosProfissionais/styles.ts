@@ -17,3 +17,7 @@ export const Grid = styled.div`
     grid-template-columns: 0.4fr 0.4fr;
   }
 `;
+
+export const SecondAcademicContainer = styled.div`
+  margin-top: 40px;
+`;

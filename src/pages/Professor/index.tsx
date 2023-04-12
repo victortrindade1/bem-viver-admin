@@ -55,7 +55,7 @@ const Professor: React.FC<IChildren> = ({ children }) => {
   return (
     <>
       <DarkSideLayout>
-        {links && (
+        {links && professor.professorDados?.id && (
           <BodyMenu
             links={links}
             clickDelete={

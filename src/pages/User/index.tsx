@@ -152,9 +152,11 @@ const User: React.FC = () => {
             />
             <Button
               label="Alterar senha"
-              width="167px"
+              sx={{
+                width: "167px",
+                margin: "40px 0px",
+              }}
               onClick={handleOpenModal}
-              margin="40px 0px"
             />
             <MuiModal
               open={openModal}

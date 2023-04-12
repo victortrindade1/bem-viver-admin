@@ -3,9 +3,12 @@ interface ProfessorState {
   professorDados: ProfessorDados | null;
 }
 
-interface ProfessorDados {
-  id: number;
+interface StoreProfessor {
   professor_nome: string;
+}
+
+interface ProfessorDados extends StoreProfessor {
+  id: number;
   professor_celular: string;
   professor_telefone: string;
   professor_email: string;

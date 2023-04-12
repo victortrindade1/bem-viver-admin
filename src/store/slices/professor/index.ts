@@ -39,7 +39,7 @@ const initialState: ProfessorState = {
 
 export const storeProfessor = createAsyncThunk(
   "professor/store",
-  async (professorDados: ProfessorDados) => {
+  async (professorDados: StoreProfessor) => {
     try {
       const response = await api.post(`/professores`, professorDados);
 

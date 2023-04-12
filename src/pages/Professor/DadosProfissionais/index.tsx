@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { FaPlus } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectProfessor, updateProfessor } from "store/slices/professor";
@@ -11,9 +12,12 @@ import Breadcrumb from "components/Breadcrumb";
 import TextForm from "components/TextForm";
 import TitleBody from "components/TitleBody";
 
-import { Grid } from "./styles";
+import { Grid, SecondAcademicContainer } from "./styles";
+import Button from "components/Button";
 
 const DadosProfissionais: React.FC = () => {
+  const [hasMoreAcademic, setHasMoreAcademic] = useState(false);
+
   const dispatch = useAppDispatch();
   const professorState = useAppSelector(selectProfessor);
   const professor: any = professorState.professorDados;
@@ -100,6 +104,10 @@ const DadosProfissionais: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    professor?.profissional_formacao_acad_2 && setHasMoreAcademic(true);
+  }, [professor]);
+
   return (
     <div>
       <Breadcrumb links={linksBreadcrumb} />
@@ -159,7 +167,7 @@ const DadosProfissionais: React.FC = () => {
           <TextForm
             register={register}
             name="profissional_formacao_acad_1"
-            label="Formação Acadêmica 1"
+            label="Formação Acadêmica"
             onEnter={() => {
               setFocus("profissional_instituicao_1");
             }}
@@ -171,7 +179,7 @@ const DadosProfissionais: React.FC = () => {
           <TextForm
             register={register}
             name="profissional_instituicao_1"
-            label="Instituição 1"
+            label="Instituição"
             onEnter={() => {
               setFocus("profissional_grau_formacao_1");
             }}
@@ -183,7 +191,7 @@ const DadosProfissionais: React.FC = () => {
           <TextForm
             register={register}
             name="profissional_grau_formacao_1"
-            label="Grau de Formação 1"
+            label="Grau de Formação"
             onEnter={() => {
               setFocus("profissional_formacao_acad_2");
             }}
@@ -191,41 +199,56 @@ const DadosProfissionais: React.FC = () => {
             control={control}
             errors={errors}
           />
-          <TextForm
-            register={register}
-            name="profissional_formacao_acad_2"
-            label="Formação Acadêmica 2"
-            onEnter={() => {
-              setFocus("profissional_instituicao_2");
-            }}
-            onBlur={onSubmit}
-            control={control}
-            errors={errors}
-            width={"100%"}
-          />
-          <TextForm
-            register={register}
-            name="profissional_instituicao_2"
-            label="Instituição 2"
-            onEnter={() => {
-              setFocus("profissional_grau_formacao_2");
-            }}
-            onBlur={onSubmit}
-            control={control}
-            errors={errors}
-            width={"100%"}
-          />
-          <TextForm
-            register={register}
-            name="profissional_grau_formacao_2"
-            label="Grau de Formação 2"
-            onEnter={() => {
-              setFocus("profissional_registro_cfep");
-            }}
-            onBlur={onSubmit}
-            control={control}
-            errors={errors}
-          />
+          {!hasMoreAcademic ? (
+            <Button
+              label={<FaPlus />}
+              onClick={setHasMoreAcademic}
+              sx={{
+                height: "30px",
+                width: "30px !important",
+                padding: "0px",
+                minWidth: "0px",
+              }}
+            />
+          ) : (
+            <SecondAcademicContainer>
+              <TextForm
+                register={register}
+                name="profissional_formacao_acad_2"
+                label="Formação Acadêmica 2"
+                onEnter={() => {
+                  setFocus("profissional_instituicao_2");
+                }}
+                onBlur={onSubmit}
+                control={control}
+                errors={errors}
+                width={"100%"}
+              />
+              <TextForm
+                register={register}
+                name="profissional_instituicao_2"
+                label="Instituição 2"
+                onEnter={() => {
+                  setFocus("profissional_grau_formacao_2");
+                }}
+                onBlur={onSubmit}
+                control={control}
+                errors={errors}
+                width={"100%"}
+              />
+              <TextForm
+                register={register}
+                name="profissional_grau_formacao_2"
+                label="Grau de Formação 2"
+                onEnter={() => {
+                  setFocus("profissional_registro_cfep");
+                }}
+                onBlur={onSubmit}
+                control={control}
+                errors={errors}
+              />
+            </SecondAcademicContainer>
+          )}
         </div>
       </Grid>
     </div>

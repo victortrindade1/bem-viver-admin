@@ -20,10 +20,8 @@ interface IBodyMenu {
 }
 
 interface IButton {
-  label: string;
+  label: string | IconType;
   type?: "button" | "reset" | "submit";
-  width?: string;
-  margin?: string;
-  // onClick?: (e?: any) => void;
   onClick?: any;
+  sx?: any;
 }

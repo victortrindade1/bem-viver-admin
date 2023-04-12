@@ -142,6 +142,11 @@ const AlunoNew: React.FC = () => {
     },
   ];
 
+  // Foco no primeiro input se é novo
+  useEffect(() => {
+    setFocus("nome");
+  }, [setFocus]);
+
   return (
     <>
       <DarkSideLayout />
