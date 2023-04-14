@@ -37,6 +37,9 @@ const CadastroProfessor = lazy(() => import("pages/Professor/Cadastro"));
 const DadosProfissionaisProfessor = lazy(
   () => import("pages/Professor/DadosProfissionais")
 );
+const DadosEscolaresProfessor = lazy(
+  () => import("pages/Professor/DadosEscolares")
+);
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -196,6 +199,14 @@ export default function MyRoutes() {
                   element={
                     <Suspense fallback={<LoadingPage />}>
                       <DadosProfissionaisProfessor />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="professor/:id/dadosescolares"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <DadosEscolaresProfessor />
                     </Suspense>
                   }
                 />

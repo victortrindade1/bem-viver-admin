@@ -34,6 +34,7 @@ const initialState: ProfessorState = {
     createdAt: "",
     updatedAt: "",
     professor_horario: [],
+    materias_professor: [],
   },
 };
 

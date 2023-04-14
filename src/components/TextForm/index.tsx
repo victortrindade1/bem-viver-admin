@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import TextField from "@mui/material/TextField";
-import { FormControl, FormHelperText } from "@mui/material";
+import { Autocomplete, FormControl, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -19,6 +19,7 @@ import {
 import { Container } from "./styles";
 
 const TextForm: React.FC<ITextForm> = ({
+  // refAutocomplete,
   maskType,
   register,
   name,
@@ -34,6 +35,7 @@ const TextForm: React.FC<ITextForm> = ({
   errors,
   disabled = false,
   variant = "standard",
+  options,
   ...rest
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -79,6 +81,11 @@ const TextForm: React.FC<ITextForm> = ({
       if (event.key === "Enter") {
         if (event.target) {
           event.preventDefault();
+          // console.log(event);
+          // if (refAutocomplete) {
+          //   event.target.value = refAutocomplete.current.state.focusedOption;
+          // }
+          // refAutocomplete && event.target.value = refAutocomplete.current.state.focusedOption;
           onEnter && onEnter(event);
         } else {
           onEnter && onEnter();
@@ -94,6 +101,61 @@ const TextForm: React.FC<ITextForm> = ({
     };
   }, [onEnter, errors, name]);
 
+  const TextFieldComponent = ({
+    onBlur,
+    onChange,
+    ref,
+    value,
+    error,
+    formState,
+    params,
+  }: any) => (
+    <TextField
+      {...register(name)}
+      onBlur={onBlur}
+      onChange={(e: any) =>
+        maskType ? onChange(handleOnChange(e)) : onChange(e)
+      }
+      inputRef={ref}
+      name={name}
+      id={name}
+      label={label}
+      key={name}
+      fullWidth
+      variant={variant}
+      value={value}
+      margin="normal"
+      required={isRequired}
+      type={showPassword ? "text" : type}
+      multiline={isMultiline}
+      placeholder={placeholder}
+      error={!!error}
+      helperText={!!formState.errors?.message}
+      disabled={disabled || formState.isSubmitting}
+      InputProps={{
+        endAdornment: (type === "password" || type === "search") && (
+          <InputAdornment position="end">
+            {type === "password" ? (
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            ) : (
+              <IconButton aria-label="search input">
+                <Search />
+              </IconButton>
+            )}
+          </InputAdornment>
+        ),
+      }}
+      {...rest}
+      {...params}
+    />
+  );
+
   return (
     <Container width={width} minWidth={minWidth}>
       <FormControl error={Boolean(errors[name])} variant={variant} fullWidth>
@@ -106,50 +168,38 @@ const TextForm: React.FC<ITextForm> = ({
             fieldState: { error },
             formState,
           }) => {
-            return (
-              <TextField
-                {...register(name)}
-                onBlur={onBlur}
-                onChange={(e: any) =>
-                  maskType ? onChange(handleOnChange(e)) : onChange(e)
-                }
-                inputRef={ref}
+            return options ? (
+              // Input com lista de opções (ComboBox)
+              <Autocomplete
                 id={name}
-                name={name}
-                label={label}
-                key={name}
-                fullWidth
-                variant={variant}
-                value={value}
-                margin="normal"
-                required={isRequired}
-                type={showPassword ? "text" : type}
-                multiline={isMultiline}
-                placeholder={placeholder}
-                error={!!error}
-                helperText={!!formState.errors?.message}
-                disabled={disabled || formState.isSubmitting}
-                InputProps={{
-                  endAdornment: (type === "password" || type === "search") && (
-                    <InputAdornment position="end">
-                      {type === "password" ? (
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      ) : (
-                        <IconButton aria-label="search input">
-                          <Search />
-                        </IconButton>
-                      )}
-                    </InputAdornment>
-                  ),
-                }}
-                {...rest}
+                // ref={refAutocomplete}
+                autoHighlight
+                autoComplete
+                autoSelect
+                options={options}
+                disablePortal // Dropdown abaixo do input na msm div
+                renderInput={(params) =>
+                  TextFieldComponent({
+                    params,
+                    onBlur,
+                    onChange,
+                    ref,
+                    value,
+                    error,
+                    formState,
+                  })
+                }
               />
+            ) : (
+              // Input comum
+              TextFieldComponent({
+                onBlur,
+                onChange,
+                ref,
+                value,
+                error,
+                formState,
+              })
             );
           }}
         />

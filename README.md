@@ -2,18 +2,7 @@
 
 ## Próximo passo
 
-Tenho q fazer um setFocus pro primeiro input de cada página qnd entra na página
-
 ##########
-
-Estou indo pra page Professor:
-Vai ter os links do menu:
-
-- Cadastro
-  - Dados Pessoais
-  - Endereço
-- Dados Profissionais
-- Dados Escolares
 
 Em Dados Escolares, vai perguntar as matérias que leciona. Não vai precisar ser necessariamente o que vai dar de matéria na escola.
 Quando perguntar a matéria, vai mostrar todas e verificar se já existe. Se não existe, já vai salvar sozinho no banco a nova matéria.

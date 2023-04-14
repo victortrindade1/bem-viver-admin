@@ -1,0 +1,102 @@
+import React, { useMemo, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
+import { useAppDispatch, useAppSelector } from "hooks";
+import {
+  storeMateria,
+  selectDadosEscolares,
+} from "store/slices/dadosEscolares";
+import { updateProfessor, selectProfessor } from "store/slices/professor";
+
+import TextForm from "components/TextForm";
+
+import { Container } from "./styles";
+
+const Materias: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const dadosEscolaresState = useAppSelector(selectDadosEscolares);
+  const materiasState = dadosEscolaresState?.dados?.materias;
+  const materias = materiasState.map((item: any) => item.materia);
+
+  const professorState = useAppSelector(selectProfessor);
+  const professor = professorState.professorDados;
+
+  const validationSchema = Yup.object().shape({
+    materia: Yup.string(),
+  });
+
+  const defaultValues: any = useMemo(() => ({ materia: "" }), []);
+
+  const {
+    control,
+    formState: { errors },
+    register,
+    // setFocus,
+    setValue,
+  } = useForm({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+
+  const onSubmitMateria = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+
+      // Não atualiza se não mudar valor
+      if (e.target.value === "") return;
+
+      // Se matéria não existe, salva no banco "materias" nova matéria
+      let materia;
+      if (!materias.includes(e.target.value)) {
+        // Matéria é nova matéria
+        const response: any = await dispatch(
+          storeMateria({
+            materia: e.target.value,
+          })
+        );
+        materia = response.payload.data;
+      } else {
+        // Matéria já existe. Acha seus dados
+        materia = materiasState?.find(
+          (item: any) => item.materia === e.target.value
+        );
+      }
+
+      setValue("materia", "");
+
+      // Salva relação professores_materias
+      const dataSubmit: any = {
+        id: professor?.id,
+        materias: [materia.id],
+      };
+      await dispatch(updateProfessor(dataSubmit));
+    },
+    [dispatch, materias, materiasState, professor, setValue]
+  );
+
+  return (
+    <Container>
+      <TextForm
+        // refAutocomplete={refAutocomplete}
+        register={register}
+        name="materia"
+        label="Adicionar Matéria"
+        onEnter={(e: any) => {
+          e.target.blur();
+        }}
+        onBlur={onSubmitMateria}
+        control={control}
+        errors={errors}
+        options={materias}
+        width="100%"
+      />
+    </Container>
+  );
+};
+
+export default Materias;

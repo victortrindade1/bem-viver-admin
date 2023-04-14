@@ -60,3 +60,7 @@ interface MateriaState {
   // createdAt: string;
   // updatedAt: string;
 }
+
+// interface StoreMateria {
+//   materia: string;
+// }
