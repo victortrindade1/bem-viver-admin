@@ -17,6 +17,7 @@ interface ITextForm {
   type?: string;
   width?: string;
   minWidth?: string;
+  maxWidth?: string;
   isMultiline?: boolean;
   placeholder?: string;
   control: any;

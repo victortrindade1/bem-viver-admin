@@ -57,6 +57,9 @@ interface ProfessorDados extends StoreProfessor {
 interface MateriaState {
   // id: number;
   materia: string;
+  professores_materias?: {
+    id: number;
+  };
   // createdAt: string;
   // updatedAt: string;
 }

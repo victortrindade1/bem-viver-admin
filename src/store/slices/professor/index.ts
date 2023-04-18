@@ -108,6 +108,24 @@ export const deleteProfessor = createAsyncThunk(
   }
 );
 
+export const deleteProfessorMateria = createAsyncThunk(
+  "professor/delete/professormateria",
+  async ({ professorMateriaId, professorId }: any) => {
+    try {
+      await api.delete(`/professormateria/${professorMateriaId}`);
+
+      const professor = await api.get(`/professores/${professorId}`);
+
+      toast.success("Dados excluídos com sucesso!");
+
+      return professor;
+    } catch (error) {
+      toast.error("Não foi possível excluir dados.");
+      throw new Error("Não foi possível excluir dados.");
+    }
+  }
+);
+
 const professorSlice = createSlice({
   name: "professor",
   initialState,
@@ -163,6 +181,18 @@ const professorSlice = createSlice({
         state.professorDados = null;
       })
       .addCase(deleteProfessor.rejected, (state, action: any) => {
+        state.statusAsync = "failed";
+        console.log(action);
+      })
+      // delete relação professor-materia
+      .addCase(deleteProfessorMateria.pending, (state) => {
+        state.statusAsync = "loading";
+      })
+      .addCase(deleteProfessorMateria.fulfilled, (state, action: any) => {
+        state.statusAsync = "idle";
+        state.professorDados = action.payload.data;
+      })
+      .addCase(deleteProfessorMateria.rejected, (state, action: any) => {
         state.statusAsync = "failed";
         console.log(action);
       });

@@ -290,7 +290,7 @@ const Alunos: React.FC = () => {
               isRefetching={isRefetching}
               rowCount={rowCount}
               onClick={handleSelectAluno}
-              actionsLabel="Aluno"
+              actionsLabel="Cadastro"
               onPaginationChange={setPagination}
               pagination={pagination}
               onSortingChange={setSorting}

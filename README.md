@@ -4,9 +4,6 @@
 
 ##########
 
-Em Dados Escolares, vai perguntar as matérias que leciona. Não vai precisar ser necessariamente o que vai dar de matéria na escola.
-Quando perguntar a matéria, vai mostrar todas e verificar se já existe. Se não existe, já vai salvar sozinho no banco a nova matéria.
-
 Na tela, terá uma tabela das matérias já cadastradas do professor e outra tabela das turmas que já atua.
 
 Não vai poder cadastrar turma pro professor aqui. isso vai acontecer no momento que montar o horário.

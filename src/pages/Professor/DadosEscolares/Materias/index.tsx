@@ -2,17 +2,29 @@ import React, { useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import type { MRT_ColumnDef } from "material-react-table";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import {
   storeMateria,
   selectDadosEscolares,
 } from "store/slices/dadosEscolares";
-import { updateProfessor, selectProfessor } from "store/slices/professor";
+import {
+  updateProfessor,
+  selectProfessor,
+  deleteProfessorMateria,
+} from "store/slices/professor";
 
 import TextForm from "components/TextForm";
+import MinimalTable from "components/MinimalTable";
 
-import { Container } from "./styles";
+import { Container, ComboboxContainer, MateriasTableContainer } from "./styles";
+
+interface IDataMateriasTablePageProfessor {
+  id: number;
+  materia: string;
+}
 
 const Materias: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,11 +42,21 @@ const Materias: React.FC = () => {
 
   const defaultValues: any = useMemo(() => ({ materia: "" }), []);
 
+  const columns = useMemo<MRT_ColumnDef<IDataMateriasTablePageProfessor>[]>(
+    () => [
+      {
+        accessorKey: "materia",
+        header: "Matéria",
+        minSize: 400,
+      },
+    ],
+    []
+  );
+
   const {
     control,
     formState: { errors },
     register,
-    // setFocus,
     setValue,
   } = useForm({
     defaultValues,
@@ -79,22 +101,41 @@ const Materias: React.FC = () => {
     [dispatch, materias, materiasState, professor, setValue]
   );
 
+  const handleDeleteMateria = async (prop: any) => {
+    await dispatch(
+      deleteProfessorMateria({
+        professorMateriaId: prop.professores_materias.id,
+        professorId: professor?.id,
+      })
+    );
+  };
   return (
     <Container>
-      <TextForm
-        // refAutocomplete={refAutocomplete}
-        register={register}
-        name="materia"
-        label="Adicionar Matéria"
-        onEnter={(e: any) => {
-          e.target.blur();
-        }}
-        onBlur={onSubmitMateria}
-        control={control}
-        errors={errors}
-        options={materias}
-        width="100%"
-      />
+      <ComboboxContainer>
+        <TextForm
+          register={register}
+          name="materia"
+          label="Adicionar Matéria"
+          onEnter={(e: any) => {
+            e.target.blur();
+          }}
+          onBlur={onSubmitMateria}
+          control={control}
+          errors={errors}
+          options={materias}
+          width="100%"
+          maxWidth="470px"
+        />
+      </ComboboxContainer>
+
+      <MateriasTableContainer>
+        <MinimalTable
+          onClick={handleDeleteMateria}
+          columns={columns}
+          data={professor?.materias_professor}
+          ActionIcon={<FaTrashAlt size={15} />}
+        />
+      </MateriasTableContainer>
     </Container>
   );
 };

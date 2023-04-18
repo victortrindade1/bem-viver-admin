@@ -29,6 +29,7 @@ const TextForm: React.FC<ITextForm> = ({
   type,
   width = "167px",
   minWidth = "80px",
+  maxWidth,
   isMultiline = false,
   placeholder,
   control,
@@ -157,7 +158,7 @@ const TextForm: React.FC<ITextForm> = ({
   );
 
   return (
-    <Container width={width} minWidth={minWidth}>
+    <Container width={width} minWidth={minWidth} maxWidth={maxWidth}>
       <FormControl error={Boolean(errors[name])} variant={variant} fullWidth>
         <Controller
           name={name}
