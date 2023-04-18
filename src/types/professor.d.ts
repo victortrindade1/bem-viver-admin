@@ -33,27 +33,28 @@ interface ProfessorDados extends StoreProfessor {
   end_cidade: string;
   createdAt: string;
   updatedAt: string;
-  professor_horario?: {
-    id: number;
-    materia_horario?: {
-      materia: string;
-    };
-    dados_turma?: {
-      turma: string;
-      dados_turno?: {
-        turno: string;
-      };
-      dados_ano?: {
-        ano: string;
-        dados_sistema?: {
-          sistema: string;
-        };
-      };
-    };
-  }[];
+  professor_horario?: ProfessorHorario[];
   materias_professor?: MateriaState[];
 }
 
+interface ProfessorHorario {
+  id: number;
+  materia_horario?: {
+    materia: string;
+  };
+  dados_turma?: {
+    turma: string;
+    dados_turno?: {
+      turno: string;
+    };
+    dados_ano?: {
+      ano: string;
+      dados_sistema?: {
+        sistema: string;
+      };
+    };
+  };
+}
 interface MateriaState {
   // id: number;
   materia: string;

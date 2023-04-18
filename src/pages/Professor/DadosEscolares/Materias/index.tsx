@@ -21,7 +21,7 @@ import MinimalTable from "components/MinimalTable";
 
 import { Container, ComboboxContainer, MateriasTableContainer } from "./styles";
 
-interface IDataMateriasTablePageProfessor {
+interface IDataTable {
   id: number;
   materia: string;
 }
@@ -42,7 +42,7 @@ const Materias: React.FC = () => {
 
   const defaultValues: any = useMemo(() => ({ materia: "" }), []);
 
-  const columns = useMemo<MRT_ColumnDef<IDataMateriasTablePageProfessor>[]>(
+  const columns = useMemo<MRT_ColumnDef<IDataTable>[]>(
     () => [
       {
         accessorKey: "materia",
@@ -134,6 +134,8 @@ const Materias: React.FC = () => {
           columns={columns}
           data={professor?.materias_professor}
           ActionIcon={<FaTrashAlt size={15} />}
+          actionIconColor="#00000050"
+          tooltipLabel="Excluir"
         />
       </MateriasTableContainer>
     </Container>

@@ -11,6 +11,8 @@ interface IMinimalTable {
   actionsLabel?: string;
   onClick: any;
   ActionIcon?: any;
+  tooltipLabel?: string;
+  actionIconColor?: string;
 }
 
 const MinimalTable: React.FC<IMinimalTable> = ({
@@ -19,6 +21,8 @@ const MinimalTable: React.FC<IMinimalTable> = ({
   actionsLabel = "",
   onClick,
   ActionIcon,
+  actionIconColor,
+  tooltipLabel = "",
 }) => {
   return (
     <MaterialReactTable
@@ -37,8 +41,8 @@ const MinimalTable: React.FC<IMinimalTable> = ({
       }}
       enableRowActions
       renderRowActions={({ row, table }) => (
-        <ActionContainer>
-          <Tooltip arrow placement="left" title="Excluir">
+        <ActionContainer actionIconColor={actionIconColor}>
+          <Tooltip arrow placement="left" title={tooltipLabel}>
             <IconButton onClick={() => onClick(row.original)}>
               {ActionIcon}
             </IconButton>
