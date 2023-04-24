@@ -79,6 +79,9 @@ const DadosProfissionais: React.FC = () => {
       profissional_serie_carteira_trabalho:
         professor?.profissional_serie_carteira_trabalho || "",
       profissional_nis_pis: professor?.profissional_nis_pis || "",
+      profissional_data_matricula: professor?.profissional_data_matricula || "",
+      profissional_data_encerramento:
+        professor?.profissional_data_encerramento || "",
       ativo: professor?.ativo || false,
     }),
     [professor]
@@ -139,6 +142,10 @@ const DadosProfissionais: React.FC = () => {
         dataSubmit.profissional_data_matricula = format(
           new Date(),
           "dd/MM/yyyy"
+        );
+        setValue(
+          "profissional_data_matricula",
+          format(new Date(), "dd/MM/yyyy")
         );
       } else {
         dataSubmit.profissional_data_encerramento = format(
@@ -230,6 +237,26 @@ const DadosProfissionais: React.FC = () => {
             errors={errors}
             width={"200px"}
           />
+          <TextForm
+            register={register}
+            name="profissional_data_matricula"
+            label="Data de Matrícula"
+            maskType="date"
+            disabled
+            control={control}
+            errors={errors}
+          />
+          {professor?.profissional_data_encerramento && (
+            <TextForm
+              register={register}
+              name="profissional_data_encerramento"
+              label="Data de Encerramento"
+              maskType="date"
+              disabled
+              control={control}
+              errors={errors}
+            />
+          )}
           <AtivoContainer>
             <SwitchForm
               label="Professor Ativo"

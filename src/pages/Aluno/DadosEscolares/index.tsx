@@ -189,6 +189,10 @@ const DadosEscolares: React.FC = () => {
           new Date(),
           "dd/MM/yyyy"
         );
+        setValue(
+          "dados_escolares_data_matricula",
+          format(new Date(), "dd/MM/yyyy")
+        );
       } else {
         dataSubmit.dados_escolares_data_encerramento = format(
           new Date(),

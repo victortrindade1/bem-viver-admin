@@ -2,14 +2,7 @@
 
 ## Próximo passo
 
-Tirar botão de excluir do menu. O botão aparecerá apenas se a opção "ativo"
-estiver desativada. Será um botão sem lixeira, será escrito "Excluir Permanentemente" pequeno e vermelho.
-
 Vou fazer Turmas. Será tradicional, como o restante. Será como no figma.
-
-No backend:
-
-Criar campos de desligamento do professor, com boolean pra ativo, data de desligamento
 
 Tirar nome do usuário do header qnd for mobile.
 
@@ -28,8 +21,6 @@ Fazer um monte de loading... tem q ter pra cada consulta no backend.
 Usar datepicker do Mui.
 
 Tem um problema chatinho q nao sei o pq acontece: qnd eu volto a usar o programa no outro dia, ele nao recebe a api, só qnd desloga e loga. senao, dá token invalido.
-
-To pensando seriamente em tirar a animação do title body. to vendo q não tem feito sentido ter, uma vez q só tem aparecido um por tela
 
 ## Login
 

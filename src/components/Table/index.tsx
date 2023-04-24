@@ -4,6 +4,8 @@ import { MRT_Localization_PT_BR } from "material-react-table/locales/pt-BR";
 import { IconButton, Tooltip } from "@mui/material";
 import { FaAddressCard } from "react-icons/fa";
 
+import { ActionContainer } from "./styles";
+
 interface ITable {
   columns: any;
   data: any;
@@ -70,13 +72,13 @@ const Table: React.FC<ITable> = ({
       enableRowActions
       enableColumnResizing
       renderRowActions={({ row, table }) => (
-        <div>
+        <ActionContainer>
           <Tooltip arrow placement="left" title="Cadastro">
             <IconButton onClick={() => onClick(row.original)}>
               <FaAddressCard />
             </IconButton>
           </Tooltip>
-        </div>
+        </ActionContainer>
       )}
       getRowId={(row: any) => row?.data?.id}
       muiToolbarAlertBannerProps={

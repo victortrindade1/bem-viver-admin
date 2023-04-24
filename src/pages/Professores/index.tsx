@@ -285,10 +285,7 @@ const Professores: React.FC = () => {
         <>
           <Breadcrumb links={linksBreadcrumb} />
 
-          <TitleBody
-            titleLabel="Consultar professores(as)"
-            customFinalScroll={10000}
-          />
+          <TitleBody titleLabel="Consultar professores(as)" />
 
           <TextForm
             name={"search"}

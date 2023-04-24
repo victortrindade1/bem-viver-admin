@@ -7,8 +7,6 @@ import { Container } from "./styles";
 
 interface ITitleBody {
   titleLabel: string;
-  editedInitialScroll?: number | null;
-  customFinalScroll?: number | null;
 }
 
 /**
