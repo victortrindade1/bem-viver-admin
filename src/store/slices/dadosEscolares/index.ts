@@ -96,7 +96,6 @@ const dadosEscolaresSlice = createSlice({
         state.statusAsync = "loading";
       })
       .addCase(storeMateria.fulfilled, (state: any, action: any) => {
-        console.log(action.payload);
         state.statusAsync = "idle";
         state.dados.materias = [...state.dados.materias, action.payload.data];
       })

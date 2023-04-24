@@ -4,19 +4,44 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { FaPlus } from "react-icons/fa";
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "hooks";
-import { selectProfessor, updateProfessor } from "store/slices/professor";
+import {
+  selectProfessor,
+  updateProfessor,
+  deleteProfessor,
+} from "store/slices/professor";
 
 import Breadcrumb from "components/Breadcrumb";
 import TextForm from "components/TextForm";
 import TitleBody from "components/TitleBody";
-
-import { Grid, SecondAcademicContainer } from "./styles";
+import SwitchForm from "components/SwitchForm";
+import MuiModal from "components/MuiModal";
 import Button from "components/Button";
 
+import {
+  Grid,
+  SecondAcademicContainer,
+  AtivoContainer,
+  ExcluirContainer,
+  ModalText,
+} from "./styles";
+import theme from "styles/theme";
+
 const DadosProfissionais: React.FC = () => {
+  const navigate = useNavigate();
+
   const [hasMoreAcademic, setHasMoreAcademic] = useState(false);
+
+  // States modal Excluir Professor
+  const [openModalExcluir, setOpenModalExcluir] = useState(false);
+  const handleOpenModalExcluir = () => {
+    setOpenModalExcluir(true);
+  };
+  const handleCloseModalExcluir = () => setOpenModalExcluir(false);
 
   const dispatch = useAppDispatch();
   const professorState = useAppSelector(selectProfessor);
@@ -33,6 +58,7 @@ const DadosProfissionais: React.FC = () => {
     profissional_num_carteira_trabalho: Yup.string(),
     profissional_serie_carteira_trabalho: Yup.string(),
     profissional_nis_pis: Yup.string(),
+    ativo: Yup.boolean(),
   });
 
   const defaultValues: any = useMemo(
@@ -53,6 +79,7 @@ const DadosProfissionais: React.FC = () => {
       profissional_serie_carteira_trabalho:
         professor?.profissional_serie_carteira_trabalho || "",
       profissional_nis_pis: professor?.profissional_nis_pis || "",
+      ativo: professor?.ativo || false,
     }),
     [professor]
   );
@@ -61,6 +88,7 @@ const DadosProfissionais: React.FC = () => {
     control,
     register,
     setFocus,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -92,6 +120,46 @@ const DadosProfissionais: React.FC = () => {
     },
     [dispatch, professor, defaultValues]
   );
+
+  // Switch ATIVO/INATIVO
+  const onSubmitSwitch = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+
+      if (defaultValues[e.target.name] === e.target.checked) {
+        return;
+      }
+
+      const dataSubmit: any = {
+        id: professor.id,
+        [e.target.name]: e.target.checked,
+      };
+
+      if (e.target.checked) {
+        dataSubmit.profissional_data_matricula = format(
+          new Date(),
+          "dd/MM/yyyy"
+        );
+      } else {
+        dataSubmit.profissional_data_encerramento = format(
+          new Date(),
+          "dd/MM/yyyy"
+        );
+        setValue(
+          "profissional_data_encerramento",
+          format(new Date(), "dd/MM/yyyy")
+        );
+      }
+
+      await dispatch(updateProfessor(dataSubmit));
+    },
+    [dispatch, professor, defaultValues, setValue]
+  );
+
+  const handleDeleteProfessor = async () => {
+    professor.id && (await dispatch(deleteProfessor(professor.id)));
+    navigate("/professores");
+  };
 
   const linksBreadcrumb = [
     {
@@ -162,6 +230,19 @@ const DadosProfissionais: React.FC = () => {
             errors={errors}
             width={"200px"}
           />
+          <AtivoContainer>
+            <SwitchForm
+              label="Professor Ativo"
+              name="ativo"
+              control={control}
+              onChange={onSubmitSwitch}
+            />
+            {professor?.ativo === false && (
+              <ExcluirContainer onClick={handleOpenModalExcluir}>
+                Excluir Permanentemente
+              </ExcluirContainer>
+            )}
+          </AtivoContainer>
         </div>
         <div>
           <TextForm
@@ -251,6 +332,19 @@ const DadosProfissionais: React.FC = () => {
           )}
         </div>
       </Grid>
+      <MuiModal
+        open={openModalExcluir}
+        handleClose={handleCloseModalExcluir}
+        title="Excluir Permanentemente"
+        onSubmit={handleDeleteProfessor}
+        icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
+        labelButton="EXCLUIR"
+      >
+        <ModalText>
+          Este professor terá seus dados excluídos permanentemente. Deseja
+          continuar?
+        </ModalText>
+      </MuiModal>
     </div>
   );
 };

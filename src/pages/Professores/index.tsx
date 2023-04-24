@@ -221,8 +221,12 @@ const Professores: React.FC = () => {
 
         setRowCount(response.data.total);
       } catch (error) {
+        console.log({ error });
         toast.error("Não foi possível carregar os dados.");
+
         setIsError(true);
+        setIsLoading(false);
+        setIsRefetching(false);
         return;
       }
       setIsError(false);

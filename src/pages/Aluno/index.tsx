@@ -1,32 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   FaAddressCard,
   FaAddressBook,
   FaGraduationCap,
   FaHeartbeat,
   FaMoneyCheckAlt,
-  FaExclamationTriangle,
+  FaBookReader,
 } from "react-icons/fa";
 
-import { useAppSelector, useAppDispatch } from "hooks";
-import { selectAluno, deleteAluno } from "store/slices/aluno";
+import { useAppSelector } from "hooks";
+import { selectAluno } from "store/slices/aluno";
 import { IChildren } from "types/layout";
 
 import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
-import MuiModal from "components/MuiModal";
+// import MuiModal from "components/MuiModal";
 
-import theme from "styles/theme";
+// import theme from "styles/theme";
 
 const Aluno: React.FC<IChildren> = ({ children }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+  // const [openModal, setOpenModal] = useState(false);
+  // const handleOpenModal = () => setOpenModal(true);
+  // const handleCloseModal = () => setOpenModal(false);
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useAppDispatch();
   const aluno = useAppSelector(selectAluno);
 
   const links = [
@@ -51,27 +50,30 @@ const Aluno: React.FC<IChildren> = ({ children }) => {
       url: `/aluno/${aluno.alunoDados?.id}/anamnese`,
     },
     {
-      label: "Cobranças",
+      label: "Pagamentos",
       Icon: FaMoneyCheckAlt,
+      url: "/alunos",
+    },
+    {
+      label: "Histórico Escolar",
+      Icon: FaBookReader,
       url: "/alunos",
     },
   ];
 
-  const handleDeleteAluno = async () => {
-    aluno.alunoDados?.id && (await dispatch(deleteAluno(aluno.alunoDados?.id)));
-    navigate("/alunos");
-  };
+  // const handleDeleteAluno = async () => {
+  //   aluno.alunoDados?.id && (await dispatch(deleteAluno(aluno.alunoDados?.id)));
+  //   navigate("/alunos");
+  // };
 
   return (
     <>
-      <DarkSideLayout>
-        {links && <BodyMenu links={links} clickDelete={handleOpenModal} />}
-      </DarkSideLayout>
+      <DarkSideLayout>{links && <BodyMenu links={links} />}</DarkSideLayout>
       <LightSideLayout titleLabel={aluno.alunoDados?.nome}>
         {children}
       </LightSideLayout>
 
-      <MuiModal
+      {/* <MuiModal
         title="Excluir Permanentemente"
         open={openModal}
         handleClose={handleCloseModal}
@@ -83,7 +85,7 @@ const Aluno: React.FC<IChildren> = ({ children }) => {
           Este aluno terá seus dados excluídos permanentemente. Deseja
           continuar?
         </div>
-      </MuiModal>
+      </MuiModal> */}
     </>
   );
 };

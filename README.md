@@ -2,16 +2,10 @@
 
 ## Próximo passo
 
-##########
+Tirar botão de excluir do menu. O botão aparecerá apenas se a opção "ativo"
+estiver desativada. Será um botão sem lixeira, será escrito "Excluir Permanentemente" pequeno e vermelho.
 
-Na tela, terá uma tabela das matérias já cadastradas do professor e outra tabela das turmas que já atua.
-
-Não vai poder cadastrar turma pro professor aqui. isso vai acontecer no momento que montar o horário.
-
-##########
-
-Intervalo: toda linha sem materia e professor é automaticamente intervalo.
-No frontend, vai ter uma flag "Intervalo". Criar um intervalo já cria um novo cadastro sem matéria e professor.
+Vou fazer Turmas. Será tradicional, como o restante. Será como no figma.
 
 No backend:
 
@@ -46,6 +40,10 @@ Nessa tela tem nome, tem edição do e-mail, nova senha e confirmação da nova 
 Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criarei o usuário admin inicial. O próximo já tem que ser criação do próprio usuário.
 
 ## Talvez pro futuro
+
+- Interface do Professor.
+  O professor emite notas, aprova alunos, emite presença, consulta histórico de notas
+  e presenças dos alunos.
 
 - Página inicial de cada aluno. Qnd seleciona o aluno, não ir pra página de cadastro, e sim pra página do aluno, onde tem informações gerais mais rápido. Lá teria:
 

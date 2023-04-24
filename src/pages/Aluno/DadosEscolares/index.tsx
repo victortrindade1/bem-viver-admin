@@ -5,9 +5,10 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "hooks";
-import { selectAluno, updateAluno } from "store/slices/aluno";
+import { selectAluno, updateAluno, deleteAluno } from "store/slices/aluno";
 import { selectDadosEscolares } from "store/slices/dadosEscolares";
 
 import TitleBody from "components/TitleBody";
@@ -17,15 +18,25 @@ import SwitchForm from "components/SwitchForm";
 import MuiModal from "components/MuiModal";
 import Breadcrumb from "components/Breadcrumb";
 
-import { Grid, ModalText } from "./styles";
+import { Grid, ModalText, ExcluirContainer, AtivoContainer } from "./styles";
 import theme from "styles/theme";
 
 const DadosEscolares: React.FC = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const navigate = useNavigate();
+
+  // States modal Alterar Data da Matícula
+  const [openModalDataMatricula, setOpenModalDataMatricula] = useState(false);
+  const handleOpenModalDataMatricula = () => {
+    setOpenModalDataMatricula(true);
   };
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseModalDataMatricula = () => setOpenModalDataMatricula(false);
+
+  // States modal Excluir Aluno
+  const [openModalExcluir, setOpenModalExcluir] = useState(false);
+  const handleOpenModalExcluir = () => {
+    setOpenModalExcluir(true);
+  };
+  const handleCloseModalExcluir = () => setOpenModalExcluir(false);
 
   const [preIsVisible, setPreIsVisible] = useState(false);
   const [encerramentoIsVisible, setEncerramentoIsVisible] = useState(false);
@@ -98,13 +109,18 @@ const DadosEscolares: React.FC = () => {
 
   const dataMatricula = watch("dados_escolares_data_matricula");
 
-  const handleSubmitModal = async () => {
+  const handleSubmitModalDataMatricula = async () => {
     const dataSubmit: any = {
       id: aluno.id,
       dados_escolares_data_matricula: dataMatricula,
     };
 
     await dispatch(updateAluno(dataSubmit));
+  };
+
+  const handleDeleteAluno = async () => {
+    aluno.id && (await dispatch(deleteAluno(aluno.id)));
+    navigate("/alunos");
   };
 
   const onSubmit = useCallback(
@@ -233,16 +249,16 @@ const DadosEscolares: React.FC = () => {
 
   const handleLoadAnoTurnoSistema = useCallback(() => {
     // Adicionar Ano, Turno e Sistema
-    setValue("ano", aluno.dados_turma?.dados_ano?.ano || "Indefinido");
-    setValue("turno", aluno.dados_turma?.dados_turno?.turno || "Indefinido");
+    setValue("ano", aluno?.dados_turma?.dados_ano?.ano || "Indefinido");
+    setValue("turno", aluno?.dados_turma?.dados_turno?.turno || "Indefinido");
     setValue(
       "sistema",
-      aluno.dados_turma?.dados_ano?.dados_sistema?.sistema || "Indefinido"
+      aluno?.dados_turma?.dados_ano?.dados_sistema?.sistema || "Indefinido"
     );
   }, [
-    aluno.dados_turma?.dados_turno?.turno,
-    aluno.dados_turma?.dados_ano?.ano,
-    aluno.dados_turma?.dados_ano?.dados_sistema?.sistema,
+    aluno?.dados_turma?.dados_turno?.turno,
+    aluno?.dados_turma?.dados_ano?.ano,
+    aluno?.dados_turma?.dados_ano?.dados_sistema?.sistema,
     setValue,
   ]);
 
@@ -347,6 +363,19 @@ const DadosEscolares: React.FC = () => {
             errors={errors}
             onChange={onSubmitSelect}
           />
+          <TextForm
+            register={register}
+            name={"dados_escolares_observacoes"}
+            label={"Observações"}
+            control={control}
+            errors={errors}
+            isMultiline={true}
+            width="100%"
+            onEnter={() => {
+              setFocus("matricula");
+            }}
+            onBlur={onSubmit}
+          />
         </div>
         <div>
           <TextForm
@@ -372,7 +401,7 @@ const DadosEscolares: React.FC = () => {
             onEnter={() => {
               setFocus("dados_escolares_observacoes");
             }}
-            onBlur={handleOpenModal}
+            onBlur={handleOpenModalDataMatricula}
           />
           {preIsVisible && (
             <TextForm
@@ -393,40 +422,47 @@ const DadosEscolares: React.FC = () => {
               label={"Data de Encerramento"}
               control={control}
               errors={errors}
-              disabled
+              disabled={!!aluno?.dados_escolares_data_encerramento}
             />
           )}
-          <SwitchForm
-            label="Aluno Ativo"
-            name="ativo"
-            control={control}
-            onChange={onSubmitSwitch}
-          />
-          <TextForm
-            register={register}
-            name={"dados_escolares_observacoes"}
-            label={"Observações"}
-            control={control}
-            errors={errors}
-            isMultiline={true}
-            width="100%"
-            onEnter={() => {
-              setFocus("matricula");
-            }}
-            onBlur={onSubmit}
-          />
+          <AtivoContainer>
+            <SwitchForm
+              label="Aluno Ativo"
+              name="ativo"
+              control={control}
+              onChange={onSubmitSwitch}
+            />
+            {aluno?.ativo === false && (
+              <ExcluirContainer onClick={handleOpenModalExcluir}>
+                Excluir Permanentemente
+              </ExcluirContainer>
+            )}
+          </AtivoContainer>
         </div>
       </Grid>
       <MuiModal
-        open={openModal}
-        handleClose={handleCloseModal}
+        open={openModalDataMatricula}
+        handleClose={handleCloseModalDataMatricula}
         title="Data da Matrícula"
-        onSubmit={handleSubmitModal}
+        onSubmit={handleSubmitModalDataMatricula}
         icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
       >
         <ModalText>
           A data de matrícula <span>{dataMatricula}</span> está correta? Este
           dado não poderá ser alterado!
+        </ModalText>
+      </MuiModal>
+      <MuiModal
+        open={openModalExcluir}
+        handleClose={handleCloseModalExcluir}
+        title="Excluir Permanentemente"
+        onSubmit={handleDeleteAluno}
+        icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
+        labelButton="EXCLUIR"
+      >
+        <ModalText>
+          Este aluno terá seus dados excluídos permanentemente. Deseja
+          continuar?
         </ModalText>
       </MuiModal>
     </div>

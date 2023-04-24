@@ -9,12 +9,15 @@ interface StoreProfessor {
 
 interface ProfessorDados extends StoreProfessor {
   id: number;
+  ativo: boolean;
   professor_celular: string;
   professor_telefone: string;
   professor_email: string;
   professor_cpf: string;
   professor_rg: string;
   professor_data_nascimento: string;
+  profissional_data_matricula: string;
+  profissional_data_encerramento: string;
   profissional_registro_cfep: string;
   profissional_formacao_acad_1: string;
   profissional_instituicao_1: string;
