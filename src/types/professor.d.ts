@@ -37,7 +37,7 @@ interface ProfessorDados extends StoreProfessor {
   createdAt: string;
   updatedAt: string;
   professor_horario?: ProfessorHorario[];
-  materias_professor?: MateriaState[];
+  materias_professor?: IMateria[];
 }
 
 interface ProfessorHorario {
@@ -58,7 +58,7 @@ interface ProfessorHorario {
     };
   };
 }
-interface MateriaState {
+interface IMateria {
   // id: number;
   materia: string;
   professores_materias?: {

@@ -40,6 +40,10 @@ const DadosProfissionaisProfessor = lazy(
 const DadosEscolaresProfessor = lazy(
   () => import("pages/Professor/DadosEscolares")
 );
+const Turma = lazy(() => import("pages/Turma"));
+const TurmaInformacoesGerais = lazy(
+  () => import("pages/Turma/InformacoesGerais")
+);
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -160,8 +164,8 @@ export default function MyRoutes() {
                   }
                 />
               </Route>
-              {/* PROFESSORES */}
 
+              {/* PROFESSORES */}
               <Route
                 path="professores"
                 element={
@@ -170,6 +174,7 @@ export default function MyRoutes() {
                   </Suspense>
                 }
               />
+
               {/* PROFESSOR */}
               <Route
                 element={
@@ -212,6 +217,7 @@ export default function MyRoutes() {
                 />
               </Route>
 
+              {/* TURMAS */}
               <Route
                 path="turmas"
                 element={
@@ -220,6 +226,34 @@ export default function MyRoutes() {
                   </Suspense>
                 }
               />
+
+              {/* TURMA */}
+              <Route
+                element={
+                  <Turma>
+                    <Outlet />
+                  </Turma>
+                }
+              >
+                <Route
+                  path="turmas/nova"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <TurmaInformacoesGerais />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="turma/:id/informacoes"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <TurmaInformacoesGerais />
+                    </Suspense>
+                  }
+                />
+              </Route>
+
+              {/* DASHBOARD */}
               <Route
                 path="dashboard"
                 element={

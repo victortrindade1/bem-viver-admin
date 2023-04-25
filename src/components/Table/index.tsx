@@ -62,7 +62,7 @@ const Table: React.FC<ITable> = ({
       enableRowSelection={false}
       enableColumnOrdering
       enableStickyHeader
-      enableGlobalFilter={true}
+      enableGlobalFilter={false}
       muiTableContainerProps={{ sx: { maxHeight: "600px" } }}
       enableStickyFooter
       localization={{

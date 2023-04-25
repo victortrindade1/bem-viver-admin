@@ -17,6 +17,7 @@ import professorReducer from "./slices/professor";
 import dadosEscolaresReducer from "./slices/dadosEscolares";
 import alunosTableReducer from "./slices/alunosTable";
 import professoresTableReducer from "./slices/professoresTable";
+import turmaReducer from "./slices/turma";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   dadosEscolares: dadosEscolaresReducer,
   alunosTable: alunosTableReducer,
   professoresTable: professoresTableReducer,
+  turma: turmaReducer,
 });
 
 const persistConfig = {

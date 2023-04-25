@@ -50,7 +50,7 @@ export const loadDados = createAsyncThunk(
 
 export const storeMateria = createAsyncThunk(
   "materia/store",
-  async (materiaDados: MateriaState) => {
+  async (materiaDados: IMateria) => {
     try {
       const response = await api.post(`/materias`, materiaDados);
 

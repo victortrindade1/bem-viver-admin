@@ -70,62 +70,62 @@ interface AlunoDados {
   periodo_id: number | null;
   horaentrada_id: number | null;
   horasaida_id: number | null;
-  dados_turma: TurmaState | null;
-  dados_periodo: PeriodoState | null;
-  dados_horaentrada: HoraEntradaState | null;
-  dados_horasaida: HoraSaidaState | null;
+  dados_turma: TurmaDados | null;
+  dados_periodo: PeriodoDados | null;
+  dados_horaentrada: HoraEntradaDados | null;
+  dados_horasaida: HoraSaidaDados | null;
 }
 
-interface SistemaState {
+interface SistemaDados {
   id: number;
   sistema: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface AnoState {
+interface AnoDados {
   id: number;
   ano: string;
   sistema_id: number | null;
-  dados_sistema: SistemaState | null;
+  dados_sistema: SistemaDados | null;
   createdAt: string;
   updatedAt: string;
 }
 
-interface TurmaState {
+interface TurmaDados {
   id: number;
   turma: string;
   createdAt: string;
   updatedAt: string;
   ano_id: number | null;
   turno_id: number | null;
-  dados_turno: TurnoState | null;
-  dados_ano: AnoState | null;
-  materias_horario?: MateriaState[];
+  dados_turno: TurnoDados | null;
+  dados_ano: AnoDados | null;
+  materias_horario?: IMateria[];
 }
 
-interface TurnoState {
+interface TurnoDados {
   id: number;
   turno: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface PeriodoState {
+interface PeriodoDados {
   id: number;
   periodo: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface HoraEntradaState {
+interface HoraEntradaDados {
   id: number;
   horaentrada: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface HoraSaidaState {
+interface HoraSaidaDados {
   id: number;
   horasaida: string;
   createdAt: string;

@@ -4,6 +4,10 @@ interface IActionContainer {
   actionIconColor?: string;
 }
 export const ActionContainer = styled.div<IActionContainer>`
+  /* display: flex;
+  justify-content: center; */
+  padding-left: 15px;
+
   svg {
     color: ${(props) => {
       return props.actionIconColor

@@ -41,7 +41,7 @@ const Turmas: React.FC = () => {
     {
       label: "Nova Turma",
       Icon: FaPlus,
-      url: "/turmas/novo",
+      url: "/turmas/nova",
     },
   ];
 
