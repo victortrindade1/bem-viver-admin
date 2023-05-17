@@ -9,6 +9,7 @@ interface ISelectItem {
 
 interface ITextForm {
   // refAutocomplete?: any;
+  defaultValue?: string;
   register: any;
   name: string;
   label: string;
@@ -28,6 +29,7 @@ interface ITextForm {
   onChange?: any;
   variant?: "standard" | "outlined";
   options?: string[];
+  isSelect?: boolean;
 }
 
 interface ISwitchForm {

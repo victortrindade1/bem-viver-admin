@@ -44,6 +44,8 @@ const Turma = lazy(() => import("pages/Turma"));
 const TurmaInformacoesGerais = lazy(
   () => import("pages/Turma/InformacoesGerais")
 );
+const TurmaEditarTurma = lazy(() => import("pages/Turma/EditarTurma"));
+const TurmaNova = lazy(() => import("pages/Turma/NovaTurma"));
 
 export default function MyRoutes() {
   const signed = useAppSelector((state: RootState) => state.auth.signed);
@@ -239,7 +241,7 @@ export default function MyRoutes() {
                   path="turmas/nova"
                   element={
                     <Suspense fallback={<LoadingPage />}>
-                      <TurmaInformacoesGerais />
+                      <TurmaNova />
                     </Suspense>
                   }
                 />
@@ -248,6 +250,14 @@ export default function MyRoutes() {
                   element={
                     <Suspense fallback={<LoadingPage />}>
                       <TurmaInformacoesGerais />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="turma/:id/editar"
+                  element={
+                    <Suspense fallback={<LoadingPage />}>
+                      <TurmaEditarTurma />
                     </Suspense>
                   }
                 />

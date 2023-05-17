@@ -5,6 +5,8 @@ interface TurmaState {
 
 interface StoreTurma {
   turma: string;
+  ano_id: number;
+  turno_id: number;
 }
 
 interface TurmaStateDados extends StoreTurma {
@@ -13,7 +15,9 @@ interface TurmaStateDados extends StoreTurma {
   turno_id: number | null;
   dados_ano?: {
     ano: string;
+    sistema_id: number | null;
     dados_sistema?: {
+      id: number;
       sistema: string;
     };
   } | null;

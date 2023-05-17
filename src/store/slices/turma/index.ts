@@ -15,7 +15,9 @@ const initialState: TurmaState = {
     updatedAt: "",
     dados_ano: {
       ano: "",
+      sistema_id: 0,
       dados_sistema: {
+        id: 0,
         sistema: "",
       },
     },
@@ -47,7 +49,7 @@ export const storeTurma = createAsyncThunk(
 
 export const updateTurma = createAsyncThunk(
   "turma/update",
-  async (turmaDados: TurmaDados) => {
+  async (turmaDados: any) => {
     try {
       const response = await api.put(`/turmas/${turmaDados.id}`, turmaDados);
 
@@ -101,6 +103,10 @@ const turmaSlice = createSlice({
     cleanState: (state) => {
       state.turmaDados = null;
     },
+    // cleanAno: (state: any) => {
+    //   state.turmaDados.ano_id = null;
+    //   state.turmaDados.dados_ano = null;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -155,6 +161,7 @@ const turmaSlice = createSlice({
   },
 });
 
+// export const { cleanState, cleanAno } = turmaSlice.actions;
 export const { cleanState } = turmaSlice.actions;
 
 export const selectTurma = (state: RootState) => state.turma;

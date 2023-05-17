@@ -5,10 +5,9 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { MRT_ColumnDef } from "material-react-table";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-// import TitlePage from "components/TitlePage";
 import DarkSideLayout from "components/DarkSideLayout";
 import LightSideLayout from "components/LightSideLayout";
 import BodyMenu from "components/BodyMenu";
@@ -17,7 +16,8 @@ import TitleBody from "components/TitleBody";
 import TextForm from "components/TextForm";
 import MinimalTable from "components/MinimalTable";
 
-// import { useAppDispatch } from "hooks";
+import { useAppDispatch } from "hooks";
+import { cleanState, showTurma } from "store/slices/turma";
 
 import api from "services/api";
 
@@ -34,8 +34,8 @@ interface IDataTable {
 const Turmas: React.FC = () => {
   const [turmas, setTurmas] = useState<IDataTable[]>([]);
 
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const links = [
     {
@@ -141,14 +141,19 @@ const Turmas: React.FC = () => {
   );
 
   const handleSelectTurma = async (turma: any) => {
-    // const response: any = await dispatch(showTurma(turma.id));
-    // navigate(`/turma/${response.payload.data.id}/cadastro`);
+    const response: any = await dispatch(showTurma(turma.id));
+    navigate(`/turma/${response.payload.data.id}/informacoes`);
   };
 
   // Carrega última tabela aberta
   useEffect(() => {
     loadTurmas({ filterInput: "" });
   }, [loadTurmas]);
+
+  // Zera state de Turma
+  useEffect(() => {
+    dispatch(cleanState());
+  }, [dispatch]);
 
   return (
     <>

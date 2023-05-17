@@ -12,7 +12,6 @@ import { selectAluno, updateAluno, deleteAluno } from "store/slices/aluno";
 import { selectDadosEscolares } from "store/slices/dadosEscolares";
 
 import TitleBody from "components/TitleBody";
-import SelectForm from "components/SelectForm";
 import TextForm from "components/TextForm";
 import SwitchForm from "components/SwitchForm";
 import MuiModal from "components/MuiModal";
@@ -228,7 +227,7 @@ const DadosEscolares: React.FC = () => {
   const horarioEntradaOptions = dados.horaentradas;
   const horarioSaidaOptions = dados.horasaidas;
 
-  const handleChangeAnoTurnoSistema = useCallback(
+  const handleUpdateAnoTurnoSistema = useCallback(
     async (e: any) => {
       e.preventDefault();
 
@@ -302,7 +301,8 @@ const DadosEscolares: React.FC = () => {
       <TitleBody titleLabel="Dados Escolares" />
       <Grid>
         <div>
-          <SelectForm
+          <TextForm
+            isSelect
             register={register}
             name={"turma"}
             label={"Turma"}
@@ -311,7 +311,7 @@ const DadosEscolares: React.FC = () => {
             options={turmaOptions}
             onChange={(e: any) => {
               onSubmitSelect(e);
-              handleChangeAnoTurnoSistema(e);
+              handleUpdateAnoTurnoSistema(e);
             }}
           />
           <TextForm
@@ -340,7 +340,8 @@ const DadosEscolares: React.FC = () => {
           />
         </div>
         <div>
-          <SelectForm
+          <TextForm
+            isSelect
             register={register}
             name={"periodo"}
             label={"Período"}
@@ -349,7 +350,8 @@ const DadosEscolares: React.FC = () => {
             errors={errors}
             onChange={onSubmitSelect}
           />
-          <SelectForm
+          <TextForm
+            isSelect
             register={register}
             name={"horaentrada"}
             label={"Horário de Entrada"}
@@ -358,7 +360,8 @@ const DadosEscolares: React.FC = () => {
             errors={errors}
             onChange={onSubmitSelect}
           />
-          <SelectForm
+          <TextForm
+            isSelect
             register={register}
             name={"horasaida"}
             label={"Horário de Saída"}

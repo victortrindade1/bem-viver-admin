@@ -1,6 +1,11 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Autocomplete, FormControl, FormHelperText } from "@mui/material";
+import {
+  Autocomplete,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -37,8 +42,12 @@ const TextForm: React.FC<ITextForm> = ({
   disabled = false,
   variant = "standard",
   options,
+  isSelect = false,
   ...rest
 }) => {
+  const [itemSelectedValue, setItemSelectedValue] = useState<string | null>(
+    null
+  );
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -72,6 +81,10 @@ const TextForm: React.FC<ITextForm> = ({
     },
     [maskType]
   );
+
+  const handleSelectItem = (item: string) => {
+    setItemSelectedValue(item);
+  };
 
   // Trigger Enter
   useEffect(() => {
@@ -113,6 +126,7 @@ const TextForm: React.FC<ITextForm> = ({
   }: any) => (
     <TextField
       {...register(name)}
+      select={isSelect}
       onBlur={onBlur}
       onChange={(e: any) =>
         maskType ? onChange(handleOnChange(e)) : onChange(e)
@@ -151,10 +165,31 @@ const TextForm: React.FC<ITextForm> = ({
             )}
           </InputAdornment>
         ),
+        // inputRef: (ref) => {
+        //       if (!ref) return;
+        //       register({
+        //         name: "trinityPerson",
+        //         value: ref.value,
+        //       });
+        //     },
       }}
       {...rest}
       {...params}
-    />
+    >
+      {options &&
+        isSelect &&
+        options.map((item: string) => {
+          return (
+            <MenuItem
+              key={item}
+              value={item}
+              onClick={() => handleSelectItem(item)}
+            >
+              <>{item}</>
+            </MenuItem>
+          );
+        })}
+    </TextField>
   );
 
   return (
@@ -169,7 +204,7 @@ const TextForm: React.FC<ITextForm> = ({
             fieldState: { error },
             formState,
           }) => {
-            return options ? (
+            return options && !isSelect ? (
               // Input com lista de opções (ComboBox)
               <Autocomplete
                 id={name}
@@ -197,7 +232,7 @@ const TextForm: React.FC<ITextForm> = ({
                 onBlur,
                 onChange,
                 ref,
-                value,
+                value: itemSelectedValue ? itemSelectedValue : value,
                 error,
                 formState,
               })

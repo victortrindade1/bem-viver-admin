@@ -2,7 +2,13 @@
 
 ## Próximo passo
 
-Vou fazer Turmas. Será tradicional, como o restante. Será como no figma.
+Nova turma terá botão de prosseguir e com todos os campos de Editar Turma.
+Prosseguiu, aparece tudo.
+
+- Em Dados Escolares, em vez de primeiro escolher a turma, escolher o ano e turno,
+  e só então aparecer o select de turma já filtrado pras turmas daquele ano e turno.
+
+Mesma coisa acontece quando vai criar nova turma. Primeiro tem q escolher o sistema, pra depois o ano, e só então criar a turma. Logo, vou ter q modificar o banco, pq o Post inicial já vai com todas as informações, e não só com o nome.
 
 Tirar nome do usuário do header qnd for mobile.
 
@@ -46,9 +52,6 @@ Dessa forma, eu já consigo usar o token desde o início. Então sou eu q criare
 
 - Lista crescente (até 5) pros contatos e autorizados a buscar, em vez d 3 fixos.
 - Nos nomes autorizados a buscar, sugerir os dos pais ou responsável.
-
-- Em Dados Escolares, em vez de primeiro escolher a turma, escolher o ano e turno,
-  e só então aparecer o select de turma já filtrado pras turmas daquele ano e turno.
 
 - Verificar se é simples ou não deixar o select como um input tb onde a gnt começa a digitar a turma e ele filtra nas opções.
 
