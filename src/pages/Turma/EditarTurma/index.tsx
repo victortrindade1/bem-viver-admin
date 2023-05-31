@@ -1,24 +1,34 @@
-import React, { useMemo, useCallback, useEffect, useState } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { FaTrashAlt, FaExclamationTriangle } from "react-icons/fa";
+import { IconButton } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "hooks";
-import { selectDadosEscolares } from "store/slices/dadosEscolares";
+import { selectDadosEscolares, loadDados } from "store/slices/dadosEscolares";
 import {
   selectTurma,
   updateTurma,
+  deleteTurma,
   // cleanAno,
 } from "store/slices/turma";
 
 import TextForm from "components/TextForm";
 import Breadcrumb from "components/Breadcrumb";
 import TitleBody from "components/TitleBody";
+import MuiModal from "components/MuiModal";
 
-import { Container } from "./styles";
+import { Container, ExcluirContainer, ExcluirPermanenteButton } from "./styles";
+import theme from "styles/theme";
 
 const EditarTurma: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [openModalExcluir, setOpenModalExcluir] = useState(false);
+  const [isHiddenButton, setIsHiddenButton] = useState(true);
 
   const turmaState = useAppSelector(selectTurma);
   const turmaRedux = turmaState.turmaDados;
@@ -90,6 +100,7 @@ const EditarTurma: React.FC = () => {
     async (e: any) => {
       e.preventDefault();
 
+      console.log(e);
       // Não atualiza se não mudar valor
       if (defaultValues[e.target.name] === e.target.value) {
         return;
@@ -118,6 +129,9 @@ const EditarTurma: React.FC = () => {
       };
 
       await dispatch(updateTurma(dataSubmit));
+
+      // atualiza state por ter alterado turma
+      await dispatch(loadDados());
     },
     [
       dadosEscolares.anos,
@@ -151,10 +165,24 @@ const EditarTurma: React.FC = () => {
     [dadosEscolares.anos, dadosEscolares?.sistemas, setValue]
   );
 
+  const handleOpenModalExcluir = () => {
+    setOpenModalExcluir(true);
+  };
+  const handleCloseModalExcluir = () => setOpenModalExcluir(false);
+
+  const handleDeleteTurma = async () => {
+    turmaRedux?.id && (await dispatch(deleteTurma(turmaRedux.id)));
+
+    // atualiza state por ter alterado turma
+    await dispatch(loadDados());
+
+    navigate("/turmas");
+  };
+
   // Foco no primeiro input se é novo
-  useEffect(() => {
-    !turmaRedux?.id && setFocus("turma");
-  }, [setFocus, turmaRedux]);
+  // useEffect(() => {
+  //   !turmaRedux?.id && setFocus("turma");
+  // }, [setFocus, turmaRedux]);
 
   return (
     <div>
@@ -211,7 +239,28 @@ const EditarTurma: React.FC = () => {
           control={control}
           errors={errors}
         />
+        <ExcluirContainer>
+          <IconButton>
+            <FaTrashAlt onClick={() => setIsHiddenButton(!isHiddenButton)} />
+          </IconButton>
+          {!isHiddenButton && (
+            <ExcluirPermanenteButton onClick={handleOpenModalExcluir}>
+              Excluir Permanentemente
+            </ExcluirPermanenteButton>
+          )}
+        </ExcluirContainer>
       </Container>
+      <MuiModal
+        open={openModalExcluir}
+        handleClose={handleCloseModalExcluir}
+        title="Excluir Permanentemente"
+        onSubmit={handleDeleteTurma}
+        icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
+        labelButton="EXCLUIR"
+      >
+        Esta turma será excluída permanentemente. Antes de continuar, é
+        recomendado que não haja alunos nessa turma. Deseja continuar?
+      </MuiModal>
     </div>
   );
 };

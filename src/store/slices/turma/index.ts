@@ -55,6 +55,10 @@ export const updateTurma = createAsyncThunk(
 
       toast.success("Dados salvos com sucesso!");
 
+      // const dispatch = useAppDispatch();
+
+      // await dispatch(loadDados());
+
       return response;
     } catch (error) {
       console.log(error);

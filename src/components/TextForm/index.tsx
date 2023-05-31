@@ -165,13 +165,6 @@ const TextForm: React.FC<ITextForm> = ({
             )}
           </InputAdornment>
         ),
-        // inputRef: (ref) => {
-        //       if (!ref) return;
-        //       register({
-        //         name: "trinityPerson",
-        //         value: ref.value,
-        //       });
-        //     },
       }}
       {...rest}
       {...params}

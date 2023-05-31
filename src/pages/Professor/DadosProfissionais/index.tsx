@@ -27,7 +27,6 @@ import {
   SecondAcademicContainer,
   AtivoContainer,
   ExcluirContainer,
-  ModalText,
 } from "./styles";
 import theme from "styles/theme";
 
@@ -367,10 +366,8 @@ const DadosProfissionais: React.FC = () => {
         icon={<FaExclamationTriangle color={theme.palette.primary.main} />}
         labelButton="EXCLUIR"
       >
-        <ModalText>
-          Este professor terá seus dados excluídos permanentemente. Deseja
-          continuar?
-        </ModalText>
+        Este professor terá seus dados excluídos permanentemente. Deseja
+        continuar?
       </MuiModal>
     </div>
   );

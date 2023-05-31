@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUserPlus } from "react-icons/fa";
+import { FaSearchPlus, FaUserPlus, FaSearchMinus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,10 +12,8 @@ import type {
   MRT_PaginationState,
   MRT_ColumnFiltersState,
   MRT_ColumnSizingState,
-  // MRT_DensityState,
   MRT_VisibilityState,
-  // MRT_ColumnOrderState,
-} from "material-react-table"; // If using TypeScript (optional, but recommended)
+} from "material-react-table";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { showAluno } from "store/slices/aluno";
@@ -31,7 +29,13 @@ import TagStatusPag from "components/TagStatusPag";
 import Breadcrumb from "components/Breadcrumb";
 import Table from "components/Table";
 
-import { TableContainer } from "./styles";
+import {
+  TableContainer,
+  SearchContainer,
+  FilterContainer,
+  FilterOpenedContainer,
+  SearchBar,
+} from "./styles";
 
 interface IDataTable {
   id: number;
@@ -47,6 +51,9 @@ const Alunos: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const alunosTable = useAppSelector(selectAlunosTable);
+
+  // Filter State
+  const [globalFilterVisible, setGlobalFilterVisible] = useState(false);
 
   // Table States
   const [alunos, setAlunos] = useState<IDataTable | any>([]);
@@ -95,11 +102,13 @@ const Alunos: React.FC = () => {
 
   const validationSchema = Yup.object().shape({
     search: Yup.string(),
+    globalFilter: Yup.string(),
   });
 
   const defaultValues: any = useMemo(
     () => ({
       search: alunosTable.filter,
+      globalFilter: "",
     }),
     [alunosTable.filter]
   );
@@ -107,7 +116,9 @@ const Alunos: React.FC = () => {
   const {
     control,
     register,
-    // setFocus,
+    setFocus,
+    setValue,
+    watch,
     setError,
     formState: { errors },
   } = useForm({
@@ -116,6 +127,8 @@ const Alunos: React.FC = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
+
+  const globalFilterSelected = watch("globalFilter");
 
   const columns = useMemo<MRT_ColumnDef<IDataTable>[]>(
     () => [
@@ -212,6 +225,26 @@ const Alunos: React.FC = () => {
     navigate(`/aluno/${response.payload.data.id}/cadastro`);
   };
 
+  const handleToggleGlobalFilter = () => {
+    setGlobalFilterVisible(!globalFilterVisible);
+
+    globalFilterVisible && setValue("globalFilter", "Nome");
+
+    globalFilterVisible && setFocus("search");
+  };
+
+  const submitSearch = async (e: any) => {
+    e.preventDefault();
+    setFilter(e.target.value);
+    setPagination({
+      pageIndex: 0,
+      pageSize: 15,
+    });
+    setSorting([]);
+    await loadAlunos({ filterInput: e.target.value });
+    e.target.blur();
+  };
+
   useEffect(() => {
     dispatch(
       store({
@@ -259,30 +292,47 @@ const Alunos: React.FC = () => {
 
           <TitleBody titleLabel="Consultar alunos" />
 
-          <TextForm
-            name={"search"}
-            label={""}
-            width={breakpoint ? "100%" : "60%"}
-            control={control}
-            errors={errors}
-            register={register}
-            placeholder={
-              "Filtrar por Nome, Matrícula, Sistema, Ano, Turma ou Status"
-            }
-            type="search"
-            variant="outlined"
-            onEnter={async (e: any) => {
-              e.preventDefault();
-              setFilter(e.target.value);
-              setPagination({
-                pageIndex: 0,
-                pageSize: 15,
-              });
-              setSorting([]);
-              await loadAlunos({ filterInput: e.target.value });
-              e.target.blur();
-            }}
-          />
+          <SearchContainer breakpoint={breakpoint}>
+            <SearchBar breakpoint={breakpoint}>
+              <TextForm
+                name={"search"}
+                label={""}
+                width={"100%"}
+                control={control}
+                errors={errors}
+                register={register}
+                placeholder={`Digite ${
+                  globalFilterSelected || "Nome"
+                } do aluno`}
+                type="search"
+                variant="outlined"
+                onBlur={(e: any) => submitSearch(e)}
+                onEnter={(e: any) => {
+                  submitSearch(e);
+                }}
+              />
+
+              <FilterContainer onClick={handleToggleGlobalFilter}>
+                {globalFilterVisible ? <FaSearchMinus /> : <FaSearchPlus />}
+              </FilterContainer>
+            </SearchBar>
+
+            {globalFilterVisible && (
+              <FilterOpenedContainer>
+                {/* <div> */}
+                <TextForm
+                  control={control}
+                  register={register}
+                  errors={errors}
+                  name="globalFilter"
+                  label="Filtrar alunos por:"
+                  isSelect
+                  options={["Nome", "Matrícula", "Turma", "Ano"]}
+                />
+                {/* </div> */}
+              </FilterOpenedContainer>
+            )}
+          </SearchContainer>
           <TableContainer>
             <Table
               data={alunos}

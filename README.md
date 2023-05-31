@@ -2,13 +2,17 @@
 
 ## Próximo passo
 
-Nova turma terá botão de prosseguir e com todos os campos de Editar Turma.
-Prosseguiu, aparece tudo.
-
 - Em Dados Escolares, em vez de primeiro escolher a turma, escolher o ano e turno,
   e só então aparecer o select de turma já filtrado pras turmas daquele ano e turno.
 
-Mesma coisa acontece quando vai criar nova turma. Primeiro tem q escolher o sistema, pra depois o ano, e só então criar a turma. Logo, vou ter q modificar o banco, pq o Post inicial já vai com todas as informações, e não só com o nome.
+- To pensando em tirar aquela busca complexa do backend. Tirar aquilo. Buscar normal.
+  Se eu tirar esse filtro louco, eu vou poder usar de boa o Controller pra buscar os alunos de determinada turma quando entra na página da turma.
+
+- Colocar as colunas de turno e sistema na tabela de alunos.
+
+- Continuar Informaçoes Gerais.
+
+## Depois
 
 Tirar nome do usuário do header qnd for mobile.
 

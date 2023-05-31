@@ -23,14 +23,6 @@ export const SecondAcademicContainer = styled.div`
   margin-top: 40px;
 `;
 
-export const ModalText = styled.div`
-  span {
-    color: ${(props) => props.theme.palette.warning.main};
-    /* font-weight: bold;
-    font-size: 26px; */
-  }
-`;
-
 export const ExcluirContainer = styled.div`
   @keyframes appear {
     from {
