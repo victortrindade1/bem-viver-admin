@@ -44,6 +44,7 @@ interface IDataTable {
   ano: string;
   turma: string;
   status: string;
+  sistema: string;
 }
 
 const Alunos: React.FC = () => {
@@ -53,7 +54,9 @@ const Alunos: React.FC = () => {
   const alunosTable = useAppSelector(selectAlunosTable);
 
   // Filter State
-  const [globalFilterVisible, setGlobalFilterVisible] = useState(false);
+  const [globalFilterVisible, setGlobalFilterVisible] = useState(
+    alunosTable.globalFilter === "" ? false : true
+  );
 
   // Table States
   const [alunos, setAlunos] = useState<IDataTable | any>([]);
@@ -76,7 +79,7 @@ const Alunos: React.FC = () => {
     alunosTable.columnSizing
   );
   const [density, setDensity] = useState(alunosTable.density);
-  // const [globalFilter, setGlobalFilter] = useState();
+  const [globalFilterState, setGlobalFilterState] = useState("");
 
   const breakpoint = useMediaQuery("(max-width:768px)");
 
@@ -108,9 +111,9 @@ const Alunos: React.FC = () => {
   const defaultValues: any = useMemo(
     () => ({
       search: alunosTable.filter,
-      globalFilter: "",
+      globalFilter: alunosTable.globalFilter,
     }),
-    [alunosTable.filter]
+    [alunosTable.filter, alunosTable.globalFilter]
   );
 
   const {
@@ -120,6 +123,7 @@ const Alunos: React.FC = () => {
     setValue,
     watch,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -141,12 +145,16 @@ const Alunos: React.FC = () => {
         header: "Matrícula",
       },
       {
+        accessorKey: "turma",
+        header: "Turma",
+      },
+      {
         accessorKey: "ano",
         header: "Ano",
       },
       {
-        accessorKey: "turma",
-        header: "Turma",
+        accessorKey: "sistema",
+        header: "Sistema",
       },
       {
         accessorKey: "status",
@@ -160,7 +168,7 @@ const Alunos: React.FC = () => {
   );
 
   const loadAlunos = useCallback(
-    async ({ filterInput }: any) => {
+    async ({ searchName }: any) => {
       try {
         if (!alunos.length) {
           setIsLoading(true);
@@ -168,13 +176,18 @@ const Alunos: React.FC = () => {
           setIsRefetching(true);
         }
 
-        const response: any = await api.get("/alunos", {
-          params: {
-            limit: 10000,
-            q: filterInput,
-          },
-        });
+        const params = {
+          limit: 10000,
+          q: searchName,
+          field: globalFilterSelected,
+        };
 
+        // console.log({ params });
+
+        const response: any = await api.get("/alunos", {
+          params,
+        });
+        // console.log({ response });
         const alunosResponse = response.data.items;
 
         if (alunosResponse.length === 0) {
@@ -199,6 +212,7 @@ const Alunos: React.FC = () => {
               ano: item.dados_turma?.dados_ano?.ano,
               turma: item.dados_turma?.turma,
               status: item.statuspagamento,
+              sistema: item.dados_turma?.dados_ano?.dados_sistema?.sistema,
             };
           }
         );
@@ -216,7 +230,7 @@ const Alunos: React.FC = () => {
       setIsLoading(false);
       setIsRefetching(false);
     },
-    [alunos.length, setError]
+    [alunos.length, globalFilterSelected, setError]
   );
 
   const handleSelectAluno = async (aluno: any) => {
@@ -229,8 +243,11 @@ const Alunos: React.FC = () => {
     setGlobalFilterVisible(!globalFilterVisible);
 
     globalFilterVisible && setValue("globalFilter", "Nome");
-
+    // !globalFilterVisible && setValue("search", "");
     globalFilterVisible && setFocus("search");
+    !globalFilterVisible && clearErrors(["search"]);
+    setValue("search", "");
+    setFilter("");
   };
 
   const submitSearch = async (e: any) => {
@@ -241,8 +258,9 @@ const Alunos: React.FC = () => {
       pageSize: 15,
     });
     setSorting([]);
-    await loadAlunos({ filterInput: e.target.value });
-    e.target.blur();
+    await loadAlunos({ searchName: e.target.value });
+    setGlobalFilterState(globalFilterSelected);
+    // e.target.blur();
   };
 
   useEffect(() => {
@@ -255,7 +273,7 @@ const Alunos: React.FC = () => {
         columnSizing,
         columnVisibility,
         density,
-        // globalFilter,
+        globalFilter: globalFilterState,
       })
     );
   }, [
@@ -267,12 +285,12 @@ const Alunos: React.FC = () => {
     columnSizing,
     columnVisibility,
     density,
-    // globalFilter,
+    globalFilterState,
   ]);
 
   // Carrega última tabela aberta
   useEffect(() => {
-    loadAlunos({ filterInput: alunosTable.filter });
+    loadAlunos({ searchName: alunosTable.filter });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -303,12 +321,13 @@ const Alunos: React.FC = () => {
                 register={register}
                 placeholder={`Digite ${
                   globalFilterSelected || "Nome"
-                } do aluno`}
+                } do(s) aluno(s)`}
                 type="search"
                 variant="outlined"
                 onBlur={(e: any) => submitSearch(e)}
                 onEnter={(e: any) => {
-                  submitSearch(e);
+                  // submitSearch(e);
+                  e.target.blur();
                 }}
               />
 
@@ -319,7 +338,6 @@ const Alunos: React.FC = () => {
 
             {globalFilterVisible && (
               <FilterOpenedContainer>
-                {/* <div> */}
                 <TextForm
                   control={control}
                   register={register}
@@ -327,9 +345,15 @@ const Alunos: React.FC = () => {
                   name="globalFilter"
                   label="Filtrar alunos por:"
                   isSelect
-                  options={["Nome", "Matrícula", "Turma", "Ano"]}
+                  options={[
+                    "Nome",
+                    "Matrícula",
+                    "Turma",
+                    "Ano",
+                    "Sistema",
+                    "Status",
+                  ]}
                 />
-                {/* </div> */}
               </FilterOpenedContainer>
             )}
           </SearchContainer>

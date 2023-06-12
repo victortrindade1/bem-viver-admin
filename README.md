@@ -2,6 +2,7 @@
 
 ## Próximo passo
 
+- To fazendo o filtro de Alunos
 - Em Dados Escolares, em vez de primeiro escolher a turma, escolher o ano e turno,
   e só então aparecer o select de turma já filtrado pras turmas daquele ano e turno.
 

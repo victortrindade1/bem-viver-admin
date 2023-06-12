@@ -12,7 +12,7 @@ const initialState = {
   columnVisibility: {},
   columnSizing: {},
   density: "comfortable",
-  // globalFilter: "",
+  globalFilter: "",
 };
 
 const alunosTableSlice = createSlice({
@@ -27,7 +27,7 @@ const alunosTableSlice = createSlice({
       state.columnVisibility = action.payload.columnVisibility;
       state.columnSizing = action.payload.columnSizing;
       state.density = action.payload.density;
-      // state.globalFilter = action.payload.globalFilter;
+      state.globalFilter = action.payload.globalFilter;
     },
   },
 });
